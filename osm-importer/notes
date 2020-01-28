@@ -1,0 +1,10 @@
+Query to http://overpass-turbo.eu/
+<query type="way">
+    <around lat="59.334591" lon="18.063240" radius="2000"/>
+    <has-kv k="highway"/>
+</query>
+<union>
+  <item/>
+  <recurse type="down"/>
+</union>
+<print/>

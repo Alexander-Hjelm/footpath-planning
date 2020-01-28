@@ -1,0 +1,76 @@
+Notes from meeting with Chris:
+Footpath importer
+    Sketch based interface, moving points
+    Base it on ExampleRoads
+    -> Generate a new prodecural road with footpaths
+    footpaths can be very close/alomst overlapping. Problem
+    Ask Todor how this would be used by urban planners
+    TODO: Update Project specification, leave unsure areas empty
+
+
+
+Möte med chris 17/10:
+    Specify more detail in everything
+    For MVP:
+        Specify some scenarios (geographical areas), single intersection, single block, entire neighbourhood
+            Generate stright street, curved street, single intersection, single street with footpath, etc...
+    Push the document to google
+    Specify that we are only looking at 2D, no road intersection if the nodes are not connected
+    Add a Timeplan to the planning document
+    Dates:
+        MVP features
+        Evaluations ready
+        A full draft of the report
+        Thesis presentation, 1 week after full draft
+        Batches tend to happen early may-mid may, second in september
+    
+    Wait for a week with iteration on evalutation/questionaries
+    Any quantifyable metrics for quality? Similary metrics?
+        Similarity to surrounding area
+
+    User questionarie for similarity between generated/existing parcels
+        Keep it as a stretch goal for evaluation
+    Focus on quantifiable metrics first, look at existing papers
+        Mesh complexity
+        Geometry
+
+    Chris's previous student, look at evaluation
+    Read through this:
+    http://www.diva-portal.org/smash/record.jsf?pid=diva2%3A1375175&dswid=-7274
+
+    Procedural Footpath Generation
+    http://www.csc.kth.se/~chpeters/ESAL/studentprojects.html
+    https://projectfharlanghn.wordpress.com
+
+    A group of master's students who do project work for Chris, maybe ask him about this later
+    
+    Bachelor's thesis, maybe I can look at methods of evaluation
+    http://kth.diva-portal.org/smash/get/diva2:1215852/FULLTEXT01.pdf
+
+    Keep track of all the references we use for the literature review later
+
+    Start writing on the background/Introduction sections
+
+    Constraits, Delimitations, good to specify the projects more
+        (no roundabouts?)
+
+Mail, 22/01
+Hi again!
+
+
+Updated master's project specification here. Could you read it through and give me your immediate thoughts? I don't reckon we need to schedule a meeting for that.
+
+
+The main additions are the evaluation metrics, constraints, scenarios and time plan.
+
+
+As for the evaluation plan, I decided not to include any user studies yet. Just programmatic evaluations and quantifyable metrics. My main idea is to sample metrics about intersections only (number of connecting roads, the angles between them, distance to connecting intersections, curviness of roads, etc). If I can sample all that and create a distribution for a few different cities, I have the two following hypothesises:
+  1. There should be selection of features that produce an observable difference in the distributions between cities that look vastly different.
+  2. If I let my program generate a large number of city parcels from a dataset, the resulting feature distribution should look like to the source dataset, and unlike datasets of other cities.
+These distributions could be created for primary, secondary roads and footpaths separately.
+
+
+What do you think? Could this be a reasonable approach?
+
+
+// Alexander

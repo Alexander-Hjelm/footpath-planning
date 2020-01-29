@@ -1,4 +1,4 @@
-import json
+from geojson import Point, Feature, FeatureCollection, dump, load
 
 accepted_highways = [
         'pedestrian',
@@ -46,9 +46,8 @@ highway_categories = {
 
 # read file
 with open('raw_data/export.geojson', 'r') as f:
-    datastring=f.read()
+    data = load(f)
 
-data = json.loads(datastring)
 data_out = {}
 
 for highway in highway_categories:
@@ -72,7 +71,7 @@ for feature in data['features'] :
 # Write all highway categories to files
 for highway in highway_categories:
     with open('raw_data/' + highway + '.geojson', 'w') as f:
-        json.dump(data_out[highway], f)
+        dump(FeatureCollection(data_out[highway]), f)
         
 
 

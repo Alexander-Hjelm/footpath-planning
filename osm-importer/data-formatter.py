@@ -9,7 +9,8 @@ accepted_highways = [
         'secondary',
         'secondary_link',
         'primary',
-        'primary_link']
+        'primary_link',
+        'residential']
 rejected_highways = [
         'crossing',
         'elevator',
@@ -23,7 +24,6 @@ rejected_highways = [
         'unclassified',
         'trunk',
         'trunk_link',
-        'residential',
         'turning_circle',
         'corridor',
         'cycleway',
@@ -40,9 +40,9 @@ rejected_highways = [
 
 highway_categories = {
         'footpath': ['pedestrian', 'footway', 'path'],
-        'tertiary': ['tertiary', 'tertiary_link'],
-        'secondary': ['secondary', 'secondary_link'],
-        'primary': ['primary', 'primary_link']}
+        'residential': ['residential'],
+        'secondary': ['tertiary', 'tertiary_link'],
+        'primary': ['primary', 'primary_link', 'secondary', 'secondary_link']}
 
 # read file
 with open('raw_data/export.geojson', 'r') as f:

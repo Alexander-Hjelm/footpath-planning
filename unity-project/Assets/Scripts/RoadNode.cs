@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class RoadNode
 {
@@ -26,6 +27,11 @@ public class RoadNode
     public float GetY()
     {
         return _yCoord;
+    }
+
+    public Vector2 GetPosAsVector2()
+    {
+        return new Vector2(_xCoord, _yCoord);
     }
 
     public List<RoadNode> GetNeighbours()

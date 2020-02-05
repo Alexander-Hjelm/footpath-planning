@@ -30,9 +30,9 @@
 
 This report covers... \cite{sampleitem2}
 
-\section(Introduction)
+\section{Introduction}
 
-\subsection(Research Question)
+\subsection{Research Question}
 
 This research question deals with the procedural generation of road networks from example data sets, and the edge cases that arise when dealing with footpath planning. A common problem is that footpaths are in their nature placed densely. How can the program identify critical areas where the footpath width is so large that it collides with existing roads? Can this be done so efficiently that the example-driven program can still run in real time? An additional question that arises is how much road data will be necessary to create believable procedural road networks for new zones in the Stockholm metropolitan area. How can this data be sampled and processed efficiently?
 
@@ -40,7 +40,7 @@ The previous work by Nishida et. al. has shown that it is possible to create bel
 
 The challenge lies in how to extract the footpath data and tie it together with the existing road map. the work by Nishida et. al. only deals with arterial and secondary roads, and I will be adding a tertiary layer of roads, wich is highly possible, but may increase the data consumption and program running time. The same applies for the statistical model that identifies colliding roads, which I will be adding on top of that.
 
-\subsection(Problem Constraints)
+\subsection{Problem Constraints}
 
 \begin{enumerate}
 \item The road network is assumed to be a 2D simple graph. This means that any overlapping roads, such as tunnels and bridges that cross over street-level roads, will be eliminated from the training set. Any self-connected nodes will also be eliminated from the training set.
@@ -50,7 +50,7 @@ The challenge lies in how to extract the footpath data and tie it together with 
 \item The program will not handle terrain features and altitude. It will be assume that the road mesh is projected on a flat 2D surface.
 \end{enumerate}
 
-\subsection(Evaluation)
+\subsection{Evaluation}
 
 The question will be examined primarily by creating a piece of software that can generate urban maps with primary and secondary roads, as well as footpaths, from example. I will experiment with different methods of collecting road data as well as different sample amounts and densities.
 
@@ -59,12 +59,12 @@ The evaluation plan will consist of programmatic evaluations and quantifyable me
   2. If I let my program generate a large number of city parcels from a dataset, the resulting feature distribution should look like to the source dataset, and unlike datasets of other cities.
 These distributions could be created for primary, secondary roads and footpaths separately.
 
-\subsection(Background)
+\subsection{Background}
 
 Procedural modeling of road networks is of interest to the fields of urban planning and urban architecture. In recent years there has been an advent of interactive tools that aid urban planners in placing or generating features of an urban plan, particularly roads and road networks.
 Additionally, the topic is of interest for 3D content creators in for example the fields of video game design or 3D animation. A trend in these fields is using methods of procedural modeling to create large amounts of 3D content quickly and efficiently, while requiring as little hand modeling as possible. Studios who create large worlds are often interested in solutions that generate large road networks without any hand modeling.
 
-\subsection(ESAL, KTH)
+\subsection{ESAL, KTH}
 The thesis work will be carried out at the Embodied Social Agents Lab (ESAL) at the Department of Computational Science and Technology (CST). The lab has before been working on systems for generating procedural urban environments, and are interested in the possibility of generating more detailed maps than have been done before, using example-based methods to preserve the aesthetic look of a greater metropolitan area. The lab is particularly interested in the generation of footpaths, since most commercial software that import road maps only import arterial and secondary car roads, and do not include pedestrian walkways, cycle paths and such smaller roads.
 % TODO: any official description of ESAL that can be used here?
 

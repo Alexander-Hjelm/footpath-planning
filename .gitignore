@@ -58,3 +58,9 @@ unity-project/*.unitypackage
 
 # Crashlytics generated file
 unity-project/crashlytics-build.properties
+
+# paper build files
+paper/paper.aux
+paper/paper.log
+paper/paper.out
+paper/paper.pdf

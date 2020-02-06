@@ -3,55 +3,111 @@ using UnityEngine;
 
 public class RoadNodeCollection
 {
-    private Dictionary<float, Dictionary<float, RoadNode>> _nodesDict
+    private Dictionary<float, Dictionary<float, RoadNode>> _readNodesByCoord
         = new Dictionary<float, Dictionary<float, RoadNode>>();
 
-    public void AddPath(List<Vector2> points)
+    private Queue<List<RoadNode>> _readPaths = new Queue<List<RoadNode>>();
+
+    private Dictionary<RoadNode, int> _visitedCount = new Dictionary<RoadNode, int>();
+
+    public void ReadPath(List<Vector2> points)
     {
-        AddNode(points[0]);
+        List<RoadNode> path = new List<RoadNode>();
         for(int i=1; i<points.Count; i++)
         {
-            AddNode(points[i]);
-            AddNeighbourRelation(points[i-1], points[i]);
+            RoadNode node = GetNode(points[i]);
+            path.Add(node);
+            BumpVisitedCount(node);
         }
+        _readPaths.Enqueue(path);
     }
 
-    public List<RoadNode> BuildToList()
+    public List<List<RoadNode>> BuildAndGetPaths()
     {
-        List<RoadNode> outList = new List<RoadNode>();
-        foreach(Dictionary<float, RoadNode> nodeDict in _nodesDict.Values)
+        Queue<List<RoadNode>> tentativePaths = _readPaths;
+        List<List<RoadNode>> outPaths = new List<List<RoadNode>>();
+
+        int crash_safe = 0;
+        while(tentativePaths.Count > 0)
         {
-            foreach(RoadNode node in nodeDict.Values)
+            List<RoadNode> path = tentativePaths.Dequeue();
+            
+            for(int i=0; i<path.Count; i++)
             {
-                outList.Add(node);
+                RoadNode node = path[i];
+                if(i>0 && i<path.Count-1 && _visitedCount[node] > 1)
+                {
+                    // This is an intersection, we should split the path
+                    List<RoadNode> path2 = new List<RoadNode>();
+                    path2.Add(node); // First add the intersection point
+                    for(int j=i; j<path.Count; j++)
+                    {
+                        // Move all other points from the first path to the second
+                        path2.Add(path[j]);
+                        path.RemoveAt(j);
+                    }
+                    // Queue the new path, deal with it in a later iteration
+                    tentativePaths.Enqueue(path2);
+                    break;
+                }
+            }
+            
+            outPaths.Add(path);
+
+            crash_safe++;
+            if (crash_safe > 7000)
+            {
+                Debug.Log("Crashed with " + tentativePaths.Count + " paths remaining");
+                break;
             }
         }
-        return outList;
+
+        return outPaths;
     }
 
-    private void AddNode(Vector2 point)
+    private void BumpVisitedCount(RoadNode node)
     {
-        if(!_nodesDict.ContainsKey(point.x))
-            _nodesDict[point.x] = new Dictionary<float, RoadNode>();
-
-        if(!_nodesDict[point.x].ContainsKey(point.y))
+        if(_visitedCount.ContainsKey(node))
         {
-            _nodesDict[point.x][point.y] = new RoadNode(point.x, point.y);
+            _visitedCount[node]++;
+        }
+        else
+        {
+            _visitedCount[node] = 0;
         }
     }
 
-    private bool NodeExists(Vector2 point)
+    private RoadNode AddAndReturnNode(Vector2 point)
     {
-        if(_nodesDict.ContainsKey(point.x) &&_nodesDict[point.x].ContainsKey(point.y))
+        if(!_readNodesByCoord.ContainsKey(point.x))
+            _readNodesByCoord[point.x] = new Dictionary<float, RoadNode>();
+
+        if(!_readNodesByCoord[point.x].ContainsKey(point.y))
+        {
+            _readNodesByCoord[point.x][point.y] = new RoadNode(point.x, point.y);
+        }
+        return _readNodesByCoord[point.x][point.y];
+    }
+
+    private bool NodeHasBeenRead(Vector2 point)
+    {
+        if(_readNodesByCoord.ContainsKey(point.x) && _readNodesByCoord[point.x].ContainsKey(point.y))
             return true;
         return false;
     }
 
     private RoadNode GetNode(Vector2 point)
     {
-        return _nodesDict[point.x][point.y];
+        if(NodeHasBeenRead(point))
+        {
+            return _readNodesByCoord[point.x][point.y];
+        }
+        else
+        {
+            return AddAndReturnNode(point);
+        }
     }
-
+/*
     private void AddNeighbourRelation(Vector2 point1, Vector2 point2)
     {
         if(NodeExists(point1) && NodeExists(point2))
@@ -67,5 +123,6 @@ public class RoadNodeCollection
                 + point1 + ", " + point2);
         }
     }
+    */
 
 }

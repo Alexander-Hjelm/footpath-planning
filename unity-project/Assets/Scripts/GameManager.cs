@@ -37,16 +37,10 @@ public class GameManager : MonoBehaviour
         }
         roadNodesList = roadNodeCollection.BuildAndGetPaths();
 
-        // Generate meshes and store them
-        //foreach(RoadNode node in roadNodesList)
-        //{
-            //GameObject roadMeshObj = new GameObject();
-            //RoadMesh roadMesh = roadMeshObj.AddComponent(typeof(RoadMesh)) as RoadMesh;
-            // TODO: Add more points here, go through all neighbours as long as there are only 2 for every node
-            // That way we can generate all simple roads
-            //roadMesh.GenerateMeshFromPoints(new List<Vector2>() {node.GetPosAsVector2()});
-            //roadMeshes[node] = roadMesh;
-        //}
+        // Generate mesh
+        GameObject roadMeshObj = new GameObject();
+        RoadMesh roadMesh = roadMeshObj.AddComponent(typeof(RoadMesh)) as RoadMesh;
+        roadMesh.GenerateMeshFromPaths(roadNodesList);
     }
 
     void Update()

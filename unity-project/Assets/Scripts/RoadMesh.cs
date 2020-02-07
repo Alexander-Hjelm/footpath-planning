@@ -6,6 +6,8 @@ using UnityEngine;
 public class RoadMesh : MonoBehaviour
 {
     private MeshFilter _meshFilter;
+    private float _scale = 20f;
+    private Vector2 _offset = new Vector2(-18.05f, -59.34f);
 
     public void Awake()
     {
@@ -29,10 +31,8 @@ public class RoadMesh : MonoBehaviour
             {
                 RoadNode a = path[i];
                 RoadNode b = path[i+1];
-                Vector2 posA2D = a.GetPosAsVector2();
-                Vector3 posA = new Vector3((posA2D.y-18.05f)*0.5f, 0f, posA2D.x-59.34f)*20f;
-                Vector2 posB2D = b.GetPosAsVector2();
-                Vector3 posB = new Vector3((posB2D.y-18.05f)*0.5f, 0f, posB2D.x-59.34f)*20f;
+                Vector3 posA = TransformPointToMeshSpace(a.GetPosAsVector2());
+                Vector3 posB = TransformPointToMeshSpace(b.GetPosAsVector2());
                 Vector3 tangent = posB - posA;
                 Vector3 normal = new Vector3(tangent.z, 0f, -tangent.x);
                 vertices.Add(posA + normal*roadWidth);
@@ -55,5 +55,10 @@ public class RoadMesh : MonoBehaviour
         //mesh.uv = newUV;
         
         _meshFilter.mesh = mesh;
+    }
+
+    private Vector3 TransformPointToMeshSpace(Vector2 input)
+    {
+        return new Vector3((input.y+_offset.x)*0.5f, 0f, input.x+_offset.y)*_scale;
     }
 }

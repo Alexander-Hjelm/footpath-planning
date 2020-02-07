@@ -34,7 +34,7 @@ public class RoadMesh : MonoBehaviour
                 Vector3 posA = TransformPointToMeshSpace(a.GetPosAsVector2());
                 Vector3 posB = TransformPointToMeshSpace(b.GetPosAsVector2());
                 Vector3 tangent = posB - posA;
-                Vector3 normal = new Vector3(tangent.z, 0f, -tangent.x);
+                Vector3 normal = new Vector3(tangent.z, 0f, -tangent.x).normalized*0.001f;
                 vertices.Add(posA + normal*roadWidth);
                 vertices.Add(posA - normal*roadWidth);
                 vertices.Add(posB + normal*roadWidth);
@@ -42,16 +42,25 @@ public class RoadMesh : MonoBehaviour
                 triangles.Add(countedVertices);
                 triangles.Add(countedVertices+1);
                 triangles.Add(countedVertices+2);
-                triangles.Add(countedVertices+1);
-                triangles.Add(countedVertices+2);
                 triangles.Add(countedVertices+3);
+                triangles.Add(countedVertices+2);
+                triangles.Add(countedVertices+1);
                 countedVertices += 4;
             }
         }
 
         mesh.vertices = vertices.ToArray();
         mesh.triangles = triangles.ToArray();
-        Debug.Log(mesh.triangles.Count());
+
+        // Build normals
+        Vector3[] normals = new Vector3[vertices.Count];
+        for(int i=0; i<vertices.Count; i++)
+        {
+            normals[i] = Vector3.up;
+        }
+        mesh.normals = normals;
+
+        //Debug.Log(mesh.triangles.Count());
         //mesh.uv = newUV;
         
         _meshFilter.mesh = mesh;

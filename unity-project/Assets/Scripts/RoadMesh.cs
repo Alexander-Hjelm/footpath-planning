@@ -39,6 +39,7 @@ public class RoadMesh : MonoBehaviour
         List<Vector3> vertices = new List<Vector3>();
         List<int> triangles = new List<int>();
         int countedVertices = 0;
+        Dictionary<RoadNode, Queue<RoadEndPoint>> intersectionNodes = new Dictionary<RoadNode, Queue<RoadEndPoint>>();
         foreach(List<RoadNode> path in paths)
         {
             RoadEndPoint previousRoadEndPoint = new RoadEndPoint(Vector3.zero, Vector3.zero, Vector3.zero);
@@ -95,6 +96,23 @@ public class RoadMesh : MonoBehaviour
                 // Set the last end point for the next path segment
                 previousRoadEndPoint = new RoadEndPoint(leftEndPoint, rightEndPoint, tangent);
             }
+        }
+
+        foreach(RoadNode node in intersectionNodes.Keys)
+        {
+            Queue<RoadEndPoint> endPoints = intersectionNodes[node];
+
+            // TODO: Begin by storing intersections at the beginning and end of the path loop
+            // TODO: Then store all corresponding end points
+            // TODO: Store the vertex indices in the RoadEndPoint structure
+            // TODO: Here: Skip the intersection node if it has less than two end points
+            // TODO: Here: order the end points by angle
+            // TODO: Iterate through the end points, get the right pos from end point 1 and left pos from end point 2
+            // TODO: Get the intersection point
+            // TODO: Store all the intersection points
+            // TODO: Get the vertex indices of the end points and move them to the new intersection points
+            // TODO: Create new triangles, stitch all the vertices together
+
         }
 
         mesh.vertices = vertices.ToArray();

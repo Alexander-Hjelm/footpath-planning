@@ -6,7 +6,7 @@ using UnityEngine;
 public class RoadMesh : MonoBehaviour
 {
     private MeshFilter _meshFilter;
-    private float _scale = 20f;
+    private float _scale = 50f;
     private Vector2 _offset = new Vector2(-18.05f, -59.34f);
 
     public void Awake()

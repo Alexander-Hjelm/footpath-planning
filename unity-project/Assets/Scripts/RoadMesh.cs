@@ -9,12 +9,16 @@ public class RoadMesh : MonoBehaviour
     {
         public Vector3 leftPoint;
         public Vector3 rightPoint;
+        public int leftIndex;
+        public int rightIndex;
         public Vector3 tangent;
 
-        public RoadEndPoint(Vector3 leftPoint, Vector3 rightPoint, Vector3 tangent)
+        public RoadEndPoint(Vector3 leftPoint, Vector3 rightPoint, int leftIndex, int rightIndex, Vector3 tangent)
         {
             this.leftPoint = leftPoint;
             this.rightPoint = rightPoint;
+            this.leftIndex = leftIndex;
+            this.rightIndex = rightIndex;
             this.tangent = tangent;
         }
     }
@@ -42,7 +46,7 @@ public class RoadMesh : MonoBehaviour
         Dictionary<RoadNode, Queue<RoadEndPoint>> intersectionNodes = new Dictionary<RoadNode, Queue<RoadEndPoint>>();
         foreach(List<RoadNode> path in paths)
         {
-            RoadEndPoint previousRoadEndPoint = new RoadEndPoint(Vector3.zero, Vector3.zero, Vector3.zero);
+            RoadEndPoint previousRoadEndPoint = new RoadEndPoint(Vector3.zero, Vector3.zero, -1, -1, Vector3.zero);
 
             for(int i=0; i<path.Count-1; i++)
             {
@@ -94,25 +98,78 @@ public class RoadMesh : MonoBehaviour
                 countedVertices += 4;
 
                 // Set the last end point for the next path segment
-                previousRoadEndPoint = new RoadEndPoint(leftEndPoint, rightEndPoint, tangent);
+                previousRoadEndPoint = new RoadEndPoint(leftEndPoint, rightEndPoint, vertices.Count-2, vertices.Count-1, tangent);
+
+                // If this is the beginning or end nod of the path, store it as an intersection candidate
+                if(i==0)
+                {
+                    if(!intersectionNodes.ContainsKey(a))
+                    {
+                        intersectionNodes[a] = new Queue<RoadEndPoint>();
+                    }
+                    intersectionNodes[a].Enqueue(new RoadEndPoint(leftStartPoint, rightStartPoint, vertices.Count-4, vertices.Count-3, tangent));
+                }
+                if(i==path.Count-2)
+                {
+                    if(!intersectionNodes.ContainsKey(b))
+                    {
+                        intersectionNodes[b] = new Queue<RoadEndPoint>();
+                    }
+                    intersectionNodes[b].Enqueue(new RoadEndPoint(leftEndPoint, rightEndPoint, vertices.Count-2, vertices.Count-1, tangent));
+                }
             }
         }
 
+        // Intersections
         foreach(RoadNode node in intersectionNodes.Keys)
         {
             Queue<RoadEndPoint> endPoints = intersectionNodes[node];
+            if(endPoints.Count < 2)
+            {
+                // Skip the node if it has less than two end points. Then it is not an intersection
+                continue;
+            }
 
-            // TODO: Begin by storing intersections at the beginning and end of the path loop
-            // TODO: Then store all corresponding end points
-            // TODO: Store the vertex indices in the RoadEndPoint structure
-            // TODO: Here: Skip the intersection node if it has less than two end points
             // TODO: Here: order the end points by angle
-            // TODO: Iterate through the end points, get the right pos from end point 1 and left pos from end point 2
-            // TODO: Get the intersection point
-            // TODO: Store all the intersection points
-            // TODO: Get the vertex indices of the end points and move them to the new intersection points
-            // TODO: Create new triangles, stitch all the vertices together
+            List<RoadEndPoint> endPointsSorted = new List<RoadEndPoint>();
+            while(endPoints.Count > 0)
+            {
+                RoadEndPoint endPoint = endPoints.Dequeue();
+                endPointsSorted.Add(endPoint);
+            }
 
+            // Now the end points are sorted, get them one by one
+            for(int i=0; i<endPointsSorted.Count; i++)
+            {
+                RoadEndPoint a = endPointsSorted[i];
+                RoadEndPoint b = endPointsSorted[i+1];
+                
+                // Get the intersection point
+                // Get the right pos from end point 1 and left pos from end point 2
+                Vector3 intersection;
+                if(MathUtils.LineLineIntersection(out intersection, a.rightPoint, a.tangent,
+                    b.leftPoint, b.tangent))
+                {
+                    // Get the vertex indices of the end points and move them to the new intersection points
+                    vertices[a.rightIndex] = intersection;
+                    vertices[b.leftIndex] = intersection;
+                    
+                    // Add the intersection point as the next vertex
+                    vertices.Add(intersection);
+
+                    // Create new triangles, stitch all the vertices together
+                    if(i<endPointsSorted.Count-2)
+                    {
+                        triangles.Add(triangles.Count-1);
+                        triangles.Add(triangles.Count);
+                        triangles.Add(triangles.Count+1);
+                    }
+                    continue;
+                }
+                
+                Debug.LogError("Found an intersection with two incoming paths that have the same tangents!");
+
+            }
         }
 
         mesh.vertices = vertices.ToArray();

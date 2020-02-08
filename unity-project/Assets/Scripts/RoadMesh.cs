@@ -43,7 +43,7 @@ public class RoadMesh : MonoBehaviour
         List<Vector3> vertices = new List<Vector3>();
         List<int> triangles = new List<int>();
         int countedVertices = 0;
-        Dictionary<RoadNode, Queue<RoadEndPoint>> intersectionNodes = new Dictionary<RoadNode, Queue<RoadEndPoint>>();
+        Dictionary<RoadNode, List<RoadEndPoint>> intersectionNodes = new Dictionary<RoadNode, List<RoadEndPoint>>();
         foreach(List<RoadNode> path in paths)
         {
             RoadEndPoint previousRoadEndPoint = new RoadEndPoint(Vector3.zero, Vector3.zero, -1, -1, Vector3.zero);
@@ -105,17 +105,17 @@ public class RoadMesh : MonoBehaviour
                 {
                     if(!intersectionNodes.ContainsKey(a))
                     {
-                        intersectionNodes[a] = new Queue<RoadEndPoint>();
+                        intersectionNodes[a] = new List<RoadEndPoint>();
                     }
-                    intersectionNodes[a].Enqueue(new RoadEndPoint(leftStartPoint, rightStartPoint, vertices.Count-4, vertices.Count-3, tangent));
+                    intersectionNodes[a].Add(new RoadEndPoint(leftStartPoint, rightStartPoint, vertices.Count-4, vertices.Count-3, tangent));
                 }
-                if(i==path.Count-2)
+                else if(i==path.Count-2)
                 {
                     if(!intersectionNodes.ContainsKey(b))
                     {
-                        intersectionNodes[b] = new Queue<RoadEndPoint>();
+                        intersectionNodes[b] = new List<RoadEndPoint>();
                     }
-                    intersectionNodes[b].Enqueue(new RoadEndPoint(leftEndPoint, rightEndPoint, vertices.Count-2, vertices.Count-1, tangent));
+                    intersectionNodes[b].Add(new RoadEndPoint(leftEndPoint, rightEndPoint, vertices.Count-2, vertices.Count-1, tangent));
                 }
             }
         }
@@ -123,33 +123,29 @@ public class RoadMesh : MonoBehaviour
         // Intersections
         foreach(RoadNode node in intersectionNodes.Keys)
         {
-            Queue<RoadEndPoint> endPoints = intersectionNodes[node];
-            if(endPoints.Count < 2)
+            List<RoadEndPoint> endPoints = intersectionNodes[node];
+            //TODO: Should work for intersections with 2 nodes as well
+            if(endPoints.Count < 3)
             {
-                // Skip the node if it has less than two end points. Then it is not an intersection
+                // Skip the node if it has less than three end points. Then it is not an intersection
                 continue;
             }
 
-            // TODO: Here: order the end points by angle
-            List<RoadEndPoint> endPointsSorted = new List<RoadEndPoint>();
-            while(endPoints.Count > 0)
-            {
-                RoadEndPoint endPoint = endPoints.Dequeue();
-                endPointsSorted.Add(endPoint);
-            }
+            // Order the end points by angle
+            RoadEndPoint[] endPointsSorted = endPoints.OrderBy(v => Vector3.Angle(v.tangent, Vector3.right)).ToArray();
 
-            int[] storedIntersectionIndices = new int[endPointsSorted.Count];
+            List<int> storedIntersectionIndices = new List<int>();
 
-            string debugEndPoints = "End points: ";
+            //string debugEndPoints = "End points: ";
 
             // Now the end points are sorted, get them one by one
-            for(int i=0; i<endPointsSorted.Count; i++)
+            for(int i=0; i<endPointsSorted.Length; i++)
             {
 
                 RoadEndPoint a = endPointsSorted[i];
-                RoadEndPoint b = endPointsSorted[(i+1)%endPointsSorted.Count];
+                RoadEndPoint b = endPointsSorted[(i+1)%endPointsSorted.Length];
                 
-                debugEndPoints += a.rightPoint + ", ";
+                //debugEndPoints += a.rightPoint + ", ";
 
                 // Get the intersection point
                 // Get the right pos from end point 1 and left pos from end point 2
@@ -161,23 +157,29 @@ public class RoadMesh : MonoBehaviour
                     vertices[a.rightIndex] = intersection;
                     vertices[b.leftIndex] = intersection;
                     
+                    //Debug.Log("Intersection: " + intersection);
                     // Add the intersection point as the next vertex
-                    //vertices.Add(intersection);
+                    vertices.Add(intersection);
                     
-                    storedIntersectionIndices[i] = a.rightIndex;
+                    storedIntersectionIndices.Add(vertices.Count-1);
                     continue;
                 }
                 
-                //Debug.LogError("Found an intersection with two incoming paths that have the same tangents! " + a.tangent + ", " + b.tangent);
+                Debug.LogError("Found an intersection with two incoming paths that have the same tangents! " + a.tangent + ", " + b.tangent);
             }
-            Debug.Log(debugEndPoints);
+            //Debug.Log(debugEndPoints);
 
-            for(int i=0; i< storedIntersectionIndices.Length; i++)
+            for(int i=0; i< storedIntersectionIndices.Count; i++)
             {
                 // Create new triangles, stitch all the vertices together
                 triangles.Add(storedIntersectionIndices[i]);
-                triangles.Add(storedIntersectionIndices[(i+1)%storedIntersectionIndices.Length]);
-                triangles.Add(storedIntersectionIndices[(i+2)%storedIntersectionIndices.Length]);
+                triangles.Add(storedIntersectionIndices[(i+1)%storedIntersectionIndices.Count]);
+                triangles.Add(storedIntersectionIndices[(i+2)%storedIntersectionIndices.Count]);
+
+                //Debug.Log("Triangle indices: " + i + ", " + (i+1)%storedIntersectionIndices.Count + ", " + (i+2)%storedIntersectionIndices.Count);
+                //Debug.Log("Added triangle:" + vertices[storedIntersectionIndices[i]]
+                        //+ vertices[storedIntersectionIndices[(i+1)%storedIntersectionIndices.Count]]
+                        //+ vertices[storedIntersectionIndices[(i+2)%storedIntersectionIndices.Count]]);
             }
 
         }

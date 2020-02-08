@@ -138,10 +138,14 @@ public class RoadMesh : MonoBehaviour
                 endPointsSorted.Add(endPoint);
             }
 
+            int[] storedIntersectionIndices = new int[endPointsSorted.Count];
+
             // Now the end points are sorted, get them one by one
-            for(int i=0; i<endPointsSorted.Count; i++)
+            for(int i=-1; i<endPointsSorted.Count-1; i++)
             {
-                RoadEndPoint a = endPointsSorted[i];
+                RoadEndPoint a;
+                if(i==-1) a = endPointsSorted[endPointsSorted.Count-1];
+                else a = endPointsSorted[i];
                 RoadEndPoint b = endPointsSorted[i+1];
                 
                 // Get the intersection point
@@ -155,23 +159,24 @@ public class RoadMesh : MonoBehaviour
                     vertices[b.leftIndex] = intersection;
                     
                     // Add the intersection point as the next vertex
-                    vertices.Add(intersection);
-
-                    // Create new triangles, stitch all the vertices together
-                    if(i<endPointsSorted.Count-2)
-                    {
-                        triangles.Add(triangles.Count-1);
-                        triangles.Add(triangles.Count);
-                        triangles.Add(triangles.Count+1);
-                    }
+                    //vertices.Add(intersection);
+                    
+                    storedIntersectionIndices[i+1] = a.rightIndex;
                     continue;
                 }
                 
-                Debug.LogError("Found an intersection with two incoming paths that have the same tangents!");
-
+                //Debug.LogError("Found an intersection with two incoming paths that have the same tangents! " + a.tangent + ", " + b.tangent);
             }
-        }
 
+            for(int i=0; i< storedIntersectionIndices.Length; i++)
+            {
+                // Create new triangles, stitch all the vertices together
+                triangles.Add(storedIntersectionIndices[i]);
+                triangles.Add(storedIntersectionIndices[(i+1)%storedIntersectionIndices.Length]);
+                triangles.Add(storedIntersectionIndices[(i+2)%storedIntersectionIndices.Length]);
+            }
+
+        }
         mesh.vertices = vertices.ToArray();
         mesh.triangles = triangles.ToArray();
 

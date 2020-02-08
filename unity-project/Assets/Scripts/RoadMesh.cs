@@ -55,6 +55,10 @@ public class RoadMesh : MonoBehaviour
                 Vector3 posA = TransformPointToMeshSpace(a.GetPosAsVector2());
                 Vector3 posB = TransformPointToMeshSpace(b.GetPosAsVector2());
                 Vector3 tangent = (posB - posA).normalized;
+                if(tangent == Vector3.zero)
+                {
+                    Debug.LogError("Tangent is zero!");
+                }
                 Vector3 normal = new Vector3(tangent.z, 0f, -tangent.x)*0.001f;
 
                 Vector3 leftStartPoint = posA + normal*roadWidth;
@@ -165,7 +169,7 @@ public class RoadMesh : MonoBehaviour
                     continue;
                 }
                 
-                Debug.LogError("Found an intersection with two incoming paths that have the same tangents! " + a.tangent + ", " + b.tangent);
+                Debug.LogError("Found an intersection with two incoming paths that have the same tangents! " + a.tangent + ", " + b.tangent + ". a.right = " + a.rightPoint + ", b.left = " + b.leftPoint);
             }
             //Debug.Log(debugEndPoints);
 

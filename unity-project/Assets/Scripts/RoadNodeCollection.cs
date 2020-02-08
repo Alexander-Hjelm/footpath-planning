@@ -40,7 +40,7 @@ public class RoadNodeCollection
                     // This is an intersection, we should split the path
                     List<RoadNode> path2 = new List<RoadNode>();
                     path2.Add(node); // First add the intersection point
-                    for(int j=i; j<path.Count; j++)
+                    for(int j=i+1; j<path.Count; j++)
                     {
                         // Move all other points from the first path to the second
                         path2.Add(path[j]);

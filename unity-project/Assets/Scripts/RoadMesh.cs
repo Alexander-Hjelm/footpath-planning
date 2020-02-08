@@ -140,14 +140,17 @@ public class RoadMesh : MonoBehaviour
 
             int[] storedIntersectionIndices = new int[endPointsSorted.Count];
 
+            string debugEndPoints = "End points: ";
+
             // Now the end points are sorted, get them one by one
-            for(int i=-1; i<endPointsSorted.Count-1; i++)
+            for(int i=0; i<endPointsSorted.Count; i++)
             {
-                RoadEndPoint a;
-                if(i==-1) a = endPointsSorted[endPointsSorted.Count-1];
-                else a = endPointsSorted[i];
-                RoadEndPoint b = endPointsSorted[i+1];
+
+                RoadEndPoint a = endPointsSorted[i];
+                RoadEndPoint b = endPointsSorted[(i+1)%endPointsSorted.Count];
                 
+                debugEndPoints += a.rightPoint + ", ";
+
                 // Get the intersection point
                 // Get the right pos from end point 1 and left pos from end point 2
                 Vector3 intersection;
@@ -161,12 +164,13 @@ public class RoadMesh : MonoBehaviour
                     // Add the intersection point as the next vertex
                     //vertices.Add(intersection);
                     
-                    storedIntersectionIndices[i+1] = a.rightIndex;
+                    storedIntersectionIndices[i] = a.rightIndex;
                     continue;
                 }
                 
                 //Debug.LogError("Found an intersection with two incoming paths that have the same tangents! " + a.tangent + ", " + b.tangent);
             }
+            Debug.Log(debugEndPoints);
 
             for(int i=0; i< storedIntersectionIndices.Length; i++)
             {

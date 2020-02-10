@@ -140,8 +140,6 @@ public class RoadMesh : MonoBehaviour
 
             List<int> storedIntersectionIndices = new List<int>();
 
-            //string debugEndPoints = "End points: ";
-
             // Now the end points are sorted, get them one by one
             for(int i=0; i<endPointsSorted.Length; i++)
             {
@@ -149,29 +147,40 @@ public class RoadMesh : MonoBehaviour
                 RoadEndPoint a = endPointsSorted[i];
                 RoadEndPoint b = endPointsSorted[(i+1)%endPointsSorted.Length];
                 
-                //debugEndPoints += a.rightPoint + ", ";
-
                 // Get the intersection point
                 // Get the right pos from end point 1 and left pos from end point 2
                 Vector3 intersection;
+                bool intersectionWasSet = false;
                 if(MathUtils.LineLineIntersection(out intersection, a.rightPoint, a.tangent,
                     b.leftPoint, b.tangent))
+                {
+                    intersectionWasSet = true;
+                }
+                else if((a.tangent + b.tangent).magnitude < 0.01f)
+                {
+                    // Tangents are opposite, pick the middle point
+                    intersection = (a.rightPoint + b.leftPoint)/2;
+                    intersectionWasSet = true;
+                }
+
+                if(intersectionWasSet)
                 {
                     // Get the vertex indices of the end points and move them to the new intersection points
                     vertices[a.rightIndex] = intersection;
                     vertices[b.leftIndex] = intersection;
                     
-                    //Debug.Log("Intersection: " + intersection);
                     // Add the intersection point as the next vertex
                     vertices.Add(intersection);
                     
                     storedIntersectionIndices.Add(vertices.Count-1);
                     continue;
                 }
-                
-                Debug.LogError("Found an intersection with two incoming paths that have the same tangents! " + a.tangent + ", " + b.tangent + ". a.right = " + a.rightPoint + ", b.left = " + b.leftPoint);
+                else
+                {
+                    Debug.LogError("Found an intersection with two incoming paths that have the same tangents! " + a.tangent + ", " + b.tangent + ". a.right = " + a.rightPoint + ", b.left = " + b.leftPoint);
+                    Debug.LogError(a.tangent.x + b.tangent.x);
+                }
             }
-            //Debug.Log(debugEndPoints);
 
             for(int i=0; i< storedIntersectionIndices.Count; i++)
             {

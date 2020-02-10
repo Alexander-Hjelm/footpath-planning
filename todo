@@ -12,3 +12,43 @@ Torsdag 06/02:
 Måndag 10/02:
 [X] Texturing: Fixa stretchartifakter
 [X] Texturing: Fixa korsningar
+[X] Workplan för exempelbaserad lösning
+
+Tisdag 11/02:
+[ ] Överför tag om vilken texture som ska tillämpas på en path
+[ ] Nya megatexture
+[ ] Nya texturekoordinater i meshgenereringen
+
+Exempelbaserad lösning:
+
+Träningsfas:
+[ ] Läs indata
+[ ] Konvertera till grafrepresentation
+[ ] Hough-transform för att detektera cirklar -> patches
+  [ ] För varje patch, expandera enligt algoritm 2 (section 4.1)
+[ ] För kvarvarande vertices, välj ut alla korsningar (noder med 3+ grannar)
+  [ ] Expandera dessa patches enlight algoritm 2
+[ ] Kvarvarande vertices, koppla till närast angränsade patch
+
+[ ] UI: Navigering
+[ ] UI: användaren kan specificera en targetdomän Omega
+
+Genereringsfas:
+
+Exempelbaserad generering
+[ ] gå över den existerande grafen, placera alla noder som ligger inuti Omega i en nodkö Q
+[ ] om inga noder låg i Omega, placera utgångspunkt i centerioden av targetdomänen Omega
+[ ] Gå igenom alla sparade patches och välj den som uppfyller villkoren:
+  [ ] Usage probability (section 4.3.1)
+  [ ] Den intersectar inte någon annan kant på kartan
+[ ] Välj den patch som fick högst usage probability
+[ ] Kopiera in den nya patchen i nätverket
+[ ] Om ingen bra patch hittades, kör procedurell generering för att generera en ny korsning istället. Lägg till de nya ändpunkterna i Q
+[ ] För varje ny ändpunkt som bildades, lägg till den i Q
+[ ] Exempelbaserad generering tills: (termineringsvillkor) Q är tom
+
+Procedurell generering
+[ ] Under träningsfasen, samla in parametrarna i 4.2 (ta average över hela grafen)
+[ ] Generera en ny korsning slumpmässigt som sammanfaller med de statistiska parametrarna
+[ ] Lägg till de nya ändåunkterna i Q
+[ ] Se till att den nya korsningen inte korsar en existerande kant

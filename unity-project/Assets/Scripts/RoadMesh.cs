@@ -105,10 +105,13 @@ public class RoadMesh : MonoBehaviour
                 triangles.Add(countedVertices+1);
                 countedVertices += 4;
 
-                uvs.Add(new Vector2(1f, 0f));
-                uvs.Add(new Vector2(0f, 0f));
-                uvs.Add(new Vector2(1f, 1f));
-                uvs.Add(new Vector2(0f, 1f));
+                float roadLength = (posA - posB).magnitude;
+                Vector2 uvScale = new Vector2(1f, 600*roadLength/_roadWidth);
+
+                uvs.Add(new Vector2(1f, 0f) * uvScale);
+                uvs.Add(new Vector2(0f, 0f) * uvScale);
+                uvs.Add(new Vector2(1f, 1f) * uvScale);
+                uvs.Add(new Vector2(0f, 1f) * uvScale);
 
                 // Set the last end point for the next path segment
                 previousRoadEndPoint = new RoadEndPoint(leftEndPoint, rightEndPoint, vertices.Count-2, vertices.Count-1, tangent);

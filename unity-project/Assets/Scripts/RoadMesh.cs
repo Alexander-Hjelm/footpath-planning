@@ -24,13 +24,16 @@ public class RoadMesh : MonoBehaviour
     }
 
     private MeshFilter _meshFilter;
-    private float _scale = 50f;
+    private float _scale = 100f;
+    float _roadWidth = 2.2f;
     private Vector2 _offset = new Vector2(-18.05f, -59.34f);
 
     public void Awake()
     {
         MeshRenderer meshRenderer = gameObject.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
-        meshRenderer.sharedMaterial = new Material(Shader.Find("Standard"));
+        Material material = new Material(Shader.Find("Standard"));
+        material.mainTexture = Resources.Load("Textures/Road") as Texture;
+        meshRenderer.sharedMaterial = material;
         _meshFilter = gameObject.AddComponent(typeof(MeshFilter)) as MeshFilter;
 
     }
@@ -38,9 +41,9 @@ public class RoadMesh : MonoBehaviour
     public void GenerateMeshFromPaths(List<List<RoadNode>> paths)
     {
         Mesh mesh = new Mesh();
-        float roadWidth = 1f;
 
         List<Vector3> vertices = new List<Vector3>();
+        List<Vector2> uvs = new List<Vector2>();
         List<int> triangles = new List<int>();
         int countedVertices = 0;
         Dictionary<RoadNode, List<RoadEndPoint>> intersectionNodes = new Dictionary<RoadNode, List<RoadEndPoint>>();
@@ -62,10 +65,10 @@ public class RoadMesh : MonoBehaviour
                 }
                 Vector3 normal = new Vector3(tangent.z, 0f, -tangent.x)*0.001f;
 
-                Vector3 leftStartPoint = posA + normal*roadWidth;
-                Vector3 rightStartPoint = posA - normal*roadWidth;
-                Vector3 leftEndPoint = posB + normal*roadWidth;
-                Vector3 rightEndPoint = posB - normal*roadWidth;
+                Vector3 leftStartPoint = posA + normal*_roadWidth;
+                Vector3 rightStartPoint = posA - normal*_roadWidth;
+                Vector3 leftEndPoint = posB + normal*_roadWidth;
+                Vector3 rightEndPoint = posB - normal*_roadWidth;
 
                 // If this is not the first path segment, merge it with the previous one
                 if(previousRoadEndPoint.tangent != Vector3.zero)
@@ -101,6 +104,11 @@ public class RoadMesh : MonoBehaviour
                 triangles.Add(countedVertices+2);
                 triangles.Add(countedVertices+1);
                 countedVertices += 4;
+
+                uvs.Add(new Vector2(1f, 0f));
+                uvs.Add(new Vector2(0f, 0f));
+                uvs.Add(new Vector2(1f, 1f));
+                uvs.Add(new Vector2(0f, 1f));
 
                 // Set the last end point for the next path segment
                 previousRoadEndPoint = new RoadEndPoint(leftEndPoint, rightEndPoint, vertices.Count-2, vertices.Count-1, tangent);
@@ -178,6 +186,7 @@ public class RoadMesh : MonoBehaviour
                     
                     // Add the intersection point as the next vertex
                     vertices.Add(intersection);
+                    uvs.Add(new Vector2(0f, 0f));
                     
                     storedIntersectionIndices.Add(vertices.Count-1);
                     continue;
@@ -203,8 +212,10 @@ public class RoadMesh : MonoBehaviour
             }
 
         }
+        Debug.Log("Vertices: " + vertices.Count + ", UVs: " + uvs.Count);
         mesh.vertices = vertices.ToArray();
         mesh.triangles = triangles.ToArray();
+        mesh.uv = uvs.ToArray();
 
         // Build normals
         Vector3[] normals = new Vector3[vertices.Count];

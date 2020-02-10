@@ -141,7 +141,7 @@ public class RoadMesh : MonoBehaviour
         {
             List<RoadEndPoint> endPoints = intersectionNodes[node];
             //TODO: Should work for intersections with 2 nodes as well
-            if(endPoints.Count < 3)
+            if(endPoints.Count < 2)
             {
                 // Skip the node if it has less than three end points. Then it is not an intersection
                 continue;
@@ -152,12 +152,17 @@ public class RoadMesh : MonoBehaviour
 
             List<int> storedIntersectionIndices = new List<int>();
 
+            // Midpoint of the intersection
+            Vector3 midPoint = Vector3.zero;
+
             // Now the end points are sorted, get them one by one
             for(int i=0; i<endPointsSorted.Length; i++)
             {
 
                 RoadEndPoint a = endPointsSorted[i];
                 RoadEndPoint b = endPointsSorted[(i+1)%endPointsSorted.Length];
+
+                midPoint += (a.rightPoint + a.leftPoint)/2;
                 
                 // Get the intersection point
                 // Get the right pos from end point 1 and left pos from end point 2
@@ -187,10 +192,6 @@ public class RoadMesh : MonoBehaviour
                     vertices[a.rightIndex] = intersection;
                     vertices[b.leftIndex] = intersection;
                     
-                    // Add the intersection point as the next vertex
-                    vertices.Add(intersection);
-                    uvs.Add(new Vector2(0f, 0f));
-                    
                     storedIntersectionIndices.Add(vertices.Count-1);
                     continue;
                 }
@@ -201,12 +202,19 @@ public class RoadMesh : MonoBehaviour
                 }
             }
 
+            // Divide the midpoint to obtain the average
+            midPoint /= endPointsSorted.Length;
+
+            // Add the midpoint of the intersection as the next vertex
+            vertices.Add(midPoint);
+            uvs.Add(new Vector2(0.5f, 0.5f));
+
             for(int i=0; i< storedIntersectionIndices.Count; i++)
             {
                 // Create new triangles, stitch all the vertices together
                 triangles.Add(storedIntersectionIndices[i]);
                 triangles.Add(storedIntersectionIndices[(i+1)%storedIntersectionIndices.Count]);
-                triangles.Add(storedIntersectionIndices[(i+2)%storedIntersectionIndices.Count]);
+                triangles.Add(vertices.Count-1); //Finally the midpoint, last in the vertex array
             }
 
         }

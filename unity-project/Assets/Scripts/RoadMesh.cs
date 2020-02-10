@@ -24,8 +24,8 @@ public class RoadMesh : MonoBehaviour
     }
 
     private MeshFilter _meshFilter;
-    private float _scale = 100f;
-    float _roadWidth = 2.2f;
+    private float _scale = 500f;
+    float _roadWidth = 11f;
     private Vector2 _offset = new Vector2(-18.05f, -59.34f);
 
     public void Awake()
@@ -204,15 +204,9 @@ public class RoadMesh : MonoBehaviour
                 triangles.Add(storedIntersectionIndices[i]);
                 triangles.Add(storedIntersectionIndices[(i+1)%storedIntersectionIndices.Count]);
                 triangles.Add(storedIntersectionIndices[(i+2)%storedIntersectionIndices.Count]);
-
-                //Debug.Log("Triangle indices: " + i + ", " + (i+1)%storedIntersectionIndices.Count + ", " + (i+2)%storedIntersectionIndices.Count);
-                //Debug.Log("Added triangle:" + vertices[storedIntersectionIndices[i]]
-                        //+ vertices[storedIntersectionIndices[(i+1)%storedIntersectionIndices.Count]]
-                        //+ vertices[storedIntersectionIndices[(i+2)%storedIntersectionIndices.Count]]);
             }
 
         }
-        Debug.Log("Vertices: " + vertices.Count + ", UVs: " + uvs.Count);
         mesh.vertices = vertices.ToArray();
         mesh.triangles = triangles.ToArray();
         mesh.uv = uvs.ToArray();
@@ -225,9 +219,6 @@ public class RoadMesh : MonoBehaviour
         }
         mesh.normals = normals;
 
-        //Debug.Log(mesh.triangles.Count());
-        //mesh.uv = newUV;
-        
         _meshFilter.mesh = mesh;
     }
 

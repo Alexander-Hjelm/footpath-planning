@@ -57,6 +57,7 @@ public class RoadMesh : MonoBehaviour
                 Vector3 tangent = (posB - posA).normalized;
                 if(tangent == Vector3.zero)
                 {
+                    // TODO: Tangets should not be zero, examine why this happens earlier in the pipeline
                     Debug.LogError("Tangent is zero!");
                 }
                 Vector3 normal = new Vector3(tangent.z, 0f, -tangent.x)*0.001f;
@@ -158,7 +159,13 @@ public class RoadMesh : MonoBehaviour
                 }
                 else if((a.tangent + b.tangent).magnitude < 0.01f)
                 {
-                    // Tangents are opposite, pick the middle point
+                    // tangents are opposite, pick the middle point
+                    intersection = (a.rightPoint + b.leftPoint)/2;
+                    intersectionWasSet = true;
+                }
+                else if((a.tangent - b.tangent).magnitude < 0.01f)
+                {
+                    // tangents are the same. This happens due to direty data, but pick the middle point for now
                     intersection = (a.rightPoint + b.leftPoint)/2;
                     intersectionWasSet = true;
                 }

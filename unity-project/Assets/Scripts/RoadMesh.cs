@@ -12,14 +12,16 @@ public class RoadMesh : MonoBehaviour
         public int leftIndex;
         public int rightIndex;
         public Vector3 tangent;
+        public RoadNode.HighwayType hwyType;
 
-        public RoadEndPoint(Vector3 leftPoint, Vector3 rightPoint, int leftIndex, int rightIndex, Vector3 tangent)
+        public RoadEndPoint(Vector3 leftPoint, Vector3 rightPoint, int leftIndex, int rightIndex, Vector3 tangent, RoadNode.HighwayType hwyType)
         {
             this.leftPoint = leftPoint;
             this.rightPoint = rightPoint;
             this.leftIndex = leftIndex;
             this.rightIndex = rightIndex;
             this.tangent = tangent;
+            this.hwyType = hwyType;
         }
     }
 
@@ -57,7 +59,7 @@ public class RoadMesh : MonoBehaviour
         Dictionary<RoadNode, List<RoadEndPoint>> intersectionNodes = new Dictionary<RoadNode, List<RoadEndPoint>>();
         foreach(List<RoadNode> path in paths)
         {
-            RoadEndPoint previousRoadEndPoint = new RoadEndPoint(Vector3.zero, Vector3.zero, -1, -1, Vector3.zero);
+            RoadEndPoint previousRoadEndPoint = new RoadEndPoint(Vector3.zero, Vector3.zero, -1, -1, Vector3.zero, RoadNode.HighwayType.NONE);
 
             RoadNode.HighwayType hwyType = RoadNode.HighwayType.NONE;
 
@@ -129,7 +131,7 @@ public class RoadMesh : MonoBehaviour
                 uvs.Add(new Vector2(uvXOffset, 1f) * uvScale);
 
                 // Set the last end point for the next path segment
-                previousRoadEndPoint = new RoadEndPoint(leftEndPoint, rightEndPoint, vertices.Count-2, vertices.Count-1, tangent);
+                previousRoadEndPoint = new RoadEndPoint(leftEndPoint, rightEndPoint, vertices.Count-2, vertices.Count-1, tangent, hwyType);
 
                 // If this is the beginning or end nod of the path, store it as an intersection candidate
                 if(i==0)
@@ -138,7 +140,7 @@ public class RoadMesh : MonoBehaviour
                     {
                         intersectionNodes[a] = new List<RoadEndPoint>();
                     }
-                    intersectionNodes[a].Add(new RoadEndPoint(leftStartPoint, rightStartPoint, vertices.Count-4, vertices.Count-3, tangent));
+                    intersectionNodes[a].Add(new RoadEndPoint(leftStartPoint, rightStartPoint, vertices.Count-4, vertices.Count-3, tangent, hwyType));
                 }
                 else if(i==path.Count-2)
                 {
@@ -146,7 +148,7 @@ public class RoadMesh : MonoBehaviour
                     {
                         intersectionNodes[b] = new List<RoadEndPoint>();
                     }
-                    intersectionNodes[b].Add(new RoadEndPoint(leftEndPoint, rightEndPoint, vertices.Count-2, vertices.Count-1, tangent));
+                    intersectionNodes[b].Add(new RoadEndPoint(leftEndPoint, rightEndPoint, vertices.Count-2, vertices.Count-1, tangent, hwyType));
                 }
             }
         }

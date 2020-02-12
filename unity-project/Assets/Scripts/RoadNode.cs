@@ -8,7 +8,8 @@ public class RoadNode
         FOOTPATH,
         RESIDENTIAL,
         SECONDARY,
-        PRIMARY
+        PRIMARY,
+        NONE
     }
 
     private static Dictionary<string, HighwayType> validHwyTypeStrings = new Dictionary<string, HighwayType>()
@@ -53,6 +54,11 @@ public class RoadNode
     public float GetY()
     {
         return _yCoord;
+    }
+
+    public HighwayType GetHighwayType()
+    {
+        return _highwayType;
     }
 
     public Vector2 GetPosAsVector2()

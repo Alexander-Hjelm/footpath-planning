@@ -51,10 +51,14 @@ public class RoadMesh : MonoBehaviour
         {
             RoadEndPoint previousRoadEndPoint = new RoadEndPoint(Vector3.zero, Vector3.zero, -1, -1, Vector3.zero);
 
+            RoadNode.HighwayType hwyType = RoadNode.HighwayType.NONE;
+
             for(int i=0; i<path.Count-1; i++)
             {
                 RoadNode a = path[i];
                 RoadNode b = path[i+1];
+                // Get hwy type from the second node in the path, since the intersection may be of another type
+                if(hwyType == RoadNode.HighwayType.NONE) hwyType = b.GetHighwayType();
                 Vector3 posA = TransformPointToMeshSpace(a.GetPosAsVector2());
                 Vector3 posB = TransformPointToMeshSpace(b.GetPosAsVector2());
                 Vector3 tangent = (posB - posA).normalized;
@@ -108,10 +112,28 @@ public class RoadMesh : MonoBehaviour
                 float roadLength = (posA - posB).magnitude;
                 Vector2 uvScale = new Vector2(1f, 600*roadLength/_roadWidth);
 
-                uvs.Add(new Vector2(1f, 0f) * uvScale);
-                uvs.Add(new Vector2(0f, 0f) * uvScale);
-                uvs.Add(new Vector2(1f, 1f) * uvScale);
-                uvs.Add(new Vector2(0f, 1f) * uvScale);
+                // Set UV x offset depending on which highway type this path is
+                float uvXOffset = 0f;
+                switch(hwyType)
+                {
+                    case RoadNode.HighwayType.FOOTPATH:
+                        uvXOffset = 0.75f;
+                        break;
+                    case RoadNode.HighwayType.RESIDENTIAL:
+                        uvXOffset = 0.5f;
+                        break;
+                    case RoadNode.HighwayType.SECONDARY:
+                        uvXOffset = 0.25f;
+                        break;
+                    case RoadNode.HighwayType.PRIMARY:
+                        uvXOffset = 0f;
+                        break;
+                }
+
+                uvs.Add(new Vector2(uvXOffset+0.25f, 0f) * uvScale);
+                uvs.Add(new Vector2(uvXOffset, 0f) * uvScale);
+                uvs.Add(new Vector2(uvXOffset+0.25f, 1f) * uvScale);
+                uvs.Add(new Vector2(uvXOffset, 1f) * uvScale);
 
                 // Set the last end point for the next path segment
                 previousRoadEndPoint = new RoadEndPoint(leftEndPoint, rightEndPoint, vertices.Count-2, vertices.Count-1, tangent);

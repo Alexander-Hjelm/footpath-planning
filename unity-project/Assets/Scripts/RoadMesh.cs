@@ -280,8 +280,6 @@ public class RoadMesh : MonoBehaviour
                 triangles.Add(storedIntersectionIndices[(i+1)%storedIntersectionIndices.Count]);
                 triangles.Add(lastIndex); //Finally the midpoint, last in the vertex array
                 Debug.Log("just added: " + triangles[triangles.Count-1]);
-
-                break;
             }
             break;
         }
@@ -289,11 +287,21 @@ public class RoadMesh : MonoBehaviour
         mesh.triangles = triangles.ToArray();
         mesh.uv = uvs.ToArray();
         //Debug.Log("pre triangles ToArray: " + mesh.triangles.ToArray()[mesh.triangles.ToArray().Length-1]);
+        //
+        Debug.Log("tri 1: " + triangles[triangles.Count-1]);
+        Debug.Log("tri 2: " + triangles[triangles.Count-4]);
+        Debug.Log("tri 3: " + triangles[triangles.Count-7]);
+        Debug.Log("tri 4: " + triangles[triangles.Count-10]);
+        //
         Debug.Log("Last triangle in list: " + triangles[triangles.Count-1]);
         Debug.Log("just triangles ToArray: " + triangles.ToArray()[triangles.ToArray().Length-1]);
         Debug.Log("just build triangles: " + mesh.triangles[mesh.triangles.Count()-1]); // Always points to 1244 for some reason
         mesh.triangles[mesh.triangles.Count()-1] = 66780;
         Debug.Log("just altered triangles: " + mesh.triangles[mesh.triangles.Count()-1]);
+        Debug.Log("tri 1: " + mesh.triangles[mesh.triangles.Count()-1]);
+        Debug.Log("tri 2: " + mesh.triangles[mesh.triangles.Count()-4]);
+        Debug.Log("tri 3: " + mesh.triangles[mesh.triangles.Count()-7]);
+        Debug.Log("tri 4: " + mesh.triangles[mesh.triangles.Count()-10]);
         
 
 

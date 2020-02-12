@@ -133,7 +133,7 @@ public class RoadMesh : MonoBehaviour
                 // Set the last end point for the next path segment
                 previousRoadEndPoint = new RoadEndPoint(leftEndPoint, rightEndPoint, vertices.Count-2, vertices.Count-1, tangent, hwyType);
 
-                // If this is the beginning or end nod of the path, store it as an intersection candidate
+                // If this is the beginning or end node of the path, store it as an intersection candidate
                 if(i==0)
                 {
                     if(!intersectionNodes.ContainsKey(a))
@@ -148,7 +148,9 @@ public class RoadMesh : MonoBehaviour
                     {
                         intersectionNodes[b] = new List<RoadEndPoint>();
                     }
-                    intersectionNodes[b].Add(new RoadEndPoint(leftEndPoint, rightEndPoint, vertices.Count-2, vertices.Count-1, tangent, hwyType));
+                    // Have to swap places of the right/left vertices here, at the end of the path, so that the intersection checker
+                    // really looks at the left end point of a and right end point of b
+                    intersectionNodes[b].Add(new RoadEndPoint(rightEndPoint, leftEndPoint, vertices.Count-1, vertices.Count-2, tangent, hwyType));
                 }
             }
         }

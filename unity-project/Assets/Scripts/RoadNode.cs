@@ -3,13 +3,46 @@ using UnityEngine;
 
 public class RoadNode
 {
+    public enum HighwayType
+    {
+        FOOTPATH,
+        RESIDENTIAL,
+        SECONDARY,
+        PRIMARY
+    }
+
+    private static Dictionary<string, HighwayType> validHwyTypeStrings = new Dictionary<string, HighwayType>()
+    {
+        {"footpath", HighwayType.FOOTPATH},
+        {"Footpath", HighwayType.FOOTPATH},
+        {"FootPath", HighwayType.FOOTPATH},
+        {"FOOTPATH", HighwayType.FOOTPATH},
+        {"residential", HighwayType.RESIDENTIAL},
+        {"Residential", HighwayType.RESIDENTIAL},
+        {"RESIDENTIAL", HighwayType.RESIDENTIAL},
+        {"secondary", HighwayType.SECONDARY},
+        {"Secondary", HighwayType.SECONDARY},
+        {"SECONDARY", HighwayType.SECONDARY},
+        {"primary", HighwayType.PRIMARY},
+        {"Primary", HighwayType.PRIMARY},
+        {"PRIMARY", HighwayType.PRIMARY}
+    };
+
     private float _xCoord;
     private float _yCoord;
+    private HighwayType _highwayType;
 
-    public RoadNode(float x, float y)
+    public static HighwayType GetHighwayTypeFromString(string input)
+    {
+        return validHwyTypeStrings[input];
+    }
+
+
+    public RoadNode(float x, float y, HighwayType highwayType)
     {
         _xCoord = x;
         _yCoord = y;
+        _highwayType = highwayType;
     }
 
     public float GetX()

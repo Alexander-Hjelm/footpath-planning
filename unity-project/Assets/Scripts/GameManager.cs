@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
                 {
                     path.Add(new Vector2(position.latitude, position.longitude));
                 }
-                roadNodeCollection.ReadPath(path);
+                roadNodeCollection.ReadPath(path, RoadNode.GetHighwayTypeFromString(hwy));
             }
         }
         roadNodesList = roadNodeCollection.BuildAndGetPaths();

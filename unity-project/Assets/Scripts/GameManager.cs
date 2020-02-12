@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     private RoadNodeCollection roadNodeCollection;
     private List<List<RoadNode>> roadNodesList;
     private Dictionary<RoadNode, RoadMesh> roadMeshes = new Dictionary<RoadNode, RoadMesh>();
+    private RoadMesh roadMesh;
 
     void Start()
     {
@@ -39,7 +40,7 @@ public class GameManager : MonoBehaviour
 
         // Generate mesh
         GameObject roadMeshObj = new GameObject();
-        RoadMesh roadMesh = roadMeshObj.AddComponent(typeof(RoadMesh)) as RoadMesh;
+        roadMesh = roadMeshObj.AddComponent(typeof(RoadMesh)) as RoadMesh;
         roadMesh.GenerateMeshFromPaths(roadNodesList);
     }
 
@@ -59,6 +60,8 @@ public class GameManager : MonoBehaviour
             }
         }
         */
+        //Debug.Log(roadMesh.GetMesh().vertices[roadMesh.GetMesh().vertices.Length-1]);
+        Debug.Log(roadMesh.GetMesh().triangles[roadMesh.GetMesh().triangles.Length-1]);
     }
 
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEditor;
 
 public class RoadMesh : MonoBehaviour
 {
@@ -155,12 +156,14 @@ public class RoadMesh : MonoBehaviour
             }
         }
 
+        int c = 0;
+
         // Intersections
         foreach(RoadNode node in intersectionNodes.Keys)
         {
             List<RoadEndPoint> endPoints = intersectionNodes[node];
             //TODO: Should work for intersections with 2 nodes as well
-            if(endPoints.Count < 2)
+            if(endPoints.Count < 3)
             {
                 // Skip the node if it has less than three end points. Then it is not an intersection
                 continue;
@@ -177,20 +180,43 @@ public class RoadMesh : MonoBehaviour
             // Now the end points are sorted, get them one by one
             for(int i=0; i<endPointsSorted.Length; i++)
             {
-
                 RoadEndPoint a = endPointsSorted[i];
                 RoadEndPoint b = endPointsSorted[(i+1)%endPointsSorted.Length];
+
+                Debug.Log("Intersection " + c + ": has endpoint with tangent" + a.tangent);
 
                 midPoint += (a.rightPoint + a.leftPoint)/2;
                 
                 // Get the intersection point
                 // Get the right pos from end point 1 and left pos from end point 2
-                Vector3 intersection;
+                Vector3 intersection = Vector3.zero;
                 bool intersectionWasSet = false;
                 if(MathUtils.LineLineIntersection(out intersection, a.rightPoint, a.tangent,
                     b.leftPoint, b.tangent))
                 {
                     intersectionWasSet = true;
+                    /*
+                    Debug.Log("a leftPoint: (" + a.leftPoint.x + ", " + a.leftPoint.z + ")");
+                    Debug.Log("a tangent: (" + a.tangent.x + ", " + a.tangent.z + ")");
+                    Debug.Log("b rightPoint: (" + b.rightPoint.x + ", " + b.rightPoint.z + ")");
+                    Debug.Log("b tangent: (" + b.tangent.x + ", " + b.tangent.z + ")");
+
+                    GameObject tempMarkerALP = new GameObject();
+                    tempMarkerALP.name = "Intersection marker " + c + " endpoint " + i + " a.leftPoint";
+                    tempMarkerALP.transform.position = a.leftPoint;
+
+                    GameObject tempMarkerBRP = new GameObject();
+                    tempMarkerBRP.name = "Intersection marker " + c + " endpoint " + i + " b.rightPoint";
+                    tempMarkerBRP.transform.position = b.rightPoint;
+
+                    GameObject tempMarkerAT = new GameObject();
+                    tempMarkerAT.name = "Intersection marker " + c + " endpoint " + i + " a.tangent";
+                    tempMarkerAT.transform.position = a.leftPoint + a.tangent * 0.01f;
+
+                    GameObject tempMarkerBT = new GameObject();
+                    tempMarkerBT.name = "Intersection marker " + c + " endpoint " + i + " b.tangent";
+                    tempMarkerBT.transform.position = b.rightPoint + b.tangent * 0.01f;
+                    */
                 }
                 else if((a.tangent + b.tangent).magnitude < 0.01f)
                 {
@@ -211,7 +237,7 @@ public class RoadMesh : MonoBehaviour
                     vertices[a.rightIndex] = intersection;
                     vertices[b.leftIndex] = intersection;
                     
-                    storedIntersectionIndices.Add(vertices.Count-1);
+                    storedIntersectionIndices.Add(a.rightIndex);
                     continue;
                 }
                 else
@@ -223,23 +249,53 @@ public class RoadMesh : MonoBehaviour
 
             // Divide the midpoint to obtain the average
             midPoint /= endPointsSorted.Length;
+            //midPoint = Vector3.zero;
 
             // Add the midpoint of the intersection as the next vertex
             vertices.Add(midPoint);
             uvs.Add(new Vector2(0.5f, 0.5f));
+            //GameObject tempMarker = new GameObject();
+            //tempMarker.name = "Intersection marker " + c;
+            //c++;
+            //tempMarker.transform.position = midPoint;
 
             for(int i=0; i< storedIntersectionIndices.Count; i++)
             {
+                GameObject tempMarkerT1 = new GameObject();
+                tempMarkerT1.name = "Triangle marker " + i + " 1";
+                tempMarkerT1.transform.position = vertices[storedIntersectionIndices[i]];
+
+                GameObject tempMarkerT2 = new GameObject();
+                tempMarkerT2.name = "Triangle marker " + i + " 2";
+                tempMarkerT2.transform.position = vertices[storedIntersectionIndices[(i+1)%storedIntersectionIndices.Count]];
+
+                GameObject tempMarkerT3 = new GameObject();
+                tempMarkerT3.name = "Triangle marker " + i + " 3";
+                tempMarkerT3.transform.position = vertices[vertices.Count-1];
+
                 // Create new triangles, stitch all the vertices together
+                int lastIndex = vertices.Count-1;
+                Debug.Log("last index: " + lastIndex);
                 triangles.Add(storedIntersectionIndices[i]);
                 triangles.Add(storedIntersectionIndices[(i+1)%storedIntersectionIndices.Count]);
-                triangles.Add(vertices.Count-1); //Finally the midpoint, last in the vertex array
-            }
+                triangles.Add(lastIndex); //Finally the midpoint, last in the vertex array
+                Debug.Log("just added: " + triangles[triangles.Count-1]);
 
+                break;
+            }
+            break;
         }
         mesh.vertices = vertices.ToArray();
         mesh.triangles = triangles.ToArray();
         mesh.uv = uvs.ToArray();
+        //Debug.Log("pre triangles ToArray: " + mesh.triangles.ToArray()[mesh.triangles.ToArray().Length-1]);
+        Debug.Log("Last triangle in list: " + triangles[triangles.Count-1]);
+        Debug.Log("just triangles ToArray: " + triangles.ToArray()[triangles.ToArray().Length-1]);
+        Debug.Log("just build triangles: " + mesh.triangles[mesh.triangles.Count()-1]); // Always points to 1244 for some reason
+        mesh.triangles[mesh.triangles.Count()-1] = 66780;
+        Debug.Log("just altered triangles: " + mesh.triangles[mesh.triangles.Count()-1]);
+        
+
 
         // Build normals
         Vector3[] normals = new Vector3[vertices.Count];
@@ -250,6 +306,14 @@ public class RoadMesh : MonoBehaviour
         mesh.normals = normals;
 
         _meshFilter.mesh = mesh;
+
+        //Debug.Log(_meshFilter.mesh.vertices[mesh.vertices.Count()-1]);
+        
+    }
+
+    public Mesh GetMesh()
+    {
+        return _meshFilter.mesh;
     }
 
     private Vector3 TransformPointToMeshSpace(Vector2 input)

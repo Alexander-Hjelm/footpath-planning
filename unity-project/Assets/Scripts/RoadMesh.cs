@@ -252,12 +252,14 @@ public class RoadMesh : MonoBehaviour
             //midPoint = Vector3.zero;
 
             // Add the midpoint of the intersection as the next vertex
-            vertices.Add(midPoint);
             uvs.Add(new Vector2(0.5f, 0.5f));
-            //GameObject tempMarker = new GameObject();
-            //tempMarker.name = "Intersection marker " + c;
-            //c++;
-            //tempMarker.transform.position = midPoint;
+            GameObject tempMarker = new GameObject();
+            tempMarker.name = "Midpoint marker " + c;
+            c++;
+            tempMarker.transform.position = midPoint;
+
+            vertices.Add(midPoint);
+            countedVertices++;
 
             for(int i=0; i< storedIntersectionIndices.Count; i++)
             {
@@ -274,35 +276,56 @@ public class RoadMesh : MonoBehaviour
                 tempMarkerT3.transform.position = vertices[vertices.Count-1];
 
                 // Create new triangles, stitch all the vertices together
-                int lastIndex = vertices.Count-1;
-                Debug.Log("last index: " + lastIndex);
+                //Debug.Log("countedVertices: " + countedVertices);
                 triangles.Add(storedIntersectionIndices[i]);
                 triangles.Add(storedIntersectionIndices[(i+1)%storedIntersectionIndices.Count]);
-                triangles.Add(lastIndex); //Finally the midpoint, last in the vertex array
-                Debug.Log("just added: " + triangles[triangles.Count-1]);
+                //triangles.Add(0); // WORKS FINE!
+                triangles.Add(countedVertices-1); // DOES NOT WORK
+                // the index gets -65536 every time
+                //Debug.Log("0-vertex: " + vertices[0]);
+                //triangles.Add(lastIndex); //Finally the midpoint, last in the vertex array
+                // FIXME: I know what the problem is! Unity has a 65536 vertex limit, thus it loops around. This might also explain why some roads do not appear
+                // TODO: Spawn submeshes instead, for every step of the loop
             }
-            break;
         }
+
+        int[] trisArray = new int[triangles.Count];
+        for(int i=0; i<triangles.Count; i++)
+        {
+            trisArray[i] = triangles[i];
+        }
+
         mesh.vertices = vertices.ToArray();
-        mesh.triangles = triangles.ToArray();
+        mesh.SetIndices(trisArray, MeshTopology.Triangles, 0);
+        //mesh.triangles = trisArray;
         mesh.uv = uvs.ToArray();
         //Debug.Log("pre triangles ToArray: " + mesh.triangles.ToArray()[mesh.triangles.ToArray().Length-1]);
         //
         Debug.Log("tri 1: " + triangles[triangles.Count-1]);
-        Debug.Log("tri 2: " + triangles[triangles.Count-4]);
-        Debug.Log("tri 3: " + triangles[triangles.Count-7]);
-        Debug.Log("tri 4: " + triangles[triangles.Count-10]);
+        Debug.Log("tri 10: " + triangles[triangles.Count-10]);
+        Debug.Log("tri 11: " + triangles[triangles.Count-11]);
+        //Debug.Log("tri 3: " + triangles[triangles.Count-7]);
+        //Debug.Log("tri 4: " + triangles[triangles.Count-10]);
         //
-        Debug.Log("Last triangle in list: " + triangles[triangles.Count-1]);
-        Debug.Log("just triangles ToArray: " + triangles.ToArray()[triangles.ToArray().Length-1]);
-        Debug.Log("just build triangles: " + mesh.triangles[mesh.triangles.Count()-1]); // Always points to 1244 for some reason
-        mesh.triangles[mesh.triangles.Count()-1] = 66780;
-        Debug.Log("just altered triangles: " + mesh.triangles[mesh.triangles.Count()-1]);
+        //Debug.Log("Last triangle in list: " + triangles[triangles.Count-1]);
+        //Debug.Log("just triangles ToArray: " + triangles.ToArray()[triangles.ToArray().Length-1]);
+        //Debug.Log("just build triangles: " + mesh.triangles[mesh.triangles.Count()-1]); // Always points to 1244 for some reason
+        //mesh.triangles[mesh.triangles.Count()-1] = 66780;
+        //Debug.Log("just altered triangles: " + mesh.triangles[mesh.triangles.Count()-1]);
         Debug.Log("tri 1: " + mesh.triangles[mesh.triangles.Count()-1]);
-        Debug.Log("tri 2: " + mesh.triangles[mesh.triangles.Count()-4]);
-        Debug.Log("tri 3: " + mesh.triangles[mesh.triangles.Count()-7]);
-        Debug.Log("tri 4: " + mesh.triangles[mesh.triangles.Count()-10]);
+        Debug.Log("tri 10: " + mesh.triangles[mesh.triangles.Count()-10]);
+        Debug.Log("tri 11: " + mesh.triangles[mesh.triangles.Count()-11]);
+        //Debug.Log("tri 2: " + mesh.triangles[mesh.triangles.Count()-4]);
+        //Debug.Log("tri 3: " + mesh.triangles[mesh.triangles.Count()-7]);
+        //Debug.Log("tri 4: " + mesh.triangles[mesh.triangles.Count()-10]);
         
+        //for(int i=0; i<triangles.Count; i++)
+        //{
+            //if(triangles[i] != mesh.triangles[i])
+            //{
+                //Debug.LogError("Mesh triangle index " + i + " did not match!");
+            //}
+        //}
 
 
         // Build normals

@@ -28,6 +28,14 @@ public class RoadMesh : MonoBehaviour
     float _roadWidth = 11f;
     private Vector2 _offset = new Vector2(-18.05f, -59.34f);
 
+    private Dictionary<RoadNode.HighwayType, float> _uvXOffsetByHwyType = new Dictionary<RoadNode.HighwayType, float>()
+    {
+        {RoadNode.HighwayType.FOOTPATH, 0.75f},
+        {RoadNode.HighwayType.RESIDENTIAL, 0.5f},
+        {RoadNode.HighwayType.SECONDARY, 0.25f},
+        {RoadNode.HighwayType.PRIMARY, 0f}
+    };
+
     public void Awake()
     {
         MeshRenderer meshRenderer = gameObject.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
@@ -113,22 +121,7 @@ public class RoadMesh : MonoBehaviour
                 Vector2 uvScale = new Vector2(1f, 600*roadLength/_roadWidth);
 
                 // Set UV x offset depending on which highway type this path is
-                float uvXOffset = 0f;
-                switch(hwyType)
-                {
-                    case RoadNode.HighwayType.FOOTPATH:
-                        uvXOffset = 0.75f;
-                        break;
-                    case RoadNode.HighwayType.RESIDENTIAL:
-                        uvXOffset = 0.5f;
-                        break;
-                    case RoadNode.HighwayType.SECONDARY:
-                        uvXOffset = 0.25f;
-                        break;
-                    case RoadNode.HighwayType.PRIMARY:
-                        uvXOffset = 0f;
-                        break;
-                }
+                float uvXOffset = _uvXOffsetByHwyType[hwyType];
 
                 uvs.Add(new Vector2(uvXOffset+0.25f, 0f) * uvScale);
                 uvs.Add(new Vector2(uvXOffset, 0f) * uvScale);

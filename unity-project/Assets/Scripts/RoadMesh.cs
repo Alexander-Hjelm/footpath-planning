@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEditor;
 
 public class RoadMesh : MonoBehaviour
 {
@@ -13,8 +14,9 @@ public class RoadMesh : MonoBehaviour
         public int rightIndex;
         public Vector3 tangent;
         public RoadNode.HighwayType hwyType;
+        public Mesh associatedMesh;
 
-        public RoadEndPoint(Vector3 leftPoint, Vector3 rightPoint, int leftIndex, int rightIndex, Vector3 tangent, RoadNode.HighwayType hwyType)
+        public RoadEndPoint(Vector3 leftPoint, Vector3 rightPoint, int leftIndex, int rightIndex, Vector3 tangent, RoadNode.HighwayType hwyType, Mesh associatedMesh)
         {
             this.leftPoint = leftPoint;
             this.rightPoint = rightPoint;
@@ -22,10 +24,10 @@ public class RoadMesh : MonoBehaviour
             this.rightIndex = rightIndex;
             this.tangent = tangent;
             this.hwyType = hwyType;
+            this.associatedMesh = associatedMesh;
         }
     }
 
-    private MeshFilter _meshFilter;
     private float _scale = 500f;
     float _roadWidth = 11f;
     private Vector2 _offset = new Vector2(-18.05f, -59.34f);
@@ -38,28 +40,19 @@ public class RoadMesh : MonoBehaviour
         {RoadNode.HighwayType.PRIMARY, 0f}
     };
 
-    public void Awake()
-    {
-        MeshRenderer meshRenderer = gameObject.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
-        Material material = new Material(Shader.Find("Standard"));
-        material.mainTexture = Resources.Load("Textures/Road") as Texture;
-        meshRenderer.sharedMaterial = material;
-        _meshFilter = gameObject.AddComponent(typeof(MeshFilter)) as MeshFilter;
-
-    }
-
     public void GenerateMeshFromPaths(List<List<RoadNode>> paths)
     {
-        Mesh mesh = new Mesh();
-
-        List<Vector3> vertices = new List<Vector3>();
-        List<Vector2> uvs = new List<Vector2>();
-        List<int> triangles = new List<int>();
-        int countedVertices = 0;
         Dictionary<RoadNode, List<RoadEndPoint>> intersectionNodes = new Dictionary<RoadNode, List<RoadEndPoint>>();
         foreach(List<RoadNode> path in paths)
         {
-            RoadEndPoint previousRoadEndPoint = new RoadEndPoint(Vector3.zero, Vector3.zero, -1, -1, Vector3.zero, RoadNode.HighwayType.NONE);
+            // Start building path mesh
+            List<Vector3> vertices = new List<Vector3>();
+            List<Vector2> uvs = new List<Vector2>();
+            List<int> triangles = new List<int>();
+            Mesh mesh = new Mesh();
+            int countedVertices = 0;
+            
+            RoadEndPoint previousRoadEndPoint = new RoadEndPoint(Vector3.zero, Vector3.zero, -1, -1, Vector3.zero, RoadNode.HighwayType.NONE, null);
 
             RoadNode.HighwayType hwyType = RoadNode.HighwayType.NONE;
 
@@ -131,7 +124,7 @@ public class RoadMesh : MonoBehaviour
                 uvs.Add(new Vector2(uvXOffset, 1f) * uvScale);
 
                 // Set the last end point for the next path segment
-                previousRoadEndPoint = new RoadEndPoint(leftEndPoint, rightEndPoint, vertices.Count-2, vertices.Count-1, tangent, hwyType);
+                previousRoadEndPoint = new RoadEndPoint(leftEndPoint, rightEndPoint, vertices.Count-2, vertices.Count-1, tangent, hwyType, mesh);
 
                 // If this is the beginning or end node of the path, store it as an intersection candidate
                 if(i==0)
@@ -140,7 +133,7 @@ public class RoadMesh : MonoBehaviour
                     {
                         intersectionNodes[a] = new List<RoadEndPoint>();
                     }
-                    intersectionNodes[a].Add(new RoadEndPoint(leftStartPoint, rightStartPoint, vertices.Count-4, vertices.Count-3, tangent, hwyType));
+                    intersectionNodes[a].Add(new RoadEndPoint(leftStartPoint, rightStartPoint, vertices.Count-4, vertices.Count-3, tangent, hwyType, mesh));
                 }
                 else if(i==path.Count-2)
                 {
@@ -150,26 +143,34 @@ public class RoadMesh : MonoBehaviour
                     }
                     // Have to swap places of the right/left vertices here, at the end of the path, so that the intersection checker
                     // really looks at the left end point of a and right end point of b
-                    intersectionNodes[b].Add(new RoadEndPoint(rightEndPoint, leftEndPoint, vertices.Count-1, vertices.Count-2, tangent, hwyType));
+                    intersectionNodes[b].Add(new RoadEndPoint(rightEndPoint, leftEndPoint, vertices.Count-1, vertices.Count-2, tangent, hwyType, mesh));
                 }
             }
+            CreateNewMeshFilterWithMesh(vertices, triangles, uvs, mesh);
         }
 
         // Intersections
         foreach(RoadNode node in intersectionNodes.Keys)
         {
+            // Start building path mesh
+            List<Vector3> vertices = new List<Vector3>();
+            List<Vector2> uvs = new List<Vector2>();
+            List<int> triangles = new List<int>();
+            Mesh mesh = new Mesh();
+            int countedVertices = 0;
+
             List<RoadEndPoint> endPoints = intersectionNodes[node];
             //TODO: Should work for intersections with 2 nodes as well
             if(endPoints.Count < 2)
             {
-                // Skip the node if it has less than three end points. Then it is not an intersection
+                // Skip the node if it has less than two end points. Then it is not an intersection
                 continue;
             }
 
             // Order the end points by angle
             RoadEndPoint[] endPointsSorted = endPoints.OrderBy(v => Vector3.Angle(v.tangent, Vector3.right)).ToArray();
 
-            List<int> storedIntersectionIndices = new List<int>();
+            List<Vector3> storedIntersections = new List<Vector3>();
 
             // Midpoint of the intersection
             Vector3 midPoint = Vector3.zero;
@@ -177,7 +178,6 @@ public class RoadMesh : MonoBehaviour
             // Now the end points are sorted, get them one by one
             for(int i=0; i<endPointsSorted.Length; i++)
             {
-
                 RoadEndPoint a = endPointsSorted[i];
                 RoadEndPoint b = endPointsSorted[(i+1)%endPointsSorted.Length];
 
@@ -185,7 +185,7 @@ public class RoadMesh : MonoBehaviour
                 
                 // Get the intersection point
                 // Get the right pos from end point 1 and left pos from end point 2
-                Vector3 intersection;
+                Vector3 intersection = Vector3.zero;
                 bool intersectionWasSet = false;
                 if(MathUtils.LineLineIntersection(out intersection, a.rightPoint, a.tangent,
                     b.leftPoint, b.tangent))
@@ -200,7 +200,7 @@ public class RoadMesh : MonoBehaviour
                 }
                 else if((a.tangent - b.tangent).magnitude < 0.01f)
                 {
-                    // tangents are the same. This happens due to direty data, but pick the middle point for now
+                    // tangents are the same. This happens due to dirty data, but pick the middle point for now
                     intersection = (a.rightPoint + b.leftPoint)/2;
                     intersectionWasSet = true;
                 }
@@ -208,35 +208,71 @@ public class RoadMesh : MonoBehaviour
                 if(intersectionWasSet)
                 {
                     // Get the vertex indices of the end points and move them to the new intersection points
-                    vertices[a.rightIndex] = intersection;
-                    vertices[b.leftIndex] = intersection;
+                    a.associatedMesh.vertices[a.rightIndex] = intersection;
+                    b.associatedMesh.vertices[b.leftIndex] = intersection;
+
+                    // Since the vertices array of the mesh has read-only access, we have to copy the whole array and change the one vertex
+                    Vector3[] verticesA = a.associatedMesh.vertices;
+                    verticesA[a.rightIndex] = intersection;
+                    a.associatedMesh.vertices = verticesA;
                     
-                    storedIntersectionIndices.Add(vertices.Count-1);
+                    Vector3[] verticesB = b.associatedMesh.vertices;
+                    verticesB[b.leftIndex] = intersection;
+                    b.associatedMesh.vertices = verticesB;
+
+                    storedIntersections.Add(intersection);
+
                     continue;
                 }
                 else
                 {
                     Debug.LogError("Found an intersection with two incoming paths that have the same tangents! " + a.tangent + ", " + b.tangent + ". a.right = " + a.rightPoint + ", b.left = " + b.leftPoint);
-                    Debug.LogError(a.tangent.x + b.tangent.x);
                 }
             }
 
-            // Divide the midpoint to obtain the average
-            midPoint /= endPointsSorted.Length;
-
-            // Add the midpoint of the intersection as the next vertex
-            vertices.Add(midPoint);
-            uvs.Add(new Vector2(0.5f, 0.5f));
-
-            for(int i=0; i< storedIntersectionIndices.Count; i++)
+            if(endPoints.Count > 2)
             {
-                // Create new triangles, stitch all the vertices together
-                triangles.Add(storedIntersectionIndices[i]);
-                triangles.Add(storedIntersectionIndices[(i+1)%storedIntersectionIndices.Count]);
-                triangles.Add(vertices.Count-1); //Finally the midpoint, last in the vertex array
-            }
+                // Divide the midpoint to obtain the average
+                midPoint /= endPointsSorted.Length;
 
+                // Add the midpoint of the intersection as the next vertex
+                // Set UV x offset depending on which highway type this path is
+                RoadNode.HighwayType hwyType = endPoints[0].hwyType;
+                float uvXOffset = _uvXOffsetByHwyType[hwyType];
+                uvs.Add(new Vector2(uvXOffset+0.125f, 0.5f));
+                vertices.Add(midPoint);
+                countedVertices++;
+
+                for(int i=0; i< storedIntersections.Count; i++)
+                {
+                    // Save the vertex to this mesh
+                    vertices.Add(storedIntersections[i]);
+                    vertices.Add(storedIntersections[(i+1)%storedIntersections.Count]);
+                    // Set UV x offset depending on which highway type this path is
+                    uvs.Add(new Vector2(uvXOffset, 0f)); // Every other corner get uv.x = 1 or 0
+                    uvs.Add(new Vector2(uvXOffset+0.25f, 0f)); // Every other corner get uv.x = 1 or 0
+
+                    // Create new triangles, stitch all the vertices together
+                    triangles.Add(0); // Mid point, was added first
+                    triangles.Add(vertices.Count-1);
+                    triangles.Add(vertices.Count-2);
+                }
+                CreateNewMeshFilterWithMesh(vertices, triangles, uvs, mesh);
+            }
         }
+    }
+
+    private void CreateNewMeshFilterWithMesh(List<Vector3> vertices, List<int> triangles, List<Vector2> uvs, Mesh mesh)
+    {
+        GameObject go = new GameObject();
+        go.transform.parent = transform;
+
+        MeshRenderer meshRenderer = go.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
+        Material material = new Material(Shader.Find("Standard"));
+        material.mainTexture = Resources.Load("Textures/Road") as Texture;
+        meshRenderer.sharedMaterial = material;
+        MeshFilter meshFilter = go.AddComponent(typeof(MeshFilter)) as MeshFilter;
+
         mesh.vertices = vertices.ToArray();
         mesh.triangles = triangles.ToArray();
         mesh.uv = uvs.ToArray();
@@ -249,7 +285,7 @@ public class RoadMesh : MonoBehaviour
         }
         mesh.normals = normals;
 
-        _meshFilter.mesh = mesh;
+        meshFilter.mesh = mesh;
     }
 
     private Vector3 TransformPointToMeshSpace(Vector2 input)

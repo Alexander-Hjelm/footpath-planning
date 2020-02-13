@@ -44,24 +44,4 @@ public class GameManager : MonoBehaviour
         roadMesh.GenerateMeshFromPaths(roadNodesList);
     }
 
-    void Update()
-    {
-        // Debug lines
-        /*
-        foreach(List<RoadNode> path in roadNodesList)
-        {
-            for(int i=0; i<path.Count-1; i++)
-            {
-                RoadNode a = path[i];
-                RoadNode b = path[i+1];
-                Vector3 start = new Vector3((a.GetY()-18.05f)*0.5f, 0f, a.GetX()-59.34f)*50f;
-                Vector3 stop = new Vector3((b.GetY()-18.05f)*0.5f, 0f, b.GetX()-59.34f)*50f;
-                Debug.DrawLine(start, stop);
-            }
-        }
-        */
-        //Debug.Log(roadMesh.GetMesh().vertices[roadMesh.GetMesh().vertices.Length-1]);
-        Debug.Log(roadMesh.GetMesh().triangles[roadMesh.GetMesh().triangles.Length-1]);
-    }
-
 }

@@ -249,8 +249,8 @@ public class RoadMesh : MonoBehaviour
                     vertices.Add(storedIntersections[i]);
                     vertices.Add(storedIntersections[(i+1)%storedIntersections.Count]);
                     // Set UV x offset depending on which highway type this path is
-                    uvs.Add(new Vector2(uvXOffset*0.25f, 0f)); // Every other corner get uv.x = 1 or 0
-                    uvs.Add(new Vector2(uvXOffset*0.25f+0.25f, 0f)); // Every other corner get uv.x = 1 or 0
+                    uvs.Add(new Vector2(uvXOffset, 0f)); // Every other corner get uv.x = 1 or 0
+                    uvs.Add(new Vector2(uvXOffset+0.25f, 0f)); // Every other corner get uv.x = 1 or 0
 
                     // Create new triangles, stitch all the vertices together
                     triangles.Add(0); // Mid point, was added first

@@ -165,6 +165,13 @@ public class RoadMesh : MonoBehaviour
             }
         }
 
+        // Create a last mesh to flush out any remaining vertices
+        Debug.Log("Created new mesh, vertex count: " + vertices.Count);
+        CreateNewMeshFilterWithMesh(vertices, triangles, uvs, storedPathMeshes[currentMeshCounter]);
+        vertices.Clear();
+        triangles.Clear();
+        uvs.Clear();
+
         // Intersections
         foreach(RoadNode node in intersectionNodes.Keys)
         {

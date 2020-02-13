@@ -161,9 +161,9 @@ public class RoadMesh : MonoBehaviour
 
             List<RoadEndPoint> endPoints = intersectionNodes[node];
             //TODO: Should work for intersections with 2 nodes as well
-            if(endPoints.Count < 3)
+            if(endPoints.Count < 2)
             {
-                // Skip the node if it has less than three end points. Then it is not an intersection
+                // Skip the node if it has less than two end points. Then it is not an intersection
                 continue;
             }
 
@@ -222,7 +222,9 @@ public class RoadMesh : MonoBehaviour
 
                     // Save the vertex to this mesh
                     vertices.Add(intersection);
-                    uvs.Add(new Vector2(i%2, 0f)); // Every other corner get uv.x = 1 or 0
+                    // Set UV x offset depending on which highway type this path is
+                    float uvXOffset = _uvXOffsetByHwyType[a.hwyType];
+                    uvs.Add(new Vector2(uvXOffset+(i%2)*0.25f, 0f)); // Every other corner get uv.x = 1 or 0
 
                     continue;
                 }
@@ -232,28 +234,28 @@ public class RoadMesh : MonoBehaviour
                 }
             }
 
-            // Divide the midpoint to obtain the average
-            midPoint /= endPointsSorted.Length;
-
-            // Add the midpoint of the intersection as the next vertex
-            uvs.Add(new Vector2(0.5f, 0.5f));
-            vertices.Add(midPoint);
-            countedVertices++;
-
-            for(int i=0; i< vertices.Count-1; i++)
+            if(endPoints.Count > 2)
             {
-                // Create new triangles, stitch all the vertices together
-                triangles.Add(vertices.Count-1); // Mid point, was added last
-                triangles.Add((i+1)%(vertices.Count-1));
-                triangles.Add(i);
+                // Divide the midpoint to obtain the average
+                midPoint /= endPointsSorted.Length;
 
-                // FIXME: I know what the problem is! Unity has a 65536 vertex limit, thus it loops around. This might also explain why some roads do not appear
-                // TODO: Spawn submeshes instead, for every step of the loop
+                // Add the midpoint of the intersection as the next vertex
+                // Set UV x offset depending on which highway type this path is
+                float uvXOffset = _uvXOffsetByHwyType[endPoints[0].hwyType];
+                uvs.Add(new Vector2(uvXOffset+0.125f, 0.5f));
+                vertices.Add(midPoint);
+                countedVertices++;
+
+                for(int i=0; i< vertices.Count-1; i++)
+                {
+                    // Create new triangles, stitch all the vertices together
+                    triangles.Add(vertices.Count-1); // Mid point, was added last
+                    triangles.Add((i+1)%(vertices.Count-1));
+                    triangles.Add(i);
+                }
+                CreateNewMeshFilterWithMesh(vertices, triangles, uvs, mesh);
             }
-            CreateNewMeshFilterWithMesh(vertices, triangles, uvs, mesh);
         }
-
-
     }
 
     private void CreateNewMeshFilterWithMesh(List<Vector3> vertices, List<int> triangles, List<Vector2> uvs, Mesh mesh)

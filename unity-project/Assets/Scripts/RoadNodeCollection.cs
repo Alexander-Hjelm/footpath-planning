@@ -15,6 +15,15 @@ public class RoadNodeCollection
         List<RoadNode> path = new List<RoadNode>();
         for(int i=0; i<points.Count; i++)
         {
+            // Cleanup, ignore all successive duplicate nodes in the paths
+            if(i<points.Count-1
+                && points[i].x == points[i+1].x
+                && points[i].y == points[i+1].y)
+            {
+                continue;
+            }
+
+            // Generate and add the node
             RoadNode node = GetNode(points[i], hwyType);
             path.Add(node);
             BumpVisitedCount(node);

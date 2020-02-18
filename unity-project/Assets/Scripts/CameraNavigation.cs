@@ -10,6 +10,7 @@ public class CameraNavigation : MonoBehaviour
     [SerializeField] private float _snapSpeed = 1f;
     [SerializeField] private float _minZoomLevel = 1f;
     [SerializeField] private float _maxZoomLevel = 10f;
+    private float _zoomLevel = 0f;
 
     private void Awake()
     {
@@ -50,14 +51,19 @@ public class CameraNavigation : MonoBehaviour
             moveOffset += Vector3.down;
         }
 
+        float zoomFactor = (_zoomLevel - _minZoomLevel) / (_maxZoomLevel - _minZoomLevel);
+        zoomFactor = Mathf.Max(zoomFactor, 0.1f);
+
         _moveTarget += new Vector3(
-            moveOffset.x*_moveSpeed,
+            moveOffset.x*_moveSpeed*zoomFactor,
             moveOffset.y*_zoomSpeed,
-            moveOffset.z*_moveSpeed
+            moveOffset.z*_moveSpeed*zoomFactor
         );
 
+        _zoomLevel = _moveTarget.y;
+
         // Zoom clamping, lower
-        if(_moveTarget.y < _minZoomLevel)
+        if(_zoomLevel < _minZoomLevel)
         {
             _moveTarget = new Vector3(
                     _moveTarget.x,
@@ -67,7 +73,7 @@ public class CameraNavigation : MonoBehaviour
         }
 
         // Zoom clamping, upper
-        if(_moveTarget.y > _maxZoomLevel)
+        if(_zoomLevel > _maxZoomLevel)
         {
             _moveTarget = new Vector3(
                     _moveTarget.x,

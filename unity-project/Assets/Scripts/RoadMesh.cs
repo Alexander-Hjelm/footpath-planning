@@ -155,7 +155,6 @@ public class RoadMesh : MonoBehaviour
             }
             if(vertices.Count > 20000)
             {
-                Debug.Log("Created new mesh, vertex count: " + vertices.Count);
                 CreateNewMeshFilterWithMesh(vertices, triangles, uvs, storedPathMeshes[currentMeshCounter]);
                 vertices.Clear();
                 triangles.Clear();
@@ -166,7 +165,6 @@ public class RoadMesh : MonoBehaviour
         }
 
         // Create a last mesh to flush out any remaining vertices
-        Debug.Log("Created new mesh, vertex count: " + vertices.Count);
         CreateNewMeshFilterWithMesh(vertices, triangles, uvs, storedPathMeshes[currentMeshCounter]);
         vertices.Clear();
         triangles.Clear();
@@ -237,7 +235,6 @@ public class RoadMesh : MonoBehaviour
                     a.associatedMesh.vertices = verticesA;
                     
                     Vector3[] verticesB = b.associatedMesh.vertices;
-                    Debug.Log(b.leftIndex + ", " + verticesB.Length);
                     verticesB[b.leftIndex] = intersection;
                     b.associatedMesh.vertices = verticesB;
 
@@ -256,27 +253,30 @@ public class RoadMesh : MonoBehaviour
                 // Divide the midpoint to obtain the average
                 midPoint /= endPointsSorted.Length;
 
-                // Add the midpoint of the intersection as the next vertex
-                // Set UV x offset depending on which highway type this path is
-                RoadNode.HighwayType hwyType = endPoints[0].hwyType;
-                float uvXOffset = _uvXOffsetByHwyType[hwyType];
-                uvs.Add(new Vector2(uvXOffset+0.125f, 0.5f));
-                vertices.Add(midPoint);
-
+                // Create intersection geometry
                 for(int i=0; i< storedIntersections.Count; i++)
                 {
+                    // Add the midpoint of the intersection as the next vertex
+                    // Set UV x offset depending on which highway type this path is
+                    RoadNode.HighwayType hwyType = endPoints[(i+1)%storedIntersections.Count].hwyType;
+                    float uvXOffset = _uvXOffsetByHwyType[hwyType];
+                    uvs.Add(new Vector2(uvXOffset+0.125f, 0.5f));
+                    vertices.Add(midPoint); // Add the midpoint as a new vertex for every triangle, so each triangle gets unique UV coordinates
+
                     // Save the vertex to this mesh
                     vertices.Add(storedIntersections[i]);
                     vertices.Add(storedIntersections[(i+1)%storedIntersections.Count]);
+
                     // Set UV x offset depending on which highway type this path is
                     uvs.Add(new Vector2(uvXOffset, 0f)); // Every other corner get uv.x = 1 or 0
                     uvs.Add(new Vector2(uvXOffset+0.25f, 0f)); // Every other corner get uv.x = 1 or 0
 
                     // Create new triangles, stitch all the vertices together
-                    triangles.Add(0); // Mid point, was added first
+                    triangles.Add(vertices.Count-3); // Mid point
                     triangles.Add(vertices.Count-1);
                     triangles.Add(vertices.Count-2);
                 }
+
                 CreateNewMeshFilterWithMesh(vertices, triangles, uvs, intersectionMesh);
             }
         }

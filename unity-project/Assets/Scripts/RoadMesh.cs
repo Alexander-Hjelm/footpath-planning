@@ -40,6 +40,14 @@ public class RoadMesh : MonoBehaviour
         {RoadNode.HighwayType.PRIMARY, 0f}
     };
 
+    private Dictionary<RoadNode.HighwayType, float> _roadWidthByHwyType = new Dictionary<RoadNode.HighwayType, float>()
+    {
+        {RoadNode.HighwayType.FOOTPATH, 0.25f},
+        {RoadNode.HighwayType.RESIDENTIAL, 0.5f},
+        {RoadNode.HighwayType.SECONDARY, 0.75f},
+        {RoadNode.HighwayType.PRIMARY, 1f}
+    };
+
     public void GenerateMeshFromPaths(List<List<RoadNode>> paths)
     {
         // Start building path mesh
@@ -79,10 +87,10 @@ public class RoadMesh : MonoBehaviour
                 }
                 Vector3 normal = new Vector3(tangent.z, 0f, -tangent.x)*0.001f;
 
-                Vector3 leftStartPoint = posA + normal*_roadWidth;
-                Vector3 rightStartPoint = posA - normal*_roadWidth;
-                Vector3 leftEndPoint = posB + normal*_roadWidth;
-                Vector3 rightEndPoint = posB - normal*_roadWidth;
+                Vector3 leftStartPoint = posA + normal*_roadWidth*_roadWidthByHwyType[hwyType];
+                Vector3 rightStartPoint = posA - normal*_roadWidth*_roadWidthByHwyType[hwyType];
+                Vector3 leftEndPoint = posB + normal*_roadWidth*_roadWidthByHwyType[hwyType];
+                Vector3 rightEndPoint = posB - normal*_roadWidth*_roadWidthByHwyType[hwyType];
 
                 // If this is not the first path segment, merge it with the previous one
                 if(previousRoadEndPoint.tangent != Vector3.zero)

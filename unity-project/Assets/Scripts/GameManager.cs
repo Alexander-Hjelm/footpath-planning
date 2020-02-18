@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     private List<List<RoadNode>> roadNodesList;
     private Dictionary<RoadNode, RoadMesh> roadMeshes = new Dictionary<RoadNode, RoadMesh>();
     private RoadMesh roadMesh;
+    private List<List<Vector2>> rawPaths = new List<List<Vector2>>();
+    private bool _debugRawPaths = true;
 
     void Start()
     {
@@ -34,6 +36,7 @@ public class GameManager : MonoBehaviour
                     path.Add(new Vector2(position.latitude, position.longitude));
                 }
                 roadNodeCollection.ReadPath(path, RoadNode.GetHighwayTypeFromString(hwy));
+                rawPaths.Add(path);
             }
         }
         roadNodesList = roadNodeCollection.BuildAndGetPaths();
@@ -42,6 +45,23 @@ public class GameManager : MonoBehaviour
         GameObject roadMeshObj = new GameObject();
         roadMesh = roadMeshObj.AddComponent(typeof(RoadMesh)) as RoadMesh;
         roadMesh.GenerateMeshFromPaths(roadNodesList);
+    }
+
+    private void Update()
+    {
+        if(_debugRawPaths)
+        {
+            for(int i=0; i<rawPaths.Count; i++)
+            {
+                List<Vector2> path = rawPaths[i];
+                for(int j=0; j<path.Count-1; j++)
+                {
+                    Debug.DrawLine(
+                        RoadMesh.TransformPointToMeshSpace(path[j]),
+                        RoadMesh.TransformPointToMeshSpace(path[j+1]));
+                }
+            }
+        }
     }
 
 }

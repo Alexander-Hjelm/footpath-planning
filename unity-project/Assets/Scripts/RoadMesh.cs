@@ -28,9 +28,9 @@ public class RoadMesh : MonoBehaviour
         }
     }
 
-    private float _scale = 500f;
+    private static float _scale = 500f;
     float _roadWidth = 11f;
-    private Vector2 _offset = new Vector2(-18.05f, -59.34f);
+    private static Vector2 _offset = new Vector2(-18.05f, -59.34f);
 
     private Dictionary<RoadNode.HighwayType, float> _uvXOffsetByHwyType = new Dictionary<RoadNode.HighwayType, float>()
     {
@@ -316,7 +316,7 @@ public class RoadMesh : MonoBehaviour
         meshFilter.mesh = mesh;
     }
 
-    private Vector3 TransformPointToMeshSpace(Vector2 input)
+    public static Vector3 TransformPointToMeshSpace(Vector2 input)
     {
         return new Vector3((input.y+_offset.x)*0.5f, 0f, input.x+_offset.y)*_scale;
     }

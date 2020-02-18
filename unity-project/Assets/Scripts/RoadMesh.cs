@@ -258,7 +258,7 @@ public class RoadMesh : MonoBehaviour
                 {
                     // Add the midpoint of the intersection as the next vertex
                     // Set UV x offset depending on which highway type this path is
-                    RoadNode.HighwayType hwyType = endPoints[i].hwyType;
+                    RoadNode.HighwayType hwyType = endPoints[(i+1)%storedIntersections.Count].hwyType;
                     float uvXOffset = _uvXOffsetByHwyType[hwyType];
                     uvs.Add(new Vector2(uvXOffset+0.125f, 0.5f));
                     vertices.Add(midPoint); // Add the midpoint as a new vertex for every triangle, so each triangle gets unique UV coordinates

@@ -13,7 +13,7 @@ public class RoadNodeCollection
     public void ReadPath(List<Vector2> points, RoadNode.HighwayType hwyType)
     {
         List<RoadNode> path = new List<RoadNode>();
-        for(int i=1; i<points.Count; i++)
+        for(int i=0; i<points.Count; i++)
         {
             RoadNode node = GetNode(points[i], hwyType);
             path.Add(node);

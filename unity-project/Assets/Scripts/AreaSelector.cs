@@ -5,8 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(LineRenderer))]
 public class AreaSelector : MonoBehaviour
 {
+    [SerializeField] private GameObject _polygonMarker;
+
     private LineRenderer _lineRenderer;
     private List<Vector3> _queuedPointsInPolygon = new List<Vector3>();
+    private List<GameObject> _instantiatedPolygonMakers = new List<GameObject>();
 
     private void Awake()
     {
@@ -34,6 +37,8 @@ public class AreaSelector : MonoBehaviour
             if(MathUtils.LinePlaneIntersection(out intersection, ray.origin, ray.direction, Vector3.up, Vector3.zero))
             {
                 _queuedPointsInPolygon.Add(intersection);
+                GameObject polygonMarker = Instantiate(_polygonMarker, intersection, Quaternion.identity);
+                _instantiatedPolygonMakers.Add(polygonMarker);
             }
         }
     }

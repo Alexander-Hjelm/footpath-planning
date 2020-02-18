@@ -150,6 +150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 667415ff513fe502a80682ee9749dcc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _polygonMarker: {fileID: 3291089127320398699, guid: 729d62d43eda73745b8e44a4c1a23539,
+    type: 3}
 --- !u!4 &663817409
 Transform:
   m_ObjectHideFlags: 0
@@ -207,7 +209,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.05
     widthCurve:
       serializedVersion: 2
       m_Curve:

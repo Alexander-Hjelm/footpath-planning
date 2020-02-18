@@ -67,5 +67,14 @@ public class AreaSelector : MonoBehaviour
                 }
             }
         }
+
+        // Backspace is undo
+        if(Input.GetKeyDown(KeyCode.Backspace) && _queuedPointsInPolygon.Count > 0)
+        {
+            _queuedPointsInPolygon.RemoveAt(_queuedPointsInPolygon.Count-1);
+            Destroy(_instantiatedPolygonMakers[_instantiatedPolygonMakers.Count-1]);
+            _instantiatedPolygonMakers.RemoveAt(_instantiatedPolygonMakers.Count-1);
+            _lineRenderer.positionCount = Mathf.Max(0,_lineRenderer.positionCount-1);
+        }
     }
 }

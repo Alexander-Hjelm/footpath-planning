@@ -9,6 +9,7 @@ public class AreaSelector : MonoBehaviour
 
     private LineRenderer _lineRenderer;
     private List<Vector3> _queuedPointsInPolygon = new List<Vector3>();
+    private List<Vector3> _createdPolygon = new List<Vector3>();
     private List<GameObject> _instantiatedPolygonMakers = new List<GameObject>();
 
     private void Awake()
@@ -46,9 +47,24 @@ public class AreaSelector : MonoBehaviour
             Vector3 intersection;
             if(MathUtils.LinePlaneIntersection(out intersection, ray.origin, ray.direction, Vector3.up, Vector3.zero))
             {
-                _queuedPointsInPolygon.Add(intersection);
-                GameObject polygonMarker = Instantiate(_polygonMarker, intersection, Quaternion.identity);
-                _instantiatedPolygonMakers.Add(polygonMarker);
+                // If the click was nearby the first marker, create the polygon
+                if(_queuedPointsInPolygon.Count > 0 && (intersection - _queuedPointsInPolygon[0]).magnitude < 0.2f*(zoomLevel+0.1f))
+                {
+                    _createdPolygon = _queuedPointsInPolygon;
+                    _queuedPointsInPolygon = new List<Vector3>();
+                    foreach(GameObject polygonMarker in _instantiatedPolygonMakers)
+                    {
+                        Destroy(polygonMarker);
+                    }
+                    _instantiatedPolygonMakers = new List<GameObject>();
+                    _lineRenderer.positionCount = 0;
+                }
+                else
+                {
+                    _queuedPointsInPolygon.Add(intersection);
+                    GameObject polygonMarker = Instantiate(_polygonMarker, intersection, Quaternion.identity);
+                    _instantiatedPolygonMakers.Add(polygonMarker);
+                }
             }
         }
     }

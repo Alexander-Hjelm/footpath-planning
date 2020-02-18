@@ -11,12 +11,14 @@ public class CameraNavigation : MonoBehaviour
     [SerializeField] private float _minZoomLevel = 1f;
     [SerializeField] private float _maxZoomLevel = 10f;
     private float _zoomLevel = 0f;
+    private static CameraNavigation _instance;
 
     private void Awake()
     {
         transform.position = new Vector3(5f, 6.3f, -7.6f);
         transform.rotation = Quaternion.LookRotation(Vector3.down, Vector3.forward);
         _moveTarget = transform.position;
+        _instance = this;
     }
 
     private void Update()
@@ -51,8 +53,7 @@ public class CameraNavigation : MonoBehaviour
             moveOffset += Vector3.down;
         }
 
-        float zoomFactor = (_zoomLevel - _minZoomLevel) / (_maxZoomLevel - _minZoomLevel);
-        zoomFactor = Mathf.Max(zoomFactor, 0.1f);
+        float zoomFactor = GetZoomLevel();
 
         _moveTarget += new Vector3(
             moveOffset.x*_moveSpeed*zoomFactor,
@@ -83,5 +84,10 @@ public class CameraNavigation : MonoBehaviour
         }
 
         transform.position = Vector3.Lerp(transform.position, _moveTarget, Time.deltaTime*_snapSpeed);
+    }
+
+    public static float GetZoomLevel()
+    {
+        return Mathf.Max(0.1f, (_instance._zoomLevel - _instance._minZoomLevel) / (_instance._maxZoomLevel - _instance._minZoomLevel));
     }
 }

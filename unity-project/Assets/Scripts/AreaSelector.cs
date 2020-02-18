@@ -28,6 +28,16 @@ public class AreaSelector : MonoBehaviour
             }
             _lineRenderer.positionCount = partialPolygonPoints.Length;
             _lineRenderer.SetPositions(partialPolygonPoints);
+
+        }
+
+        // Line width and marker size dependent on zoom level
+        float zoomLevel = CameraNavigation.GetZoomLevel();
+        _lineRenderer.startWidth = (zoomLevel+0.1f)*0.1f;
+        _lineRenderer.endWidth = (zoomLevel+0.1f)*0.1f;
+        for(int i=0; i<_instantiatedPolygonMakers.Count; i++)
+        {
+            _instantiatedPolygonMakers[i].transform.localScale = new Vector3(1f, 1f, 1f)*(zoomLevel+0.1f)*0.5f;
         }
 
         if(Input.GetMouseButtonDown(0))

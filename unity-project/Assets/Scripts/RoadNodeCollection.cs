@@ -26,15 +26,6 @@ public class RoadNodeCollection
             // Generate and add the node
             RoadNode node = GetNode(points[i], hwyType);
 
-            Vector2 p = points[i];
-            p = RoadMesh.TransformPointToMeshSpace(p);
-            if(p.x-0.00001 < 6.56414 && p.x+0.00001 > 6.56414
-                && p.y-0.00001 < 3.492355 && p.y+0.00001 > -3.492355)
-            {
-                Debug.Log("Tracer node was gotten");
-            }
-
-
             path.Add(node);
             BumpVisitedCount(node);
         }
@@ -130,13 +121,8 @@ public class RoadNodeCollection
     {
         if(NodeHasBeenRead(point))
         {
-            // TODO: Compare node by coordinates to see if we can filter it out, the try to follow it later in the pipeline
-            Vector3 p = RoadMesh.TransformPointToMeshSpace(point);
-            if(p.x-0.00001 < 6.56414 && p.x+0.00001 > 6.56414
-                && p.y-0.00001 < 3.492355 && p.y+0.00001 > -3.492355)
-            {
-                Debug.Log("The tracer node had already been read: " + p.x + ", " + p.z);
-            }
+            // Node has now been read more than once, therefore mark it as an intersection
+            _readNodesByCoord[point.x][point.y].SetIntersection();
             return _readNodesByCoord[point.x][point.y];
         }
         else

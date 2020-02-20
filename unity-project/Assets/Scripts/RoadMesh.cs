@@ -150,8 +150,7 @@ public class RoadMesh : MonoBehaviour
                     Debug.Log("Tracer node was found when reading paths. Index " + i + " out of " + (path.Count-1));
                 }
 
-
-                if(i==path.Count-2 || (path.Count==2 && i==0))
+                if(b.IsIntersection())
                 {
                     if(!intersectionNodes.ContainsKey(b))
                     {
@@ -160,30 +159,15 @@ public class RoadMesh : MonoBehaviour
                     // Have to swap places of the right/left vertices here, at the end of the path, so that the intersection checker
                     // really looks at the left end point of a and right end point of b
                     intersectionNodes[b].Add(new RoadEndPoint(rightEndPoint, leftEndPoint, vertices.Count-1, vertices.Count-2, tangent, hwyType, storedPathMeshes[currentMeshCounter]));
-
-                    Vector2 p = new Vector2(b.GetX(), b.GetY());
-                    p = RoadMesh.TransformPointToMeshSpace(p);
-                    if(p.x-0.00001 < 6.56414 && p.x+0.00001 > 6.56414
-                        && p.y-0.00001 < 3.492355 && p.y+0.00001 > -3.492355)
-                    {
-                        Debug.Log("Tracer node: added an intersection in the end, tangent: " + tangent);
-                    }
                 }
                 // If this is the beginning or end node of the path, store it as an intersection candidate
-                else if(i==0)
+                if(a.IsIntersection())
                 {
                     if(!intersectionNodes.ContainsKey(a))
                     {
                         intersectionNodes[a] = new List<RoadEndPoint>();
                     }
                     intersectionNodes[a].Add(new RoadEndPoint(leftStartPoint, rightStartPoint, vertices.Count-4, vertices.Count-3, tangent, hwyType, storedPathMeshes[currentMeshCounter]));
-                    Vector2 p = new Vector2(a.GetX(), a.GetY());
-                    p = RoadMesh.TransformPointToMeshSpace(p);
-                    if(p.x-0.00001 < 6.56414 && p.x+0.00001 > 6.56414
-                        && p.y-0.00001 < 3.492355 && p.y+0.00001 > -3.492355)
-                    {
-                        Debug.Log("Tracer node: added an intersection in the beginning, tangent: " + tangent);
-                    }
                 }
             }
             if(vertices.Count > 20000)
@@ -214,7 +198,7 @@ public class RoadMesh : MonoBehaviour
 
             List<RoadEndPoint> endPoints = intersectionNodes[node];
             //TODO: Should work for intersections with 2 nodes as well
-            if(endPoints.Count < 2)
+            if(endPoints.Count <= 1)
             {
                 // Skip the node if it has less than two end points. Then it is not an intersection
                 continue;

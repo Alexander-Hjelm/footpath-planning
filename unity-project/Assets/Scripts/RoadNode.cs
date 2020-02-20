@@ -32,6 +32,7 @@ public class RoadNode
     private float _xCoord;
     private float _yCoord;
     private HighwayType _highwayType;
+    private bool _intersection;
 
     public static HighwayType GetHighwayTypeFromString(string input)
     {
@@ -44,6 +45,7 @@ public class RoadNode
         _xCoord = x;
         _yCoord = y;
         _highwayType = highwayType;
+        _intersection = false;
     }
 
     public float GetX()
@@ -64,6 +66,16 @@ public class RoadNode
     public Vector2 GetPosAsVector2()
     {
         return new Vector2(_xCoord, _yCoord);
+    }
+
+    public bool IsIntersection()
+    {
+        return _intersection;
+    }
+
+    public void SetIntersection()
+    {
+        _intersection = true;
     }
 
 }

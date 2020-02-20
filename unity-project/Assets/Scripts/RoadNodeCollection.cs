@@ -25,6 +25,16 @@ public class RoadNodeCollection
 
             // Generate and add the node
             RoadNode node = GetNode(points[i], hwyType);
+
+            Vector2 p = points[i];
+            p = RoadMesh.TransformPointToMeshSpace(p);
+            if(p.x-0.00001 < 6.56414 && p.x+0.00001 > 6.56414
+                && p.y-0.00001 < 3.492355 && p.y+0.00001 > -3.492355)
+            {
+                Debug.Log("Tracer node was gotten");
+            }
+
+
             path.Add(node);
             BumpVisitedCount(node);
         }
@@ -44,6 +54,15 @@ public class RoadNodeCollection
             for(int i=0; i<path.Count; i++)
             {
                 RoadNode node = path[i];
+
+                Vector2 p = new Vector2(node.GetX(), node.GetY());
+                p = RoadMesh.TransformPointToMeshSpace(p);
+                if(p.x-0.00001 < 6.56414 && p.x+0.00001 > 6.56414
+                    && p.y-0.00001 < 3.492355 && p.y+0.00001 > -3.492355)
+                {
+                    Debug.Log("Tracer node was found when building paths");
+                }
+
                 if(i>0 && i<path.Count-1 && _visitedCount[node] > 1)
                 {
                     // This is an intersection, we should split the path
@@ -89,7 +108,9 @@ public class RoadNodeCollection
     private RoadNode AddAndReturnNode(Vector2 point, RoadNode.HighwayType hwyType)
     {
         if(!_readNodesByCoord.ContainsKey(point.x))
+        {
             _readNodesByCoord[point.x] = new Dictionary<float, RoadNode>();
+        }
 
         if(!_readNodesByCoord[point.x].ContainsKey(point.y))
         {
@@ -109,6 +130,13 @@ public class RoadNodeCollection
     {
         if(NodeHasBeenRead(point))
         {
+            // TODO: Compare node by coordinates to see if we can filter it out, the try to follow it later in the pipeline
+            Vector3 p = RoadMesh.TransformPointToMeshSpace(point);
+            if(p.x-0.00001 < 6.56414 && p.x+0.00001 > 6.56414
+                && p.y-0.00001 < 3.492355 && p.y+0.00001 > -3.492355)
+            {
+                Debug.Log("The tracer node had already been read: " + p.x + ", " + p.z);
+            }
             return _readNodesByCoord[point.x][point.y];
         }
         else

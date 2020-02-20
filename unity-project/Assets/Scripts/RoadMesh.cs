@@ -75,6 +75,7 @@ public class RoadMesh : MonoBehaviour
             {
                 RoadNode a = path[i];
                 RoadNode b = path[i+1];
+
                 // Get hwy type from the second node in the path, since the intersection may be of another type
                 if(hwyType == RoadNode.HighwayType.NONE) hwyType = b.GetHighwayType();
                 Vector3 posA = TransformPointToMeshSpace(a.GetPosAsVector2());
@@ -217,6 +218,14 @@ public class RoadMesh : MonoBehaviour
             {
                 // Skip the node if it has less than two end points. Then it is not an intersection
                 continue;
+            }
+
+            Vector2 p = new Vector2(node.GetX(), node.GetY());
+            p = RoadMesh.TransformPointToMeshSpace(p);
+            if(p.x-0.00001 < 6.56414 && p.x+0.00001 > 6.56414
+                && p.y-0.00001 < 3.492355 && p.y+0.00001 > -3.492355)
+            {
+                Debug.Log("Tracer node was found as an intersection. endPoints count: " + endPoints.Count);
             }
 
             // Order the end points by angle

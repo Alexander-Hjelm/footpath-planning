@@ -213,7 +213,7 @@ public class RoadMesh : MonoBehaviour
             }
 
             // Order the end points by angle
-            RoadEndPoint[] endPointsSorted = endPoints.OrderBy(v => Vector3.Angle(v.tangent, Vector3.right)).ToArray();
+            RoadEndPoint[] endPointsSorted = endPoints.OrderBy(v => Vector3.SignedAngle(v.tangent, Vector3.right, -Vector3.up)).ToArray();
 
             List<Vector3> storedIntersections = new List<Vector3>();
 

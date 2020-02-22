@@ -1,11 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MapDebugHelper : MonoBehaviour
 {
     private static double targetNodeX = 6.144524;
     private static double targetNodeY = -7.995605;
+
+    [SerializeField] private InputField _coordXText;
+    [SerializeField] private InputField _coordYText;
+
+    private static MapDebugHelper _instance;
+
+    private void Awake()
+    {
+        _instance = this;
+    }
+
+    public void FocusOnNodeButtonCallback()
+    {
+        float x = float.Parse(_coordXText.text);
+        float y = float.Parse(_coordYText.text);
+
+        Camera.main.transform.position = new Vector3(x, 2f, y);
+    }
 
     public static void ConditionalNodeLog(RoadNode node, string msg)
     {

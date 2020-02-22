@@ -46,13 +46,7 @@ public class RoadNodeCollection
             {
                 RoadNode node = path[i];
 
-                Vector2 p = new Vector2(node.GetX(), node.GetY());
-                p = RoadMesh.TransformPointToMeshSpace(p);
-                if(p.x-0.00001 < 6.56414 && p.x+0.00001 > 6.56414
-                    && p.y-0.00001 < 3.492355 && p.y+0.00001 > -3.492355)
-                {
-                    Debug.Log("Tracer node was found when building paths");
-                }
+                MapDebugHelper.ConditionalNodeLog(node, "Tracer node was found when building paths");
 
                 if(i>0 && i<path.Count-1 && _visitedCount[node] > 1)
                 {
@@ -122,6 +116,10 @@ public class RoadNodeCollection
         if(NodeHasBeenRead(point))
         {
             // Node has now been read more than once, therefore mark it as an intersection
+            if(_readNodesByCoord[point.x][point.y].IsIntersection())
+            {
+                MapDebugHelper.ConditionalNodeLog(point, "Tracer node was found three times or more when reading nodes. Marked as an intersection");
+            }
             _readNodesByCoord[point.x][point.y].SetIntersection();
             return _readNodesByCoord[point.x][point.y];
         }
@@ -130,22 +128,5 @@ public class RoadNodeCollection
             return AddAndReturnNode(point, hwyType);
         }
     }
-/*
-    private void AddNeighbourRelation(Vector2 point1, Vector2 point2)
-    {
-        if(NodeExists(point1) && NodeExists(point2))
-        {
-            RoadNode node1 = GetNode(point1);
-            RoadNode node2 = GetNode(point2);
-            node1.AddNeighbour(node2);
-            node2.AddNeighbour(node1);
-        }
-        else
-        {
-            Debug.LogError("RoadNodeCollection tried to add a neighbour relation for two nodes that do not exist: "
-                + point1 + ", " + point2);
-        }
-    }
-    */
 
 }

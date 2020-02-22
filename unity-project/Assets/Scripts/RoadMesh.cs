@@ -142,13 +142,6 @@ public class RoadMesh : MonoBehaviour
                 // Set the last end point for the next path segment
                 previousRoadEndPoint = new RoadEndPoint(leftEndPoint, rightEndPoint, vertices.Count-2, vertices.Count-1, tangent, hwyType, storedPathMeshes[currentMeshCounter]);
                 
-                Vector2 po = new Vector2(b.GetX(), b.GetY());
-                po = RoadMesh.TransformPointToMeshSpace(po);
-                if(po.x-0.00001 < 6.56414 && po.x+0.00001 > 6.56414
-                    && po.y-0.00001 < 3.492355 && po.y+0.00001 > -3.492355)
-                {
-                    Debug.Log("Tracer node was found when reading paths. Index " + i + " out of " + (path.Count-1));
-                }
 
                 if(b.IsIntersection())
                 {
@@ -159,6 +152,8 @@ public class RoadMesh : MonoBehaviour
                     // Have to swap places of the right/left vertices here, at the end of the path, so that the intersection checker
                     // really looks at the left end point of a and right end point of b
                     intersectionNodes[b].Add(new RoadEndPoint(rightEndPoint, leftEndPoint, vertices.Count-1, vertices.Count-2, tangent, hwyType, storedPathMeshes[currentMeshCounter]));
+
+                    MapDebugHelper.ConditionalNodeLog(b, "Tracer node was found when reading paths. Added a b-intersection");
                 }
                 // If this is the beginning or end node of the path, store it as an intersection candidate
                 if(a.IsIntersection())
@@ -168,6 +163,7 @@ public class RoadMesh : MonoBehaviour
                         intersectionNodes[a] = new List<RoadEndPoint>();
                     }
                     intersectionNodes[a].Add(new RoadEndPoint(leftStartPoint, rightStartPoint, vertices.Count-4, vertices.Count-3, tangent, hwyType, storedPathMeshes[currentMeshCounter]));
+                    MapDebugHelper.ConditionalNodeLog(a, "Tracer node was found when reading paths. Added a a-intersection");
                 }
             }
             if(vertices.Count > 20000)
@@ -204,14 +200,6 @@ public class RoadMesh : MonoBehaviour
                 continue;
             }
 
-            Vector2 p = new Vector2(node.GetX(), node.GetY());
-            p = RoadMesh.TransformPointToMeshSpace(p);
-            if(p.x-0.00001 < 6.56414 && p.x+0.00001 > 6.56414
-                && p.y-0.00001 < 3.492355 && p.y+0.00001 > -3.492355)
-            {
-                Debug.Log("Tracer node was found as an intersection. endPoints count: " + endPoints.Count);
-            }
-
             // Order the end points by angle
             RoadEndPoint[] endPointsSorted = endPoints.OrderBy(v => Vector3.SignedAngle(v.tangent, Vector3.right, -Vector3.up)).ToArray();
 
@@ -227,6 +215,18 @@ public class RoadMesh : MonoBehaviour
                 RoadEndPoint b = endPointsSorted[(i+1)%endPointsSorted.Length];
 
                 midPoint += (a.rightPoint + a.leftPoint)/2;
+
+                Vector2 p2 = new Vector3(node.GetX(), node.GetY());
+                Vector3 p = RoadMesh.TransformPointToMeshSpace(p2);
+                if(p.x-0.00005 < 6.144524 && p.x+0.00005 > 6.144524
+                    && p.z-0.00005 < -7.995605 && p.z+0.00005 > -7.995605)
+                {
+                    Debug.Log("Endpoint collision check: (a.rightPoint = "
+                            + a.rightPoint.x + ", " + a.rightPoint.z + "), (b.leftPoint = "
+                            + b.leftPoint.x + ", " + b.leftPoint.z + "), (a.tangent = "
+                            + a.tangent.x + ", " + a.tangent.z + "), b.tangent = "
+                            + b.tangent.x + ", " + b.tangent.z + ")");
+                }
                 
                 // Get the intersection point
                 // Get the right pos from end point 1 and left pos from end point 2

@@ -23,7 +23,7 @@ public class MapDebugHelper : MonoBehaviour
         float x = float.Parse(_coordXText.text);
         float y = float.Parse(_coordYText.text);
 
-        Camera.main.transform.position = new Vector3(x, 2f, y);
+        Camera.main.transform.position = new Vector3(x, 0.05f, y);
     }
 
     public static void ConditionalNodeLog(RoadNode node, string msg)

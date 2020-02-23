@@ -78,8 +78,7 @@ public class RoadMesh : MonoBehaviour
                 RoadNode a = path.Get(i);
                 RoadNode b = path.Get(i+1);
 
-                // Get hwy type from the second node in the path, since the intersection may be of another type
-                if(hwyType == RoadNode.HighwayType.NONE) hwyType = b.GetHighwayType();
+                if(hwyType == RoadNode.HighwayType.NONE) hwyType = path.GetHighwayType();
                 Vector3 posA = TransformPointToMeshSpace(a.GetPosAsVector2());
                 Vector3 posB = TransformPointToMeshSpace(b.GetPosAsVector2());
                 Vector3 tangent = (posB - posA).normalized;

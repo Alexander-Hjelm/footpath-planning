@@ -11,11 +11,14 @@ public class MapDebugHelper : MonoBehaviour
     [SerializeField] private InputField _coordXText;
     [SerializeField] private InputField _coordYText;
 
+    private static GameObject _pointMarker;
+
     private static MapDebugHelper _instance;
 
     private void Awake()
     {
         _instance = this;
+        _pointMarker = Resources.Load("Prefabs/PolygonMarker") as GameObject;
     }
 
     public void FocusOnNodeButtonCallback()
@@ -24,6 +27,9 @@ public class MapDebugHelper : MonoBehaviour
         float y = float.Parse(_coordYText.text);
 
         Camera.main.transform.position = new Vector3(x, 0.05f, y);
+
+        GameObject pointMarker = Instantiate(_pointMarker, new Vector3(x, 0.001f, y), Quaternion.identity);
+        pointMarker.transform.localScale = 0.015f* new Vector3(1f, 1f, 1f);
     }
 
     public static void ConditionalNodeLog(RoadNode node, string msg)

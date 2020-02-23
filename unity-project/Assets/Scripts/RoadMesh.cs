@@ -48,7 +48,7 @@ public class RoadMesh : MonoBehaviour
         {RoadNode.HighwayType.PRIMARY, 1f}
     };
 
-    public void GenerateMeshFromPaths(List<List<RoadNode>> paths)
+    public void GenerateMeshFromPaths(List<RoadPath> paths)
     {
         // Start building path mesh
         List<Vector3> vertices = new List<Vector3>();
@@ -59,7 +59,7 @@ public class RoadMesh : MonoBehaviour
         int countedVertices = 0;
 
         Dictionary<RoadNode, List<RoadEndPoint>> intersectionNodes = new Dictionary<RoadNode, List<RoadEndPoint>>();
-        foreach(List<RoadNode> path in paths)
+        foreach(RoadPath path in paths)
         {
             // First create the mesh we'll be working with
             if(storedPathMeshes.Count <= currentMeshCounter) 
@@ -71,10 +71,10 @@ public class RoadMesh : MonoBehaviour
 
             RoadNode.HighwayType hwyType = RoadNode.HighwayType.NONE;
 
-            for(int i=0; i<path.Count-1; i++)
+            for(int i=0; i<path.Count()-1; i++)
             {
-                RoadNode a = path[i];
-                RoadNode b = path[i+1];
+                RoadNode a = path.Get(i);
+                RoadNode b = path.Get(i+1);
 
                 // Get hwy type from the second node in the path, since the intersection may be of another type
                 if(hwyType == RoadNode.HighwayType.NONE) hwyType = b.GetHighwayType();
@@ -280,7 +280,7 @@ public class RoadMesh : MonoBehaviour
                 {
                     // Add the midpoint of the intersection as the next vertex
                     // Set UV x offset depending on which highway type this path is
-                    RoadNode.HighwayType hwyType = endPoints[(i+1)%storedIntersections.Count].hwyType;
+                    RoadNode.HighwayType hwyType = endPoints[i].hwyType;
                     float uvXOffset = _uvXOffsetByHwyType[hwyType];
                     uvs.Add(new Vector2(uvXOffset+0.125f, 0.5f));
                     vertices.Add(midPoint); // Add the midpoint as a new vertex for every triangle, so each triangle gets unique UV coordinates

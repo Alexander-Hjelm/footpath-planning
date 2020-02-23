@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     };
 
     private RoadNodeCollection roadNodeCollection;
-    private List<List<RoadNode>> roadNodesList;
+    private List<RoadPath> roadNodesList;
     private Dictionary<RoadNode, RoadMesh> roadMeshes = new Dictionary<RoadNode, RoadMesh>();
     private RoadMesh roadMesh;
     private List<List<Vector2>> rawPaths = new List<List<Vector2>>();

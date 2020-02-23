@@ -6,13 +6,13 @@ public class RoadNodeCollection
     private Dictionary<float, Dictionary<float, RoadNode>> _readNodesByCoord
         = new Dictionary<float, Dictionary<float, RoadNode>>();
 
-    private Queue<List<RoadNode>> _readPaths = new Queue<List<RoadNode>>();
+    private Queue<RoadPath> _readPaths = new Queue<RoadPath>();
 
     private Dictionary<RoadNode, int> _visitedCount = new Dictionary<RoadNode, int>();
 
     public void ReadPath(List<Vector2> points, RoadNode.HighwayType hwyType)
     {
-        List<RoadNode> path = new List<RoadNode>();
+        RoadPath path = new RoadPath(hwyType);
         for(int i=0; i<points.Count; i++)
         {
             // Cleanup, ignore all successive duplicate nodes in the paths
@@ -32,31 +32,31 @@ public class RoadNodeCollection
         _readPaths.Enqueue(path);
     }
 
-    public List<List<RoadNode>> BuildAndGetPaths()
+    public List<RoadPath> BuildAndGetPaths()
     {
-        Queue<List<RoadNode>> tentativePaths = _readPaths;
-        List<List<RoadNode>> outPaths = new List<List<RoadNode>>();
+        Queue<RoadPath> tentativePaths = _readPaths;
+        List<RoadPath> outPaths = new List<RoadPath>();
 
         int crash_safe = 0;
         while(tentativePaths.Count > 0)
         {
-            List<RoadNode> path = tentativePaths.Dequeue();
+            RoadPath path = tentativePaths.Dequeue();
             
-            for(int i=0; i<path.Count; i++)
+            for(int i=0; i<path.Count(); i++)
             {
-                RoadNode node = path[i];
+                RoadNode node = path.Get(i);
 
                 MapDebugHelper.ConditionalNodeLog(node, "Tracer node was found when building paths");
 
-                if(i>0 && i<path.Count-1 && _visitedCount[node] > 1)
+                if(i>0 && i<path.Count()-1 && _visitedCount[node] > 1)
                 {
                     // This is an intersection, we should split the path
-                    List<RoadNode> path2 = new List<RoadNode>();
+                    RoadPath path2 = new RoadPath(path.GetHighwayType());
                     path2.Add(node); // First add the intersection point
-                    for(int j=i+1; j<path.Count; j++)
+                    for(int j=i+1; j<path.Count(); j++)
                     {
                         // Move all other points from the first path to the second
-                        path2.Add(path[j]);
+                        path2.Add(path.Get(j));
                         path.RemoveAt(j);
                     }
                     // Queue the new path, deal with it in a later iteration

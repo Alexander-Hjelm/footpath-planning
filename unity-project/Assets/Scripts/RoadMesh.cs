@@ -162,7 +162,7 @@ public class RoadMesh : MonoBehaviour
                     {
                         intersectionNodes[a] = new List<RoadEndPoint>();
                     }
-                    intersectionNodes[a].Add(new RoadEndPoint(leftStartPoint, rightStartPoint, vertices.Count-4, vertices.Count-3, tangent, hwyType, storedPathMeshes[currentMeshCounter]));
+                    intersectionNodes[a].Add(new RoadEndPoint(leftStartPoint, rightStartPoint, vertices.Count-4, vertices.Count-3, -tangent, hwyType, storedPathMeshes[currentMeshCounter]));
                     MapDebugHelper.ConditionalNodeLog(a, "Tracer node was found when reading paths. Added a a-intersection");
                 }
             }

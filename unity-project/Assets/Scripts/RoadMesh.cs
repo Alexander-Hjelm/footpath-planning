@@ -216,17 +216,12 @@ public class RoadMesh : MonoBehaviour
 
                 midPoint += (a.rightPoint + a.leftPoint)/2;
 
-                Vector2 p2 = new Vector3(node.GetX(), node.GetY());
-                Vector3 p = RoadMesh.TransformPointToMeshSpace(p2);
-                if(p.x-0.00005 < 6.144524 && p.x+0.00005 > 6.144524
-                    && p.z-0.00005 < -7.995605 && p.z+0.00005 > -7.995605)
-                {
-                    Debug.Log("Endpoint collision check: (a.rightPoint = "
+                string msg = "Endpoint collision check: (a.rightPoint = "
                             + a.rightPoint.x + ", " + a.rightPoint.z + "), (b.leftPoint = "
                             + b.leftPoint.x + ", " + b.leftPoint.z + "), (a.tangent = "
                             + a.tangent.x + ", " + a.tangent.z + "), b.tangent = "
-                            + b.tangent.x + ", " + b.tangent.z + ")");
-                }
+                            + b.tangent.x + ", " + b.tangent.z + ")";
+                MapDebugHelper.ConditionalNodeLog(node, msg);
                 
                 // Get the intersection point
                 // Get the right pos from end point 1 and left pos from end point 2

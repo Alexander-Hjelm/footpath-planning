@@ -118,9 +118,9 @@ public class RoadNodeCollection
             // Node has now been read more than once, therefore mark it as an intersection
             if(_readNodesByCoord[point.x][point.y].IsIntersection())
             {
-                MapDebugHelper.ConditionalNodeLog(point, "Tracer node was found three times or more when reading nodes. Marked as an intersection."
-                        + " Center: + " + point.x + ", " + point.y);
                 Vector3 point3D = RoadMesh.TransformPointToMeshSpace(point);
+                MapDebugHelper.ConditionalNodeLog(point, "Tracer node was found three times or more when reading nodes. Marked as an intersection."
+                        + " Center: + " + point3D.x + ", " + point3D.z);
                 //Debug.Log("Found intersection: (" + point3D.x + ", " + point3D.z + ")");
             }
             _readNodesByCoord[point.x][point.y].SetIntersection();

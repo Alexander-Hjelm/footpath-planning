@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MathUtils : MonoBehaviour
@@ -73,4 +74,21 @@ public class MathUtils : MonoBehaviour
 			return false;
 		}
 	}
+
+    public static Vector3 FindCentroid(List<Vector3> points) {
+        float x = 0;
+        float y = 0;
+        float z = 0;
+        foreach (Vector3 p in points) {
+            x += p.x;
+            y += p.y;
+            z += p.z;
+        }
+        Vector3 center = new Vector3(0, 0);
+        center.x = x / points.Count;
+        center.y = y / points.Count;
+        center.z = z / points.Count;
+        return center;
+    }
+
 }

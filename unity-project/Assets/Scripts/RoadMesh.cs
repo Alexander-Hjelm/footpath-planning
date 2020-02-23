@@ -162,6 +162,7 @@ public class RoadMesh : MonoBehaviour
                     {
                         intersectionNodes[a] = new List<RoadEndPoint>();
                     }
+                    // Negative tangent so that the tangent always points inwards to the intersection, both for a- and b-intersections
                     intersectionNodes[a].Add(new RoadEndPoint(leftStartPoint, rightStartPoint, vertices.Count-4, vertices.Count-3, -tangent, hwyType, storedPathMeshes[currentMeshCounter]));
                     MapDebugHelper.ConditionalNodeLog(a, "Tracer node was found when reading paths. Added a a-intersection");
                 }
@@ -214,11 +215,11 @@ public class RoadMesh : MonoBehaviour
                 RoadEndPoint a = endPointsSorted[i];
                 RoadEndPoint b = endPointsSorted[(i+1)%endPointsSorted.Length];
 
-                midPoint += (a.rightPoint + a.leftPoint)/2;
+                midPoint += (a.leftPoint + b.rightPoint)/2;
 
-                string msg = "Endpoint collision check: (a.rightPoint = "
-                            + a.rightPoint.x + ", " + a.rightPoint.z + "), (b.leftPoint = "
-                            + b.leftPoint.x + ", " + b.leftPoint.z + "), (a.tangent = "
+                string msg = "Endpoint collision check: (a.leftPoint = "
+                            + a.leftPoint.x + ", " + a.leftPoint.z + "), (b.rightPoint = "
+                            + b.rightPoint.x + ", " + b.rightPoint.z + "), (a.tangent = "
                             + a.tangent.x + ", " + a.tangent.z + "), b.tangent = "
                             + b.tangent.x + ", " + b.tangent.z + ")";
                 MapDebugHelper.ConditionalNodeLog(node, msg);
@@ -227,21 +228,22 @@ public class RoadMesh : MonoBehaviour
                 // Get the right pos from end point 1 and left pos from end point 2
                 Vector3 intersection = Vector3.zero;
                 bool intersectionWasSet = false;
-                if(MathUtils.LineLineIntersection(out intersection, a.rightPoint, a.tangent,
-                    b.leftPoint, b.tangent))
+                if(MathUtils.LineLineIntersection(out intersection, a.leftPoint, a.tangent,
+                    b.rightPoint, b.tangent))
                 {
                     intersectionWasSet = true;
+                    MapDebugHelper.ConditionalNodeLog(node, "Linear intersection found at: " + intersection.x + ", " + intersection.z);
                 }
                 else if((a.tangent + b.tangent).magnitude < 0.01f)
                 {
                     // tangents are opposite, pick the middle point
-                    intersection = (a.rightPoint + b.leftPoint)/2;
+                    intersection = (a.leftPoint + b.rightPoint)/2;
                     intersectionWasSet = true;
                 }
                 else if((a.tangent - b.tangent).magnitude < 0.01f)
                 {
                     // tangents are the same. This happens due to dirty data, but pick the middle point for now
-                    intersection = (a.rightPoint + b.leftPoint)/2;
+                    intersection = (a.leftPoint + b.rightPoint)/2;
                     intersectionWasSet = true;
                 }
 
@@ -251,11 +253,11 @@ public class RoadMesh : MonoBehaviour
 
                     // Since the vertices array of the mesh has read-only access, we have to copy the whole array and change the one vertex
                     Vector3[] verticesA = a.associatedMesh.vertices;
-                    verticesA[a.rightIndex] = intersection;
+                    verticesA[a.leftIndex] = intersection;
                     a.associatedMesh.vertices = verticesA;
                     
                     Vector3[] verticesB = b.associatedMesh.vertices;
-                    verticesB[b.leftIndex] = intersection;
+                    verticesB[b.rightIndex] = intersection;
                     b.associatedMesh.vertices = verticesB;
 
                     storedIntersections.Add(intersection);
@@ -264,7 +266,7 @@ public class RoadMesh : MonoBehaviour
                 }
                 else
                 {
-                    Debug.LogError("Found an intersection with two incoming paths that have the same tangents! " + a.tangent + ", " + b.tangent + ". a.right = " + a.rightPoint + ", b.left = " + b.leftPoint);
+                    Debug.LogError("Found an intersection with two incoming paths that have the same tangents! " + a.tangent + ", " + b.tangent + ". a.left = " + a.leftPoint + ", b.right = " + b.rightPoint);
                 }
             }
 
@@ -293,8 +295,8 @@ public class RoadMesh : MonoBehaviour
 
                     // Create new triangles, stitch all the vertices together
                     triangles.Add(vertices.Count-3); // Mid point
-                    triangles.Add(vertices.Count-1);
                     triangles.Add(vertices.Count-2);
+                    triangles.Add(vertices.Count-1);
                 }
 
                 CreateNewMeshFilterWithMesh(vertices, triangles, uvs, intersectionMesh);

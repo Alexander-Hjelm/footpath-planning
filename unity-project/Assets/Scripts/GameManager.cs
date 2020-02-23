@@ -30,7 +30,16 @@ public class GameManager : MonoBehaviour
             foreach(FeatureObject feature in collection.features)
             {
                 List<Vector2> path = new List<Vector2>();
-                List<PositionObject> positions = feature.geometry.AllPositions();
+                GeometryObject geometryObject = feature.geometry;
+
+                // Don't treat polygon objects, just skip them
+                if(geometryObject as PolygonGeometryObject != null
+                        || geometryObject as MultiPolygonGeometryObject != null)
+                {
+                    continue;
+                }
+
+                List<PositionObject> positions = geometryObject.AllPositions();
                 foreach(PositionObject position in positions)
                 {
                     path.Add(new Vector2(position.latitude, position.longitude));

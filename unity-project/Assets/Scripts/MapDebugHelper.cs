@@ -29,7 +29,7 @@ public class MapDebugHelper : MonoBehaviour
         Camera.main.transform.position = new Vector3(x, 0.05f, y);
 
         GameObject pointMarker = Instantiate(_pointMarker, new Vector3(x, 0.001f, y), Quaternion.identity);
-        pointMarker.transform.localScale = 0.015f* new Vector3(1f, 1f, 1f);
+        pointMarker.transform.localScale = 0.0015f* new Vector3(1f, 1f, 1f);
     }
 
     public static void ConditionalNodeLog(RoadNode node, string msg)

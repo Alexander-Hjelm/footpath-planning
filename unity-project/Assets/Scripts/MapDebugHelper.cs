@@ -21,6 +21,11 @@ public class MapDebugHelper : MonoBehaviour
         _pointMarker = Resources.Load("Prefabs/PolygonMarker") as GameObject;
     }
 
+    private void Start()
+    {
+        Camera.main.transform.position = new Vector3((float)targetNodeX, 0.05f, (float)targetNodeY);
+    }
+
     public void FocusOnNodeButtonCallback()
     {
         float x = float.Parse(_coordXText.text);

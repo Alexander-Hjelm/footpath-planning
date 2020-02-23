@@ -6,7 +6,7 @@ using UnityEditor;
 
 public class RoadMesh : MonoBehaviour
 {
-    private struct RoadEndPoint
+    private class RoadEndPoint
     {
         public Vector3 leftPoint;
         public Vector3 rightPoint;
@@ -15,6 +15,7 @@ public class RoadMesh : MonoBehaviour
         public Vector3 tangent;
         public RoadNode.HighwayType hwyType;
         public Mesh associatedMesh;
+        public Vector3 associatedIntersection;
 
         public RoadEndPoint(Vector3 leftPoint, Vector3 rightPoint, int leftIndex, int rightIndex, Vector3 tangent, RoadNode.HighwayType hwyType, Mesh associatedMesh)
         {
@@ -25,6 +26,7 @@ public class RoadMesh : MonoBehaviour
             this.tangent = tangent;
             this.hwyType = hwyType;
             this.associatedMesh = associatedMesh;
+            this.associatedIntersection = Vector3.zero;
         }
     }
 

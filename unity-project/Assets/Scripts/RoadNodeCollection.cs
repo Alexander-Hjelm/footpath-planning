@@ -6,13 +6,13 @@ public class RoadNodeCollection
     private Dictionary<float, Dictionary<float, RoadNode>> _readNodesByCoord
         = new Dictionary<float, Dictionary<float, RoadNode>>();
 
-    private Queue<List<RoadNode>> _readPaths = new Queue<List<RoadNode>>();
+    private Queue<RoadPath> _readPaths = new Queue<RoadPath>();
 
     private Dictionary<RoadNode, int> _visitedCount = new Dictionary<RoadNode, int>();
 
     public void ReadPath(List<Vector2> points, RoadNode.HighwayType hwyType)
     {
-        List<RoadNode> path = new List<RoadNode>();
+        RoadPath path = new RoadPath(hwyType);
         for(int i=0; i<points.Count; i++)
         {
             // Cleanup, ignore all successive duplicate nodes in the paths
@@ -25,36 +25,38 @@ public class RoadNodeCollection
 
             // Generate and add the node
             RoadNode node = GetNode(points[i], hwyType);
+
             path.Add(node);
             BumpVisitedCount(node);
         }
         _readPaths.Enqueue(path);
     }
 
-    public List<List<RoadNode>> BuildAndGetPaths()
+    public List<RoadPath> BuildAndGetPaths()
     {
-        Queue<List<RoadNode>> tentativePaths = _readPaths;
-        List<List<RoadNode>> outPaths = new List<List<RoadNode>>();
+        Queue<RoadPath> tentativePaths = _readPaths;
+        List<RoadPath> outPaths = new List<RoadPath>();
 
         int crash_safe = 0;
         while(tentativePaths.Count > 0)
         {
-            List<RoadNode> path = tentativePaths.Dequeue();
+            RoadPath path = tentativePaths.Dequeue();
             
-            for(int i=0; i<path.Count; i++)
+            for(int i=0; i<path.Count(); i++)
             {
-                RoadNode node = path[i];
-                if(i>0 && i<path.Count-1 && _visitedCount[node] > 1)
+                RoadNode node = path.Get(i);
+
+                if(i>0 && i<path.Count()-1 && _visitedCount[node] > 1)
                 {
                     // This is an intersection, we should split the path
-                    List<RoadNode> path2 = new List<RoadNode>();
-                    path2.Add(node); // First add the intersection point
-                    for(int j=i+1; j<path.Count; j++)
+                    RoadPath path2 = new RoadPath(path.GetHighwayType());
+                    for(int j=0; j<i; j++)
                     {
                         // Move all other points from the first path to the second
-                        path2.Add(path[j]);
-                        path.RemoveAt(j);
+                        path2.Add(path.Get(0));
+                        path.RemoveAt(0);
                     }
+                    path2.Add(node); // Finally add the intersection point
                     // Queue the new path, deal with it in a later iteration
                     tentativePaths.Enqueue(path2);
                     break;
@@ -89,7 +91,9 @@ public class RoadNodeCollection
     private RoadNode AddAndReturnNode(Vector2 point, RoadNode.HighwayType hwyType)
     {
         if(!_readNodesByCoord.ContainsKey(point.x))
+        {
             _readNodesByCoord[point.x] = new Dictionary<float, RoadNode>();
+        }
 
         if(!_readNodesByCoord[point.x].ContainsKey(point.y))
         {
@@ -109,6 +113,12 @@ public class RoadNodeCollection
     {
         if(NodeHasBeenRead(point))
         {
+            // Node has now been read more than once, therefore mark it as an intersection
+            if(_readNodesByCoord[point.x][point.y].IsIntersection())
+            {
+                Vector3 point3D = RoadMesh.TransformPointToMeshSpace(point);
+            }
+            _readNodesByCoord[point.x][point.y].SetIntersection();
             return _readNodesByCoord[point.x][point.y];
         }
         else
@@ -116,22 +126,5 @@ public class RoadNodeCollection
             return AddAndReturnNode(point, hwyType);
         }
     }
-/*
-    private void AddNeighbourRelation(Vector2 point1, Vector2 point2)
-    {
-        if(NodeExists(point1) && NodeExists(point2))
-        {
-            RoadNode node1 = GetNode(point1);
-            RoadNode node2 = GetNode(point2);
-            node1.AddNeighbour(node2);
-            node2.AddNeighbour(node1);
-        }
-        else
-        {
-            Debug.LogError("RoadNodeCollection tried to add a neighbour relation for two nodes that do not exist: "
-                + point1 + ", " + point2);
-        }
-    }
-    */
 
 }

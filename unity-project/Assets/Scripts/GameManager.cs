@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     };
 
     private RoadNodeCollection roadNodeCollection;
-    private List<List<RoadNode>> roadNodesList;
+    private List<RoadPath> roadNodesList;
     private Dictionary<RoadNode, RoadMesh> roadMeshes = new Dictionary<RoadNode, RoadMesh>();
     private RoadMesh roadMesh;
     private List<List<Vector2>> rawPaths = new List<List<Vector2>>();
@@ -30,7 +30,16 @@ public class GameManager : MonoBehaviour
             foreach(FeatureObject feature in collection.features)
             {
                 List<Vector2> path = new List<Vector2>();
-                List<PositionObject> positions = feature.geometry.AllPositions();
+                GeometryObject geometryObject = feature.geometry;
+
+                // Don't treat polygon objects, just skip them
+                if(geometryObject as PolygonGeometryObject != null
+                        || geometryObject as MultiPolygonGeometryObject != null)
+                {
+                    continue;
+                }
+
+                List<PositionObject> positions = geometryObject.AllPositions();
                 foreach(PositionObject position in positions)
                 {
                     path.Add(new Vector2(position.latitude, position.longitude));

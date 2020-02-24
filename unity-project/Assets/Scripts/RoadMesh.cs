@@ -6,7 +6,7 @@ using UnityEditor;
 
 public class RoadMesh : MonoBehaviour
 {
-    private struct RoadEndPoint
+    private class RoadEndPoint
     {
         public Vector3 leftPoint;
         public Vector3 rightPoint;
@@ -15,6 +15,7 @@ public class RoadMesh : MonoBehaviour
         public Vector3 tangent;
         public RoadNode.HighwayType hwyType;
         public Mesh associatedMesh;
+        public Vector3 associatedIntersection;
 
         public RoadEndPoint(Vector3 leftPoint, Vector3 rightPoint, int leftIndex, int rightIndex, Vector3 tangent, RoadNode.HighwayType hwyType, Mesh associatedMesh)
         {
@@ -25,6 +26,7 @@ public class RoadMesh : MonoBehaviour
             this.tangent = tangent;
             this.hwyType = hwyType;
             this.associatedMesh = associatedMesh;
+            this.associatedIntersection = Vector3.zero;
         }
     }
 
@@ -48,7 +50,7 @@ public class RoadMesh : MonoBehaviour
         {RoadNode.HighwayType.PRIMARY, 1f}
     };
 
-    public void GenerateMeshFromPaths(List<List<RoadNode>> paths)
+    public void GenerateMeshFromPaths(List<RoadPath> paths)
     {
         // Start building path mesh
         List<Vector3> vertices = new List<Vector3>();
@@ -59,7 +61,7 @@ public class RoadMesh : MonoBehaviour
         int countedVertices = 0;
 
         Dictionary<RoadNode, List<RoadEndPoint>> intersectionNodes = new Dictionary<RoadNode, List<RoadEndPoint>>();
-        foreach(List<RoadNode> path in paths)
+        foreach(RoadPath path in paths)
         {
             // First create the mesh we'll be working with
             if(storedPathMeshes.Count <= currentMeshCounter) 
@@ -71,12 +73,12 @@ public class RoadMesh : MonoBehaviour
 
             RoadNode.HighwayType hwyType = RoadNode.HighwayType.NONE;
 
-            for(int i=0; i<path.Count-1; i++)
+            for(int i=0; i<path.Count()-1; i++)
             {
-                RoadNode a = path[i];
-                RoadNode b = path[i+1];
-                // Get hwy type from the second node in the path, since the intersection may be of another type
-                if(hwyType == RoadNode.HighwayType.NONE) hwyType = b.GetHighwayType();
+                RoadNode a = path.Get(i);
+                RoadNode b = path.Get(i+1);
+
+                if(hwyType == RoadNode.HighwayType.NONE) hwyType = path.GetHighwayType();
                 Vector3 posA = TransformPointToMeshSpace(a.GetPosAsVector2());
                 Vector3 posB = TransformPointToMeshSpace(b.GetPosAsVector2());
                 Vector3 tangent = (posB - posA).normalized;
@@ -140,17 +142,9 @@ public class RoadMesh : MonoBehaviour
 
                 // Set the last end point for the next path segment
                 previousRoadEndPoint = new RoadEndPoint(leftEndPoint, rightEndPoint, vertices.Count-2, vertices.Count-1, tangent, hwyType, storedPathMeshes[currentMeshCounter]);
+                
 
-                // If this is the beginning or end node of the path, store it as an intersection candidate
-                if(i==0)
-                {
-                    if(!intersectionNodes.ContainsKey(a))
-                    {
-                        intersectionNodes[a] = new List<RoadEndPoint>();
-                    }
-                    intersectionNodes[a].Add(new RoadEndPoint(leftStartPoint, rightStartPoint, vertices.Count-4, vertices.Count-3, tangent, hwyType, storedPathMeshes[currentMeshCounter]));
-                }
-                else if(i==path.Count-2)
+                if(b.IsIntersection())
                 {
                     if(!intersectionNodes.ContainsKey(b))
                     {
@@ -159,6 +153,16 @@ public class RoadMesh : MonoBehaviour
                     // Have to swap places of the right/left vertices here, at the end of the path, so that the intersection checker
                     // really looks at the left end point of a and right end point of b
                     intersectionNodes[b].Add(new RoadEndPoint(rightEndPoint, leftEndPoint, vertices.Count-1, vertices.Count-2, tangent, hwyType, storedPathMeshes[currentMeshCounter]));
+                }
+                // If this is the beginning or end node of the path, store it as an intersection candidate
+                if(a.IsIntersection())
+                {
+                    if(!intersectionNodes.ContainsKey(a))
+                    {
+                        intersectionNodes[a] = new List<RoadEndPoint>();
+                    }
+                    // Negative tangent so that the tangent always points inwards to the intersection, both for a- and b-intersections
+                    intersectionNodes[a].Add(new RoadEndPoint(leftStartPoint, rightStartPoint, vertices.Count-4, vertices.Count-3, -tangent, hwyType, storedPathMeshes[currentMeshCounter]));
                 }
             }
             if(vertices.Count > 20000)
@@ -189,16 +193,14 @@ public class RoadMesh : MonoBehaviour
 
             List<RoadEndPoint> endPoints = intersectionNodes[node];
             //TODO: Should work for intersections with 2 nodes as well
-            if(endPoints.Count < 2)
+            if(endPoints.Count <= 1)
             {
                 // Skip the node if it has less than two end points. Then it is not an intersection
                 continue;
             }
 
             // Order the end points by angle
-            RoadEndPoint[] endPointsSorted = endPoints.OrderBy(v => Vector3.Angle(v.tangent, Vector3.right)).ToArray();
-
-            List<Vector3> storedIntersections = new List<Vector3>();
+            RoadEndPoint[] endPointsSorted = endPoints.OrderBy(v => Vector2.SignedAngle(new Vector2(v.tangent.x, v.tangent.z), Vector2.right)).ToArray();
 
             // Midpoint of the intersection
             Vector3 midPoint = Vector3.zero;
@@ -209,27 +211,33 @@ public class RoadMesh : MonoBehaviour
                 RoadEndPoint a = endPointsSorted[i];
                 RoadEndPoint b = endPointsSorted[(i+1)%endPointsSorted.Length];
 
-                midPoint += (a.rightPoint + a.leftPoint)/2;
+                midPoint += (a.leftPoint + b.rightPoint)/2;
+
+                string msg = "Endpoint collision check: (a.leftPoint = "
+                            + a.leftPoint.x + ", " + a.leftPoint.z + "), (b.rightPoint = "
+                            + b.rightPoint.x + ", " + b.rightPoint.z + "), (a.tangent = "
+                            + a.tangent.x + ", " + a.tangent.z + "), b.tangent = "
+                            + b.tangent.x + ", " + b.tangent.z + ")";
                 
                 // Get the intersection point
                 // Get the right pos from end point 1 and left pos from end point 2
                 Vector3 intersection = Vector3.zero;
                 bool intersectionWasSet = false;
-                if(MathUtils.LineLineIntersection(out intersection, a.rightPoint, a.tangent,
-                    b.leftPoint, b.tangent))
+                if(MathUtils.LineLineIntersection(out intersection, a.leftPoint, a.tangent,
+                    b.rightPoint, b.tangent))
                 {
                     intersectionWasSet = true;
                 }
                 else if((a.tangent + b.tangent).magnitude < 0.01f)
                 {
                     // tangents are opposite, pick the middle point
-                    intersection = (a.rightPoint + b.leftPoint)/2;
+                    intersection = (a.leftPoint + b.rightPoint)/2;
                     intersectionWasSet = true;
                 }
                 else if((a.tangent - b.tangent).magnitude < 0.01f)
                 {
                     // tangents are the same. This happens due to dirty data, but pick the middle point for now
-                    intersection = (a.rightPoint + b.leftPoint)/2;
+                    intersection = (a.leftPoint + b.rightPoint)/2;
                     intersectionWasSet = true;
                 }
 
@@ -239,20 +247,20 @@ public class RoadMesh : MonoBehaviour
 
                     // Since the vertices array of the mesh has read-only access, we have to copy the whole array and change the one vertex
                     Vector3[] verticesA = a.associatedMesh.vertices;
-                    verticesA[a.rightIndex] = intersection;
+                    verticesA[a.leftIndex] = intersection;
                     a.associatedMesh.vertices = verticesA;
                     
                     Vector3[] verticesB = b.associatedMesh.vertices;
-                    verticesB[b.leftIndex] = intersection;
+                    verticesB[b.rightIndex] = intersection;
                     b.associatedMesh.vertices = verticesB;
 
-                    storedIntersections.Add(intersection);
-
+                    // Store the intersection on b so that the correct intersections are referenced when placing the vertices
+                    b.associatedIntersection = intersection;
                     continue;
                 }
                 else
                 {
-                    Debug.LogError("Found an intersection with two incoming paths that have the same tangents! " + a.tangent + ", " + b.tangent + ". a.right = " + a.rightPoint + ", b.left = " + b.leftPoint);
+                    Debug.LogError("Found an intersection with two incoming paths that have the same tangents! " + a.tangent + ", " + b.tangent + ". a.left = " + a.leftPoint + ", b.right = " + b.rightPoint);
                 }
             }
 
@@ -262,18 +270,21 @@ public class RoadMesh : MonoBehaviour
                 midPoint /= endPointsSorted.Length;
 
                 // Create intersection geometry
-                for(int i=0; i< storedIntersections.Count; i++)
+                for(int i=0; i< endPointsSorted.Length; i++)
                 {
                     // Add the midpoint of the intersection as the next vertex
                     // Set UV x offset depending on which highway type this path is
-                    RoadNode.HighwayType hwyType = endPoints[(i+1)%storedIntersections.Count].hwyType;
+                    RoadNode.HighwayType hwyType = endPointsSorted[i].hwyType;
                     float uvXOffset = _uvXOffsetByHwyType[hwyType];
                     uvs.Add(new Vector2(uvXOffset+0.125f, 0.5f));
                     vertices.Add(midPoint); // Add the midpoint as a new vertex for every triangle, so each triangle gets unique UV coordinates
 
+                    Vector3 endVertex1 = endPointsSorted[i].associatedIntersection;
+                    Vector3 endVertex2 = endPointsSorted[(i+1)%endPointsSorted.Length].associatedIntersection;
+
                     // Save the vertex to this mesh
-                    vertices.Add(storedIntersections[i]);
-                    vertices.Add(storedIntersections[(i+1)%storedIntersections.Count]);
+                    vertices.Add(endVertex1);
+                    vertices.Add(endVertex2);
 
                     // Set UV x offset depending on which highway type this path is
                     uvs.Add(new Vector2(uvXOffset, 0f)); // Every other corner get uv.x = 1 or 0
@@ -281,8 +292,8 @@ public class RoadMesh : MonoBehaviour
 
                     // Create new triangles, stitch all the vertices together
                     triangles.Add(vertices.Count-3); // Mid point
-                    triangles.Add(vertices.Count-1);
                     triangles.Add(vertices.Count-2);
+                    triangles.Add(vertices.Count-1);
                 }
 
                 CreateNewMeshFilterWithMesh(vertices, triangles, uvs, intersectionMesh);

@@ -46,12 +46,8 @@ public class RoadNodeCollection
             {
                 RoadNode node = path.Get(i);
 
-                MapDebugHelper.ConditionalNodeLog(node, "Tracer node was found when building paths");
-
                 if(i>0 && i<path.Count()-1 && _visitedCount[node] > 1)
                 {
-                    MapDebugHelper.ConditionalNodeLog(node, "Tracer node was split");
-                    
                     // This is an intersection, we should split the path
                     RoadPath path2 = new RoadPath(path.GetHighwayType());
                     for(int j=0; j<i; j++)
@@ -121,9 +117,6 @@ public class RoadNodeCollection
             if(_readNodesByCoord[point.x][point.y].IsIntersection())
             {
                 Vector3 point3D = RoadMesh.TransformPointToMeshSpace(point);
-                MapDebugHelper.ConditionalNodeLog(point, "Tracer node was found three times or more when reading nodes. Marked as an intersection."
-                        + " Center: + " + point3D.x + ", " + point3D.z);
-                //Debug.Log("Found intersection: (" + point3D.x + ", " + point3D.z + ")");
             }
             _readNodesByCoord[point.x][point.y].SetIntersection();
             return _readNodesByCoord[point.x][point.y];

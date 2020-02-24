@@ -153,8 +153,6 @@ public class RoadMesh : MonoBehaviour
                     // Have to swap places of the right/left vertices here, at the end of the path, so that the intersection checker
                     // really looks at the left end point of a and right end point of b
                     intersectionNodes[b].Add(new RoadEndPoint(rightEndPoint, leftEndPoint, vertices.Count-1, vertices.Count-2, tangent, hwyType, storedPathMeshes[currentMeshCounter]));
-
-                    MapDebugHelper.ConditionalNodeLog(b, "Tracer node was found when reading paths. Added a b-intersection");
                 }
                 // If this is the beginning or end node of the path, store it as an intersection candidate
                 if(a.IsIntersection())
@@ -165,7 +163,6 @@ public class RoadMesh : MonoBehaviour
                     }
                     // Negative tangent so that the tangent always points inwards to the intersection, both for a- and b-intersections
                     intersectionNodes[a].Add(new RoadEndPoint(leftStartPoint, rightStartPoint, vertices.Count-4, vertices.Count-3, -tangent, hwyType, storedPathMeshes[currentMeshCounter]));
-                    MapDebugHelper.ConditionalNodeLog(a, "Tracer node was found when reading paths. Added a a-intersection");
                 }
             }
             if(vertices.Count > 20000)
@@ -221,7 +218,6 @@ public class RoadMesh : MonoBehaviour
                             + b.rightPoint.x + ", " + b.rightPoint.z + "), (a.tangent = "
                             + a.tangent.x + ", " + a.tangent.z + "), b.tangent = "
                             + b.tangent.x + ", " + b.tangent.z + ")";
-                MapDebugHelper.ConditionalNodeLog(node, msg);
                 
                 // Get the intersection point
                 // Get the right pos from end point 1 and left pos from end point 2
@@ -231,7 +227,6 @@ public class RoadMesh : MonoBehaviour
                     b.rightPoint, b.tangent))
                 {
                     intersectionWasSet = true;
-                    MapDebugHelper.ConditionalNodeLog(node, "Linear intersection found at: " + intersection.x + ", " + intersection.z);
                 }
                 else if((a.tangent + b.tangent).magnitude < 0.01f)
                 {
@@ -290,9 +285,6 @@ public class RoadMesh : MonoBehaviour
                     // Save the vertex to this mesh
                     vertices.Add(endVertex1);
                     vertices.Add(endVertex2);
-
-                    MapDebugHelper.ConditionalNodeLog(node, "End vertex 1: " + endVertex1.x + ", " + endVertex1.z);
-                    MapDebugHelper.ConditionalNodeLog(node, "End vertex 2: " + endVertex2.x + ", " + endVertex2.z);
 
                     // Set UV x offset depending on which highway type this path is
                     uvs.Add(new Vector2(uvXOffset, 0f)); // Every other corner get uv.x = 1 or 0

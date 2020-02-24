@@ -50,15 +50,17 @@ public class RoadNodeCollection
 
                 if(i>0 && i<path.Count()-1 && _visitedCount[node] > 1)
                 {
+                    MapDebugHelper.ConditionalNodeLog(node, "Tracer node was split");
+                    
                     // This is an intersection, we should split the path
                     RoadPath path2 = new RoadPath(path.GetHighwayType());
-                    path2.Add(node); // First add the intersection point
-                    for(int j=i+1; j<path.Count(); j++)
+                    for(int j=0; j<i; j++)
                     {
                         // Move all other points from the first path to the second
-                        path2.Add(path.Get(j));
-                        path.RemoveAt(j);
+                        path2.Add(path.Get(0));
+                        path.RemoveAt(0);
                     }
+                    path2.Add(node); // Finally add the intersection point
                     // Queue the new path, deal with it in a later iteration
                     tentativePaths.Enqueue(path2);
                     break;

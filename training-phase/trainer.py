@@ -77,14 +77,16 @@ def IsVertexInAnyPatch(vertex, patches):
     return False
 
 def ExtractPatches(G):
+    # Filter out interesting features and expand them
     patches = Detect(G)
     for patch in patches:
         Expand(patch)
-    #TODO: Filter out intersections and expand them
+    # For the remaining graph, filter out intersections and expand them
     for vertex in G:
         if not IsVertexInAnyPatch(vertex, patches):
-            patch = Patch([vertex])
-            Expand(patch)
+            if len(vertex.neighbours) > 2:
+                patch = Patch([vertex])
+                Expand(patch)
     #TODO: Go over all vertices v that are not in any patches. If a neighbour is in a patch, add v to that patch
 
 for file_name in files_to_read:

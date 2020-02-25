@@ -1,13 +1,14 @@
-from geojson import Point, Feature, FeatureCollection, dump, load
+from geojson import Point, Feature, FeatureCollection, load
+from json import dump
 import math
 from queue import Queue
 
 data_dir = "../osm-importer/raw_data/"
 files_to_read = [
-        "footpath.geojson",
-        "residential.geojson",
-        "secondary.geojson",
-        "primary.geojson"
+        "footpath",
+        "residential",
+        "secondary",
+        "primary"
         ]
 vertex_distance_threshold = 0.0002
 
@@ -115,15 +116,17 @@ def ExtractPatches(G):
             break
         i += 1
 
+    return patches
+
 
 for file_name in files_to_read:
 
     nodes_by_coord = {}
 
     # read file
-    with open(data_dir + file_name, 'r') as f:
+    with open(data_dir + file_name + '.geojson', 'r') as f:
         data = load(f)
-    print("Read geojson features from file: " + data_dir + file_name + "...")
+    print("Read geojson features from file: " + data_dir + file_name + ".geojson...")
 
     for feature in data['features'] :
         properties = feature['properties']
@@ -162,4 +165,31 @@ for file_name in files_to_read:
             G.append(nodes_by_coord[x][y])
 
     print("Extracting features from the dataset: " + file_name + "...")
-    ExtractPatches(G)
+    patches = ExtractPatches(G)
+    json_out = []
+    i = 0
+    for patch in patches:
+        json_out.append({})
+        json_out[i]['edges'] = []
+        json_out[i]['points'] = []
+        found_edges = {}
+        for v in patch.vertices:
+            json_out[i]['points'].append([v.x, v.y])
+            for u in v.neighbours:
+                # Check that this edge has not been counted already
+                if u in found_edges and v in found_edges[u]:
+                    continue
+                if v in found_edges and u in found_edges[v]:
+                    continue
+
+                # Add the edge to the ouput json object
+                json_out[i]['edges'].append([[v.x, v.y],[u.x, u.y]])
+
+                # Keep track of this edge for later
+                if not v in found_edges:
+                    found_edges[v] = []
+                found_edges[v].append(u)
+
+    with open('out_data/' + file_name + '.json', 'w') as f:
+        dump(json_out, f)
+

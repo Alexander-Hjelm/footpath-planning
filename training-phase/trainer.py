@@ -17,13 +17,17 @@ class Node:
     neighbours = []
 
     def __init__(self, x, y):
+        assert(isinstance(x, float))
+        assert(isinstance(y, float))
         self.x = x
         self.y = y
 
     def distance_to(self, u):
+        assert(isinstance(u, Node))
         return math.sqrt((self.x-u.x)**2 + (self.y-u.y)**2)
 
     def add_neighbour(self, u):
+        assert(isinstance(u, Node))
         if not(u in self.neighbours):
             if not(u == self):
                 self.neighbours.append(u)
@@ -33,12 +37,15 @@ class Patch:
 
     #TODO: type checking in methods
     def __init__(self, vertices):
+        assert(isinstance(vertices, list))
         self.vertices = vertices
 
     def add_vertex(self, vertex):
+        assert(isinstance(vertex, Node))
         self.vertices.append(vertex)
 
     def add_vertices(self, vertices_in):
+        assert(isinstance(vertices_in, list))
         for vertex in vertices_in:
             self.add_vertex(vertex)
 
@@ -57,9 +64,7 @@ def Expand(patch):
     while Q.empty():
         v = Q.get()
         for u in v.neighbours:
-            if(not u == v):
-                #print(v.distance_to(u))
-                if not u in processed_vertices:
+            if not u == v and not u in processed_vertices:
                     if v.distance_to(u) < vertex_distance_threshold:
                         patch.add_vertex(u)
                         Q.put(u)
@@ -117,7 +122,7 @@ for file_name in files_to_read:
             if i > 0:
                 x_prev = coordinates[i-1][0]
                 y_prev = coordinates[i-1][1]
-                if(node == nodes_by_coord[x_prev][y_prev]):
+                if node == nodes_by_coord[x_prev][y_prev]:
                     print("Error: Added the node as its own neighbour")
                 node.add_neighbour(nodes_by_coord[x_prev][y_prev])
                 nodes_by_coord[x_prev][y_prev].add_neighbour(node)

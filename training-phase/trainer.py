@@ -72,7 +72,7 @@ def Expand(patch):
 
 def IsVertexInAnyPatch(vertex, patches):
     for patch in patches:
-        if vertex in patch:
+        if vertex in patch.vertices:
             return True
     return False
 
@@ -81,13 +81,40 @@ def ExtractPatches(G):
     patches = Detect(G)
     for patch in patches:
         Expand(patch)
+
     # For the remaining graph, filter out intersections and expand them
     for vertex in G:
         if not IsVertexInAnyPatch(vertex, patches):
             if len(vertex.neighbours) > 2:
                 patch = Patch([vertex])
+                patches.append(patch)
                 Expand(patch)
-    #TODO: Go over all vertices v that are not in any patches. If a neighbour is in a patch, add v to that patch
+
+    # Go over all vertices remaining vertices v. If a neighbour is in a patch, add v to that patch
+    G_unassigned = Queue()
+    for vertex in G:
+        if not IsVertexInAnyPatch(vertex, patches):
+            G_unassigned.put(vertex)
+    i = 0
+    max_iterations = int(len(G)*2.0)
+    while not G_unassigned.empty():
+        v = G_unassigned.get()
+        patch_was_found = False
+        for u in v.neighbours:
+            for patch in patches:
+                if u in patch.vertices:
+                    patch.add_vertex(v);
+                    patch_was_found = True
+                    break
+            if patch_was_found:
+                break
+        if not patch_was_found:
+            G_unassigned.put(v)
+
+        if i == max_iterations:
+            break
+        i += 1
+
 
 for file_name in files_to_read:
 

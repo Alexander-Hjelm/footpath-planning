@@ -21,6 +21,7 @@ class Node:
         assert(isinstance(y, float))
         self.x = x
         self.y = y
+        self.neighbours = []
 
     def distance_to(self, u):
         assert(isinstance(u, Node))
@@ -35,7 +36,6 @@ class Node:
 class Patch:
     vertices = []
 
-    #TODO: type checking in methods
     def __init__(self, vertices):
         assert(isinstance(vertices, list))
         self.vertices = vertices
@@ -64,7 +64,7 @@ def Expand(patch):
     while Q.empty():
         v = Q.get()
         for u in v.neighbours:
-            if not u == v and not u in processed_vertices:
+            if not u in processed_vertices:
                     if v.distance_to(u) < vertex_distance_threshold:
                         patch.add_vertex(u)
                         Q.put(u)

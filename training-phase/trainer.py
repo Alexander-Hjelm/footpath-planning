@@ -189,6 +189,7 @@ for file_name in files_to_read:
                 if not v in found_edges:
                     found_edges[v] = []
                 found_edges[v].append(u)
+        i += 1
 
     with open('out_data/' + file_name + '.json', 'w') as f:
         dump(json_out, f)

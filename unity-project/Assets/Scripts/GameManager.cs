@@ -26,7 +26,12 @@ public class GameManager : MonoBehaviour
         // Read patch data
         foreach(string hwy in _highwayCategories)
         {
-            Patch[] patches = JsonManager.ReadObject<Patch[]>("Assets/Resources/PatchData/" + hwy);
+            PatchData[] patchData = JsonManager.ReadObject<PatchData[]>("Assets/Resources/PatchData/" + hwy);
+            Patch[] patches = new Patch[patchData.Length]; 
+            for(int i=0; i<patchData.Length; i++)
+            {
+                patches[i] = new Patch(patchData[i]);
+            }
             _loadedPatches[RoadNode.GetHighwayTypeFromString(hwy)] = patches;
         }
 

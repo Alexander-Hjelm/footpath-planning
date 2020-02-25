@@ -43,6 +43,7 @@ class Patch:
             self.add_vertex(vertex)
 
 def Detect(G):
+    #TODO: Not yet implemented, use this method to extract interesting features, such as circles
     return []
 
 def Expand(patch):
@@ -74,10 +75,12 @@ def ExtractPatches(G):
     patches = Detect(G)
     for patch in patches:
         Expand(patch)
+    #TODO: Filter out intersections and expand them
     for vertex in G:
         if not IsVertexInAnyPatch(vertex, patches):
             patch = Patch([vertex])
             Expand(patch)
+    #TODO: Go over all vertices v that are not in any patches. If a neighbour is in a patch, add v to that patch
 
 for file_name in files_to_read:
 
@@ -86,6 +89,7 @@ for file_name in files_to_read:
     # read file
     with open(data_dir + file_name, 'r') as f:
         data = load(f)
+    print("Read geojson features from file: " + data_dir + file_name + "...")
 
     for feature in data['features'] :
         properties = feature['properties']
@@ -123,4 +127,5 @@ for file_name in files_to_read:
         for y in nodes_by_coord[x]:
             G.append(nodes_by_coord[x][y])
 
+    print("Extracting features from the dataset: " + file_name + "...")
     ExtractPatches(G)

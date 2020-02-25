@@ -19,9 +19,17 @@ public class GameManager : MonoBehaviour
     private RoadMesh roadMesh;
     private List<List<Vector2>> rawPaths = new List<List<Vector2>>();
     private bool _debugRawPaths = true;
+    private Dictionary<RoadNode.HighwayType, Patch[]> _loadedPatches = new Dictionary<RoadNode.HighwayType, Patch[]>();
 
     void Start()
     {
+        // Read patch data
+        foreach(string hwy in _highwayCategories)
+        {
+            Patch[] patches = JsonManager.ReadObject<Patch[]>("Assets/Resources/PatchData/" + hwy);
+            _loadedPatches[RoadNode.GetHighwayTypeFromString(hwy)] = patches;
+        }
+
         roadNodeCollection = new RoadNodeCollection();
 
         foreach(string hwy in _highwayCategories)

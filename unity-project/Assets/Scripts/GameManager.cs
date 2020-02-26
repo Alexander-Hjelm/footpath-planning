@@ -18,8 +18,10 @@ public class GameManager : MonoBehaviour
     private Dictionary<RoadNode, RoadMesh> roadMeshes = new Dictionary<RoadNode, RoadMesh>();
     private RoadMesh roadMesh;
     private List<List<Vector2>> rawPaths = new List<List<Vector2>>();
-    private bool _debugRawPaths = true;
     private Dictionary<RoadNode.HighwayType, Patch[]> _loadedPatches = new Dictionary<RoadNode.HighwayType, Patch[]>();
+
+    private bool _debugRawPaths = false;
+    private bool _debugPatches = true;
 
     void Start()
     {
@@ -81,6 +83,26 @@ public class GameManager : MonoBehaviour
                     Debug.DrawLine(
                         RoadMesh.TransformPointToMeshSpace(path[j]),
                         RoadMesh.TransformPointToMeshSpace(path[j+1]));
+                }
+            }
+        }
+
+        if(_debugPatches)
+        {
+            foreach(RoadNode.HighwayType hwyType in _loadedPatches.Keys)
+            {
+                foreach(Patch patch in _loadedPatches[hwyType])
+                {
+                    Vector2[] vertices = patch.GetVertices();
+                    Patch.Edge[] edges = patch.GetEdges();
+                    foreach(Patch.Edge edge in edges)
+                    {
+                        Vector2 u = vertices[edge.IndexU];
+                        Vector2 v = vertices[edge.IndexV];
+                        Debug.DrawLine(
+                            RoadMesh.TransformPointToMeshSpace(u),
+                            RoadMesh.TransformPointToMeshSpace(v));
+                    }
                 }
             }
         }

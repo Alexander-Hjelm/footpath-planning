@@ -2,7 +2,7 @@
 
 public class Patch
 {
-    private struct Edge
+    public struct Edge
     {
         public int IndexU;
         public int IndexV;
@@ -33,5 +33,15 @@ public class Patch
             int v = patchData.edges[i, 1];
             _edges[i] = new Edge(u, v);
         }
+    }
+
+    public Vector2[] GetVertices()
+    {
+        return _vertices;
+    }
+
+    public Edge[] GetEdges()
+    {
+        return _edges;
     }
 }

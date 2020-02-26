@@ -13,7 +13,6 @@ public class Patch
             IndexV = indexV;
         }
     }
-    
 
     private Vector2[] _vertices;
     private Edge[] _edges;

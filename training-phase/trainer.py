@@ -11,6 +11,7 @@ files_to_read = [
         "primary"
         ]
 vertex_distance_threshold = 0.0002
+min_num_of_vertices_per_patch = 2
 
 class Node:
     x = 0.0
@@ -169,6 +170,8 @@ for file_name in files_to_read:
     json_out = []
     i = 0
     for patch in patches:
+        if len(patch.vertices) < min_num_of_vertices_per_patch:
+            continue
         json_out.append({})
         json_out[i]['edges'] = []
         json_out[i]['points'] = []

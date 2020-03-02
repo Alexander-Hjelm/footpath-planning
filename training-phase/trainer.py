@@ -179,21 +179,22 @@ for file_name in files_to_read:
         for v_counter in range(0, len(patch.vertices)):
             v = patch.vertices[v_counter]
             json_out[i]['points'].append([v.x, v.y])
-            for u_counter in range(0, len(v.neighbours)):
-                u = v.neighbours[u_counter]
-                # Check that this edge has not been counted already
-                if u in found_edges and v in found_edges[u]:
-                    continue
-                if v in found_edges and u in found_edges[v]:
-                    continue
+            for u_counter in range(0, len(patch.vertices)):
+                u = patch.vertices[u_counter]
+                if u in v.neighbours:
+                    # Check that this edge has not been counted already
+                    if u in found_edges and v in found_edges[u]:
+                        continue
+                    if v in found_edges and u in found_edges[v]:
+                        continue
 
-                # Add the edge to the ouput json object
-                json_out[i]['edges'].append([v_counter, u_counter])
+                    # Add the edge to the ouput json object
+                    json_out[i]['edges'].append([v_counter, u_counter])
 
-                # Keep track of this edge for later
-                if not v in found_edges:
-                    found_edges[v] = []
-                found_edges[v].append(u)
+                    # Keep track of this edge for later
+                    if not v in found_edges:
+                        found_edges[v] = []
+                    found_edges[v].append(u)
         i += 1
 
     with open('out_data/' + file_name + '.json', 'w') as f:

@@ -79,8 +79,8 @@ public class RoadMesh : MonoBehaviour
                 RoadNode b = path.Get(i+1);
 
                 if(hwyType == RoadNode.HighwayType.NONE) hwyType = path.GetHighwayType();
-                Vector3 posA = TransformPointToMeshSpace(a.GetPosAsVector2());
-                Vector3 posB = TransformPointToMeshSpace(b.GetPosAsVector2());
+                Vector3 posA = TransformPointToMeshSpaceAxisFlipped(a.GetPosAsVector2());
+                Vector3 posB = TransformPointToMeshSpaceAxisFlipped(b.GetPosAsVector2());
                 Vector3 tangent = (posB - posA).normalized;
                 if(tangent == Vector3.zero)
                 {
@@ -327,8 +327,13 @@ public class RoadMesh : MonoBehaviour
         meshFilter.mesh = mesh;
     }
 
-    public static Vector3 TransformPointToMeshSpace(Vector2 input)
+    public static Vector3 TransformPointToMeshSpaceAxisFlipped(Vector2 input)
     {
         return new Vector3((input.y+_offset.x)*0.5f, 0f, input.x+_offset.y)*_scale;
+    }
+
+    public static Vector3 TransformPointToMeshSpace(Vector2 input)
+    {
+        return new Vector3((input.x+_offset.x)*0.5f, 0f, (input.y+_offset.y))*_scale;
     }
 }

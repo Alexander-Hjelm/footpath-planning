@@ -81,8 +81,8 @@ public class GameManager : MonoBehaviour
                 for(int j=0; j<path.Count-1; j++)
                 {
                     Debug.DrawLine(
-                        RoadMesh.TransformPointToMeshSpace(path[j]),
-                        RoadMesh.TransformPointToMeshSpace(path[j+1]));
+                        RoadMesh.TransformPointToMeshSpaceAxisFlipped(path[j]),
+                        RoadMesh.TransformPointToMeshSpaceAxisFlipped(path[j+1]));
                 }
             }
         }

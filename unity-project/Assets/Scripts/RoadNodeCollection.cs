@@ -116,7 +116,7 @@ public class RoadNodeCollection
             // Node has now been read more than once, therefore mark it as an intersection
             if(_readNodesByCoord[point.x][point.y].IsIntersection())
             {
-                Vector3 point3D = RoadMesh.TransformPointToMeshSpace(point);
+                Vector3 point3D = RoadMesh.TransformPointToMeshSpaceAxisFlipped(point);
             }
             _readNodesByCoord[point.x][point.y].SetIntersection();
             return _readNodesByCoord[point.x][point.y];

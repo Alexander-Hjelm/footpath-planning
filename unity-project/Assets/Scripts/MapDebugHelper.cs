@@ -49,9 +49,8 @@ public class MapDebugHelper : MonoBehaviour
 
     public static void ConditionalNodeLog(Vector2 point, string msg)
     {
-        Vector3 p = RoadMesh.TransformPointToMeshSpaceAxisFlipped(point);
-        if(p.x-0.00005 < targetNodeX && p.x+0.00005 > targetNodeX
-            && p.z-0.00005 < targetNodeY && p.z+0.00005 > targetNodeY)
+        if(point.x-0.00005 < targetNodeX && point.x+0.00005 > targetNodeX
+            && point.y-0.00005 < targetNodeY && point.y+0.00005 > targetNodeY)
         {
             Debug.Log(msg);
         }

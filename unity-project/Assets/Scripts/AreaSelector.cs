@@ -50,6 +50,9 @@ public class AreaSelector : MonoBehaviour
                 Vector2 intersection2D = new Vector2(intersection.x, intersection.z);
                 if(_queuedPointsInPolygon.Count > 0 && (intersection2D - _queuedPointsInPolygon[0]).magnitude < 0.2f*(zoomLevel+0.1f))
                 {
+                    // If the click was nearby the first marker, create the polygon
+                    
+                    // Create the polygon and reset the point queue
                     _createdPolygon = new Polygon(_queuedPointsInPolygon.ToArray());
                     _queuedPointsInPolygon = new List<Vector2>();
 

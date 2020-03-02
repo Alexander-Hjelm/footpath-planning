@@ -42,6 +42,22 @@ public class GameManager : MonoBehaviour
         foreach(string hwy in _highwayCategories)
         {
             PatchData[] patchData = JsonManager.ReadObject<PatchData[]>("Assets/Resources/PatchData/" + hwy);
+
+            // Coordinate transformation
+            foreach(PatchData pd in patchData)
+            {
+                float[,] points = pd.points;
+                for(int i=0; i<points.GetLength(0); i++)
+                {
+                    float x = points[i, 0];
+                    float y = points[i, 1];
+                    Vector3 transformed = RoadMesh.TransformPointToMeshSpace(new Vector2(x, y));
+                    points[i, 0] = transformed.x;
+                    points[i, 1] = transformed.z;
+                }
+            }
+            
+            // Create patches
             Patch[] patches = new Patch[patchData.Length]; 
             for(int i=0; i<patchData.Length; i++)
             {
@@ -73,7 +89,11 @@ public class GameManager : MonoBehaviour
                 List<PositionObject> positions = geometryObject.AllPositions();
                 foreach(PositionObject position in positions)
                 {
-                    path.Add(new Vector2(position.latitude, position.longitude));
+                    // Coordinate transformation
+                    Vector3 transformed = RoadMesh.TransformPointToMeshSpace(new Vector2(position.longitude, position.latitude));
+
+                    // Add node to path
+                    path.Add(new Vector2(transformed.x, transformed.z));
                 }
                 roadNodeCollection.ReadPath(path, RoadNode.GetHighwayTypeFromString(hwy));
                 rawPaths.Add(path);
@@ -97,8 +117,8 @@ public class GameManager : MonoBehaviour
                 for(int j=0; j<path.Count-1; j++)
                 {
                     Debug.DrawLine(
-                        RoadMesh.TransformPointToMeshSpaceAxisFlipped(path[j]),
-                        RoadMesh.TransformPointToMeshSpaceAxisFlipped(path[j+1]));
+                        new Vector3(path[j].x, 0f, path[j].y),
+                        new Vector3(path[j+1].x, 0f, path[j+1].y));
                 }
             }
         }
@@ -116,8 +136,8 @@ public class GameManager : MonoBehaviour
                         Vector2 u = vertices[edge.IndexU];
                         Vector2 v = vertices[edge.IndexV];
                         Debug.DrawLine(
-                            RoadMesh.TransformPointToMeshSpace(u),
-                            RoadMesh.TransformPointToMeshSpace(v));
+                            new Vector3(u.x, 0f, u.y),
+                            new Vector3(v.x, 0f, v.y));
                     }
                 }
             }

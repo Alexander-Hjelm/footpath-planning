@@ -47,12 +47,16 @@ public class AreaSelector : MonoBehaviour
             Vector3 intersection;
             if(MathUtils.LinePlaneIntersection(out intersection, ray.origin, ray.direction, Vector3.up, Vector3.zero))
             {
-                // If the click was nearby the first marker, create the polygon
                 Vector2 intersection2D = new Vector2(intersection.x, intersection.z);
                 if(_queuedPointsInPolygon.Count > 0 && (intersection2D - _queuedPointsInPolygon[0]).magnitude < 0.2f*(zoomLevel+0.1f))
                 {
                     _createdPolygon = new Polygon(_queuedPointsInPolygon.ToArray());
                     _queuedPointsInPolygon = new List<Vector2>();
+
+                    // Call to generate a new road network inside the polygon
+                    RoadGenerator.PopulatePolygonFromExamplePatches(GameManager.GetPaths(), _createdPolygon);
+
+                    // Reset polygon markers and line renderer
                     foreach(GameObject polygonMarker in _instantiatedPolygonMakers)
                     {
                         Destroy(polygonMarker);

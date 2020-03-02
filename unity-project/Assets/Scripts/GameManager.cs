@@ -115,4 +115,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public static List<RoadPath> GetPaths()
+    {
+        return _instance.roadNodesList;
+    }
+
 }

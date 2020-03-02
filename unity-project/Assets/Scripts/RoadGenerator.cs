@@ -19,6 +19,7 @@ public class RoadGenerator
             return;
         }
 
+        // Queue all nodes that are inside the polygon
         Queue<RoadNode> tentativeNodes = new Queue<RoadNode>();
         List<RoadNode> hitNodes = new List<RoadNode>();
         foreach(RoadPath path in paths)
@@ -35,6 +36,12 @@ public class RoadGenerator
                     }
                 }
             }
+        }
+
+        // If no points were found, queue the polygon centroid
+        if(tentativeNodes.Count == 0)
+        {
+            tentativeNodes.Enqueue(new RoadNode(polygon.GetCenter(), RoadNode.HighwayType.SECONDARY));
         }
     }
 }

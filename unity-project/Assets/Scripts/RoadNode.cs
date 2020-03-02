@@ -48,6 +48,11 @@ public class RoadNode
         _intersection = false;
     }
 
+    public RoadNode(Vector2 pos, HighwayType highwayType):
+        this(pos.x, pos.y, highwayType)
+    {
+    }
+
     public float GetX()
     {
         return _xCoord;

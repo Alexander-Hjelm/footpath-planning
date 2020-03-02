@@ -21,7 +21,8 @@ public class GameManager : MonoBehaviour
     private Dictionary<RoadNode.HighwayType, Patch[]> _loadedPatches = new Dictionary<RoadNode.HighwayType, Patch[]>();
 
     private bool _debugRawPaths = false;
-    private bool _debugPatches = true;
+    private bool _debugPatches = false;
+    private bool _debugOnlyResidential = true;
 
     private static GameManager _instance;
 
@@ -32,6 +33,11 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        if(_debugOnlyResidential)
+        {
+            _highwayCategories = new string[]{"residential"};
+        }
+
         // Read patch data
         foreach(string hwy in _highwayCategories)
         {

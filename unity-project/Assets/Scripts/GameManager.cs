@@ -23,7 +23,14 @@ public class GameManager : MonoBehaviour
     private bool _debugRawPaths = false;
     private bool _debugPatches = true;
 
-    void Start()
+    private static GameManager _instance;
+
+    private void Awake()
+    {
+        _instance = this;
+    }
+
+    private void Start()
     {
         // Read patch data
         foreach(string hwy in _highwayCategories)

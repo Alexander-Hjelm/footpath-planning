@@ -18,6 +18,23 @@ public class RoadGenerator
             Debug.LogError("Tried to call PopulatePolygonFromExamplePatches(), but the loaded patches dataset is empty!");
             return;
         }
-        
+
+        Queue<RoadNode> tentativeNodes = new Queue<RoadNode>();
+        List<RoadNode> hitNodes = new List<RoadNode>();
+        foreach(RoadPath path in paths)
+        {
+            for(int i=0; i<path.Count(); i++)
+            {
+                RoadNode node = path.Get(i);
+                if(!hitNodes.Contains(node))
+                {
+                    hitNodes.Add(node);
+                    if(polygon.ContainsPoint(node.GetPosAsVector2()))
+                    {
+                        tentativeNodes.Enqueue(node);
+                    }
+                }
+            }
+        }
     }
 }

@@ -50,6 +50,9 @@ public class GameManager : MonoBehaviour
             _loadedPatches[RoadNode.GetHighwayTypeFromString(hwy)] = patches;
         }
 
+        // Send a reference of the loaded paths to the RoadGenerator
+        RoadGenerator.LoadPatches(_loadedPatches);
+
         roadNodeCollection = new RoadNodeCollection();
 
         foreach(string hwy in _highwayCategories)

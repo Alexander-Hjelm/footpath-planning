@@ -37,14 +37,27 @@ class Node:
 
 class Patch:
     vertices = []
+    edges = []
 
-    def __init__(self, vertices):
-        assert(isinstance(vertices, list))
-        self.vertices = vertices
+    # Statistical paramteres, Nishida et. al, section 4.2
+    stat_len = 0.0      # Average edge length
+    stat_len_var = 0.0  # Variance, edge length
+    stat_curv = 0.0     # Average edge curvature
+    stat_curv_var = 0.0 # Variance, edge curvature
+
+    def __init__(self, vertex):
+        assert(isinstance(vertex, Node))
+        self.vertices = [vertex]
+        self.edges = []
 
     def add_vertex(self, vertex):
         assert(isinstance(vertex, Node))
         self.vertices.append(vertex)
+        u_index = len(self.vertices)-1
+        for neighbour in vertex.neighbours:
+            if neighbour in self.vertices:
+                v_index = self.vertices.index(neighbour)
+                self.edges.append([u_index, v_index])
 
     def add_vertices(self, vertices_in):
         assert(isinstance(vertices_in, list))
@@ -88,7 +101,7 @@ def ExtractPatches(G):
     for vertex in G:
         if not IsVertexInAnyPatch(vertex, patches):
             if len(vertex.neighbours) > 2:
-                patch = Patch([vertex])
+                patch = Patch(vertex)
                 patches.append(patch)
                 Expand(patch)
 
@@ -175,26 +188,13 @@ for file_name in files_to_read:
         json_out.append({})
         json_out[i]['edges'] = []
         json_out[i]['points'] = []
-        found_edges = {}
-        for v_counter in range(0, len(patch.vertices)):
-            v = patch.vertices[v_counter]
+        for v in patch.vertices:
             json_out[i]['points'].append([v.x, v.y])
-            for u_counter in range(0, len(patch.vertices)):
-                u = patch.vertices[u_counter]
-                if u in v.neighbours:
-                    # Check that this edge has not been counted already
-                    if u in found_edges and v in found_edges[u]:
-                        continue
-                    if v in found_edges and u in found_edges[v]:
-                        continue
-
-                    # Add the edge to the ouput json object
-                    json_out[i]['edges'].append([v_counter, u_counter])
-
-                    # Keep track of this edge for later
-                    if not v in found_edges:
-                        found_edges[v] = []
-                    found_edges[v].append(u)
+        for e in patch.edges:
+            # Add the edge to the ouput json object
+            json_out[i]['edges'].append([e[0], e[1]])
+            if e[0] > len(patch.vertices):
+                print("ERROR")
         i += 1
 
     with open('out_data/' + file_name + '.json', 'w') as f:

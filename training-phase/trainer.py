@@ -50,6 +50,11 @@ class Patch:
         self.vertices = [vertex]
         self.edges = []
 
+        self.stat_len = 0.0
+        self.stat_len_var = 0.0
+        self.stat_curv = 0.0
+        self.stat_curv_var = 0.0
+
     def add_vertex(self, vertex):
         assert(isinstance(vertex, Node))
         self.vertices.append(vertex)
@@ -63,6 +68,10 @@ class Patch:
         assert(isinstance(vertices_in, list))
         for vertex in vertices_in:
             self.add_vertex(vertex)
+
+    def calculate_statistical_params(self):
+        for e in self.edges:
+            pass
 
 def Detect(G):
     #TODO: Not yet implemented, use this method to extract interesting features, such as circles
@@ -129,6 +138,10 @@ def ExtractPatches(G):
         if i == max_iterations:
             break
         i += 1
+
+    # Finally, compute statistical parameters for all patches
+    for patch in patches:
+        patch.calculate_statistical_params()
 
     return patches
 

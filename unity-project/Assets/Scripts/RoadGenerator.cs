@@ -43,5 +43,10 @@ public class RoadGenerator
         {
             tentativeNodes.Enqueue(new RoadNode(polygon.GetCenter(), RoadNode.HighwayType.SECONDARY));
         }
+
+
+        // Finally, Notify the GameManager to generate a new mesh
+        GameManager.SetPaths(paths);
+        GameManager.GenerateMesh();
     }
 }

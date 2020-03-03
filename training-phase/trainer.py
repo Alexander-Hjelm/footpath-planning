@@ -158,7 +158,7 @@ def Expand(patch):
     for vertex in patch.vertices:
         Q.put(vertex)
         processed_vertices.append(vertex)
-    while Q.empty():
+    while not Q.empty():
         v = Q.get()
         for u in v.neighbours:
             if not u in processed_vertices:

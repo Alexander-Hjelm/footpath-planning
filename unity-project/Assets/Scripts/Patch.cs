@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class Patch
 {
@@ -16,6 +17,7 @@ public class Patch
 
     private Vector2[] _vertices;
     private Edge[] _edges;
+    private Dictionary<string, float> _statistics = new Dictionary<string, float>();
 
     public Patch(PatchData patchData)
     {
@@ -33,6 +35,11 @@ public class Patch
             int v = patchData.edges[i, 1];
             _edges[i] = new Edge(u, v);
         }
+
+        _statistics["avg_len"] = patchData.stat_avg_len;
+        _statistics["var_len"] = patchData.stat_var_len;
+        _statistics["avg_curv"] = patchData.stat_avg_curv;
+        _statistics["var_curv"] = patchData.stat_var_curv;
     }
 
     public Vector2[] GetVertices()
@@ -43,5 +50,10 @@ public class Patch
     public Edge[] GetEdges()
     {
         return _edges;
+    }
+
+    public float GetStatistic(string label)
+    {
+        return _statistics[label];
     }
 }

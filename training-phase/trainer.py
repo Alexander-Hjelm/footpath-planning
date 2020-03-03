@@ -17,13 +17,15 @@ class Node:
     x = 0.0
     y = 0.0
     neighbours = []
+    associated_path = ""
 
-    def __init__(self, x, y):
+    def __init__(self, x, y, associated_path):
         assert(isinstance(x, float))
         assert(isinstance(y, float))
         self.x = x
         self.y = y
         self.neighbours = []
+        self.associated_path = associated_path
 
     def distance_to(self, u):
         assert(isinstance(u, Node))
@@ -170,7 +172,7 @@ for file_name in files_to_read:
             x = coordinate[0]
             y = coordinate[1]
 
-            node = Node(x, y)
+            node = Node(x, y, properties['name'])
 
             # Add node to dictionary if not already read
             if not x in nodes_by_coord:

@@ -37,6 +37,10 @@ class Node:
             if not(u == self):
                 self.neighbours.append(u)
 
+    def nomarlized(self):
+        d = math.sqrt((self.x)**2 + (self.y)**2)
+        return Node(x/d, y/d, associated_path)
+
 class Patch:
     vertices = []
     edges = []
@@ -71,9 +75,58 @@ class Patch:
         for vertex in vertices_in:
             self.add_vertex(vertex)
 
+    def get_paths(self):
+        tentative_vertices = []
+        for v in self.vertices:
+            tentative_vertices.append(v)
+        while len(tentative_vertices) > 0:
+            v = tentative_vertices[-1]
+            path = []
+            tentative_vertices.remove(v)
+        # TODO: Unfinished
+
     def calculate_statistical_params(self):
+        paths = self.get_paths()
+        edge_count = len(self.edges)
+        path_count = len(paths)
+        avg_len = 0.0
+        var_len = 0.0
+        avg_curv = 0.0
+        var_curv = 0.0
+        stored_lens = []
+        stored_curvs = []
+
+        # Edge length, average
         for e in self.edges:
-            pass
+            u = e[0]
+            v = e[1]
+            res = u.distance_to(v)
+            avg_len += res
+            stored_lens.append(res)
+        avg_len /= edge_count
+
+        # Edge length, variance
+        for d in stored_lens:
+            var_len += (avg_len - d)**2
+        var_len /= edge_count
+
+        # Edge curvature, average
+        for p in self.paths:
+            nom = 0.0
+            denom = 0.0
+            for i in range(0, len(p)-1):
+                nom += p[i].nomarlized().distance_to(p[i+1].nomarlized())
+                denom += p[i].distance_to(p[i+1])
+            res = nom/denom
+            avg_curv += res
+            stored_curvs.append(res)
+        avg_curv /= len(paths)
+
+        # Edge curvature, variance
+        for k in stored_curvs:
+            var_curv += (avg_curv - k)**2
+        var_curv /= path_count
+
 
 def Detect(G):
     #TODO: Not yet implemented, use this method to extract interesting features, such as circles

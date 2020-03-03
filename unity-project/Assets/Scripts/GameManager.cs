@@ -101,10 +101,7 @@ public class GameManager : MonoBehaviour
         }
         roadNodesList = roadNodeCollection.BuildAndGetPaths();
 
-        // Generate mesh
-        GameObject roadMeshObj = new GameObject();
-        roadMesh = roadMeshObj.AddComponent(typeof(RoadMesh)) as RoadMesh;
-        roadMesh.GenerateMeshFromPaths(roadNodesList);
+        GenerateMesh();
     }
 
     private void Update()
@@ -144,9 +141,27 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public static void GenerateMesh()
+    {
+        if(_instance.roadMesh != null)
+        {
+            DestroyImmediate(_instance.roadMesh.gameObject);
+        }
+
+        // Generate mesh
+        GameObject roadMeshObj = new GameObject();
+        _instance.roadMesh = roadMeshObj.AddComponent(typeof(RoadMesh)) as RoadMesh;
+        _instance.roadMesh.GenerateMeshFromPaths(_instance.roadNodesList);
+    }
+
     public static List<RoadPath> GetPaths()
     {
         return _instance.roadNodesList;
+    }
+
+    public static void SetPaths(List<RoadPath> paths)
+    {
+        _instance.roadNodesList = paths;
     }
 
 }

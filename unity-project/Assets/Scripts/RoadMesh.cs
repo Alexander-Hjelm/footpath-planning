@@ -30,8 +30,9 @@ public class RoadMesh : MonoBehaviour
         }
     }
 
+    private List<GameObject> _rendererGOs = new List<GameObject>();
+    private float _roadWidth = 11f;
     private static float _scale = 500f;
-    float _roadWidth = 11f;
     private static Vector2 _offset = new Vector2(-18.05f, -59.34f);
 
     private Dictionary<RoadNode.HighwayType, float> _uvXOffsetByHwyType = new Dictionary<RoadNode.HighwayType, float>()
@@ -49,6 +50,14 @@ public class RoadMesh : MonoBehaviour
         {RoadNode.HighwayType.SECONDARY, 0.75f},
         {RoadNode.HighwayType.PRIMARY, 1f}
     };
+
+    private void OnDestroy()
+    {
+        foreach(GameObject go in _rendererGOs)
+        {
+            DestroyImmediate(go);
+        }
+    }
 
     public void GenerateMeshFromPaths(List<RoadPath> paths)
     {
@@ -325,6 +334,9 @@ public class RoadMesh : MonoBehaviour
         mesh.normals = normals;
 
         meshFilter.mesh = mesh;
+
+        // Store the new GameObject for later deletion
+        _rendererGOs.Add(go);
     }
 
     public static Vector3 TransformPointToMeshSpace(Vector2 input)

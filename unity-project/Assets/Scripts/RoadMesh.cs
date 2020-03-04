@@ -30,8 +30,9 @@ public class RoadMesh : MonoBehaviour
         }
     }
 
+    private List<GameObject> _rendererGOs = new List<GameObject>();
+    private float _roadWidth = 11f;
     private static float _scale = 500f;
-    float _roadWidth = 11f;
     private static Vector2 _offset = new Vector2(-18.05f, -59.34f);
 
     private Dictionary<RoadNode.HighwayType, float> _uvXOffsetByHwyType = new Dictionary<RoadNode.HighwayType, float>()
@@ -49,6 +50,14 @@ public class RoadMesh : MonoBehaviour
         {RoadNode.HighwayType.SECONDARY, 0.75f},
         {RoadNode.HighwayType.PRIMARY, 1f}
     };
+
+    private void OnDestroy()
+    {
+        foreach(GameObject go in _rendererGOs)
+        {
+            DestroyImmediate(go);
+        }
+    }
 
     public void GenerateMeshFromPaths(List<RoadPath> paths)
     {
@@ -79,8 +88,8 @@ public class RoadMesh : MonoBehaviour
                 RoadNode b = path.Get(i+1);
 
                 if(hwyType == RoadNode.HighwayType.NONE) hwyType = path.GetHighwayType();
-                Vector3 posA = TransformPointToMeshSpace(a.GetPosAsVector2());
-                Vector3 posB = TransformPointToMeshSpace(b.GetPosAsVector2());
+                Vector3 posA = new Vector3(a.GetX(), 0f, a.GetY());
+                Vector3 posB = new Vector3(b.GetX(), 0f, b.GetY());
                 Vector3 tangent = (posB - posA).normalized;
                 if(tangent == Vector3.zero)
                 {
@@ -325,10 +334,13 @@ public class RoadMesh : MonoBehaviour
         mesh.normals = normals;
 
         meshFilter.mesh = mesh;
+
+        // Store the new GameObject for later deletion
+        _rendererGOs.Add(go);
     }
 
     public static Vector3 TransformPointToMeshSpace(Vector2 input)
     {
-        return new Vector3((input.y+_offset.x)*0.5f, 0f, input.x+_offset.y)*_scale;
+        return new Vector3((input.x+_offset.x)*0.5f, 0f, (input.y+_offset.y))*_scale;
     }
 }

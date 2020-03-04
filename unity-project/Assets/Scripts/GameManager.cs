@@ -18,10 +18,57 @@ public class GameManager : MonoBehaviour
     private Dictionary<RoadNode, RoadMesh> roadMeshes = new Dictionary<RoadNode, RoadMesh>();
     private RoadMesh roadMesh;
     private List<List<Vector2>> rawPaths = new List<List<Vector2>>();
-    private bool _debugRawPaths = true;
+    private Dictionary<RoadNode.HighwayType, Patch[]> _loadedPatches = new Dictionary<RoadNode.HighwayType, Patch[]>();
 
-    void Start()
+    private bool _debugRawPaths = false;
+    private bool _debugPatches = false;
+    private bool _debugOnlyResidential = true;
+
+    private static GameManager _instance;
+
+    private void Awake()
     {
+        _instance = this;
+    }
+
+    private void Start()
+    {
+        if(_debugOnlyResidential)
+        {
+            _highwayCategories = new string[]{"residential"};
+        }
+
+        // Read patch data
+        foreach(string hwy in _highwayCategories)
+        {
+            PatchData[] patchData = JsonManager.ReadObject<PatchData[]>("Assets/Resources/PatchData/" + hwy);
+
+            // Coordinate transformation
+            foreach(PatchData pd in patchData)
+            {
+                float[,] points = pd.points;
+                for(int i=0; i<points.GetLength(0); i++)
+                {
+                    float x = points[i, 0];
+                    float y = points[i, 1];
+                    Vector3 transformed = RoadMesh.TransformPointToMeshSpace(new Vector2(x, y));
+                    points[i, 0] = transformed.x;
+                    points[i, 1] = transformed.z;
+                }
+            }
+            
+            // Create patches
+            Patch[] patches = new Patch[patchData.Length]; 
+            for(int i=0; i<patchData.Length; i++)
+            {
+                patches[i] = new Patch(patchData[i]);
+            }
+            _loadedPatches[RoadNode.GetHighwayTypeFromString(hwy)] = patches;
+        }
+
+        // Send a reference of the loaded paths to the RoadGenerator
+        RoadGenerator.LoadPatches(_loadedPatches);
+
         roadNodeCollection = new RoadNodeCollection();
 
         foreach(string hwy in _highwayCategories)
@@ -42,7 +89,11 @@ public class GameManager : MonoBehaviour
                 List<PositionObject> positions = geometryObject.AllPositions();
                 foreach(PositionObject position in positions)
                 {
-                    path.Add(new Vector2(position.latitude, position.longitude));
+                    // Coordinate transformation
+                    Vector3 transformed = RoadMesh.TransformPointToMeshSpace(new Vector2(position.longitude, position.latitude));
+
+                    // Add node to path
+                    path.Add(new Vector2(transformed.x, transformed.z));
                 }
                 roadNodeCollection.ReadPath(path, RoadNode.GetHighwayTypeFromString(hwy));
                 rawPaths.Add(path);
@@ -50,10 +101,7 @@ public class GameManager : MonoBehaviour
         }
         roadNodesList = roadNodeCollection.BuildAndGetPaths();
 
-        // Generate mesh
-        GameObject roadMeshObj = new GameObject();
-        roadMesh = roadMeshObj.AddComponent(typeof(RoadMesh)) as RoadMesh;
-        roadMesh.GenerateMeshFromPaths(roadNodesList);
+        GenerateMesh();
     }
 
     private void Update()
@@ -66,11 +114,54 @@ public class GameManager : MonoBehaviour
                 for(int j=0; j<path.Count-1; j++)
                 {
                     Debug.DrawLine(
-                        RoadMesh.TransformPointToMeshSpace(path[j]),
-                        RoadMesh.TransformPointToMeshSpace(path[j+1]));
+                        new Vector3(path[j].x, 0f, path[j].y),
+                        new Vector3(path[j+1].x, 0f, path[j+1].y));
                 }
             }
         }
+
+        if(_debugPatches)
+        {
+            foreach(RoadNode.HighwayType hwyType in _loadedPatches.Keys)
+            {
+                foreach(Patch patch in _loadedPatches[hwyType])
+                {
+                    Vector2[] vertices = patch.GetVertices();
+                    Patch.Edge[] edges = patch.GetEdges();
+                    foreach(Patch.Edge edge in edges)
+                    {
+                        Vector2 u = vertices[edge.IndexU];
+                        Vector2 v = vertices[edge.IndexV];
+                        Debug.DrawLine(
+                            new Vector3(u.x, 0f, u.y),
+                            new Vector3(v.x, 0f, v.y));
+                    }
+                }
+            }
+        }
+    }
+
+    public static void GenerateMesh()
+    {
+        if(_instance.roadMesh != null)
+        {
+            DestroyImmediate(_instance.roadMesh.gameObject);
+        }
+
+        // Generate mesh
+        GameObject roadMeshObj = new GameObject();
+        _instance.roadMesh = roadMeshObj.AddComponent(typeof(RoadMesh)) as RoadMesh;
+        _instance.roadMesh.GenerateMeshFromPaths(_instance.roadNodesList);
+    }
+
+    public static List<RoadPath> GetPaths()
+    {
+        return _instance.roadNodesList;
+    }
+
+    public static void SetPaths(List<RoadPath> paths)
+    {
+        _instance.roadNodesList = paths;
     }
 
 }

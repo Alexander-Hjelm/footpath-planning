@@ -8,8 +8,8 @@ public class AreaSelector : MonoBehaviour
     [SerializeField] private GameObject _polygonMarker;
 
     private LineRenderer _lineRenderer;
-    private List<Vector3> _queuedPointsInPolygon = new List<Vector3>();
-    private List<Vector3> _createdPolygon = new List<Vector3>();
+    private List<Vector2> _queuedPointsInPolygon = new List<Vector2>();
+    private Polygon _createdPolygon = null;
     private List<GameObject> _instantiatedPolygonMakers = new List<GameObject>();
 
     private void Awake()
@@ -25,7 +25,7 @@ public class AreaSelector : MonoBehaviour
             Vector3[] partialPolygonPoints = new Vector3[_queuedPointsInPolygon.Count];
             for(int i=0; i<_queuedPointsInPolygon.Count; i++)
             {
-                partialPolygonPoints[i] = _queuedPointsInPolygon[i];
+                partialPolygonPoints[i] = new Vector3(_queuedPointsInPolygon[i].x, 0f, _queuedPointsInPolygon[i].y);
             }
             _lineRenderer.positionCount = partialPolygonPoints.Length;
             _lineRenderer.SetPositions(partialPolygonPoints);
@@ -47,11 +47,19 @@ public class AreaSelector : MonoBehaviour
             Vector3 intersection;
             if(MathUtils.LinePlaneIntersection(out intersection, ray.origin, ray.direction, Vector3.up, Vector3.zero))
             {
-                // If the click was nearby the first marker, create the polygon
-                if(_queuedPointsInPolygon.Count > 0 && (intersection - _queuedPointsInPolygon[0]).magnitude < 0.2f*(zoomLevel+0.1f))
+                Vector2 intersection2D = new Vector2(intersection.x, intersection.z);
+                if(_queuedPointsInPolygon.Count > 0 && (intersection2D - _queuedPointsInPolygon[0]).magnitude < 0.2f*(zoomLevel+0.1f))
                 {
-                    _createdPolygon = _queuedPointsInPolygon;
-                    _queuedPointsInPolygon = new List<Vector3>();
+                    // If the click was nearby the first marker, create the polygon
+                    
+                    // Create the polygon and reset the point queue
+                    _createdPolygon = new Polygon(_queuedPointsInPolygon.ToArray());
+                    _queuedPointsInPolygon = new List<Vector2>();
+
+                    // Call to generate a new road network inside the polygon
+                    RoadGenerator.PopulatePolygonFromExamplePatches(GameManager.GetPaths(), _createdPolygon);
+
+                    // Reset polygon markers and line renderer
                     foreach(GameObject polygonMarker in _instantiatedPolygonMakers)
                     {
                         Destroy(polygonMarker);
@@ -61,7 +69,7 @@ public class AreaSelector : MonoBehaviour
                 }
                 else
                 {
-                    _queuedPointsInPolygon.Add(intersection);
+                    _queuedPointsInPolygon.Add(intersection2D);
                     GameObject polygonMarker = Instantiate(_polygonMarker, intersection, Quaternion.identity);
                     _instantiatedPolygonMakers.Add(polygonMarker);
                 }

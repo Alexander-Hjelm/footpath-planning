@@ -78,3 +78,6 @@ What do you think? Could this be a reasonable approach?
 Frågor till nästa möte:
 - Använde XINGJIANG YUs paper för generering av vägmeshes. Kan jag citera det eller borde jag hitta en akadmisk källa?
 - Finns det någon LaTeX-template?
+
+Möte med Todor, 02/03/2020:
+    Hur bra är osm-data för att merga vägar till representation med lanes för bilar/cykel/footpath, med en defaultbredd för varje

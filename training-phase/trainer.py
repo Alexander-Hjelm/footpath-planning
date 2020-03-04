@@ -11,18 +11,21 @@ files_to_read = [
         "primary"
         ]
 vertex_distance_threshold = 0.0002
+min_num_of_vertices_per_patch = 2
 
 class Node:
     x = 0.0
     y = 0.0
     neighbours = []
+    associated_path = ""
 
-    def __init__(self, x, y):
+    def __init__(self, x, y, associated_path):
         assert(isinstance(x, float))
         assert(isinstance(y, float))
         self.x = x
         self.y = y
         self.neighbours = []
+        self.associated_path = associated_path
 
     def distance_to(self, u):
         assert(isinstance(u, Node))
@@ -34,21 +37,114 @@ class Node:
             if not(u == self):
                 self.neighbours.append(u)
 
+    def get_neighbours_of_same_path(self):
+        out = []
+        for v in self.neighbours:
+            if v.associated_path == self.associated_path:
+                out.append(v)
+        return out
+
+    def nomarlized(self):
+        d = self.magnitude()
+        return Node(x/d, y/d, self.associated_path)
+
+    def magnitude(self):
+        return math.sqrt((self.x)**2 + (self.y)**2)
+
 class Patch:
     vertices = []
+    edges = []
 
-    def __init__(self, vertices):
-        assert(isinstance(vertices, list))
-        self.vertices = vertices
+    # Statistical paramteres, Nishida et. al, section 4.2
+    stat_len = 0.0      # Average edge length
+    stat_len_var = 0.0  # Variance, edge length
+    stat_curv = 0.0     # Average edge curvature
+    stat_curv_var = 0.0 # Variance, edge curvature
+
+    def __init__(self, vertex):
+        assert(isinstance(vertex, Node))
+        self.vertices = [vertex]
+        self.edges = []
+
+        self.stat_len = 0.0
+        self.stat_len_var = 0.0
+        self.stat_curv = 0.0
+        self.stat_curv_var = 0.0
 
     def add_vertex(self, vertex):
         assert(isinstance(vertex, Node))
         self.vertices.append(vertex)
+        u_index = len(self.vertices)-1
+        for neighbour in vertex.neighbours:
+            if neighbour in self.vertices:
+                v_index = self.vertices.index(neighbour)
+                self.edges.append([u_index, v_index])
 
     def add_vertices(self, vertices_in):
         assert(isinstance(vertices_in, list))
         for vertex in vertices_in:
             self.add_vertex(vertex)
+
+    def calculate_statistical_params(self):
+        edge_count = len(self.edges)
+        avg_len = 0.0
+        var_len = 0.0
+        avg_curv = 0.0
+        var_curv = 0.0
+        stored_lens = []
+        stored_curvs = []
+
+        # Edge length, average
+        for e in self.edges:
+            u = self.vertices[e[0]]
+            v = self.vertices[e[1]]
+            res = u.distance_to(v)
+            avg_len += res
+            stored_lens.append(res)
+
+        if len(stored_lens) > 0:
+            avg_len /= len(stored_lens)
+
+            # Edge length, variance
+            for d in stored_lens:
+                var_len += (avg_len - d)**2
+            var_len /= edge_count
+        else:
+            avg_len = -1.0
+            var_len = -1.0
+
+        # Edge curvature, average
+        for vertex in self.vertices:
+            neighbours = vertex.get_neighbours_of_same_path()
+            if len(neighbours) > 1:
+                u = neighbours[0]
+                v = neighbours[1]
+                if vertex.associated_path == u.associated_path and vertex.associated_path == v.associated_path:
+                    z_1 = Node(u.x-vertex.x, u.y-vertex.y, "")
+                    z_2 = Node(vertex.x-v.x, vertex.y-v.y, "")
+                    nom = z_1.nomarlized().distance_to(z_2.nomarlized())
+                    denom = z_1.magnitude()
+                    res = nom/denom
+                    avg_curv += res
+                    stored_curvs.append(res)
+
+        if len(stored_curvs) > 0:
+            avg_curv /= len(stored_curvs)
+
+            # Edge curvature, variance
+            for k in stored_curvs:
+                var_curv += (avg_curv - k)**2
+            var_curv /= len(stored_curvs)
+        else:
+            avg_curv = -1.0
+            var_curv = -1.0
+
+        self.stat_len = avg_len
+        self.stat_len_var = var_len
+        self.stat_curv = avg_curv
+        self.stat_curv_var = var_curv
+
+
 
 def Detect(G):
     #TODO: Not yet implemented, use this method to extract interesting features, such as circles
@@ -62,7 +158,7 @@ def Expand(patch):
     for vertex in patch.vertices:
         Q.put(vertex)
         processed_vertices.append(vertex)
-    while Q.empty():
+    while not Q.empty():
         v = Q.get()
         for u in v.neighbours:
             if not u in processed_vertices:
@@ -87,7 +183,7 @@ def ExtractPatches(G):
     for vertex in G:
         if not IsVertexInAnyPatch(vertex, patches):
             if len(vertex.neighbours) > 2:
-                patch = Patch([vertex])
+                patch = Patch(vertex)
                 patches.append(patch)
                 Expand(patch)
 
@@ -116,6 +212,10 @@ def ExtractPatches(G):
             break
         i += 1
 
+    # Finally, compute statistical parameters for all patches
+    for patch in patches:
+        patch.calculate_statistical_params()
+
     return patches
 
 
@@ -143,7 +243,7 @@ for file_name in files_to_read:
             x = coordinate[0]
             y = coordinate[1]
 
-            node = Node(x, y)
+            node = Node(x, y, properties['@id'])
 
             # Add node to dictionary if not already read
             if not x in nodes_by_coord:
@@ -169,26 +269,22 @@ for file_name in files_to_read:
     json_out = []
     i = 0
     for patch in patches:
+        if len(patch.vertices) < min_num_of_vertices_per_patch:
+            continue
         json_out.append({})
         json_out[i]['edges'] = []
         json_out[i]['points'] = []
-        found_edges = {}
+        json_out[i]['stat_avg_len'] = patch.stat_len
+        json_out[i]['stat_var_len'] = patch.stat_len_var
+        json_out[i]['stat_avg_curv'] = patch.stat_curv
+        json_out[i]['stat_var_curv'] = patch.stat_curv_var
         for v in patch.vertices:
             json_out[i]['points'].append([v.x, v.y])
-            for u in v.neighbours:
-                # Check that this edge has not been counted already
-                if u in found_edges and v in found_edges[u]:
-                    continue
-                if v in found_edges and u in found_edges[v]:
-                    continue
-
-                # Add the edge to the ouput json object
-                json_out[i]['edges'].append([[v.x, v.y],[u.x, u.y]])
-
-                # Keep track of this edge for later
-                if not v in found_edges:
-                    found_edges[v] = []
-                found_edges[v].append(u)
+        for e in patch.edges:
+            # Add the edge to the ouput json object
+            json_out[i]['edges'].append([e[0], e[1]])
+            if e[0] > len(patch.vertices):
+                print("ERROR")
         i += 1
 
     with open('out_data/' + file_name + '.json', 'w') as f:

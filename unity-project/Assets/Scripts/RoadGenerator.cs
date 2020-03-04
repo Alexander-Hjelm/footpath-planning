@@ -71,11 +71,8 @@ public class RoadGenerator
             // TODO: Mark nodes as end points. If an endpoint is encountered in an added patch, queue it in tentativeNodes
             foreach(Patch patch in _loadedPatches[anchorNode.GetHighwayType()])
             {
-                if(!CollisionCheck(patch, edgesForCollisionCheck))
-                {
-                    AddPatch(patch, anchorNode);
+                if(TryAddPatch(patch, anchorNode))
                     break;
-                }
             }
         }
 
@@ -84,19 +81,28 @@ public class RoadGenerator
         GameManager.GenerateMesh();
     }
 
-    private static void AddPatch(Patch patch, RoadNode anchorNode)
+    private static bool TryAddPatch(Patch patch, RoadNode anchorNode, List<RoadEdge> edgesForCollisionCheck)
     {
-        throw new System.NotImplementedException();
+        // Select the first node in the patch as the patch-side anchor point
+        // TODO: Make a better selection function
+        Vector2 patchsideAnchor = path.GetVertices[0];
+
+        if(!collisioncheck(patch, edgesForCollisionCheck, anchorNode.GetPosAsVector2()-patchsideAnchor))
+        {
+            //TODO: Go over all nodes in the patches and add them to the paths, anchor nodes factored in
+            return true;
+        }
+        return false;
     }
 
-    private static bool CollisionCheck(Patch patch, List<RoadEdge> edges)
+    private static bool CollisionCheck(Patch patch, List<RoadEdge> edges, Vector2 anchorOffset)
     {
         // Do a collision check between all edges in a patch and a set of edges
         foreach(Patch.Edge patchEdge in patch.GetEdges())
         {
             foreach(RoadEdge placedEdge in edges)
             {
-                if(CollisionCheck(patch.GetVertices()[patchEdge.IndexU], patch.GetVertices()[patchEdge.IndexV], edges))
+                if(CollisionCheck(patch.GetVertices()[patchEdge.IndexU] + anchorOffset, patch.GetVertices()[patchEdge.IndexV] + anchorOffset, edges))
                 {
                     return true;
                 }

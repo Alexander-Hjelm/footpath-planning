@@ -68,11 +68,20 @@ public class RoadGenerator
         while(tentativeNodes.Count > 0)
         {
             RoadNode anchorNode = tentativeNodes.Dequeue();
-            // TODO: Mark nodes as end points. If an endpoint is encountered in an added patch, queue it in tentativeNodes
             foreach(Patch patch in _loadedPatches[anchorNode.GetHighwayType()])
             {
-                if(TryAddPatch(patch, anchorNode, edgesForCollisionCheck, paths))
+                List<RoadNode> patchEndPoints = new List<RoadNode>();
+                if(TryAddPatch(out patchEndPoints, patch, anchorNode, polygon, edgesForCollisionCheck, paths))
+                {
+                    // Queue end points to the tentative queue
+                    foreach(RoadNode endPoint in patchEndPoints)
+                    {
+                        //TODO: Enable this line as soon as the collision check works
+                        //tentativeNodes.Queue(endPoint);
+                    }
+                    
                     break;
+                }
             }
         }
 
@@ -81,34 +90,51 @@ public class RoadGenerator
         GameManager.GenerateMesh();
     }
 
-    private static bool TryAddPatch(Patch patch, RoadNode anchorNode, List<RoadEdge> edgesForCollisionCheck, List<RoadPath> pathsToBeAddedTo)
+    private static bool TryAddPatch(out List<RoadNode> endNodes, Patch patch, RoadNode anchorNode, Polygon polygon, List<RoadEdge> edgesForCollisionCheck, List<RoadPath> pathsToBeAddedTo)
     {
+        endNodes = new List<RoadNode>();
+
         // Select the first node in the patch as the patch-side anchor point
         // TODO: Make a better selection function
         Vector2 patchsideAnchor = patch.GetVertices()[0];
         Vector2 patchOffset = anchorNode.GetPosAsVector2()-patchsideAnchor;
 
-        if(!CollisionCheck(patch, edgesForCollisionCheck, patchOffset))
+        // Check that all points in the patch are inside the polygon
+        foreach(Vector2 v in patch.GetVertices())
         {
-            // Go over all nodes in the patches and add them to the paths, anchor position factored in
-            // Add a new path for every edge in the patch
-            foreach(Patch.Edge edge in patch.GetEdges())
-            {
-                Vector2 u = patch.GetVertices()[edge.IndexU] + patchOffset;
-                Vector2 v = patch.GetVertices()[edge.IndexV] + patchOffset;
-
-                RoadNode nodeU = new RoadNode(u, anchorNode.GetHighwayType());
-                RoadNode nodeV = new RoadNode(v, anchorNode.GetHighwayType());
-
-                RoadPath path = new RoadPath(anchorNode.GetHighwayType());
-                path.Add(nodeU);
-                path.Add(nodeV);
-
-                pathsToBeAddedTo.Add(path);
-            }
-            return true;
+            if(!polygon.ContainsPoint(v))
+                return false;
         }
-        return false;
+
+        // Check that no edges in the patch intersect with any existing edges
+        if(CollisionCheck(patch, edgesForCollisionCheck, patchOffset))
+        {
+            return false;
+        }
+
+        // Go over all nodes in the patches and add them to the paths, anchor position factored in
+        // Add a new path for every edge in the patch
+        // TODO: Generate the unique nodes first, then link them together in paths
+        foreach(Patch.Edge edge in patch.GetEdges())
+        {
+            Vector2 u = patch.GetVertices()[edge.IndexU] + patchOffset;
+            Vector2 v = patch.GetVertices()[edge.IndexV] + patchOffset;
+
+            RoadNode nodeU = new RoadNode(u, anchorNode.GetHighwayType());
+            RoadNode nodeV = new RoadNode(v, anchorNode.GetHighwayType());
+
+            RoadPath path = new RoadPath(anchorNode.GetHighwayType());
+            path.Add(nodeU);
+            path.Add(nodeV);
+
+            pathsToBeAddedTo.Add(path);
+
+            if(patch.IsVertexEndPoint(edge.IndexU))
+                endNodes.Add(nodeU);
+            if(patch.IsVertexEndPoint(edge.IndexV))
+                endNodes.Add(nodeV);
+        }
+        return true;
     }
 
     private static bool CollisionCheck(Patch patch, List<RoadEdge> edges, Vector2 anchorOffset)

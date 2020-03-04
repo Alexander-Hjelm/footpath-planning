@@ -22,19 +22,40 @@ public class RoadGenerator
         // Queue all nodes that are inside the polygon
         Queue<RoadNode> tentativeNodes = new Queue<RoadNode>();
         List<RoadNode> hitNodes = new List<RoadNode>();
+        List<RoadEdge> edgesForCollisionCheck = new List<RoadEdge>();
         foreach(RoadPath path in paths)
         {
             for(int i=0; i<path.Count(); i++)
             {
                 RoadNode node = path.Get(i);
-                if(!hitNodes.Contains(node))
+                if(polygon.ContainsPoint(node.GetPosAsVector2()))
                 {
-                    hitNodes.Add(node);
-                    if(polygon.ContainsPoint(node.GetPosAsVector2()))
+                    if(!hitNodes.Contains(node))
                     {
                         tentativeNodes.Enqueue(node);
                     }
+
+                    // Add a new edge to run collision checks with later
+                    // This handles the cases where the current node is inside to polygon and the next one is either inside or outside it
+                    if(i<path.Count()-1)
+                    {
+                        edgesForCollisionCheck.Add(new RoadEdge(node, path.Get(i-1)));
+                    }
                 }
+                else
+                {
+                    // Add a new edge to run collision checks with later
+                    // This handles the cases where the current node is outside to polygon but the next one is inside it
+                    if(i<path.Count()-1)
+                    {
+                        RoadNode next = path.Get(i+1);
+                        if(polygon.ContainsPoint(next.GetPosAsVector2()))
+                        {
+                            edgesForCollisionCheck.Add(new RoadEdge(node, next));
+                        }
+                    }
+                }
+                hitNodes.Add(node);
             }
         }
 
@@ -44,13 +65,12 @@ public class RoadGenerator
             tentativeNodes.Enqueue(new RoadNode(polygon.GetCenter(), RoadNode.HighwayType.SECONDARY));
         }
 
-
         // Finally, Notify the GameManager to generate a new mesh
         GameManager.SetPaths(paths);
         GameManager.GenerateMesh();
     }
 
-    private static void AddPatch(Patch patch, RoadNode anchorNode)
+    private static void AddPatch(Patch patch, RoadNode anchorNode, List<RoadEdge> edgesForCollisionCheck)
     {
         throw new System.NotImplementedException();
     }

@@ -77,7 +77,11 @@ public class RoadGenerator
                     foreach(RoadNode endPoint in patchEndPoints)
                     {
                         //TODO: Enable this line as soon as the collision check works
-                        //tentativeNodes.Queue(endPoint);
+                        //TODO: Queue.Contains is O(n), find a way to use Dictionary.Contains instead (O(1))
+                        if(!tentativeNodes.Contains(endPoint))
+                        {
+                            //tentativeNodes.Queue(endPoint);
+                        }
                     }
                     
                     break;
@@ -114,14 +118,17 @@ public class RoadGenerator
 
         // Go over all nodes in the patches and add them to the paths, anchor position factored in
         // Add a new path for every edge in the patch
-        // TODO: Generate the unique nodes first, then link them together in paths
+        // Generate the unique nodes first, then link them together in paths
+        RoadNode[] patchNodes = new RoadNode[patch.GetVertices().Length];
+        for(int i=0; i<patch.GetVertices().Length; i++)
+        {
+            Vector2 v = patch.GetVertices()[i];
+            patchNodes[i] = new RoadNode(v, anchorNode.GetHighwayType());
+        }
         foreach(Patch.Edge edge in patch.GetEdges())
         {
-            Vector2 u = patch.GetVertices()[edge.IndexU] + patchOffset;
-            Vector2 v = patch.GetVertices()[edge.IndexV] + patchOffset;
-
-            RoadNode nodeU = new RoadNode(u, anchorNode.GetHighwayType());
-            RoadNode nodeV = new RoadNode(v, anchorNode.GetHighwayType());
+            RoadNode nodeU = patchNodes[edge.IndexU];
+            RoadNode nodeV = patchNodes[edge.IndexV];
 
             RoadPath path = new RoadPath(anchorNode.GetHighwayType());
             path.Add(nodeU);

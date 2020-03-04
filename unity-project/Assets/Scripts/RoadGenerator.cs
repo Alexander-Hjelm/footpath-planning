@@ -71,7 +71,7 @@ public class RoadGenerator
             // TODO: Mark nodes as end points. If an endpoint is encountered in an added patch, queue it in tentativeNodes
             foreach(Patch patch in _loadedPatches[anchorNode.GetHighwayType()])
             {
-                if(TryAddPatch(patch, anchorNode, edgesForCollisionCheck, paths))
+                if(TryAddPatch(patch, anchorNode, polygon, edgesForCollisionCheck, paths))
                     break;
             }
         }
@@ -81,34 +81,43 @@ public class RoadGenerator
         GameManager.GenerateMesh();
     }
 
-    private static bool TryAddPatch(Patch patch, RoadNode anchorNode, List<RoadEdge> edgesForCollisionCheck, List<RoadPath> pathsToBeAddedTo)
+    private static bool TryAddPatch(Patch patch, RoadNode anchorNode, Polygon polygon, List<RoadEdge> edgesForCollisionCheck, List<RoadPath> pathsToBeAddedTo)
     {
         // Select the first node in the patch as the patch-side anchor point
         // TODO: Make a better selection function
         Vector2 patchsideAnchor = patch.GetVertices()[0];
         Vector2 patchOffset = anchorNode.GetPosAsVector2()-patchsideAnchor;
 
-        if(!CollisionCheck(patch, edgesForCollisionCheck, patchOffset))
+        // Check that all points in the patch are inside the polygon
+        foreach(Vector2 v in patch.GetVertices())
         {
-            // Go over all nodes in the patches and add them to the paths, anchor position factored in
-            // Add a new path for every edge in the patch
-            foreach(Patch.Edge edge in patch.GetEdges())
-            {
-                Vector2 u = patch.GetVertices()[edge.IndexU] + patchOffset;
-                Vector2 v = patch.GetVertices()[edge.IndexV] + patchOffset;
-
-                RoadNode nodeU = new RoadNode(u, anchorNode.GetHighwayType());
-                RoadNode nodeV = new RoadNode(v, anchorNode.GetHighwayType());
-
-                RoadPath path = new RoadPath(anchorNode.GetHighwayType());
-                path.Add(nodeU);
-                path.Add(nodeV);
-
-                pathsToBeAddedTo.Add(path);
-            }
-            return true;
+            if(!polygon.ContainsPoint(v))
+                return false;
         }
-        return false;
+
+        // Check that no edges in the patch intersect with any existing edges
+        if(CollisionCheck(patch, edgesForCollisionCheck, patchOffset))
+        {
+            return false;
+        }
+
+        // Go over all nodes in the patches and add them to the paths, anchor position factored in
+        // Add a new path for every edge in the patch
+        foreach(Patch.Edge edge in patch.GetEdges())
+        {
+            Vector2 u = patch.GetVertices()[edge.IndexU] + patchOffset;
+            Vector2 v = patch.GetVertices()[edge.IndexV] + patchOffset;
+
+            RoadNode nodeU = new RoadNode(u, anchorNode.GetHighwayType());
+            RoadNode nodeV = new RoadNode(v, anchorNode.GetHighwayType());
+
+            RoadPath path = new RoadPath(anchorNode.GetHighwayType());
+            path.Add(nodeU);
+            path.Add(nodeV);
+
+            pathsToBeAddedTo.Add(path);
+        }
+        return true;
     }
 
     private static bool CollisionCheck(Patch patch, List<RoadEdge> edges, Vector2 anchorOffset)

@@ -49,4 +49,45 @@ public class RoadGenerator
         GameManager.SetPaths(paths);
         GameManager.GenerateMesh();
     }
+
+    private static void AddPatch(Patch patch, RoadNode anchorNode)
+    {
+        throw new System.NotImplementedException();
+    }
+
+    private static bool CollisionCheck(Patch patch, List<RoadEdge> edges)
+    {
+        // Do a collision check between all edges in a patch and a set of edges
+        foreach(Patch.Edge patchEdge in patch.GetEdges())
+        {
+            foreach(RoadEdge placedEdge in edges)
+            {
+                if(CollisionCheck(patch.GetVertices()[patchEdge.IndexU], patch.GetVertices()[patchEdge.IndexV], edges))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private static bool CollisionCheck(RoadNode a, RoadNode b, List<RoadEdge> edges)
+    {
+        // Do a collision check between a node pair and a set of edges
+        return CollisionCheck(a.GetPosAsVector2(), b.GetPosAsVector2(), edges);
+    }
+
+    private static bool CollisionCheck(Vector2 a, Vector2 b, List<RoadEdge> edges)
+    {
+        // Do a collision check between an edge (poisition pair) and a set of edges
+        foreach(RoadEdge edge in edges)
+        {
+            Vector3 intersection;
+            if(MathUtils.LineSegmentLineSegmentIntersection(out intersection, a, b, edge.GetU().GetPosAsVector2(), edge.GetV().GetPosAsVector2()))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -42,6 +42,24 @@ public class MathUtils : MonoBehaviour
 		}
 	}
 
+	public static bool LineSegmentLineSegmentIntersection(out Vector3 intersection, Vector3 linePoint11, Vector3 linePoint12, Vector3 linePoint21, Vector3 linePoint22){
+ 
+		Vector3 lineVec1 = linePoint12 - linePoint11;
+		Vector3 lineVec2 = linePoint22 - linePoint21;
+
+        bool linesIntersect = LineLineIntersection(out intersection, linePoint11, lineVec1, linePoint21, lineVec2);
+
+        if(linesIntersect
+                && Vector3.Dot(linePoint12-linePoint11, linePoint12-intersection) > 0
+                && Vector3.Dot(linePoint11-linePoint12, linePoint11-intersection) > 0
+                && Vector3.Dot(linePoint22-linePoint21, linePoint22-intersection) > 0
+                && Vector3.Dot(linePoint21-linePoint22, linePoint21-intersection) > 0)
+        {
+            return true;
+        }
+        return false;
+	}
+
     //Get the intersection between a line and a plane. 
 	//If the line and plane are not parallel, the function outputs true, otherwise false.
 	public static bool LinePlaneIntersection(out Vector3 intersection, Vector3 linePoint, Vector3 lineVec, Vector3 planeNormal, Vector3 planePoint){

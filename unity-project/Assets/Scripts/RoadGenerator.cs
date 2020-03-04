@@ -83,7 +83,6 @@ public class RoadGenerator
                             //tentativeNodes.Queue(endPoint);
                         }
                     }
-                    
                     break;
                 }
             }

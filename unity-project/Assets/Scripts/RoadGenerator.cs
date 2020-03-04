@@ -85,10 +85,10 @@ public class RoadGenerator
     {
         // Select the first node in the patch as the patch-side anchor point
         // TODO: Make a better selection function
-        Vector2 patchsideAnchor = path.GetVertices[0];
+        Vector2 patchsideAnchor = patch.GetVertices()[0];
         Vector2 patchOffset = anchorNode.GetPosAsVector2()-patchsideAnchor;
 
-        if(!collisioncheck(patch, edgesForCollisionCheck, patchOffset))
+        if(!CollisionCheck(patch, edgesForCollisionCheck, patchOffset))
         {
             // Go over all nodes in the patches and add them to the paths, anchor position factored in
             // Add a new path for every edge in the patch

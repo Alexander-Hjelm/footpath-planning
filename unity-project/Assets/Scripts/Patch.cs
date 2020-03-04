@@ -17,23 +17,33 @@ public class Patch
 
     private Vector2[] _vertices;
     private Edge[] _edges;
+    private bool[] _endPoints; // Keeps track of what vertices are end points
     private Dictionary<string, float> _statistics = new Dictionary<string, float>();
 
     public Patch(PatchData patchData)
     {
         _vertices = new Vector2[patchData.points.GetLength(0)];
-        for(int i=0; i<patchData.points.GetLength(0); i++)
-        {
-            float x = patchData.points[i, 0];
-            float y = patchData.points[i, 1];
-            _vertices[i] = new Vector2(x, y);
-        }
         _edges = new Edge[patchData.edges.GetLength(0)];
+        _endPoints = new bool[_vertices.Length];
+        int[] vertexHits = new int[_vertices.Length];
         for(int i=0; i<patchData.edges.GetLength(0); i++)
         {
             int u = patchData.edges[i, 0];
             int v = patchData.edges[i, 1];
             _edges[i] = new Edge(u, v);
+            vertexHits[u]++;
+            vertexHits[v]++;
+        }
+        for(int i=0; i<vertexHits.Length; i++)
+        {
+            if(vertexHits[i] < 2)
+                _endPoints[i] = true;
+        }
+        for(int i=0; i<patchData.points.GetLength(0); i++)
+        {
+            float x = patchData.points[i, 0];
+            float y = patchData.points[i, 1];
+            _vertices[i] = new Vector2(x, y);
         }
 
         _statistics["avg_len"] = patchData.stat_avg_len;
@@ -55,5 +65,10 @@ public class Patch
     public float GetStatistic(string label)
     {
         return _statistics[label];
+    }
+
+    public bool IsVertexEndPoint(int i)
+    {
+        return _endPoints[i];
     }
 }

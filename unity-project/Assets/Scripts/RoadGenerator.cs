@@ -71,7 +71,7 @@ public class RoadGenerator
             // TODO: Mark nodes as end points. If an endpoint is encountered in an added patch, queue it in tentativeNodes
             foreach(Patch patch in _loadedPatches[anchorNode.GetHighwayType()])
             {
-                if(TryAddPatch(patch, anchorNode))
+                if(TryAddPatch(patch, anchorNode, edgesForCollisionCheck, paths))
                     break;
             }
         }
@@ -81,15 +81,31 @@ public class RoadGenerator
         GameManager.GenerateMesh();
     }
 
-    private static bool TryAddPatch(Patch patch, RoadNode anchorNode, List<RoadEdge> edgesForCollisionCheck)
+    private static bool TryAddPatch(Patch patch, RoadNode anchorNode, List<RoadEdge> edgesForCollisionCheck, List<RoadPath> pathsToBeAddedTo)
     {
         // Select the first node in the patch as the patch-side anchor point
         // TODO: Make a better selection function
         Vector2 patchsideAnchor = path.GetVertices[0];
+        Vector2 patchOffset = anchorNode.GetPosAsVector2()-patchsideAnchor;
 
-        if(!collisioncheck(patch, edgesForCollisionCheck, anchorNode.GetPosAsVector2()-patchsideAnchor))
+        if(!collisioncheck(patch, edgesForCollisionCheck, patchOffset))
         {
-            //TODO: Go over all nodes in the patches and add them to the paths, anchor nodes factored in
+            // Go over all nodes in the patches and add them to the paths, anchor position factored in
+            // Add a new path for every edge in the patch
+            foreach(Patch.Edge edge in patch.GetEdges())
+            {
+                Vector2 u = patch.GetVertices()[edge.IndexU] + patchOffset;
+                Vector2 v = patch.GetVertices()[edge.IndexV] + patchOffset;
+
+                RoadNode nodeU = new RoadNode(u, anchorNode.GetHighwayType());
+                RoadNode nodeV = new RoadNode(v, anchorNode.GetHighwayType());
+
+                RoadPath path = new RoadPath(anchorNode.GetHighwayType());
+                path.Add(nodeU);
+                path.Add(nodeV);
+
+                pathsToBeAddedTo.Add(path);
+            }
             return true;
         }
         return false;

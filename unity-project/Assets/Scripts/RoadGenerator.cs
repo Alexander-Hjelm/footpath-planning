@@ -39,7 +39,7 @@ public class RoadGenerator
                     // This handles the cases where the current node is inside to polygon and the next one is either inside or outside it
                     if(i<path.Count()-1)
                     {
-                        edgesForCollisionCheck.Add(new RoadEdge(node, path.Get(i-1)));
+                        edgesForCollisionCheck.Add(new RoadEdge(node, path.Get(i+1)));
                     }
                 }
                 else
@@ -62,7 +62,21 @@ public class RoadGenerator
         // If no points were found, queue the polygon centroid
         if(tentativeNodes.Count == 0)
         {
-            tentativeNodes.Enqueue(new RoadNode(polygon.GetCenter(), RoadNode.HighwayType.SECONDARY));
+            tentativeNodes.Enqueue(new RoadNode(polygon.GetCenter(), RoadNode.HighwayType.RESIDENTIAL));
+        }
+
+        while(tentativeNodes.Count > 0)
+        {
+            RoadNode anchorNode = tentativeNodes.Dequeue();
+            // TODO: Mark nodes as end points. If an endpoint is encountered in an added patch, queue it in tentativeNodes
+            foreach(Patch patch in _loadedPatches[anchorNode.GetHighwayType()])
+            {
+                if(!CollisionCheck(patch, edgesForCollisionCheck))
+                {
+                    AddPatch(patch, anchorNode);
+                    break;
+                }
+            }
         }
 
         // Finally, Notify the GameManager to generate a new mesh
@@ -70,7 +84,7 @@ public class RoadGenerator
         GameManager.GenerateMesh();
     }
 
-    private static void AddPatch(Patch patch, RoadNode anchorNode, List<RoadEdge> edgesForCollisionCheck)
+    private static void AddPatch(Patch patch, RoadNode anchorNode)
     {
         throw new System.NotImplementedException();
     }

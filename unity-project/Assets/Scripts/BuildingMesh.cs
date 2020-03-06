@@ -62,16 +62,16 @@ public class BuildingMesh : MonoBehaviour
                 triangles.Add(countedVertices);
                 triangles.Add(countedVertices+1);
 
-                triangles.Add(countedVertices);
                 triangles.Add(countedVertices+1);
+                triangles.Add(countedVertices);
                 triangles.Add(countedVertices+2);
 
                 triangles.Add(countedVertices+2);
                 triangles.Add(countedVertices+3);
-                triangles.Add(countedVertices);
+                triangles.Add(countedVertices+1);
 
-                triangles.Add(centroidRaisedIndex);
                 triangles.Add(countedVertices+2);
+                triangles.Add(centroidRaisedIndex);
                 triangles.Add(countedVertices+3);
 
                 countedVertices += 4;

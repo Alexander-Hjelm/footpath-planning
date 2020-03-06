@@ -8,7 +8,8 @@ public class BuildingMesh : MonoBehaviour
 {
     private List<GameObject> _rendererGOs = new List<GameObject>();
     private static float _scale = 500f;
-    private static float _buildingHeight = 1f;
+    private static float _buildingHeight = 0.2f;
+    private static float _buildingHeightVariation = 0.1f;
     private static Vector2 _offset = new Vector2(-18.05f, -59.34f);
 
     private void OnDestroy()
@@ -37,11 +38,14 @@ public class BuildingMesh : MonoBehaviour
                 storedBuildingMeshes.Add(new Mesh());
             }
 
+            // Randomize the building height
+            float buildingHeight = _buildingHeight + _buildingHeightVariation*Random.value;
+
             List<Vector3> footprintPoints = buildingFootprint.GetVertices();
             Vector3 centroid = MathUtils.FindCentroid(footprintPoints);
 
             vertices.Add(centroid);
-            vertices.Add(centroid + Vector3.up*_buildingHeight);
+            vertices.Add(centroid + Vector3.up*buildingHeight);
             uvs.Add(new Vector2(0f, 0f));
             uvs.Add(new Vector2(0f, 0f));
             int centroidIndex = countedVertices;
@@ -55,8 +59,8 @@ public class BuildingMesh : MonoBehaviour
 
                 vertices.Add(a);
                 vertices.Add(b);
-                vertices.Add(a + Vector3.up*_buildingHeight);
-                vertices.Add(b + Vector3.up*_buildingHeight);
+                vertices.Add(a + Vector3.up*buildingHeight);
+                vertices.Add(b + Vector3.up*buildingHeight);
 
                 triangles.Add(centroidIndex);
                 triangles.Add(countedVertices);

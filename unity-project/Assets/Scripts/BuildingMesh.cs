@@ -52,13 +52,11 @@ public class BuildingMesh : MonoBehaviour
             {
                 Vector3 a = footprintPoints[i];
                 Vector3 b = footprintPoints[i+1];
-                Vector3 a3D = RoadMesh.TransformPointToMeshSpace(a);
-                Vector3 b3D = RoadMesh.TransformPointToMeshSpace(b);
 
-                vertices.Add(a3D);
-                vertices.Add(b3D);
-                vertices.Add(a3D + Vector3.up*_buildingHeight);
-                vertices.Add(b3D + Vector3.up*_buildingHeight);
+                vertices.Add(a);
+                vertices.Add(b);
+                vertices.Add(a + Vector3.up*_buildingHeight);
+                vertices.Add(b + Vector3.up*_buildingHeight);
 
                 triangles.Add(centroidIndex);
                 triangles.Add(countedVertices);

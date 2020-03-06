@@ -39,11 +39,15 @@ public class BuildingMesh : MonoBehaviour
 
             List<Vector3> footprintPoints = buildingFootprint.GetVertices();
             Vector3 centroid = MathUtils.FindCentroid(footprintPoints);
+
             vertices.Add(centroid);
             vertices.Add(centroid + Vector3.up*_buildingHeight);
+            uvs.Add(new Vector2(0f, 0f));
+            uvs.Add(new Vector2(0f, 0f));
             int centroidIndex = countedVertices;
             int centroidRaisedIndex = countedVertices+1;
             countedVertices+=2;
+
             for(int i=0; i<footprintPoints.Count-1; i++)
             {
                 Vector3 a = footprintPoints[i];
@@ -79,15 +83,16 @@ public class BuildingMesh : MonoBehaviour
                 uvs.Add(new Vector2(0f, 1f));
                 uvs.Add(new Vector2(1f, 1f));
 
-                if(vertices.Count > 20000)
-                {
-                    CreateNewMeshFilterWithMesh(vertices, triangles, uvs, storedBuildingMeshes[currentMeshCounter]);
-                    vertices.Clear();
-                    triangles.Clear();
-                    uvs.Clear();
-                    countedVertices = 0;
-                    currentMeshCounter++;
-                }
+            }
+
+            if(vertices.Count > 20000)
+            {
+                CreateNewMeshFilterWithMesh(vertices, triangles, uvs, storedBuildingMeshes[currentMeshCounter]);
+                vertices.Clear();
+                triangles.Clear();
+                uvs.Clear();
+                countedVertices = 0;
+                currentMeshCounter++;
             }
         }
 

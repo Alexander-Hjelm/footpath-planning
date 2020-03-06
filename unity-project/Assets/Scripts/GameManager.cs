@@ -15,8 +15,10 @@ public class GameManager : MonoBehaviour
 
     private RoadNodeCollection roadNodeCollection;
     private List<RoadPath> roadNodesList;
+    private List<BuildingFootprint> buildingFootprintList = new List<BuildingFootprint>();
     private Dictionary<RoadNode, RoadMesh> roadMeshes = new Dictionary<RoadNode, RoadMesh>();
     private RoadMesh roadMesh;
+    private BuildingMesh buildingMesh;
     private List<List<Vector2>> rawPaths = new List<List<Vector2>>();
     private Dictionary<RoadNode.HighwayType, Patch[]> _loadedPatches = new Dictionary<RoadNode.HighwayType, Patch[]>();
 
@@ -102,6 +104,7 @@ public class GameManager : MonoBehaviour
         roadNodesList = roadNodeCollection.BuildAndGetPaths();
 
         GenerateRoadMesh();
+        GenerateBuildingMesh();
     }
 
     private void Update()
@@ -152,6 +155,19 @@ public class GameManager : MonoBehaviour
         GameObject roadMeshObj = new GameObject();
         _instance.roadMesh = roadMeshObj.AddComponent(typeof(RoadMesh)) as RoadMesh;
         _instance.roadMesh.GenerateMeshFromPaths(_instance.roadNodesList);
+    }
+
+    public static void GenerateBuildingMesh()
+    {
+        if(_instance.buildingMesh != null)
+        {
+            DestroyImmediate(_instance.buildingMesh.gameObject);
+        }
+
+        // Generate mesh
+        GameObject buildingMeshObj = new GameObject();
+        _instance.buildingMesh = buildingMeshObj.AddComponent(typeof(BuildingMesh)) as BuildingMesh;
+        _instance.buildingMesh.GenerateMeshFromFootprints(_instance.buildingFootprintList);
     }
 
     public static List<RoadPath> GetPaths()

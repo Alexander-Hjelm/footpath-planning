@@ -1,6 +1,8 @@
-Query to http://overpass-turbo.eu/
+// Query to http://overpass-turbo.eu/
+
+// Query for ways
 <query type="way">
-    <around lat="59.334591" lon="18.063240" radius="2000"/>
+    <around lat="59.334591" lon="18.063240" radius="800"/>
     <has-kv k="highway"/>
 </query>
 <union>
@@ -8,3 +10,15 @@ Query to http://overpass-turbo.eu/
   <recurse type="down"/>
 </union>
 <print/>
+
+// Query for building footprints
+<query type="wr">
+    <around lat="59.334591" lon="18.063240" radius="800"/>
+    <has-kv k="building"/>
+</query>
+<union>
+  <item/>
+  <recurse type="down"/>
+</union>
+<print/>
+

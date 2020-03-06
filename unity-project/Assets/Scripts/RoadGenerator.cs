@@ -90,7 +90,7 @@ public class RoadGenerator
 
         // Finally, Notify the GameManager to generate a new mesh
         GameManager.SetPaths(paths);
-        GameManager.GenerateMesh();
+        GameManager.GenerateRoadMesh();
     }
 
     private static bool TryAddPatch(out List<RoadNode> endNodes, Patch patch, RoadNode anchorNode, Polygon polygon, List<RoadEdge> edgesForCollisionCheck, List<RoadPath> pathsToBeAddedTo)

@@ -68,6 +68,23 @@ public class GameManager : MonoBehaviour
             _loadedPatches[RoadNode.GetHighwayTypeFromString(hwy)] = patches;
         }
 
+        // Read building footprint data
+        FeatureCollection buildingFeatureCollection = GeoJSONImporter.ReadFeatureCollectionFromFile("MapData/buildings");
+        foreach(FeatureObject feature in buildingFeatureCollection.features)
+        {
+            BuildingFootprint buildingFootprint = new BuildingFootprint();
+            GeometryObject geometryObject = feature.geometry;
+            List<PositionObject> positions = geometryObject.AllPositions();
+            foreach(PositionObject position in positions)
+            {
+                // Coordinate transformation
+                Vector3 transformed = RoadMesh.TransformPointToMeshSpace(new Vector2(position.longitude, position.latitude));
+                // Add node to path
+                buildingFootprint.AddVertex(transformed);
+            }
+            buildingFootprintList.Add(buildingFootprint);
+        }
+
         // Send a reference of the loaded paths to the RoadGenerator
         RoadGenerator.LoadPatches(_loadedPatches);
 

@@ -81,3 +81,25 @@ Frågor till nästa möte:
 
 Möte med Todor, 02/03/2020:
     Hur bra är osm-data för att merga vägar till representation med lanes för bilar/cykel/footpath, med en defaultbredd för varje
+
+    Länkar:
+    https://www.researchgate.net/publication/334326665_Typo-morphology_of_transportation_-Looking_at_historical_development_and_multimodal_futures_of_Swedish_streets_and_roads
+    http://www.cmecc.com/uploads/%E8%AF%BE%E6%9C%AC%E5%92%8C%E8%AE%BA%E6%96%87/%5B92%5D%5B%E8%A7%84%E5%88%92%E8%AE%BE%E8%AE%A1%5DStephen.Marshal(2005)Streets.and.patterns.pdf
+    https://www.youtube.com/watch?v=qW2DALscsXk
+    https://scholar.google.com/citations?user=AYt9TPgAAAAJ&hl=en
+
+Möte med Chris, 05/03/2020:
+    FWDa projectspecifikation till Ann till Jonas Beskow
+    Fråga Todor: Standard widths, road widths + footpath widths, what ways are there to infer them?
+    OSM: Infer footpath width from nearest buildings (building footprint)
+    How do we make a best guess of footpath width
+    Building footprints
+    Average footpath width in the whole stockholm
+    Pass 1: Convert to a 3D mesh and measure the paths for which there are collision with other map elements
+    Go out physically and measure road withs changing
+    Ask Todor: Is there a detailed database for path widths in Stockholm? Do urban planners go out and physically 
+    GIS: Height data. Get a heightmap of buildings for footprints+terrain.
+    Find out what default width OSM uses for paths
+    Motivation: AI agents, they might fail navigating when faced with a too narrow path or intersecting obstacles
+    Record a video of the demo
+

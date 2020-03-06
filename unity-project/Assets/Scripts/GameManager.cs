@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     private bool _debugRawPaths = false;
     private bool _debugPatches = false;
-    private bool _debugOnlyResidential = true;
+    private bool _debugOnlyResidential = false;
 
     private static GameManager _instance;
 

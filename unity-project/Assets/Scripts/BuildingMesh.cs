@@ -109,7 +109,8 @@ public class BuildingMesh : MonoBehaviour
 
         MeshRenderer meshRenderer = go.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
         Material material = new Material(Shader.Find("Standard"));
-        material.mainTexture = Resources.Load("Textures/Road") as Texture;
+        material.color = new Color(0.8f, 0.8f, 0.8f, 1f);
+        //material.mainTexture = Resources.Load("Textures/Road") as Texture;
         meshRenderer.sharedMaterial = material;
         MeshFilter meshFilter = go.AddComponent(typeof(MeshFilter)) as MeshFilter;
 

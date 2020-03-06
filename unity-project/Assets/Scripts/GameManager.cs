@@ -101,7 +101,7 @@ public class GameManager : MonoBehaviour
         }
         roadNodesList = roadNodeCollection.BuildAndGetPaths();
 
-        GenerateMesh();
+        GenerateRoadMesh();
     }
 
     private void Update()
@@ -141,7 +141,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public static void GenerateMesh()
+    public static void GenerateRoadMesh()
     {
         if(_instance.roadMesh != null)
         {

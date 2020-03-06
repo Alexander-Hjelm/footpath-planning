@@ -53,6 +53,8 @@ The challenge lies in how to extract the footpath data and tie it together with 
 \item The program will not handle terrain features and altitude. It will be assume that the road mesh is projected on a flat 2D surface.
 \end{enumerate}
 
+With that said, Nishida et. al. present an excellent solution for generating new road patches that comform to an underlying terrain function.
+
 \subsection{Evaluation}
 
 The question will be examined primarily by creating a piece of software that can generate urban maps with primary and secondary roads, as well as footpaths, from example. I will experiment with different methods of collecting road data as well as different sample amounts and densities.
@@ -67,9 +69,22 @@ These distributions could be created for primary, secondary roads and footpaths 
 Procedural modeling of road networks is of interest to the fields of urban planning and urban architecture. In recent years there has been an advent of interactive tools that aid urban planners in placing or generating features of an urban plan, particularly roads and road networks.
 Additionally, the topic is of interest for 3D content creators in for example the fields of video game design or 3D animation. A trend in these fields is using methods of procedural modeling to create large amounts of 3D content quickly and efficiently, while requiring as little hand modeling as possible. Studios who create large worlds are often interested in solutions that generate large road networks without any hand modeling.
 
+Motivation
+
+Navigation agents, they might fail navigating when faced with a too narrow path or intersecting obstacles
+Using a road network to creates an underlying navmesh
+
 \subsection{ESAL, KTH}
 The thesis work will be carried out at the Embodied Social Agents Lab (ESAL) at the Department of Computational Science and Technology (CST). The lab has before been working on systems for generating procedural urban environments, and are interested in the possibility of generating more detailed maps than have been done before, using example-based methods to preserve the aesthetic look of a greater metropolitan area. The lab is particularly interested in the generation of footpaths, since most commercial software that import road maps only import arterial and secondary car roads, and do not include pedestrian walkways, cycle paths and such smaller roads.
 % TODO: any official description of ESAL that can be used here?
+
+\section(OSM Data)
+
+To separate sidewalks from detached footpaths, I used the fact that OSM generally provides sidewalks with the same name as the adjacent motorway. Thus they can be paired together and measured against each other.
+
+\section{Implementation}
+
+In this implementation, roads of different types were allowed to merge into one another to form common intersections. To facilitate this, it was neccessary to work with a path-by-path representation of the point data. When two path share a node with common coordinates, they form an intersection which can be of multiple different types.
 
 \end{multicols}
 

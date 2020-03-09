@@ -85,11 +85,15 @@ public class GameManager : MonoBehaviour
             buildingFootprintList.Add(buildingFootprint);
         }
 
+        // Read paths widths
+        Dictionary<string, float> pathWidths = JsonManager.ReadObject<Dictionary<string, float>>("Assets/Resources/MapData/path_widths");
+
         // Send a reference of the loaded paths to the RoadGenerator
         RoadGenerator.LoadPatches(_loadedPatches);
 
         roadNodeCollection = new RoadNodeCollection();
 
+        // Read paths
         foreach(string hwy in _highwayCategories)
         {
             FeatureCollection collection = GeoJSONImporter.ReadFeatureCollectionFromFile("MapData/" + hwy);
@@ -114,7 +118,7 @@ public class GameManager : MonoBehaviour
                     // Add node to path
                     path.Add(new Vector2(transformed.x, transformed.z));
                 }
-                roadNodeCollection.ReadPath(path, RoadNode.GetHighwayTypeFromString(hwy));
+                roadNodeCollection.ReadPath(path, RoadNode.GetHighwayTypeFromString(hwy), feature.properties["@id"]);
                 rawPaths.Add(path);
             }
         }

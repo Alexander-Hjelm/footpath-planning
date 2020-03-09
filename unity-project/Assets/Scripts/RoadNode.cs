@@ -32,6 +32,7 @@ public class RoadNode
     private float _xCoord;
     private float _yCoord;
     private HighwayType _highwayType;
+    private string _pathId;
     private bool _intersection;
 
     public static HighwayType GetHighwayTypeFromString(string input)
@@ -40,16 +41,17 @@ public class RoadNode
     }
 
 
-    public RoadNode(float x, float y, HighwayType highwayType)
+    public RoadNode(float x, float y, HighwayType highwayType, string pathId)
     {
         _xCoord = x;
         _yCoord = y;
         _highwayType = highwayType;
+        _pathId = pathId;
         _intersection = false;
     }
 
     public RoadNode(Vector2 pos, HighwayType highwayType):
-        this(pos.x, pos.y, highwayType)
+        this(pos.x, pos.y, highwayType, "")
     {
     }
 

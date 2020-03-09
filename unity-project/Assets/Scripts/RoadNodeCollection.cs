@@ -10,7 +10,7 @@ public class RoadNodeCollection
 
     private Dictionary<RoadNode, int> _visitedCount = new Dictionary<RoadNode, int>();
 
-    public void ReadPath(List<Vector2> points, RoadNode.HighwayType hwyType)
+    public void ReadPath(List<Vector2> points, RoadNode.HighwayType hwyType, string id)
     {
         RoadPath path = new RoadPath(hwyType);
         for(int i=0; i<points.Count; i++)
@@ -24,7 +24,7 @@ public class RoadNodeCollection
             }
 
             // Generate and add the node
-            RoadNode node = GetNode(points[i], hwyType);
+            RoadNode node = GetNode(points[i], hwyType, id);
 
             path.Add(node);
             BumpVisitedCount(node);
@@ -88,7 +88,7 @@ public class RoadNodeCollection
         }
     }
 
-    private RoadNode AddAndReturnNode(Vector2 point, RoadNode.HighwayType hwyType)
+    private RoadNode AddAndReturnNode(Vector2 point, RoadNode.HighwayType hwyType, string id)
     {
         if(!_readNodesByCoord.ContainsKey(point.x))
         {
@@ -97,7 +97,7 @@ public class RoadNodeCollection
 
         if(!_readNodesByCoord[point.x].ContainsKey(point.y))
         {
-            _readNodesByCoord[point.x][point.y] = new RoadNode(point.x, point.y, hwyType);
+            _readNodesByCoord[point.x][point.y] = new RoadNode(point.x, point.y, hwyType, id);
         }
         return _readNodesByCoord[point.x][point.y];
     }
@@ -109,7 +109,7 @@ public class RoadNodeCollection
         return false;
     }
 
-    private RoadNode GetNode(Vector2 point, RoadNode.HighwayType hwyType)
+    private RoadNode GetNode(Vector2 point, RoadNode.HighwayType hwyType, string id)
     {
         if(NodeHasBeenRead(point))
         {
@@ -119,7 +119,7 @@ public class RoadNodeCollection
         }
         else
         {
-            return AddAndReturnNode(point, hwyType);
+            return AddAndReturnNode(point, hwyType, id);
         }
     }
 

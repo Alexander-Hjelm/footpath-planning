@@ -80,7 +80,7 @@ public class RoadGenerator
                         //TODO: Queue.Contains is O(n), find a way to use Dictionary.Contains instead (O(1))
                         if(!tentativeNodes.Contains(endPoint))
                         {
-                            //tentativeNodes.Queue(endPoint);
+                            //tentativeNodes.Enqueue(endPoint);
                         }
                     }
                     break;
@@ -105,8 +105,10 @@ public class RoadGenerator
         // Check that all points in the patch are inside the polygon
         foreach(Vector2 v in patch.GetVertices())
         {
-            if(!polygon.ContainsPoint(v))
+            if(!polygon.ContainsPoint(v+patchOffset))
+            {
                 return false;
+            }
         }
 
         // Check that no edges in the patch intersect with any existing edges
@@ -122,16 +124,18 @@ public class RoadGenerator
         for(int i=0; i<patch.GetVertices().Length; i++)
         {
             Vector2 v = patch.GetVertices()[i];
-            patchNodes[i] = new RoadNode(v, anchorNode.GetHighwayType());
+            patchNodes[i] = new RoadNode(v+patchOffset, anchorNode.GetHighwayType());
         }
         foreach(Patch.Edge edge in patch.GetEdges())
         {
             RoadNode nodeU = patchNodes[edge.IndexU];
             RoadNode nodeV = patchNodes[edge.IndexV];
 
-            RoadPath path = new RoadPath(anchorNode.GetHighwayType(), "");
+            RoadPath path = new RoadPath(anchorNode.GetHighwayType(), edge.PathId);
             path.Add(nodeU);
             path.Add(nodeV);
+
+            edgesForCollisionCheck.Add(new RoadEdge(nodeU, nodeV));
 
             pathsToBeAddedTo.Add(path);
 

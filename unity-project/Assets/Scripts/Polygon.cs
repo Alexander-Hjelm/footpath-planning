@@ -66,4 +66,16 @@ public class Polygon
         return centroid;
 
     }
+
+    public string ToString()
+    {
+        string outStr = "";
+        for(int i=0; i<_points.Length; i++)
+        {
+            outStr += _points[i];
+            if(i<_points.Length-1)
+                outStr += ", ";
+        }
+        return outStr;
+    }
 }

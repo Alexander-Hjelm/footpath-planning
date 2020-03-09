@@ -43,14 +43,6 @@ public class RoadMesh : MonoBehaviour
         {RoadNode.HighwayType.PRIMARY, 0f}
     };
 
-    private Dictionary<RoadNode.HighwayType, float> _roadWidthByHwyType = new Dictionary<RoadNode.HighwayType, float>()
-    {
-        {RoadNode.HighwayType.FOOTPATH, 0.25f},
-        {RoadNode.HighwayType.RESIDENTIAL, 0.5f},
-        {RoadNode.HighwayType.SECONDARY, 0.75f},
-        {RoadNode.HighwayType.PRIMARY, 1f}
-    };
-
     private void OnDestroy()
     {
         foreach(GameObject go in _rendererGOs)
@@ -59,7 +51,7 @@ public class RoadMesh : MonoBehaviour
         }
     }
 
-    public void GenerateMeshFromPaths(List<RoadPath> paths)
+    public void GenerateMeshFromPaths(List<RoadPath> paths, Dictionary<string, float> pathWidths)
     {
         // Start building path mesh
         List<Vector3> vertices = new List<Vector3>();
@@ -79,6 +71,7 @@ public class RoadMesh : MonoBehaviour
             }
 
             RoadEndPoint previousRoadEndPoint = new RoadEndPoint(Vector3.zero, Vector3.zero, -1, -1, Vector3.zero, RoadNode.HighwayType.NONE, null);
+            float width = -10000f;
 
             RoadNode.HighwayType hwyType = RoadNode.HighwayType.NONE;
 
@@ -88,6 +81,8 @@ public class RoadMesh : MonoBehaviour
                 RoadNode b = path.Get(i+1);
 
                 if(hwyType == RoadNode.HighwayType.NONE) hwyType = path.GetHighwayType();
+                if(width == -10000f) width = pathWidths[path.GetId()];
+
                 Vector3 posA = new Vector3(a.GetX(), 0f, a.GetY());
                 Vector3 posB = new Vector3(b.GetX(), 0f, b.GetY());
                 Vector3 tangent = (posB - posA).normalized;
@@ -98,10 +93,10 @@ public class RoadMesh : MonoBehaviour
                 }
                 Vector3 normal = new Vector3(tangent.z, 0f, -tangent.x)*0.001f;
 
-                Vector3 leftStartPoint = posA + normal*_roadWidth*_roadWidthByHwyType[hwyType];
-                Vector3 rightStartPoint = posA - normal*_roadWidth*_roadWidthByHwyType[hwyType];
-                Vector3 leftEndPoint = posB + normal*_roadWidth*_roadWidthByHwyType[hwyType];
-                Vector3 rightEndPoint = posB - normal*_roadWidth*_roadWidthByHwyType[hwyType];
+                Vector3 leftStartPoint = posA + normal*_roadWidth*width;
+                Vector3 rightStartPoint = posA - normal*_roadWidth*width;
+                Vector3 leftEndPoint = posB + normal*_roadWidth*width;
+                Vector3 rightEndPoint = posB - normal*_roadWidth*width;
 
                 // If this is not the first path segment, merge it with the previous one
                 if(previousRoadEndPoint.tangent != Vector3.zero)

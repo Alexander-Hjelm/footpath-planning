@@ -10,9 +10,9 @@ public class RoadNodeCollection
 
     private Dictionary<RoadNode, int> _visitedCount = new Dictionary<RoadNode, int>();
 
-    public void ReadPath(List<Vector2> points, RoadNode.HighwayType hwyType)
+    public void ReadPath(List<Vector2> points, RoadNode.HighwayType hwyType, string id)
     {
-        RoadPath path = new RoadPath(hwyType);
+        RoadPath path = new RoadPath(hwyType, id);
         for(int i=0; i<points.Count; i++)
         {
             // Cleanup, ignore all successive duplicate nodes in the paths
@@ -49,7 +49,7 @@ public class RoadNodeCollection
                 if(i>0 && i<path.Count()-1 && _visitedCount[node] > 1)
                 {
                     // This is an intersection, we should split the path
-                    RoadPath path2 = new RoadPath(path.GetHighwayType());
+                    RoadPath path2 = new RoadPath(path.GetHighwayType(), path.GetId());
                     for(int j=0; j<i; j++)
                     {
                         // Move all other points from the first path to the second

@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     private BuildingMesh buildingMesh;
     private List<List<Vector2>> rawPaths = new List<List<Vector2>>();
     private Dictionary<RoadNode.HighwayType, Patch[]> _loadedPatches = new Dictionary<RoadNode.HighwayType, Patch[]>();
+    private Dictionary<string, float> _pathWidths;
 
     private bool _debugRawPaths = false;
     private bool _debugPatches = false;
@@ -85,11 +86,15 @@ public class GameManager : MonoBehaviour
             buildingFootprintList.Add(buildingFootprint);
         }
 
+        // Read paths widths
+        _pathWidths = JsonManager.ReadObject<Dictionary<string, float>>("Assets/Resources/MapData/path_widths");
+
         // Send a reference of the loaded paths to the RoadGenerator
         RoadGenerator.LoadPatches(_loadedPatches);
 
         roadNodeCollection = new RoadNodeCollection();
 
+        // Read paths
         foreach(string hwy in _highwayCategories)
         {
             FeatureCollection collection = GeoJSONImporter.ReadFeatureCollectionFromFile("MapData/" + hwy);
@@ -114,7 +119,7 @@ public class GameManager : MonoBehaviour
                     // Add node to path
                     path.Add(new Vector2(transformed.x, transformed.z));
                 }
-                roadNodeCollection.ReadPath(path, RoadNode.GetHighwayTypeFromString(hwy));
+                roadNodeCollection.ReadPath(path, RoadNode.GetHighwayTypeFromString(hwy), feature.properties["@id"]);
                 rawPaths.Add(path);
             }
         }
@@ -171,7 +176,7 @@ public class GameManager : MonoBehaviour
         // Generate mesh
         GameObject roadMeshObj = new GameObject();
         _instance.roadMesh = roadMeshObj.AddComponent(typeof(RoadMesh)) as RoadMesh;
-        _instance.roadMesh.GenerateMeshFromPaths(_instance.roadNodesList);
+        _instance.roadMesh.GenerateMeshFromPaths(_instance.roadNodesList, _instance._pathWidths);
     }
 
     public static void GenerateBuildingMesh()

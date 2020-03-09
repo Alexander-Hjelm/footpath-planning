@@ -218,6 +218,7 @@ def ExtractPatches(G):
 
     return patches
 
+id_map = {}
 
 for file_name in files_to_read:
 
@@ -232,6 +233,7 @@ for file_name in files_to_read:
         properties = feature['properties']
         geometry = feature['geometry']
         geo_type = geometry['type']
+        feature_id = properties['@id']
 
         # Skip polygon features
         if geo_type == 'Polygon' or geo_type == "MultiPolygon":
@@ -243,7 +245,7 @@ for file_name in files_to_read:
             x = coordinate[0]
             y = coordinate[1]
 
-            node = Node(x, y, properties['@id'])
+            node = Node(x, y, feature_id)
 
             # Add node to dictionary if not already read
             if not x in nodes_by_coord:
@@ -256,8 +258,16 @@ for file_name in files_to_read:
                 y_prev = coordinates[i-1][1]
                 if node == nodes_by_coord[x_prev][y_prev]:
                     print("Error: Added the node as its own neighbour")
-                node.add_neighbour(nodes_by_coord[x_prev][y_prev])
+                node_prev = nodes_by_coord[x_prev][y_prev]
+                node.add_neighbour(node_prev)
                 nodes_by_coord[x_prev][y_prev].add_neighbour(node)
+                # Register the neighbour relationship with the feature id
+                if not node in id_map:
+                    id_map[node] = {}
+                if not node_prev in id_map:
+                    id_map[node_prev] = {}
+                id_map[node][node_prev] = feature_id
+                id_map[node_prev][node] = feature_id
 
     G = []
     for x in nodes_by_coord:
@@ -272,8 +282,9 @@ for file_name in files_to_read:
         if len(patch.vertices) < min_num_of_vertices_per_patch:
             continue
         json_out.append({})
-        json_out[i]['edges'] = []
         json_out[i]['points'] = []
+        json_out[i]['edges'] = []
+        json_out[i]['edge_ids'] = []
         json_out[i]['stat_avg_len'] = patch.stat_len
         json_out[i]['stat_var_len'] = patch.stat_len_var
         json_out[i]['stat_avg_curv'] = patch.stat_curv
@@ -285,6 +296,7 @@ for file_name in files_to_read:
             json_out[i]['edges'].append([e[0], e[1]])
             if e[0] > len(patch.vertices):
                 print("ERROR")
+            json_out[i]['edge_ids'].append(id_map[patch.vertices[e[0]]][patch.vertices[e[1]]])
         i += 1
 
     with open('out_data/' + file_name + '.json', 'w') as f:

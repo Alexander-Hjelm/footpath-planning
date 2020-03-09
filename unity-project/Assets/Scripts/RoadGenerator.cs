@@ -134,6 +134,8 @@ public class RoadGenerator
             path.Add(nodeU);
             path.Add(nodeV);
 
+            edgesForCollisionCheck.Add(new RoadEdge(nodeU, nodeV));
+
             pathsToBeAddedTo.Add(path);
 
             if(patch.IsVertexEndPoint(edge.IndexU))

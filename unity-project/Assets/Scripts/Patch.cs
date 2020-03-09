@@ -32,7 +32,7 @@ public class Patch
         {
             int u = patchData.edges[i, 0];
             int v = patchData.edges[i, 1];
-            string id = patchData.edgeIds[i];
+            string id = patchData.edge_ids[i];
             _edges[i] = new Edge(u, v, id);
             vertexHits[u]++;
             vertexHits[v]++;

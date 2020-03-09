@@ -105,7 +105,8 @@ public class RoadGenerator
         // Check that all points in the patch are inside the polygon
         foreach(Vector2 v in patch.GetVertices())
         {
-            if(!polygon.ContainsPoint(v))
+            if(!polygon.ContainsPoint(v+patchOffset))
+            {
                 return false;
         }
 

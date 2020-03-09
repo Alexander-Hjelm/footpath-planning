@@ -9,10 +9,10 @@ highway_categories = [
         ]
 
 standard_widths = {
-        'footpath': 0.1,
-        'residential': 0.2,
-        'secondary': 0.3,
-        'primary': 0.4
+        'footpath': 0.25,
+        'residential': 0.5,
+        'secondary': 0.75,
+        'primary': 1.0
         }
 
 path_data = {}

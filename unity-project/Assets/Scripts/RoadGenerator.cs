@@ -80,7 +80,7 @@ public class RoadGenerator
                         //TODO: Queue.Contains is O(n), find a way to use Dictionary.Contains instead (O(1))
                         if(!tentativeNodes.Contains(endPoint))
                         {
-                            //tentativeNodes.Queue(endPoint);
+                            //tentativeNodes.Enqueue(endPoint);
                         }
                     }
                     break;
@@ -108,6 +108,7 @@ public class RoadGenerator
             if(!polygon.ContainsPoint(v+patchOffset))
             {
                 return false;
+            }
         }
 
         // Check that no edges in the patch intersect with any existing edges

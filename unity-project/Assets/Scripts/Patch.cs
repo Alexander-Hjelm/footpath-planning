@@ -7,11 +7,13 @@ public class Patch
     {
         public int IndexU;
         public int IndexV;
+        public string PathId;
 
-        public Edge(int indexU, int indexV)
+        public Edge(int indexU, int indexV, string pathId)
         {
             IndexU = indexU;
             IndexV = indexV;
+            PathId = pathId;
         }
     }
 
@@ -30,7 +32,8 @@ public class Patch
         {
             int u = patchData.edges[i, 0];
             int v = patchData.edges[i, 1];
-            _edges[i] = new Edge(u, v);
+            string id = patchData.edgeIds[i];
+            _edges[i] = new Edge(u, v, id);
             vertexHits[u]++;
             vertexHits[v]++;
         }

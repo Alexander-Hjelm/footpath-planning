@@ -12,7 +12,7 @@ public class RoadNodeCollection
 
     public void ReadPath(List<Vector2> points, RoadNode.HighwayType hwyType, string id)
     {
-        RoadPath path = new RoadPath(hwyType);
+        RoadPath path = new RoadPath(hwyType, id);
         for(int i=0; i<points.Count; i++)
         {
             // Cleanup, ignore all successive duplicate nodes in the paths
@@ -24,7 +24,7 @@ public class RoadNodeCollection
             }
 
             // Generate and add the node
-            RoadNode node = GetNode(points[i], hwyType, id);
+            RoadNode node = GetNode(points[i], hwyType);
 
             path.Add(node);
             BumpVisitedCount(node);
@@ -49,7 +49,7 @@ public class RoadNodeCollection
                 if(i>0 && i<path.Count()-1 && _visitedCount[node] > 1)
                 {
                     // This is an intersection, we should split the path
-                    RoadPath path2 = new RoadPath(path.GetHighwayType());
+                    RoadPath path2 = new RoadPath(path.GetHighwayType(), path.GetId());
                     for(int j=0; j<i; j++)
                     {
                         // Move all other points from the first path to the second
@@ -88,7 +88,7 @@ public class RoadNodeCollection
         }
     }
 
-    private RoadNode AddAndReturnNode(Vector2 point, RoadNode.HighwayType hwyType, string id)
+    private RoadNode AddAndReturnNode(Vector2 point, RoadNode.HighwayType hwyType)
     {
         if(!_readNodesByCoord.ContainsKey(point.x))
         {
@@ -97,7 +97,7 @@ public class RoadNodeCollection
 
         if(!_readNodesByCoord[point.x].ContainsKey(point.y))
         {
-            _readNodesByCoord[point.x][point.y] = new RoadNode(point.x, point.y, hwyType, id);
+            _readNodesByCoord[point.x][point.y] = new RoadNode(point.x, point.y, hwyType);
         }
         return _readNodesByCoord[point.x][point.y];
     }
@@ -109,7 +109,7 @@ public class RoadNodeCollection
         return false;
     }
 
-    private RoadNode GetNode(Vector2 point, RoadNode.HighwayType hwyType, string id)
+    private RoadNode GetNode(Vector2 point, RoadNode.HighwayType hwyType)
     {
         if(NodeHasBeenRead(point))
         {
@@ -119,7 +119,7 @@ public class RoadNodeCollection
         }
         else
         {
-            return AddAndReturnNode(point, hwyType, id);
+            return AddAndReturnNode(point, hwyType);
         }
     }
 

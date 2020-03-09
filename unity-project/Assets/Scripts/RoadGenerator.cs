@@ -129,7 +129,7 @@ public class RoadGenerator
             RoadNode nodeU = patchNodes[edge.IndexU];
             RoadNode nodeV = patchNodes[edge.IndexV];
 
-            RoadPath path = new RoadPath(anchorNode.GetHighwayType());
+            RoadPath path = new RoadPath(anchorNode.GetHighwayType(), "");
             path.Add(nodeU);
             path.Add(nodeV);
 

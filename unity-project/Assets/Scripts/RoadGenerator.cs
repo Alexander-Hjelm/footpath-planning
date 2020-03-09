@@ -123,7 +123,7 @@ public class RoadGenerator
         for(int i=0; i<patch.GetVertices().Length; i++)
         {
             Vector2 v = patch.GetVertices()[i];
-            patchNodes[i] = new RoadNode(v, anchorNode.GetHighwayType());
+            patchNodes[i] = new RoadNode(v+patchOffset, anchorNode.GetHighwayType());
         }
         foreach(Patch.Edge edge in patch.GetEdges())
         {

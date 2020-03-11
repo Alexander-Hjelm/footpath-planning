@@ -21,7 +21,7 @@ def epsg3006_to_wgs84(point):
     y = point[1]
     # Coordinate conversion from EPSG:3006 to WGS:84
     x_new = 0.000011199*x + 10.5112561156
-    y_new = 0.000009016*y
+    y_new = 0.00000901561*y
     return (x_new, y_new)
 
 

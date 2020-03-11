@@ -7,10 +7,8 @@ using UnityEditor;
 public class BuildingMesh : MonoBehaviour
 {
     private List<GameObject> _rendererGOs = new List<GameObject>();
-    private static float _scale = 500f;
     private static float _buildingHeight = 0.2f;
     private static float _buildingHeightVariation = 0.1f;
-    private static Vector2 _offset = new Vector2(-18.05f, -59.34f);
 
     private void OnDestroy()
     {
@@ -136,8 +134,4 @@ public class BuildingMesh : MonoBehaviour
         _rendererGOs.Add(go);
     }
 
-    public static Vector3 TransformPointToMeshSpace(Vector2 input)
-    {
-        return new Vector3((input.x+_offset.x)*0.5f, 0f, (input.y+_offset.y))*_scale;
-    }
 }

@@ -18,19 +18,22 @@ def epsg3006_to_wgs84(point):
 
 for i in range(0, len(shapes)):
     shape = shapes[i]
-    coordinates = shape['geometry']['coordinates'][0]
 
-    # Coordinate conversion
-    for j in range(0, len(coordinates)):
-        point = coordinates[j]
-        if type(point) == tuple:
-            coordinates[j] = epsg3006_to_wgs84(point)
-        elif type(point) == list:
-            for k in range(0, len(point)):
-                coordinates[j][k] = epsg3006_to_wgs84(coordinates[j][k])
-            pass
-        else:
-            print("ERROR: No handling for points of type: " + type(point))
+    coordinates_container = shape['geometry']['coordinates']
+    for s in range(0, len(coordinates_container)):
+        coordinates = coordinates_container[s]
+
+        # Coordinate conversion
+        for j in range(0, len(coordinates)):
+            point = coordinates[j]
+            if type(point) == tuple:
+                coordinates[j] = epsg3006_to_wgs84(point)
+            elif type(point) == list:
+                for k in range(0, len(point)):
+                    coordinates[j][k] = epsg3006_to_wgs84(coordinates[j][k])
+                pass
+            else:
+                print("ERROR: No handling for points of type: " + type(point))
 
     # Append shape to output data in GeoJSON format
     data_out.append(shape)

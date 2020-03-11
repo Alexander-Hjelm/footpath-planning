@@ -7,6 +7,15 @@ print(shapes.schema)
 #first = shapes.next()
 data_out = []
 
+def polygon_area(vertices):
+    n = len(vertices) # of corners
+    a = 0.0
+    for i in range(n):
+        j = (i + 1) % n
+        a += abs(vertices[i][0] * vertices[j][1]-vertices[j][0] * vertices[i][1])
+    result = a / 2.0
+    return result
+
 def epsg3006_to_wgs84(point):
     x = point[0]
     y = point[1]
@@ -18,6 +27,7 @@ def epsg3006_to_wgs84(point):
 
 for i in range(0, len(shapes)):
     shape = shapes[i]
+    shape_points = []
 
     coordinates_container = shape['geometry']['coordinates']
     for s in range(0, len(coordinates_container)):
@@ -28,12 +38,18 @@ for i in range(0, len(shapes)):
             point = coordinates[j]
             if type(point) == tuple:
                 coordinates[j] = epsg3006_to_wgs84(point)
+                shape_points.append(coordinates[j])
             elif type(point) == list:
                 for k in range(0, len(point)):
                     coordinates[j][k] = epsg3006_to_wgs84(coordinates[j][k])
+                    shape_points.append(coordinates[j][k])
                 pass
             else:
                 print("ERROR: No handling for points of type: " + type(point))
+    
+    if polygon_area(shape_points) > 0.3:
+        print("Shape " + shape['id'] + " was not included since the area was too large.")
+        continue
 
     # Append shape to output data in GeoJSON format
     data_out.append(shape)

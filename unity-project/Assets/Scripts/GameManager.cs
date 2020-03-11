@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     private Dictionary<RoadNode, RoadMesh> roadMeshes = new Dictionary<RoadNode, RoadMesh>();
     private RoadMesh roadMesh;
     private BuildingMesh buildingMesh;
+    private PlotMesh plotMesh;
     private List<List<Vector2>> rawPaths = new List<List<Vector2>>();
     private Dictionary<RoadNode.HighwayType, Patch[]> _loadedPatches = new Dictionary<RoadNode.HighwayType, Patch[]>();
     private Dictionary<string, float> _pathWidths;
@@ -87,6 +88,25 @@ public class GameManager : MonoBehaviour
             buildingFootprintList.Add(buildingFootprint);
         }
 
+        // Read plot data
+        FeatureCollection plotFeatureCollection = GeoJSONImporter.ReadFeatureCollectionFromFile("MapData/plots");
+        foreach(FeatureObject feature in plotFeatureCollection.features)
+        {
+            Footprint plotFootprint = new Footprint();
+            GeometryObject geometryObject = feature.geometry;
+            List<PositionObject> positions = geometryObject.AllPositions();
+            foreach(PositionObject position in positions)
+            {
+                // Coordinate transformation
+                Vector3 transformed = RoadMesh.TransformPointToMeshSpace(new Vector2(position.longitude, position.latitude));
+                // Add node to path
+                plotFootprint.AddVertex(transformed);
+                print(position.longitude + ", " + position.latitude);
+                print(transformed.x + ", " + transformed.z);
+            }
+            plotFootprintList.Add(plotFootprint);
+        }
+
         // Read paths widths
         _pathWidths = JsonManager.ReadObject<Dictionary<string, float>>("Assets/Resources/MapData/path_widths");
 
@@ -128,6 +148,7 @@ public class GameManager : MonoBehaviour
 
         GenerateRoadMesh();
         GenerateBuildingMesh();
+        GeneratePlotMesh();
     }
 
     private void Update()
@@ -191,6 +212,19 @@ public class GameManager : MonoBehaviour
         GameObject buildingMeshObj = new GameObject();
         _instance.buildingMesh = buildingMeshObj.AddComponent(typeof(BuildingMesh)) as BuildingMesh;
         _instance.buildingMesh.GenerateMeshFromFootprints(_instance.buildingFootprintList);
+    }
+
+    public static void GeneratePlotMesh()
+    {
+        if(_instance.plotMesh != null)
+        {
+            DestroyImmediate(_instance.plotMesh.gameObject);
+        }
+
+        // Generate mesh
+        GameObject plotMeshObj = new GameObject();
+        _instance.plotMesh = plotMeshObj.AddComponent(typeof(PlotMesh)) as PlotMesh;
+        _instance.plotMesh.GenerateMeshFromFootprints(_instance.plotFootprintList);
     }
 
     public static List<RoadPath> GetPaths()

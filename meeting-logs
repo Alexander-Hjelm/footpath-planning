@@ -103,3 +103,29 @@ Möte med Chris, 05/03/2020:
     Motivation: AI agents, they might fail navigating when faced with a too narrow path or intersecting obstacles
     Record a video of the demo
 
+Möte med TODOR, 10-03-20: 
+    SLU maps
+        https://zeus.slu.se/get/?drop=get
+    Öppna geodata
+    GIS maps
+    Bus lane is a tag on open street map
+    Biking lanes, recommended width
+    VGU, vägars och gators utformning, PDF från 2020: https://www.trafikverket.se/for-dig-i-branschen/vag/Utformning-av-vagar-och-gator/vgu/
+        Sidan 25, Sektion 5.7
+    PBL, Plan och Bygglag (inte viktigt)
+    BBR Boverkets Byggregler: https://www.boverket.se/sv/byggande/regler-for-byggande/om-boverkets--byggregler-bbr/
+    GIS Maps for stockholm: Building height
+
+    Filip Biljecki: https://scholar.google.com/citations?user=jGqm4kEAAAAJ&hl=en
+    Applications of 3D City Models: State of the Art Review, Filip Biljecki
+    Also Filip: Generating 3D city models without elevation data
+
+Viewpoint: City information modeling (CIM) and Digitizing urban practises
+(Todor's manifest about interactive urban modelling)
+    
+An improved LOD specification for 3D building models, Filip Biljecki
+
+Generating 3D City models without elevation data, Filip Biljecki
+    Used footprint area and footprint complexity to estimate building height
+    Footprint complexity = Area of perimiter between the footprint and the cirle with the same area as the footprint
+

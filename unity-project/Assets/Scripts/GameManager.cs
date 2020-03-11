@@ -15,7 +15,8 @@ public class GameManager : MonoBehaviour
 
     private RoadNodeCollection roadNodeCollection;
     private List<RoadPath> roadNodesList;
-    private List<BuildingFootprint> buildingFootprintList = new List<BuildingFootprint>();
+    private List<Footprint> buildingFootprintList = new List<Footprint>();
+    private List<Footprint> plotFootprintList = new List<Footprint>();
     private Dictionary<RoadNode, RoadMesh> roadMeshes = new Dictionary<RoadNode, RoadMesh>();
     private RoadMesh roadMesh;
     private BuildingMesh buildingMesh;
@@ -73,7 +74,7 @@ public class GameManager : MonoBehaviour
         FeatureCollection buildingFeatureCollection = GeoJSONImporter.ReadFeatureCollectionFromFile("MapData/buildings");
         foreach(FeatureObject feature in buildingFeatureCollection.features)
         {
-            BuildingFootprint buildingFootprint = new BuildingFootprint();
+            Footprint buildingFootprint = new Footprint();
             GeometryObject geometryObject = feature.geometry;
             List<PositionObject> positions = geometryObject.AllPositions();
             foreach(PositionObject position in positions)

@@ -20,7 +20,7 @@ public class BuildingMesh : MonoBehaviour
         }
     }
 
-    public void GenerateMeshFromFootprints(List<BuildingFootprint> buildingFootprints)
+    public void GenerateMeshFromFootprints(List<Footprint> buildingFootprints)
     {
         // Start building path mesh
         List<Vector3> vertices = new List<Vector3>();
@@ -30,7 +30,7 @@ public class BuildingMesh : MonoBehaviour
         int currentMeshCounter = 0;
         int countedVertices = 0;
 
-        foreach(BuildingFootprint buildingFootprint in buildingFootprints)
+        foreach(Footprint buildingFootprint in buildingFootprints)
         {
             // First create the mesh we'll be working with
             if(storedBuildingMeshes.Count <= currentMeshCounter) 

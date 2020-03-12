@@ -122,14 +122,7 @@ Möte med TODOR, 10-03-20:
     Applications of 3D City Models: State of the Art Review, Filip Biljecki
     Also Filip: Generating 3D city models without elevation data
 
-Viewpoint: City information modeling (CIM) and Digitizing urban practises
-(Todor's manifest about interactive urban modelling)
-    
 An improved LOD specification for 3D building models, Filip Biljecki
-
-Generating 3D City models without elevation data, Filip Biljecki
-    Used footprint area and footprint complexity to estimate building height
-    Footprint complexity = Area of perimiter between the footprint and the cirle with the same area as the footprint
 
 Möte med Chris 12-03-20
     Some areas good be well reconstructed, some not. Inconsistent matching between datasets.
@@ -141,4 +134,3 @@ Möte med Chris 12-03-20
     Look at his PHD thesis: Level of detail in 3D city models
     Look at this paper: The most common geometric and semantic errors in CityGML datasets
     Hugo Ledouxs paper: Applications of 3D city models: State of the art review <- read this, look for evaluation methodologies. Geoinformation might have better methodologies than visualization
-

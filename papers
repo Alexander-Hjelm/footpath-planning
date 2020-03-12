@@ -47,3 +47,48 @@ https://www.cs.purdue.edu/cgvlab/papers/aliaga/urban-sigasia-2008.pdf
 Interactive Reconfiguration of Urban Layouts
 https://www.cs.purdue.edu/cgvlab/papers/aliaga/cga08.pdf
 
+READ PAPERS:
+
+Generating 3D City models without elevation data, Filip Biljecki
+    Used footprint area and footprint complexity to estimate building height
+    Footprint complexity = Area of perimiter between the footprint and the cirle with the same area as the footprint
+
+Viewpoint: City information modeling (CIM) and Digitizing urban practises
+(Todor's manifest about interactive urban modelling, under review)
+
+F Biljecki: Level Of Detail in 3D City Models
+    Chapter 11, p 231: Sensitivity of LOD to positional errors
+    Refers to the papers: Propagation of positional error in 3D GIS, Error propagation in the computation of volumes in 3D city models with the Monte Carlo method
+    p. 235: 
+        One may define a maximum acceptable uncertainty of the result of an operation, and by performing the analysis of the propagation of uncertainty within the operation may reversely determine the maximum allowed uncertainty in the input data.
+        Describes a few different use cases for calculating the error propagation of Geospatial data
+        Uses Monte Carlo method
+
+Once we find out how to measure GIS input error, we can use this to determine the output error in road placement
+
+F Biljecki: THE MOST COMMON GEOMETRIC AND SEMANTIC ERRORS IN CITYGML DATASETS
+    Tolerances for coordinates and planarity (p. 15): Points that span neighbouring boundary surfaces may not be in the exact same location, so a snapping tolerance is introduced
+    VALIDATION OF THE SEMANTICS OF BUILDINGS: For 3D geospatial data, the orientation of an element can be verified by taking the normal of a surface.
+    Used quality metric: The percentage of invalid surfaces in the entire model (for validation of 3D geospatial data)
+
+Least square fit of 2D geodata? And add the mean error to the road width (x2, one for road placement and one for the building placement) and see how the number of intersections changes.
+Are neighbouring boundary surfaces interesection or non-watertight?
+
+F Biljecki: Applications of 3D City Models: State of the Art Review
+    Check out sources 27-29 (OSM city model generation)
+
+M. Over: Generating web-based 3D City Models from OpenStreetMap: The current situation in Germany
+    https://www.sciencedirect.com/science/article/pii/S0198971510000402
+    Lists the accuracy requirements in some common application areas (CityGML Standards)
+    Investigates which CityGML standard accuracy requirements can be fulfilled
+    Takes the Visualization standpoint
+    Building footprints are mostly digitized from aerial or satellite imagery. Legal agreements with online map providers allow mappers to use some high-resolution imagery for deriving vector data. In this case, the accuracy of the digitized building footprints depends on the resolution of the provided orthophotos and satellite images.
+    Section 7 offers some good comments on OSM data quality
+
+[TO READ] M. Haklay: How good is volunteered geographical information? A comparative study of OpenStreetMap and Ordnance Survey datasets
+    https://scholar.google.com/citations?user=vcM6_ekAAAAJ&hl=sv&oi=sra
+
+[TO READ] M. Goetz: Towards generating highly detailed 3D CityGML models from OpenStreetMap
+    https://www.researchgate.net/publication/262351418_Towards_generating_highly_detailed_3D_CityGML_models_from_OpenStreetMap
+
+[TO READ] M. Goetz: Towards defining a framework for the automatic derivation of 3D CityGML models from Volunteered Geographic Information.

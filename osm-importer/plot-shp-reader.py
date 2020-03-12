@@ -32,6 +32,8 @@ for i in range(0, len(shapes)):
     shape = shapes[i]
     shape_points = []
 
+    print("Progess: " + str(int(i*100.0/len(shapes))) + "%")
+
     coordinates_container = shape['geometry']['coordinates']
     for s in range(0, len(coordinates_container)):
         coordinates = coordinates_container[s]

@@ -1,4 +1,5 @@
 from geojson import FeatureCollection, dump
+from pyproj import Proj, transform
 import fiona
 
 shapes = fiona.open("raw_data/ay_get.shp")
@@ -20,10 +21,12 @@ def epsg3006_to_wgs84(point):
     x = point[0]
     y = point[1]
     # Coordinate conversion from EPSG:3006 to WGS:84
-    x_new = 0.000011199*x + 10.5112561156
-    y_new = 0.00000901561*y
-    return (x_new, y_new)
-
+    # Transform using pyproj
+    WGS84 = Proj('EPSG:4326')
+    SWEREF = Proj('EPSG:3006',preserve_units=False)
+    # Perform the transformation. SLU data has flipped x/y coordinates
+    x_new, y_new = transform(SWEREF, WGS84, y, x)
+    return (y_new, x_new)
 
 for i in range(0, len(shapes)):
     shape = shapes[i]

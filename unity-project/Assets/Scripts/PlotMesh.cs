@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEditor;
 
-public class BuildingMesh : MonoBehaviour
+public class PlotMesh : MonoBehaviour
 {
     private List<GameObject> _rendererGOs = new List<GameObject>();
     private static float _buildingHeight = 0.2f;
@@ -18,7 +18,7 @@ public class BuildingMesh : MonoBehaviour
         }
     }
 
-    public void GenerateMeshFromFootprints(List<Footprint> buildingFootprints)
+    public void GenerateMeshFromFootprints(List<Footprint> plotFootprints)
     {
         // Start building path mesh
         List<Vector3> vertices = new List<Vector3>();
@@ -28,7 +28,7 @@ public class BuildingMesh : MonoBehaviour
         int currentMeshCounter = 0;
         int countedVertices = 0;
 
-        foreach(Footprint buildingFootprint in buildingFootprints)
+        foreach(Footprint plotFootprint in plotFootprints)
         {
             // First create the mesh we'll be working with
             if(storedBuildingMeshes.Count <= currentMeshCounter) 
@@ -39,16 +39,13 @@ public class BuildingMesh : MonoBehaviour
             // Randomize the building height
             float buildingHeight = _buildingHeight + _buildingHeightVariation*Random.value;
 
-            List<Vector3> footprintPoints = buildingFootprint.GetVertices();
+            List<Vector3> footprintPoints = plotFootprint.GetVertices();
             Vector3 centroid = MathUtils.FindCentroid(footprintPoints);
 
             vertices.Add(centroid);
-            vertices.Add(centroid + Vector3.up*buildingHeight);
-            uvs.Add(new Vector2(0f, 0f));
             uvs.Add(new Vector2(0f, 0f));
             int centroidIndex = countedVertices;
-            int centroidRaisedIndex = countedVertices+1;
-            countedVertices+=2;
+            countedVertices+=1;
 
             for(int i=0; i<footprintPoints.Count-1; i++)
             {
@@ -57,32 +54,15 @@ public class BuildingMesh : MonoBehaviour
 
                 vertices.Add(a);
                 vertices.Add(b);
-                vertices.Add(a + Vector3.up*buildingHeight);
-                vertices.Add(b + Vector3.up*buildingHeight);
 
                 triangles.Add(centroidIndex);
                 triangles.Add(countedVertices);
                 triangles.Add(countedVertices+1);
 
-                triangles.Add(countedVertices+1);
-                triangles.Add(countedVertices);
-                triangles.Add(countedVertices+2);
-
-                triangles.Add(countedVertices+2);
-                triangles.Add(countedVertices+3);
-                triangles.Add(countedVertices+1);
-
-                triangles.Add(countedVertices+2);
-                triangles.Add(centroidRaisedIndex);
-                triangles.Add(countedVertices+3);
-
-                countedVertices += 4;
+                countedVertices += 2;
 
                 uvs.Add(new Vector2(0f, 0f));
-                uvs.Add(new Vector2(1f, 0f));
-                uvs.Add(new Vector2(0f, 1f));
-                uvs.Add(new Vector2(1f, 1f));
-
+                uvs.Add(new Vector2(0f, 0f));
             }
 
             if(vertices.Count > 20000)
@@ -111,7 +91,7 @@ public class BuildingMesh : MonoBehaviour
 
         MeshRenderer meshRenderer = go.AddComponent(typeof(MeshRenderer)) as MeshRenderer;
         Material material = new Material(Shader.Find("Standard"));
-        material.color = new Color(0.8f, 0.8f, 0.8f, 1f);
+        material.color = new Color(1.0f, 0.5f, 0.5f, 1f);
         //material.mainTexture = Resources.Load("Textures/Road") as Texture;
         meshRenderer.sharedMaterial = material;
         MeshFilter meshFilter = go.AddComponent(typeof(MeshFilter)) as MeshFilter;
@@ -133,5 +113,4 @@ public class BuildingMesh : MonoBehaviour
         // Store the new GameObject for later deletion
         _rendererGOs.Add(go);
     }
-
 }

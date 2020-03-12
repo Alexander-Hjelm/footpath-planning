@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildingFootprint
+public class Footprint
 {
     private List<Vector3> _vertices = new List<Vector3>();
 

@@ -131,3 +131,14 @@ Generating 3D City models without elevation data, Filip Biljecki
     Used footprint area and footprint complexity to estimate building height
     Footprint complexity = Area of perimiter between the footprint and the cirle with the same area as the footprint
 
+Möte med Chris 12-03-20
+    Some areas good be well reconstructed, some not. Inconsistent matching between datasets.
+    Think of some method to determine how realtistically fasible the comparison process between datasets is.
+    A contribution to the paper: Evaluate the similarity between OSM and SLU datasets, basic analysis of the similarity between datasets, this reduces risk of the project. A good inclusion in the project
+    Perceptual error metrics, quantitative error metrics in LOD. Use such metrics to evaluate the difference in datasets.
+    Will have to do some research to find a quantitative metric
+    E-mail Filip Biljecki: Talk about the common metrics used, anyone that is good for my project? Use quick question. Do you know any work in the area of reconstructing paths?
+    Look at his PHD thesis: Level of detail in 3D city models
+    Look at this paper: The most common geometric and semantic errors in CityGML datasets
+    Hugo Ledouxs paper: Applications of 3D city models: State of the art review <- read this, look for evaluation methodologies. Geoinformation might have better methodologies than visualization
+

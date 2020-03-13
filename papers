@@ -55,6 +55,7 @@ Generating 3D City models without elevation data, Filip Biljecki
 
 Viewpoint: City information modeling (CIM) and Digitizing urban practises
 (Todor's manifest about interactive urban modelling, under review)
+Mentions a few services that reconstructs cities from geodata, use this as related work
 
 F Biljecki: Level Of Detail in 3D City Models
     Chapter 11, p 231: Sensitivity of LOD to positional errors
@@ -84,11 +85,50 @@ M. Over: Generating web-based 3D City Models from OpenStreetMap: The current sit
     Takes the Visualization standpoint
     Building footprints are mostly digitized from aerial or satellite imagery. Legal agreements with online map providers allow mappers to use some high-resolution imagery for deriving vector data. In this case, the accuracy of the digitized building footprints depends on the resolution of the provided orthophotos and satellite images.
     Section 7 offers some good comments on OSM data quality
+    Claims that OSM building footprint data is collected by tracing satellite images, which have a certain resolution
 
-[TO READ] M. Haklay: How good is volunteered geographical information? A comparative study of OpenStreetMap and Ordnance Survey datasets
+M. Haklay: How good is volunteered geographical information? A comparative study of OpenStreetMap and Ordnance Survey datasets
     https://scholar.google.com/citations?user=vcM6_ekAAAAJ&hl=sv&oi=sra
+    https://kfrichter.org/crowdsourcing-material/day1/haklay10.pdf
+    Page 685 provides some accuracy classes (Positional accuracy, attribute accuracy, completeness etc)
+    Page 686 has a comment on masimum resolution of GPS and OSM
+    Page 688 describes the methodology of determining the similarity between two datasets. The metric they used is: The buffer zone method, described in Figure 1.
+    Page 688 also comments on the issue of measuring features with a different amount of points
+        The buffer size was set to 20m, since this is the resolution of their source dataset (What is the resolution of SLU?)
+        In our case: Go over all buildings, calculate the individual overlap (buffer method), calculate the average building overlap and the variance.
+    Might have to note that the building footprints are completely covered by both the OSM and SLU datasets, thus solving the issue of completeness.
+    SLU dataset does not contain road data
+    Page 690 shows that for datasets where the amount of points are the same, they simply take the distance between the points as the error, and calculate the average and variance from this
+    Page 692: The completeness was taken as the difference of the sum of road lengths in either dataset
 
-[TO READ] M. Goetz: Towards generating highly detailed 3D CityGML models from OpenStreetMap
+H. Fan: Quality assessment for building footprints data on OpenStreetMap
+    https://www.researchgate.net/publication/262163378_Quality_assessment_for_building_footprints_data_on_OpenStreetMap
+    newest (2014)
+    Introduction says that sattellite data came from Bing
+    Focuses specifically on building footprint data
+    Good related works!
+    Related works section: Claims that bigger urban areas "inherit" many more contributers, and thus are better mapped
+    Mentions a related work that uses area comparison to estimate quality
+    Map matching:
+        Koukoletsos et al. (2012) proposed a feature-mathing algorithm specifcially for OSM that incorporates both geometric data and attribute data. SLU contains no attributes, however.
+    Similarity matching by using Turning Function
+        Invariant to rotation and scaling
+    Page 6 has a nice illustration showing the possible displamenet errors in building footprints
+    Uses difference in total building area to asses completeness, this avoids the semantic error that some buildings may be merged in one dataset but not in the other. Nothing is right or wrong here.
+        To avoid this semantic issue when counting vertices, compare building by building, then keep the larger building in the dataset if there are vertices that have yet been unmatched.
+    Mentions position accuracy, just like M. Haklay
+        For our project, maybe we could identify buildings with the same number of points by evaluating the closest points, if the closest point is in some threshold distance e.
+        Asses the completeness question by counting the number of buildings whose centerpoints and area are roughly the same (within some tolerance), then pull both buildings from both datasets and continue.
+    Section 4 describes an algorithm to find corresponding points
+    Search area was reduced by storing buildings in grid cells of 15x15m, by their centroids, then searching the current and neghbouring cells
+    For semantic accuracy (1-on-1 building matching) they used a structure where they allowed multiple buildings to be matched to one another.
+    Includes max, min, average and deviation of poisitional accuracy
+    Turns out OSM building footprints are very simplified, which gives a difference in the turning function
+    Page 16 describes neccessary normalization of the area and perimiter data
+    
+
+M. Goetz: Towards generating highly detailed 3D CityGML models from OpenStreetMap
     https://www.researchgate.net/publication/262351418_Towards_generating_highly_detailed_3D_CityGML_models_from_OpenStreetMap
-
-[TO READ] M. Goetz: Towards defining a framework for the automatic derivation of 3D CityGML models from Volunteered Geographic Information.
+    https://www.tandfonline.com/doi/full/10.1080/13658816.2012.721552
+    Describes the origin of CityGML and main difference from other specifications
+    Defines Volounteered Geographic Information

@@ -31,8 +31,6 @@
 
 This report covers... \cite{sampleitem2}
 
-\begin{multicols}{2}
-
 \section{Introduction}
 
 \subsection{Research Question}
@@ -82,20 +80,31 @@ The thesis work will be carried out at the Embodied Social Agents Lab (ESAL) at 
 
 To separate sidewalks from detached footpaths, I used the fact that OSM generally provides sidewalks with the same name as the adjacent motorway. Thus they can be paired together and measured against each other.
 
+\subsection(SLU Data)
+
+The SLU map is maintained by The Swedish National Land Survey (Swedish: Lantmäteriet).
+The SLU data is aqqcuired by land surveying methods such as GPS or DGNSS positioning, or by reproduction of features from ortophoto or stereo mapping from 3D aerial images.
+The map is updated continously by Lantmäteriet, in conjoncture with the forming or reforming of property.
+Property limits and building features have a position accuracy requirement of 5 meters.
+(Lantmäteriet, 2019)
+
+\subsection(A word on coordinate systems)
+
+The SLU dataset comes in the SWEREF 99 TM (Lantmäteriet, 2019). SWEREF 99 TM is a projected coordinate system and there is no linear transformation to WGS 48, which OpenStreetMap uses (OSM 19). The coordinate conversions for this paper were obtained using proj: a Linux commandline application for geospatial coordinate conversion.
+
 \section{Implementation}
 
 In this implementation, roads of different types were allowed to merge into one another to form common intersections. To facilitate this, it was neccessary to work with a path-by-path representation of the point data. When two path share a node with common coordinates, they form an intersection which can be of multiple different types.
 
-\end{multicols}
-
 \begin{thebibliography}{9}
-\bibitem{sampleitem1}
-Title 1, \\ 
-\href{https://en.wikipedia.org/wiki/Geostationary\_ orbit}{https://en.wikipedia.org/wiki/Geostationary\_ orbit}.
 
-\bibitem{sampleitem2}
-Title 2, \\ 
-\href{https://sv.wikipedia.org/wiki/SpaceX}{https://sv.wikipedia.org/wiki/SpaceX}.
+\bibitem{lantmateriet-19}
+(Lantmäteriet, 2019), Produktbeskrivning: GSD-Fastighetskartan vektor \\ 
+\href{https://www.lantmateriet.se/globalassets/kartor-och-geografisk-information/kartor/fastshmi.pdf}.
+
+\bibitem{osm-19}
+(OSM 19) Converting to WGS84, accessed 13-03-2020\\ 
+\href{https://wiki.openstreetmap.org/wiki/Converting_to_WGS84}.
 
 \end{thebibliography}
 

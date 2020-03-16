@@ -76,12 +76,19 @@ Using a road network to creates an underlying navmesh
 The thesis work will be carried out at the Embodied Social Agents Lab (ESAL) at the Department of Computational Science and Technology (CST). The lab has before been working on systems for generating procedural urban environments, and are interested in the possibility of generating more detailed maps than have been done before, using example-based methods to preserve the aesthetic look of a greater metropolitan area. The lab is particularly interested in the generation of footpaths, since most commercial software that import road maps only import arterial and secondary car roads, and do not include pedestrian walkways, cycle paths and such smaller roads.
 % TODO: any official description of ESAL that can be used here?
 
-\section(OSM Data)
+\section(The geodata used in this project)
+
+For the purpose of this project, the OpenStreetMap road dataset has been used in the presentation of the road network around Stockholm, and in the generative process of new road networks. To assess and correct path widths and path node locations, the OpenStreetMap building footprint dataset has also been used. To make an assessment on the quality and precision of the OpenStreetMap data, the SLU map from the Swedish National Land Survey was used in comparison with the OpenStreetMap map. The SLU map conatins only building footprints and property limits. Both map segments were obtained around the Stockholm greater metropolitan area. The exact map segments that were extracted were in both cases rectangles with the following coordinates:. TODO: Get coordinates
+
+\subsection(OSM Data)
+
+OpenStreetMap road data and building footprints are commonly obtained by manually tracing features in commercially available satellite images. Such images have a limit on their resolution which puts a theoretical limit on the accuracy of map features compared to their real-world equivalents (Haklay 2010). Particularily the high resolution imagery from Bing in 2010 led to an increase in building information in OpenStreetMap (Fan et al, 2014).
 
 To separate sidewalks from detached footpaths, I used the fact that OSM generally provides sidewalks with the same name as the adjacent motorway. Thus they can be paired together and measured against each other.
 
 \subsection(SLU Data)
 
+The SLU map contains 
 The SLU map is maintained by The Swedish National Land Survey (Swedish: Lantmäteriet).
 The SLU data is aqqcuired by land surveying methods such as GPS or DGNSS positioning, or by reproduction of features from ortophoto or stereo mapping from 3D aerial images.
 The map is updated continously by Lantmäteriet, in conjoncture with the forming or reforming of property.
@@ -90,7 +97,35 @@ Property limits and building features have a position accuracy requirement of 5 
 
 \subsection(A word on coordinate systems)
 
-The SLU dataset comes in the SWEREF 99 TM (Lantmäteriet, 2019). SWEREF 99 TM is a projected coordinate system and there is no linear transformation to WGS 48, which OpenStreetMap uses (OSM 19). The coordinate conversions for this paper were obtained using proj: a Linux commandline application for geospatial coordinate conversion.
+The SLU dataset is delivered in the SWEREF 99 TM (Lantmäteriet, 2019). SWEREF 99 TM is a projected coordinate system and there is no linear transformation to WGS 48, which OpenStreetMap uses (OSM 19). The coordinate conversions for this paper were obtained using proj: a Linux commandline application for geospatial coordinate conversion.
+
+\section{Evaluation of the quality of geodata}
+
+(Haklay 2010) specifices a comprehesive list of 8 accuracy classes when it comes to evaluating the quality of geographic information.
+
+\begin{itemize}
+  \item Lineage. This is the historical aspect of the dataset, which concerns the collection process and evolution.
+  \item Positional accuracy. This relates the coordinate value of an object in the database to the actual location of the ground in the real world.
+  \item Attibute accuracy. In a geographical database, objects are commonly tagged with meta-information. This class assesses how correct those values are.
+  \item Logical consistency - This assesses the internal consistency of the dataset. For every dataset there may be internal rules and relationships that objects and features must follow, and this class assesses the degree to which these are adhered to.
+  \item Completeness - This assesses the lack of data in a dataset, and the coverage of real-world objects. Objects or features may be missing from a dataset, which reduces its quality.
+  \item Semantic accuracy - This links the way in which an object or feature is recorded and represented to how it should be interpreted.
+  \item Usage, purpose and constraints - This concerns the validity of the dataset in relation to its purpose and how it is used.
+  \item Temporal quality - This assesses the validity of the dataset in relation to real-world changes over time.
+\end{itemize}
+
+Other than for the purpose of mentioning various sources or error, this project will focus exclusively on the Positional accuracy, Completeness and Semantic accuracy classes. The comparison of the OSM and SLU maps will focus on these accuracy classes to determine the error tolerance when manipulating features in the 3D map presentation and the road network generating phase.
+
+\subsection{The accuracy classes that will not be focused on}
+
+The lineage aspect of the OSM data is available through the OSM History Viewer, an online debugging tool that lets anyone freely view the change history of individual fetures in a commit history-like fashion. There is an option for editors to include a personal note with their changesets to include additional details or motivate why a change was made, but there is no guaratee that the data includes any information on the aquisition method used (OSM 2020). The history aspect of the SLU dataset is not freely available online, but the acquistion method is included in the file metadata on a per-object basis. Lantmäteriet uses internal codes to specifify the acquistion method, and these codes can be referred to in the product description the accompanies the map files. As the scope of this project is limited to making a broad comparison of the positional accuracy of the two datasets, only the required positional accuracy as described by the SLU product description will be used.
+TODO: Dig deeper in the SLU dataset, how can one find the method of aquisition for Stockholm buildings, and its precision?
+
+The attribute accuracy measure is interesting, as both maps use encoded metadata on a per feature basis, the attribute accuracy of the two datasets could be assessed by doing a simple feature comparison and creating a translation table between the two attribute maps. To the knowledge of the author, this has never been done with specifically these two datasets, at the time of writing.
+
+The temporal accuracy will not be assessed as this projects focuses on comparing a single snapshot of the two datasets at the same point in time.
+
+The logical accuracy will not be assessed because the underlying logical relations between features in both maps serve no purpose to this project.
 
 \section{Implementation}
 
@@ -103,8 +138,20 @@ In this implementation, roads of different types were allowed to merge into one 
 \href{https://www.lantmateriet.se/globalassets/kartor-och-geografisk-information/kartor/fastshmi.pdf}.
 
 \bibitem{osm-19}
-(OSM 19) Converting to WGS84, accessed 13-03-2020\\ 
-\href{https://wiki.openstreetmap.org/wiki/Converting_to_WGS84}.
+(OSM 19) Converting to WGS84, accessed 13-03-2020 \\ 
+\href{https://wiki.openstreetmap.org/wiki/Converting\_to\_WGS84}.
+
+\bibitem{osm-20}
+(OSM 20) OSM History Viewer\\
+\href{https://wiki.openstreetmap.org/wiki/OSM\_History\_Viewer}.
+
+\bibitem{haklay-10}
+(Haklay, 2010), How good is volunteered geographical information?A comparative study of OpenStreetMap and OrdnanceSurvey datasets \\
+\href{https://kfrichter.org/crowdsourcing-material/day1/haklay10.pdf}.
+
+\bitiem{fan-14}
+(Fan et al, 2014), Quality assessment for building footprints data on OpenStreetMap \\
+\href{https://www.researchgate.net/publication/262163378\_Quality\_assessment\_for\_building\_footprints\_data\_on\_OpenStreetMap}.
 
 \end{thebibliography}
 

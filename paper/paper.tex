@@ -162,10 +162,7 @@ For this project the relative overlap will be used both to find possible matchin
 
 //TODO: Finding identical points
 
-//TODO: Point proximity for positional accuracy
-
-//TODO: Cite biljecki
-When presenting CityGML geometric errors, Biljecki recommends to obtain a measure of the distribution of error, introduce a tolerance and calculate the number of features or segments that fall within this tolerance. We can used this as a complementary statistic to the average error and error variance.
+Finally, when two building footprints and their vertices have been mapped, we will use the offset of matching vertices as a measure of positional error. The average and variance in vertex spread will be calculated and used to make an assessment of the geometric precision of the OpenStreetMap dataset, and this precision will further be used to form an upper boundary on geometrical corrections that can be made to the map once it has been imported into the application.
 
 \section{Implementation}
 

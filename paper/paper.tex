@@ -129,10 +129,14 @@ The logical accuracy will not be assessed because the underlying logical relatio
 
 \section{Dataset quality evaluation}
 
-//TODO: Feature mapping, how to, first of all
+\subsection{Assesment of dataset completeness}
+
+(Fan et al., 2014) used the total building area in their reference dataset and the OpenStreetMap dataset to assess the completeness of OpenStreetMap data. The motivation for this is to eliminate semantic differences between both datasets. A very common example of a semantic error when comparing geographic data is that a large building in one dataset may be segmented into several smaller ones in the other, making one-to-one object mapping impossible. Thus using building area as an estimator for completeness solves this issue much better than i.e. the number of buildings or other objects in each dataset.
+This project will use the building area in the OSM dataset versus that of the SLU dataset to determine the completeness of OpenStreetMap building data in the Stockholm area, which will then be used as an argument for how accurate the building correspondence and point proximity measures can be.
 
 \subsection{Building correspondence}
 
+Feature mapping
 The building footprint correspondence will be evaluated using a similarity function that assesses the turning funciton and relative area overlap. The similarity function between any building in the OSM data set and any building in the SLU datasets will be defined as a function of their respective footprints ($foot_{OSM}, foot_{SLU}$), as follows:
 $S(foot_{OSM}, foot_{SLU}) = S_{T}(foot_{OSM}, foot_{SLU}) + S_{RO}(foot_{OSM}, foot_{SLU})$, where $S_{T}$ measures the difference in turning function and $S_{RO}$ measures the relative overlap between the footprints.
 
@@ -146,8 +150,6 @@ The turning function has some nice geometric properties, in that it is invariant
 The similarity of two polygons A and B in terms of their turning function is defined as their distance of their cumulative turning functions: $S_{T}(A, B) = 1 - (\int^{1}_{0} T_{C,A}(l) - T_{C,B}(l) dl)^{1/2}$.
 The value range of $S(A, B)$ will be 0 to 1, where $S(A,B) = 1$ if the polygons are identical. 
 
-//TODO: Completeness by building area, quotation
-
 \subsection{Correspondence by building area}
 
 (Fan et al., 2014) further discussed how the relative overlap in building area can be used to determine building correspondence between datasets. The relative building overlap between the OSM and SLU datasets will be defined as folows, given the footprints of any building in the OSM set ($foot_{OSM}$) and the SLU set ($foot_{SLU}$):
@@ -155,6 +157,8 @@ The value range of $S(A, B)$ will be 0 to 1, where $S(A,B) = 1$ if the polygons 
 $S_{RO}(foot_{OSM}, foot_{SLU}) = \frac{A_{Overlap}}{min(A_{foot_{OSM}}, A_{foot_{SLU}}))}$
 
 For this project the relative overlap will be used both to find possible matching building candidates, and as a term in their similarity function.
+
+\subsection{Closest point and point proximity}
 
 //TODO: Finding identical points
 

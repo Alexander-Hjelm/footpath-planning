@@ -142,7 +142,7 @@ $S(foot_{OSM}, foot_{SLU}) = S_{T}(foot_{OSM}, foot_{SLU}) + S_{RO}(foot_{OSM}, 
 
 \subsection{Turning function definition}
 
-The turning function was first defined by Arkin et al. (1991), as a method for measuring the similarity of two polygons. The Turning funciton $T_c(l)$ measures the cumulative angle of the polygon's counter-clockwise tangent, as a function of the cumulative normalized length l. This project uses the turning function as it is defined by (Fan et al., 2014). For a polygon with vertices ${v_1 ... v_n}$ and line segments ${e_1 ... e_n}$ It is defined as follows.
+The turning function was first defined by Arkin et al. (1991), as a method for measuring the similarity of two polygons. The Turning function $T_c(l)$ measures the cumulative angle of the polygon's counter-clockwise tangent, as a function of the cumulative normalized length l. This project uses the turning function as it is defined by (Fan et al., 2014). For a polygon with vertices ${v_1 ... v_n}$ and line segments ${e_1 ... e_n}$ It is defined as follows.
 Fix a starting vertex $v_1$.
 The tangent angle at $v_1$ is $\theta_{n,1}$. This is the angle between the neighbouring line segments $e_n$ and $e_1$.
 For any $i$ such that $i>1$ and $n<i$, the tangent angle at $v_i$ is recursively defined as: $\theta_{i, i-1} = \theta_{n,1} + \sum^{i}_{k=1} \theta_{k, k-1}$
@@ -158,7 +158,7 @@ $S_{RO}(foot_{OSM}, foot_{SLU}) = \frac{A_{Overlap}}{min(A_{foot_{OSM}}, A_{foot
 
 For this project the relative overlap will be used both to find possible matching building candidates, and as a term in their similarity function.
 
-The relative overlap may also be used to determine building matching relations even when the semantic accuracy is low. If a large building is represented by a single footprint in one dataset but by several smaller footprints in the other, XXX found that if $S_{RO}(foot_{A}, foot_{B}) < 30\%$ for two buildings $A$ and $B$ from different sets, then $A$ and $B$ are highly likely to be separate, neighbouring buildings and not in fact identical. Therefore we will here assume that two buildings are matching candidates if their relative area overlap is greater than 30\%. If a one-to-many object matching is found, the compound perimeter of the footprints in the many-set will be used when calculating the turning function and finding closest vertices between the polygons.
+The relative overlap may be used to determine building matching relations even when the semantic accuracy is low. If a large building is represented by a single footprint in one dataset but by several smaller footprints in the other, XXX found that if $S_{RO}(foot_{A}, foot_{B}) < 30\%$ for two buildings $A$ and $B$ from different sets, then $A$ and $B$ are highly likely to be separate, neighbouring buildings and not in fact identical. Therefore we will here assume that two buildings are matching candidates if their relative area overlap is greater than 30\%. If a one-to-many object matching is found, the compound perimeter of the footprints in the many-set will be used when calculating the turning function and finding closest vertices between the polygons.
 
 \subsection{Closest point and point proximity}
 
@@ -188,7 +188,7 @@ In this implementation, roads of different types were allowed to merge into one 
 (Haklay, 2010), How good is volunteered geographical information?A comparative study of OpenStreetMap and OrdnanceSurvey datasets \\
 \href{https://kfrichter.org/crowdsourcing-material/day1/haklay10.pdf}.
 
-\bitiem{fan-14}
+\bibitem{fan-14}
 (Fan et al, 2014), Quality assessment for building footprints data on OpenStreetMap \\
 \href{https://www.researchgate.net/publication/262163378\_Quality\_assessment\_for\_building\_footprints\_data\_on\_OpenStreetMap}.
 

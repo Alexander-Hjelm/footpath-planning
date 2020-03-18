@@ -76,17 +76,17 @@ Using a road network to creates an underlying navmesh
 The thesis work will be carried out at the Embodied Social Agents Lab (ESAL) at the Department of Computational Science and Technology (CST). The lab has before been working on systems for generating procedural urban environments, and are interested in the possibility of generating more detailed maps than have been done before, using example-based methods to preserve the aesthetic look of a greater metropolitan area. The lab is particularly interested in the generation of footpaths, since most commercial software that import road maps only import arterial and secondary car roads, and do not include pedestrian walkways, cycle paths and such smaller roads.
 % TODO: any official description of ESAL that can be used here?
 
-\section(The geodata used in this project)
+\section{The geodata used in this project}
 
 For the purpose of this project, the OpenStreetMap road dataset has been used in the presentation of the road network around Stockholm, and in the generative process of new road networks. To assess and correct path widths and path node locations, the OpenStreetMap building footprint dataset has also been used. To make an assessment on the quality and precision of the OpenStreetMap data, the SLU map from the Swedish National Land Survey was used in comparison with the OpenStreetMap map. The SLU map conatins only building footprints and property limits. Both map segments were obtained around the Stockholm greater metropolitan area. The exact map segments that were extracted were in both cases rectangles with the following coordinates:. TODO: Get coordinates
 
-\subsection(OSM Data)
+\subsection{OSM Data}
 
 OpenStreetMap road data and building footprints are commonly obtained by manually tracing features in commercially available satellite images. Such images have a limit on their resolution which puts a theoretical limit on the accuracy of map features compared to their real-world equivalents (Haklay 2010). Particularily the high resolution imagery from Bing in 2010 led to an increase in building information in OpenStreetMap (Fan et al, 2014).
 
 To separate sidewalks from detached footpaths, I used the fact that OSM generally provides sidewalks with the same name as the adjacent motorway. Thus they can be paired together and measured against each other.
 
-\subsection(SLU Data)
+\subsection{SLU Data}
 
 The SLU map contains building features and property limits, but no road data.
 The SLU map is maintained by The Swedish National Land Survey (Swedish: Lantmäteriet).
@@ -95,7 +95,7 @@ The map is updated continously by Lantmäteriet, in conjoncture with the forming
 Property limits and building features have a position accuracy requirement of 5 meters.
 (Lantmäteriet, 2019)
 
-\subsection(A word on coordinate systems)
+\subsection{A word on coordinate systems}
 
 The SLU dataset is delivered in the SWEREF 99 TM (Lantmäteriet, 2019). SWEREF 99 TM is a projected coordinate system and there is no linear transformation to WGS 48, which OpenStreetMap uses (OSM 19). The coordinate conversions for this paper were obtained using proj: a Linux commandline application for geospatial coordinate conversion.
 

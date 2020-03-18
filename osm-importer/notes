@@ -22,3 +22,18 @@
 </union>
 <print/>
 
+<bbox-query s="59.22680633612663" n="59.42193948304223" w="17.794666698423512" e="18.145808596992175"/>
+<query type="wr">
+    <has-kv k="building"/>
+</query>
+<union>
+  <item/>
+  <recurse type="down"/>
+</union>
+<print/>
+
+way(poly:"59.42 17.79 59.42 18.15 59.23 18.15 59.23 17.79")["building"];
+/*added by auto repair*/
+(._;>;);
+/*end of auto repair*/
+out body;

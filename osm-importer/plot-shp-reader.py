@@ -59,10 +59,6 @@ for i in range(0, len(shapes)):
             else:
                 print("ERROR: No handling for points of type: " + type(point))
     
-    if polygon_area(shape_points) > 0.13:
-        print("Shape " + shape['id'] + " was not included since the area was too large.")
-        continue
-
     # Append shape to output data in GeoJSON format
     data_out.append(shape)
 

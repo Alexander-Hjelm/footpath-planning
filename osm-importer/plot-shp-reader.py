@@ -2,14 +2,14 @@
 # removing any features that are not seen as buildings. It also does coordinate transformation.
 # Run it first with the raw SLU data before doing anything else!
 # REQUIREMENTS:
-# - ./raw_data/ay_get.shp
-# - ./raw_data/ay_get.shx
+# - ./raw_data/by_get.shp
+# - ./raw_data/by_get.shx
 
 from geojson import FeatureCollection, dump
 from pyproj import Proj, transform
 import fiona
 
-shapes = fiona.open("raw_data/ay_get.shp")
+shapes = fiona.open("raw_data/by_get.shp")
 print(shapes.schema)
 #first feature of the shapefile
 #first = shapes.next()

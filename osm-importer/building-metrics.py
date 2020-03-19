@@ -18,9 +18,9 @@ def polygon_area(vertices):
     return result
 
 # read files
-with open('raw_data/buildings.geojson', 'r') as f:
+with open('raw_data/osm_buildings_sweref.geojson', 'r') as f:
     OSM_data = load(f)
-with open('raw_data/plots.geojson', 'r') as f:
+with open('raw_data/slu_buildings_sweref.geojson', 'r') as f:
     SLU_data = load(f)
 
 print("Finished loading map data")

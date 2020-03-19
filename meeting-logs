@@ -135,9 +135,16 @@ Möte med Chris 12-03-20
     Look at this paper: The most common geometric and semantic errors in CityGML datasets
     Hugo Ledouxs paper: Applications of 3D city models: State of the art review <- read this, look for evaluation methodologies. Geoinformation might have better methodologies than visualization
 
-    Coordinates:
+    Coordinates, large dataset:
         W: 658561, N: 6590367
         E: 679501, S: 6569543
 
         W: 17.794666698423512, N: 59.42193948304223
         E: 18.145808596992175, S: 59.22680633612663
+
+    Coordinates, small dataset:
+        W: 672759, N: 6582377
+        E: 674433, S: 6580606
+
+        W: 18.03809503228281, N: 59.34469860821763
+        E: 18.066052311607727, S: 59.328128796834925

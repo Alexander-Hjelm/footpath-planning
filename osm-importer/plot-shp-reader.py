@@ -1,3 +1,10 @@
+# This script reads a raw SLU export file (.shp) with buildings and processes it,
+# removing any features that are not seen as buildings. It also does coordinate transformation.
+# Run it first with the raw SLU data before doing anything else!
+# REQUIREMENTS:
+# - ./raw_data/ay_get.shp
+# - ./raw_data/ay_get.shx
+
 from geojson import FeatureCollection, dump
 from pyproj import Proj, transform
 import fiona

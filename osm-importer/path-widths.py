@@ -1,3 +1,8 @@
+# This script reads path data by highway type, and outputs a file with the width of every street by id
+# It requires that way-data-formatter.py has been run first to generate the neccessary road files.
+# REQUIREMENTS:
+# - Run way-data-formatter.py
+
 from geojson import Point, Feature, FeatureCollection, load
 from json import dump
 

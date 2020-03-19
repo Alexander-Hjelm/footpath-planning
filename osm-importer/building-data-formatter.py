@@ -1,3 +1,9 @@
+# This script reads a raw Overpass Turbo export file with buildings and processes it,
+# removing any features that are not seen as buildings.
+# Run it first with the raw Overpass Turbo data before doing anything else!
+# REQUIREMENTS:
+# - ./raw_data/export-buildings.geojson
+
 from geojson import Point, Feature, FeatureCollection, dump, load
 
 accepted_types = [

@@ -1,3 +1,9 @@
+# This script reads a raw Overpass Turbo export file with paths and processes it,
+# Filtering accepted highway types and creates an output file for wach accepted highway type.
+# Run it first with the raw Overpass Turbo data before doing anything else!
+# REQUIREMENTS:
+# - ./raw_data/export.geojson
+
 from geojson import Point, Feature, FeatureCollection, dump, load
 
 accepted_highways = [

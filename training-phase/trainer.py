@@ -1,3 +1,8 @@
+# This script takes the generated road network and generates patches
+# for use in the example-based geneation phase.
+# REQUIREMENTS:
+# - Run way-data-formatter.py
+
 from geojson import Point, Feature, FeatureCollection, load
 from json import dump
 import math

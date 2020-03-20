@@ -91,13 +91,13 @@ for feature_osm in OSM_data['features']:
     # Build polygon
     polygon_osm = extract_polygon_from_feature(feature_osm)
     if polygon_intersects_query_bbox(polygon_osm):
-        for feature_slu in SLU_data['features']:
+        for feature_slu in SLU_data_out:
             polygon_slu = extract_polygon_from_feature(feature_slu)
 
-            if polygon_relative_overlap(polygon_osm, polygon_slu) > 0.3:
-                if(feature in SLU_data_out):
-                    SLU_data_out.remove(feature_slu)
-                    print('Remaining SLU features: ' + str(len(SLU_data_out)))
+            relative_overlap = polygon_relative_overlap(polygon_osm, polygon_slu)
+            if relative_overlap > 0.3:
+                SLU_data_out.remove(feature_slu)
+                print('Remaining SLU features: ' + str(len(SLU_data_out)))
 
     else:
         OSM_data_out.append(feature_osm)

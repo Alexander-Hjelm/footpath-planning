@@ -12,8 +12,6 @@ Buildings
 2.      building-data-formatter-osm.py
         building-data-formatter-slu.py
 
-3.      building-vertex-formatter.py
-
 4.      building-cropper.py
 
 5.      building-convert-to-sweref.py

@@ -1,7 +1,8 @@
 # Processes data with good vertex structure. Removes OSM buildings that interect the edge
 # of an OSM query, and the corresponding overlapping buildings in the SLU set
 # REQUIREMENTS:
-# - Run building-vertex-formatter.py
+# - Run building-data-formatter-osm.py
+# - Run building-data-formatter-slu.py
 
 from geojson import Point, Feature, FeatureCollection, load, dump
 from pyproj import Proj, transform

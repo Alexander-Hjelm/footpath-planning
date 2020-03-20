@@ -62,5 +62,5 @@ for i in range(0, len(shapes)):
     # Append shape to output data in GeoJSON format
     data_out.append(shape)
 
-with open('raw_data/plots.geojson', 'w') as f:
+with open('raw_data/buildings-slu.geojson', 'w') as f:
     dump(FeatureCollection(data_out), f)

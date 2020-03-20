@@ -9,14 +9,16 @@ Buildings
             raw_data/by_get.shp
             raw_data/by_get.shx
 
-2.      building-data-formatter.py
-        plot-shp-reader.py
+2.      building-data-formatter-osm.py
+        building-data-formatter-slu.py
 
-3.      building-cropper.py
+3.      building-vertex-formatter.py
 
-4.      convert-to-sweref.py
+4.      building-cropper.py
 
-5.      building-metrics.py
+5.      building-convert-to-sweref.py
+
+6.      building-metrics.py
 
 
 ####

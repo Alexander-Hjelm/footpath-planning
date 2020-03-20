@@ -1,6 +1,6 @@
 # This script reads processed OSM and SLU building data, and finds the metrics specified in the project report
 # REQUIREMENTS:
-# - Run convert-to-sweref.py
+# - Run buildings-convert-to-sweref.py
 
 from geojson import Point, Feature, FeatureCollection, load
 
@@ -18,9 +18,9 @@ def polygon_area(vertices):
     return result
 
 # read files
-with open('raw_data/osm_buildings_sweref.geojson', 'r') as f:
+with open('raw_data/buildings-osm-sweref.geojson', 'r') as f:
     OSM_data = load(f)
-with open('raw_data/slu_buildings_sweref.geojson', 'r') as f:
+with open('raw_data/buildings-slu-sweref.geojson', 'r') as f:
     SLU_data = load(f)
 
 print("Finished loading map data")

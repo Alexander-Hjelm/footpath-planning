@@ -32,6 +32,6 @@ for feature in data['features'] :
     print("[WARNING] Found a feature that was not caught by the filter: \n" + str(feature) + ", add handling for this feature!")
 
 # Write all building features to files
-with open('raw_data/buildings.geojson', 'w') as f:
+with open('raw_data/buildings-osm.geojson', 'w') as f:
     dump(FeatureCollection(data_out), f)
 

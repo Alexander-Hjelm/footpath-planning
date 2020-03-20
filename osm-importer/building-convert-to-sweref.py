@@ -1,7 +1,6 @@
 # Coverts processed data to a simple geometric structure in sweref coordinates
 # REQUIREMENTS:
-# - Run building-data-formatter.py
-# - Run plot-shp-reader.py
+# - Run building-cropper.py
 
 from geojson import Point, Feature, FeatureCollection, load, dump
 from pyproj import Proj, transform

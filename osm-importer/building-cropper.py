@@ -71,6 +71,9 @@ with open('raw_data/buildings-slu.geojson', 'r') as f:
 OSM_data_out = []
 SLU_data_out = []
 
+for feature in SLU_data['features']:
+    SLU_data_out.append(feature)
+
 progress = 0.0
 for feature_osm in OSM_data['features']:
     print("Cropping, progess: " + str(int(100*progress/len(OSM_data['features']))) + '%')
@@ -80,10 +83,12 @@ for feature_osm in OSM_data['features']:
     polygon_osm = extract_polygon_from_feature(feature_osm)
     if polygon_intersects_query_bbox(polygon_osm):
         for feature_slu in SLU_data['features']:
-            polygon_slu = feature_slu['geometry']['coordinates']
+            polygon_slu = extract_polygon_from_feature(feature_slu)
 
             if polygon_relative_overlap(polygon_osm, polygon_slu) > 0.3:
-                SLU_data['features'].remove(feature_slu)
+                if(feature in SLU_data_out):
+                    SLU_data_out.remove(feature_slu)
+                    print('Remaining SLU features: ' + str(len(SLU_data_out)))
 
     else:
         OSM_data_out.append(feature_osm)

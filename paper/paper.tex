@@ -207,6 +207,14 @@ Finally, when two building footprints and their vertices have been mapped, we wi
 
 In this implementation, roads of different types were allowed to merge into one another to form common intersections. To facilitate this, it was neccessary to work with a path-by-path representation of the point data. When two path share a node with common coordinates, they form an intersection which can be of multiple different types.
 
+\section{Notes about data processing}
+
+Once data from the both sets had been extracted, they looked dissimilar. (Show picture) Had to go over all OSM buildings that intersected with the query box and remove them, along with any SLU buildings that intersected with them.
+
+When calculating the area overlap we used the fact that multipolygons in geojson are represented with the main, bounding polygon first. When calculating the area of a multipolygon building, we simply took the area of the first polygon and subtracted the subsequent ones.
+
+However, when calculating the relative area overlap, this becomes unesseccary since any semantically incorrect subdivision of the polygon will always be inside the bounding polygon.
+
 \begin{thebibliography}{9}
 
 \bibitem{lantmateriet-19}

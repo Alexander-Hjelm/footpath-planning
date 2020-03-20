@@ -17,9 +17,9 @@ def wgs84_to_epsg3006(point):
     return (y_new, x_new)
 
 # read files
-with open('raw_data/buildings-osm.geojson', 'r') as f:
+with open('raw_data/buildings-osm-cropped.geojson', 'r') as f:
     OSM_data = load(f)
-with open('raw_data/buildings-slu.geojson', 'r') as f:
+with open('raw_data/buildings-slu-cropped.geojson', 'r') as f:
     SLU_data = load(f)
 
 progress = 0.0

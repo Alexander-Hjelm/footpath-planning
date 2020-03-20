@@ -69,7 +69,7 @@ for feature_osm in OSM_data['features']:
         OSM_data['features'].remove(feature_osm)
 
 # Write all building features to files
-with open('raw_data/buildings-osm.geojson', 'w') as f:
+with open('raw_data/buildings-osm-cropped.geojson', 'w') as f:
     dump(FeatureCollection(OSM_data), f)
-with open('raw_data/buildings-slu.geojson', 'w') as f:
+with open('raw_data/buildings-slu-cropped.geojson', 'w') as f:
     dump(FeatureCollection(SLU_data), f)

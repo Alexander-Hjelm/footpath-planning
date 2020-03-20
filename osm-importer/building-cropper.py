@@ -14,12 +14,11 @@ q_bbox_s = 59.328128796834925
 q_bbox_w = 18.03809503228281
 
 def polygon_line_intersection(polygon, line_point_1, line_point_2):
-    #print(polygon)
-    shapely_poly = shapely.geometry.Polygon(polygon[0])
+    shapely_poly = shapely.geometry.Polygon(polygon)
     shapely_line = shapely.geometry.LineString([line_point_1, line_point_2])
-    intersection_line = list(shapely_poly.intersection(shapely_line).coords)
-    print(intersection_line)
-    if len(intersection_line) == 0:
+    intersection_line = shapely_poly.intersection(shapely_line)
+
+    if intersection_line.length == 0.0:
         return False
     return True
 
@@ -37,6 +36,15 @@ def polygon_intersects_query_bbox(polygon):
 def polygon_relative_overlap(polygon_1, polygon_2):
     return 0.0
 
+def extract_polygon_from_feature(feature):
+    feature_type = feature['geometry']['type']
+
+    if feature_type == 'Polygon':
+        # Even for multipolygons, the big surrounding polygon is always the first one
+        return feature_osm['geometry']['coordinates'][0]
+
+    print("extract_polygon_from_feature: feature type not implemented: " + feature)
+
 # read files
 with open('raw_data/buildings-osm.geojson', 'r') as f:
     OSM_data = load(f)
@@ -48,7 +56,8 @@ for feature_osm in OSM_data['features']:
     print("Cropping, progess: " + str(int(100*progress/len(OSM_data['features']))) + '%')
     progress+=1.0
 
-    polygon_osm = feature_osm['geometry']['coordinates']
+    # Build polygon
+    polygon_osm = extract_polygon_from_feature(feature_osm)
     if polygon_intersects_query_bbox(polygon_osm):
 
         for feature_slu in SLU_data['features']:

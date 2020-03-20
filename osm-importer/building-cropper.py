@@ -5,23 +5,31 @@
 
 from geojson import Point, Feature, FeatureCollection, load, dump
 from pyproj import Proj, transform
+import shapely.geometry
 
-query_bbox_n = 59.34469860821763
-query_bbox_e = 18.066052311607727
-query_bbox_s = 59.328128796834925
-query_bbox_w = 18.03809503228281
+q_bbox_n = 59.34469860821763
+q_bbox_e = 18.066052311607727
+q_bbox_s = 59.328128796834925
+q_bbox_w = 18.03809503228281
 
-def polygon_line_intersection(polygon, line_point, line_vec):
-    return False
+def polygon_line_intersection(polygon, line_point_1, line_point_2):
+    #print(polygon)
+    shapely_poly = shapely.geometry.Polygon(polygon[0])
+    shapely_line = shapely.geometry.LineString([line_point_1, line_point_2])
+    intersection_line = list(shapely_poly.intersection(shapely_line).coords)
+    print(intersection_line)
+    if len(intersection_line) == 0:
+        return False
+    return True
 
 def polygon_intersects_query_bbox(polygon):
-    if polygon_line_intersection(polygon, (query_bbox_w, query_bbox_n), (0.0, 1.0)):
+    if polygon_line_intersection(polygon, (q_bbox_w, q_bbox_n), (q_bbox_e, q_bbox_n)):
         return True
-    if polygon_line_intersection(polygon, (query_bbox_w, query_bbox_n), (1.0, 0.0)):
+    if polygon_line_intersection(polygon, (q_bbox_e, q_bbox_n), (q_bbox_e, q_bbox_s)):
         return True
-    if polygon_line_intersection(polygon, (query_bbox_e, query_bbox_s), (0.0, 1.0)):
+    if polygon_line_intersection(polygon, (q_bbox_e, q_bbox_s), (q_bbox_w, q_bbox_s)):
         return True
-    if polygon_line_intersection(polygon, (query_bbox_e, query_bbox_s), (1.0, 0.0)):
+    if polygon_line_intersection(polygon, (q_bbox_w, q_bbox_s), (q_bbox_w, q_bbox_n)):
         return True
     return False
 

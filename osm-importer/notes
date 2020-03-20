@@ -1,5 +1,12 @@
 // Query to http://overpass-turbo.eu/
 
+// Query for features by id
+relation(1653092);
+/*added by auto repair*/
+(._;>;);
+/*end of auto repair*/
+out;
+
 // Query for ways
 <query type="way">
     <around lat="59.334591" lon="18.063240" radius="800"/>

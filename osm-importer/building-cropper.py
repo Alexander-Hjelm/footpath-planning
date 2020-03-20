@@ -33,8 +33,23 @@ def polygon_intersects_query_bbox(polygon):
         return True
     return False
 
+def polygon_intersection_area(polygon_1, polygon_2):
+    shapely_poly_1 = shapely.geometry.Polygon(polygon_1)
+    #print(polygon_1)
+    #print(polygon_2)
+    #traceback.print_stack()
+    shapely_poly_2 = shapely.geometry.Polygon(polygon_2)
+    return shapely_poly_1.intersection(shapely_poly_2).area
+
+def polygon_area(polygon):
+    shapely_poly = shapely.geometry.Polygon(polygon)
+    return shapely_poly.area
+
 def polygon_relative_overlap(polygon_1, polygon_2):
-    return 0.0
+    area_overlap = polygon_intersection_area(polygon_1, polygon_2)
+    area_1 = polygon_area(polygon_1)
+    area_2 = polygon_area(polygon_2)
+    return area_overlap / min(area_1, area_2)
 
 def extract_polygon_from_feature(feature):
     feature_type = feature['geometry']['type']

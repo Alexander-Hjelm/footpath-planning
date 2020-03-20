@@ -74,9 +74,18 @@ SLU_data_out = []
 for feature in SLU_data['features']:
     SLU_data_out.append(feature)
 
+query_polygon = [[q_bbox_w, q_bbox_n],[q_bbox_e, q_bbox_n],[q_bbox_e, q_bbox_s],[q_bbox_w, q_bbox_s],[q_bbox_w, q_bbox_n]]
+
+# Delete any SLU buildings that are outside of the new projected query box
+for feature in SLU_data_out:
+    polygon = extract_polygon_from_feature(feature)
+    if polygon_intersection_area(polygon, query_polygon) == 0.0:
+        SLU_data_out.remove(feature)
+        print('Remaining SLU features: ' + str(len(SLU_data_out)))
+
 progress = 0.0
 for feature_osm in OSM_data['features']:
-    print("Cropping, progess: " + str(int(100*progress/len(OSM_data['features']))) + '%')
+    print("Cropping OSM features, progess: " + str(int(100*progress/len(OSM_data['features']))) + '%')
     progress+=1.0
 
     # Build polygon

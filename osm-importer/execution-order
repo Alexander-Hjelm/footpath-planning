@@ -1,0 +1,30 @@
+Execution order of OSM/SLU importer scripts:
+
+#########
+Buildings
+#########
+
+1.      Ensure the following files exist:
+            raw_data/export-buildings.geojson
+            raw_data/by_get.shp
+            raw_data/by_get.shx
+
+2.      building-data-formatter.py
+        plot-shp-reader.py
+
+3.      building-cropper.py
+
+4.      convert-to-sweref.py
+
+5.      building-metrics.py
+
+
+####
+Ways
+####
+
+1.      way-data-formatter.py
+
+2.      Run all building scripts up to building-cropper.py
+
+3.      path-widths.py

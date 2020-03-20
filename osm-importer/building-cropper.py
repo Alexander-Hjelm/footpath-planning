@@ -79,7 +79,7 @@ query_polygon = [[q_bbox_w, q_bbox_n],[q_bbox_e, q_bbox_n],[q_bbox_e, q_bbox_s],
 # Delete any SLU buildings that are outside of the new projected query box
 for feature in SLU_data_out:
     polygon = extract_polygon_from_feature(feature)
-    if polygon_relative_overlap(polygon, query_polygon) < 1.0:
+    if polygon_relative_overlap(polygon, query_polygon) < 0.999:
         SLU_data_out.remove(feature)
         print('Remaining SLU features: ' + str(len(SLU_data_out)))
 
@@ -90,7 +90,7 @@ for feature_osm in OSM_data['features']:
 
     # Build polygon
     polygon_osm = extract_polygon_from_feature(feature_osm)
-    if polygon_relative_overlap(polygon_osm, query_polygon) < 1.0:
+    if polygon_relative_overlap(polygon_osm, query_polygon) < 0.999:
         for feature_slu in SLU_data_out:
             polygon_slu = extract_polygon_from_feature(feature_slu)
 

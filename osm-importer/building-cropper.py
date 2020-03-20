@@ -35,9 +35,6 @@ def polygon_intersects_query_bbox(polygon):
 
 def polygon_intersection_area(polygon_1, polygon_2):
     shapely_poly_1 = shapely.geometry.Polygon(polygon_1)
-    #print(polygon_1)
-    #print(polygon_2)
-    #traceback.print_stack()
     shapely_poly_2 = shapely.geometry.Polygon(polygon_2)
     return shapely_poly_1.intersection(shapely_poly_2).area
 
@@ -56,9 +53,14 @@ def extract_polygon_from_feature(feature):
 
     if feature_type == 'Polygon':
         # Even for multipolygons, the big surrounding polygon is always the first one
-        return feature_osm['geometry']['coordinates'][0]
+        return feature['geometry']['coordinates'][0]
 
-    print("extract_polygon_from_feature: feature type not implemented: " + feature)
+    if feature_type == 'MultiPolygon':
+        #TODO: Return the very first polygon for now. Is this correct?
+        return feature['geometry']['coordinates'][0][0]
+
+    print("extract_polygon_from_feature: feature type not implemented: " + feature_type)
+    print(feature)
 
 # read files
 with open('raw_data/buildings-osm.geojson', 'r') as f:

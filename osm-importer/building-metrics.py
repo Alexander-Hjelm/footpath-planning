@@ -78,6 +78,9 @@ print("Total area, fraction: " + str(total_area_OSM / total_area_SLU))
 overlapping_buildings = {}
 progress = 0.0
 for feature_osm in OSM_data['features']:
+    # Debug only, limit the wating time
+    if progress>10:
+        break
     print("Mapping features, progess: " + str(int(100*progress/len(OSM_data['features']))) + '%')
     progress+=1.0
 

@@ -19,8 +19,6 @@ q_bbox_e = q_bbox_e - q_p
 q_bbox_s = q_bbox_s + q_p
 q_bbox_w = q_bbox_w + q_p
 
-#TODO: To solve the noise issue around the edges of the query, make the q_bbox slightly smaller in both OSM and SLU cases
-
 def polygon_line_intersection(polygon, line_point_1, line_point_2):
     shapely_poly = shapely.geometry.Polygon(polygon)
     shapely_line = shapely.geometry.LineString([line_point_1, line_point_2])
@@ -82,7 +80,7 @@ for feature in SLU_data['features']:
 
 progress = 0.0
 for feature_osm in OSM_data['features']:
-    #print("Cropping OSM features, progess: " + str(int(100*progress/len(OSM_data['features']))) + '%')
+    print("Cropping OSM features, progess: " + str(int(100*progress/len(OSM_data['features']))) + '%')
     progress+=1.0
 
     # Build polygon

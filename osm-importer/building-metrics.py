@@ -17,6 +17,17 @@ def polygon_area(vertices):
     result = abs(a) / 2.0
     return result
 
+def add_areas_recursively(c):
+    area_out = 0.0
+    if type(c) == list:
+        if type(c[0][0]) == float:
+            # Found a float pair
+            area_out += polygon_area(c)
+        else:
+            for c_sub in c:
+                step_recursively(c_sub)
+    return area_out
+
 # read files
 with open('raw_data/buildings-osm-sweref.geojson', 'r') as f:
     OSM_data = load(f)
@@ -29,8 +40,8 @@ print("Finished loading map data")
 total_area_OSM = 0.0
 total_area_SLU = 0.0
 for feature in OSM_data['features']:
-    total_area_OSM += polygon_area(feature['geometry']['coordinates'])
+    total_area_OSM += add_areas_recursively(feature['geometry']['coordinates'])
 for feature in SLU_data['features']:
-    total_area_SLU += polygon_area(feature['geometry']['coordinates'])
+    total_area_SLU += add_areas_recursively(feature['geometry']['coordinates'])
 print(total_area_OSM)
 print(total_area_SLU)

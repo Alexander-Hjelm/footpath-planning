@@ -30,17 +30,6 @@ def polygon_line_intersection(polygon, line_point_1, line_point_2):
         return False
     return True
 
-def polygon_intersects_query_bbox(polygon):
-    if polygon_line_intersection(polygon, (q_bbox_w, q_bbox_n), (q_bbox_e, q_bbox_n)):
-        return True
-    if polygon_line_intersection(polygon, (q_bbox_e, q_bbox_n), (q_bbox_e, q_bbox_s)):
-        return True
-    if polygon_line_intersection(polygon, (q_bbox_e, q_bbox_s), (q_bbox_w, q_bbox_s)):
-        return True
-    if polygon_line_intersection(polygon, (q_bbox_w, q_bbox_s), (q_bbox_w, q_bbox_n)):
-        return True
-    return False
-
 def polygon_intersection_area(polygon_1, polygon_2):
     shapely_poly_1 = shapely.geometry.Polygon(polygon_1)
     shapely_poly_2 = shapely.geometry.Polygon(polygon_2)

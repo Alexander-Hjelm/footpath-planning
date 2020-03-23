@@ -75,7 +75,8 @@ print("Total area, SLU: " + str(total_area_SLU))
 print("Total area, fraction: " + str(total_area_OSM / total_area_SLU))
 
 # Feature mapping
-overlapping_buildings = {}
+overlapping_buildings_osm_bigger = {}
+overlapping_buildings_slu_bigger = {}
 progress = 0.0
 for feature_osm in OSM_data['features']:
     # Debug only, limit the wating time
@@ -84,8 +85,6 @@ for feature_osm in OSM_data['features']:
     print("Mapping features, progess: " + str(int(100*progress/len(OSM_data['features']))) + '%')
     progress+=1.0
 
-    overlapping_buildings[feature_osm['id']] = []
-
     # Build polygon and match with SLU polygons
     polygon_osm = extract_polygon_from_feature(feature_osm)
     for feature_slu in SLU_data['features']:
@@ -93,9 +92,13 @@ for feature_osm in OSM_data['features']:
 
         relative_overlap = polygon_relative_overlap(polygon_osm, polygon_slu)
         if relative_overlap > 0.3:
-            overlapping_buildings[feature_osm['id']].append(feature_slu)
+            if polygon_area(polygon_slu) > polygon_area(polygon_osm):
+                if not feature_slu['id'] in overlapping_buildings_slu_bigger.keys:
+                    overlapping_buildings_slu_bigger[feature_slu['id']] = []
+                overlapping_buildings_slu_bigger[feature_slu['id']].append(feature_osm)
+            else:
+                if not feature_osm['id'] in overlapping_buildings_osm_bigger.keys:
+                    overlapping_buildings_osm_bigger[feature_osm['id']] = []
+                overlapping_buildings_osm_bigger[feature_osm['id']].append(feature_slu)
 
-#TODO: Store overlapping buildings as id -> featurelist
-#TODO: A limit on the number of buildings counted
-#TODO: Shout if the area in SLU is bigger
 #TODO: Bounding polygon method

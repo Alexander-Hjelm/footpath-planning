@@ -16,6 +16,19 @@ def wgs84_to_epsg3006(point):
     x_new, y_new = transform(WGS84, SWEREF, y, x)
     return (y_new, x_new)
 
+def step_recursively(c):
+    if type(c) == list:
+        if type(c[0]) == float and len(c) == 2:
+            # Found a float pair
+            c_new = wgs84_to_epsg3006(c)
+            c[0] = c_new[0]
+            c[1] = c_new[1]
+        else:
+            for c_sub in c:
+                step_recursively(c_sub)
+    else:
+        print(type(c))
+
 # read files
 with open('raw_data/buildings-osm-cropped.geojson', 'r') as f:
     OSM_data = load(f)
@@ -24,18 +37,16 @@ with open('raw_data/buildings-slu-cropped.geojson', 'r') as f:
 
 progress = 0.0
 for feature in OSM_data['features']:
+    step_recursively(feature['geometry']['coordinates'])
+    # Progress
     print("Converting OSM features, progess: " + str(int(100*progress/len(OSM_data['features']))) + '%')
     progress+=1.0
-    for i in range(0, len(feature['geometry']['coordinates'])):
-        point = feature['geometry']['coordinates'][i]
-        feature['geometry']['coordinates'][i] = wgs84_to_epsg3006(point)
-progress = 0.0
+
 for feature in SLU_data['features']:
+    step_recursively(feature['geometry']['coordinates'])
+
+    # Progress
     print("Converting SLU features, progess: " + str(int(100*progress/len(SLU_data['features']))) + '%')
-    progress+=1.0
-    for i in range(0, len(feature['geometry']['coordinates'])):
-        point = feature['geometry']['coordinates'][i]
-        feature['geometry']['coordinates'][i] = wgs84_to_epsg3006(point)
 
 # Write all building features to files
 with open('raw_data/buildings-osm-sweref.geojson', 'w') as f:

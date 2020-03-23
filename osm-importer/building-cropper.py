@@ -104,15 +104,18 @@ candidates_for_removal = []
 for feature_osm_1 in OSM_data_out:
     print("Progress: " + str(100*progress/len(OSM_data_out)) + "%")
     progress+=1.0
-    for feature_osm_2 in OSM_data_out:
-        if not feature_osm_1 == feature_osm_2:
-            polygon_1 = extract_polygon_from_feature(feature_osm_1)
-            polygon_2 = extract_polygon_from_feature(feature_osm_2)
-            if polygon_relative_overlap(polygon_1, polygon_2) > 0.3:
-                if polygon_area(polygon_1) > polygon_area(polygon_2):
-                    candidates_for_removal.append(feature_osm_2)
-                else:
-                    candidates_for_removal.append(feature_osm_1)
+    # Do not treat multipolygons, since they can have buildings inside of them
+    if len(feature_osm_1['geometry']['coordinates']) == 1:
+        for feature_osm_2 in OSM_data_out:
+            if not feature_osm_1 == feature_osm_2:
+                if len(feature_osm_2['geometry']['coordinates']) == 1:
+                    polygon_1 = extract_polygon_from_feature(feature_osm_1)
+                    polygon_2 = extract_polygon_from_feature(feature_osm_2)
+                    if polygon_relative_overlap(polygon_1, polygon_2) > 0.3:
+                        if polygon_area(polygon_1) > polygon_area(polygon_2):
+                            candidates_for_removal.append(feature_osm_2)
+                        else:
+                            candidates_for_removal.append(feature_osm_1)
 print("Removed " + str(len(candidates_for_removal)) + " features from OSM dataset due to self intersection")
 for feature in candidates_for_removal:
     if feature in OSM_data_out:
@@ -124,15 +127,18 @@ candidates_for_removal = []
 for feature_slu_1 in SLU_data_out:
     print("Progress: " + str(100*progress/len(SLU_data_out)) + "%")
     progress+=1.0
-    for feature_slu_2 in SLU_data_out:
-        if not feature_slu_1 == feature_slu_2:
-            polygon_1 = extract_polygon_from_feature(feature_slu_1)
-            polygon_2 = extract_polygon_from_feature(feature_slu_2)
-            if polygon_relative_overlap(polygon_1, polygon_2) > 0.3:
-                if polygon_area(polygon_1) > polygon_area(polygon_2):
-                    candidates_for_removal.append(feature_slu_2)
-                else:
-                    candidates_for_removal.append(feature_slu_1)
+    # Do not treat multipolygons, since they can have buildings inside of them
+    if len(feature_slu_1['geometry']['coordinates']) == 1:
+        for feature_slu_2 in SLU_data_out:
+            if not feature_slu_1 == feature_slu_2:
+                if len(feature_slu_2['geometry']['coordinates']) == 1:
+                    polygon_1 = extract_polygon_from_feature(feature_slu_1)
+                    polygon_2 = extract_polygon_from_feature(feature_slu_2)
+                    if polygon_relative_overlap(polygon_1, polygon_2) > 0.3:
+                        if polygon_area(polygon_1) > polygon_area(polygon_2):
+                            candidates_for_removal.append(feature_slu_2)
+                        else:
+                            candidates_for_removal.append(feature_slu_1)
 print("Removed " + str(len(candidates_for_removal)) + " features from SLU dataset due to self intersection")
 for feature in candidates_for_removal:
     if feature in SLU_data_out:

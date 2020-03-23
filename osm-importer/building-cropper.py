@@ -12,7 +12,7 @@ q_bbox_n = 59.34469860821763
 q_bbox_e = 18.066052311607727
 q_bbox_s = 59.328128796834925
 q_bbox_w = 18.03809503228281
-q_p = 0.001 # Padding for query bbox
+q_p = 0.005 # Padding for query bbox
 
 q_bbox_n = q_bbox_n - q_p
 q_bbox_e = q_bbox_e - q_p

@@ -35,6 +35,9 @@ with open('raw_data/buildings-osm-cropped.geojson', 'r') as f:
 with open('raw_data/buildings-slu-cropped.geojson', 'r') as f:
     SLU_data = load(f)
 
+print("Number of OSM features to convert: " + str(len(OSM_data['features'])))
+print("Number of SLU features to convert: " + str(len(SLU_data['features'])))
+
 progress = 0.0
 for feature in OSM_data['features']:
     step_recursively(feature['geometry']['coordinates'])
@@ -42,6 +45,7 @@ for feature in OSM_data['features']:
     print("Converting OSM features, progess: " + str(int(100*progress/len(OSM_data['features']))) + '%')
     progress+=1.0
 
+progress = 0.0
 for feature in SLU_data['features']:
     step_recursively(feature['geometry']['coordinates'])
 

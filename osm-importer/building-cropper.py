@@ -97,6 +97,47 @@ for feature_osm in OSM_data['features']:
     else:
         OSM_data_out.append(feature_osm)
 
+# Delete any buildings that intersect with another building in the same dataset
+print("Cropping OSM buildings that intersect with other OSM buildings")
+progress = 0.0
+candidates_for_removal = []
+for feature_osm_1 in OSM_data_out:
+    print("Progress: " + str(100*progress/len(OSM_data_out)) + "%")
+    progress+=1.0
+    for feature_osm_2 in OSM_data_out:
+        if not feature_osm_1 == feature_osm_2:
+            polygon_1 = extract_polygon_from_feature(feature_osm_1)
+            polygon_2 = extract_polygon_from_feature(feature_osm_2)
+            if polygon_relative_overlap(polygon_1, polygon_2) > 0.3:
+                if polygon_area(polygon_1) > polygon_area(polygon_2):
+                    candidates_for_removal.append(feature_osm_2)
+                else:
+                    candidates_for_removal.append(feature_osm_1)
+print("Removed " + str(len(candidates_for_removal)) + " features from OSM dataset due to self intersection")
+for feature in candidates_for_removal:
+    if feature in OSM_data_out:
+        OSM_data_out.remove(feature)
+
+print("Cropping SLU buildings that intersect with other SLU buildings")
+progress = 0.0
+candidates_for_removal = []
+for feature_slu_1 in SLU_data_out:
+    print("Progress: " + str(100*progress/len(SLU_data_out)) + "%")
+    progress+=1.0
+    for feature_slu_2 in SLU_data_out:
+        if not feature_slu_1 == feature_slu_2:
+            polygon_1 = extract_polygon_from_feature(feature_slu_1)
+            polygon_2 = extract_polygon_from_feature(feature_slu_2)
+            if polygon_relative_overlap(polygon_1, polygon_2) > 0.3:
+                if polygon_area(polygon_1) > polygon_area(polygon_2):
+                    candidates_for_removal.append(feature_slu_2)
+                else:
+                    candidates_for_removal.append(feature_slu_1)
+print("Removed " + str(len(candidates_for_removal)) + " features from SLU dataset due to self intersection")
+for feature in candidates_for_removal:
+    if feature in SLU_data_out:
+        SLU_data_out.remove(feature) 
+
 # Write all building features to files
 with open('raw_data/buildings-osm-cropped.geojson', 'w') as f:
     dump(FeatureCollection(OSM_data_out), f)

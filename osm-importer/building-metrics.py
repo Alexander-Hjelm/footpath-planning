@@ -20,12 +20,19 @@ def polygon_area(vertices):
 def add_areas_recursively(c):
     area_out = 0.0
     if type(c) == list:
-        if type(c[0][0]) == float:
-            # Found a float pair
-            area_out += polygon_area(c)
+        if type(c[0][0]) == list and type(c[0][0][0] == float):
+            # Found a multipolygon. Add the area of the first (bounding) polygon,
+            # and subtract the rest (holes)
+            area_out += polygon_area(c[0])
+            for i in range(1, len(c)):
+                area_out -= polygon_area(c[i])
+        elif type(c[0][0]) == float:
+            # Found a list of coordinates, bottom level
+            if len(c) == 0:
+                area_out += polygon_area(c)
         else:
             for c_sub in c:
-                step_recursively(c_sub)
+                area_out += add_areas_recursively(c_sub)
     return area_out
 
 # read files
@@ -43,5 +50,5 @@ for feature in OSM_data['features']:
     total_area_OSM += add_areas_recursively(feature['geometry']['coordinates'])
 for feature in SLU_data['features']:
     total_area_SLU += add_areas_recursively(feature['geometry']['coordinates'])
-print(total_area_OSM)
-print(total_area_SLU)
+print("Total area, OSM: " + str(total_area_OSM))
+print("Total area, SLU: " + str(total_area_SLU))

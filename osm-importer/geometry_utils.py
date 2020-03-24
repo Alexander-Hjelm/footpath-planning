@@ -117,6 +117,43 @@ def perp_distance_point_to_line(point, line_point_1, line_point_2):
     return nom/denom
 
 def douglas_peucker(polygon, e):
+    # Find starting points, use northernmost point and the furthest point from that
+    #Pick northernmost point to ensure it is the same in both OSM and SLU cases
+    sp_1 = None
+    xy_max = 0.0
+    for i in range(0, len(polygon)):
+        p = polygon[i]
+        x = p[0]
+        y = p[1]
+        if x+y < xy_max:
+            xy_max = x+y
+            sp_1 = p
+
+    sp_2 = None
+    r_max = 0.0
+    for i in range(0, len(polygon)):
+        p = polygon[i]
+        r = point_distance(sp_1, p)
+        if r > r_max:
+            r_max = r
+            sp_2 = p
+
+    sp_1_index = polygon.index(sp_1)
+    sp_2_index = polygon.index(sp_2)
+    if sp_1_index < sp_2_index:
+        temp = sp_1_index
+        sp_1_index = sp_2_index
+        sp_2_index = temp
+
+    slice_1 = polygon[:sp_1_index] + polgon[sp_2_index:]
+    slice_2 = polgon[sp_1_index:sp_2_index]
+
+    res_polygon_1 = douglas_peucker_helper(slice_1)
+    res_polygon_2 = douglas_peucker_helper(slice_2)
+
+    return res_polygon_1 + res_polygon_2
+
+def douglas_peucker_helper(polygon, e):
     # TODO: geodata polygons have the first and last elements the same. Does this implementation support that?
     # Find the point with the maximum distance to the line: polygon[0], polygon[end]
     d_max = 0

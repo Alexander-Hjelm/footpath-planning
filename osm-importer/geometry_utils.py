@@ -88,19 +88,19 @@ def minimum_bounding_rectangle(polygon):
 
 def minmax_points_of_polygon(polygon):
     # TODO: Using this instead of MBR for now, since I have not figured out how to do rotated MBR
-    min_point_n = []
-    min_point_e = []
-    min_point_s = []
-    min_point_w = []
+    min_point_n = [0.0, -999999999.0]
+    min_point_e = [-999999999.0, 0.0]
+    min_point_s = [0.0, 999999999.0]
+    min_point_w = [999999999.0, 0.0]
 
     for point in polygon:
-        if point.y > min_point_n:
+        if point[1] > min_point_n[1]:
             min_point_n = point
-        if point.x > min_point_e:
+        if point[0] > min_point_e[0]:
             min_point_e = point
-        if point.y < min_point_s:
+        if point[1] < min_point_s[1]:
             min_point_s = point
-        if point.x < min_point_w:
+        if point[0] < min_point_w[0]:
             min_point_w = point
 
     return [min_point_n, min_point_e, min_point_s, min_point_w]
@@ -169,8 +169,8 @@ def douglas_peucker_helper(polygon, e):
     #If max distance is greater than epsilon, recursively simplify
     if d_max > e:
         # Recursive call
-        rec_polygon_1 = douglas_peucker(polygon[:index], e)
-        rec_polygon_2 = douglas_peucker(polygon[index:], e)
+        rec_polygon_1 = douglas_peucker_helper(polygon[:index], e)
+        rec_polygon_2 = douglas_peucker_helper(polygon[index:], e)
         # Build the result list
         polygon_out = rec_polygon_1 + rec_polygon_2
     else:

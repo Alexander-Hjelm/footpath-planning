@@ -24,6 +24,25 @@ def polygon_relative_overlap(polygon_1, polygon_2):
     area_2 = polygon_area(polygon_2)
     return area_overlap / min(area_1, area_2)
 
+def point_distance(p1, p2):
+    return math.sqrt((p1[0]-p2[0])**2 + (p1[1]-p2[1])**2)
+
+def polygon_perimeter(polygon):
+    perimeter_out = 0.0
+    for i in range(0, len(polygon)-1):
+        perimeter_out += point_distance(polygon[i], polygon[i+1])
+    return perimeter_out
+
+def signed_edge_angle(e1p1, e1p2, e2p1, e2p2):
+    vector1 = e1p2-e1p1
+    vector1 = e2p2-e2p1
+    x1, y1 = vector1
+    x2, y2 = vector2
+    inner_product = x1*x2 + y1*y2
+    len1 = math.hypot(x1, y1)
+    len2 = math.hypot(x2, y2)
+    return math.acos(inner_product/(len1*len2))
+
 def add_areas_recursively(c):
     area_out = 0.0
     if type(c) == list:
@@ -98,6 +117,24 @@ def douglas_peucker(polygon, e):
     else:
         polygon_out = [polygon[0], polygon[end]]
     return polygon_out
+
+def turning_function(polygon):
+    turnpoints_out = []
+    acc_len = 0.0 # Accumluated length that has been stepped through
+    total_len = polygon_perimeter(polygon)
+    acc_angle = 0.0
+    for i in range(0, len(polygon)-2):
+        p1 = polygon[i]
+        p2 = polygon[i+1]
+        p3 = polygon[i+2]
+
+        edge_len = point_distance(p2, p1)
+        acc_len += edge_len
+
+        angle = signed_edge_angle(p1, p2, p2, p3)
+        acc_angle += angle
+        turnpoints_out.append([acc_len, acc_angle])
+    return turnpoints_out
 
 def extract_polygon_from_feature(feature):
     feature_type = feature['geometry']['type']

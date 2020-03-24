@@ -46,11 +46,11 @@ for feature_osm in OSM_data['features']:
         relative_overlap = geometry_utils.polygon_relative_overlap(polygon_osm, polygon_slu)
         if relative_overlap > 0.3:
             if geometry_utils.polygon_area(polygon_slu) > geometry_utils.polygon_area(polygon_osm):
-                if not feature_slu['id'] in overlapping_buildings_slu_bigger.keys:
+                if not feature_slu['id'] in overlapping_buildings_slu_bigger.keys():
                     overlapping_buildings_slu_bigger[feature_slu['id']] = []
                 overlapping_buildings_slu_bigger[feature_slu['id']].append(feature_osm)
             else:
-                if not feature_osm['id'] in overlapping_buildings_osm_bigger.keys:
+                if not feature_osm['id'] in overlapping_buildings_osm_bigger.keys():
                     overlapping_buildings_osm_bigger[feature_osm['id']] = []
                 overlapping_buildings_osm_bigger[feature_osm['id']].append(feature_slu)
 

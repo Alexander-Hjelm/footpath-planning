@@ -4,6 +4,7 @@
 
 from geojson import Point, Feature, FeatureCollection, load
 import shapely.geometry
+import math
 
 OSM_data = {}
 SLU_data = {}
@@ -40,6 +41,63 @@ def add_areas_recursively(c):
             for c_sub in c:
                 area_out += add_areas_recursively(c_sub)
     return area_out
+
+def minimum_bounding_rectangle(polygon):
+    pass
+
+def minmax_points_of_polygon_with_offset(polygon):
+    # TODO: Using this instead of MBR for now, since I have not figured out how to do rotated MBR
+    min_point_n = []
+    min_point_e = []
+    min_point_s = []
+    min_point_w = []
+
+    for point in polygon:
+        if point.y > min_point_n:
+            min_point_n = point
+        if point.x > min_point_e:
+            min_point_e = point
+        if point.y < min_point_s:
+            min_point_s = point
+        if point.x < min_point_w:
+            min_point_w = point
+
+    return [min_point_n, min_point_e, min_point_s, min_point_w]
+
+def perp_distance_point_to_line(point, line_point_1, line_point_2):
+    x0 = point[0]
+    y0 = point[1]
+    x1 = line_point_1[0]
+    y1 = line_point_1[1]
+    x2 = line_point_2[0]
+    y2 = line_point_2[1]
+    nom = abs((y2-y1)*x0 - (x2-x1)*y0 + x2*y1 - y2*x1)
+    denom = math.sqrt((y2-y1)**2 + (x2-x1)**2)
+    return nom/denom
+
+def douglas_peucker(polygon, e):
+    # TODO: geodata polygons have the first and last elements the same. Does this implementation support that?
+    # Find the point with the maximum distance to the line: polygon[0], polygon[end]
+    d_max = 0
+    index = 0
+    end = len(polygon)
+    for i in range(1, end-1):
+        d = perp_distance_point_to_line(polygon[i], polygon[0], polygon[end])
+        if d > d_max:
+            index = i
+            d_max = d
+
+    polygon_out = []
+    #If max distance is greater than epsilon, recursively simplify
+    if d_max > e:
+        # Recursive call
+        rec_polygon_1 = douglas_peucker(polygon[:index], e)
+        rec_polygon_2 = douglas_peucker(polygon[index:], e)
+        # Build the result list
+        polygon_out = rec_polygon_1 + rec_polygon_2
+    else:
+        polygon_out = [polygon[0], polygon[end]]
+    return polygon_out
 
 def extract_polygon_from_feature(feature):
     feature_type = feature['geometry']['type']

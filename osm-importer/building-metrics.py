@@ -71,7 +71,12 @@ for feature_osm in OSM_data['features']:
         tc_osm = geometry_utils.turning_function(polygon_osm)
         #tc_slu = geometry_utils.turning_function(polygon_slu)
 
-
+#TODO: Calculate Douglas-Peucker-reduced polygons
+#TODO: Bounding points of Douglas-Peucker-reduced polygons
+#TODO: Include point indices with Douglas-Peucker reduction
+#TODO: Map to the original points before the reduction
+#TODO: Point distance
+#TODO: Point distance average
 
 
 

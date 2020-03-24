@@ -54,14 +54,17 @@ for feature_osm in OSM_data['features']:
                     overlapping_buildings_osm_bigger[feature_osm['id']] = []
                 overlapping_buildings_osm_bigger[feature_osm['id']].append(feature_slu)
 
-# Calculate turning functions
+# Geometrical distance between the two sets
+avg_pos_error = 0.0
+counted_points = 0
 for feature_osm in OSM_data['features']:
-    #TODO: Turning function on the convex hull for now? Otherwise no way to map the multiple SLU
     # Footprints to a single OSM footprint
     if feature_osm['id'] in overlapping_buildings_osm_bigger:
         features_slu = overlapping_buildings_osm_bigger[feature_osm['id']]
 
         # Build polygons
+        # TODO: Get the convex hull of both and use those as polygons. 
+        # Otherwise no way to map the multiple SLU
         polygon_osm = geometry_utils.extract_polygon_from_feature(feature_osm)
         polygon_slu = []
         for feature_slu in features_slu:
@@ -71,12 +74,20 @@ for feature_osm in OSM_data['features']:
         tc_osm = geometry_utils.turning_function(polygon_osm)
         #tc_slu = geometry_utils.turning_function(polygon_slu)
 
-#TODO: Calculate Douglas-Peucker-reduced polygons
-#TODO: Bounding points of Douglas-Peucker-reduced polygons
-#TODO: Include point indices with Douglas-Peucker reduction
-#TODO: Map to the original points before the reduction
-#TODO: Point distance
-#TODO: Point distance average
+        # Douglas Peucker-reduced polygon, 5m tolerance for now
+        # TODO: Adjust tolerance
+        polygon_osm_dp = geometry_utils.douglas_peucker(polygon_osm, 5)
+        #polygon_slu_dp = geometry_utils.douglas_peucker()
 
+        bounding_points_osm = geometry_utils.minmax_points_of_polygon(polygon_osm_dp)
+        #bounding_points_slu = geometry_utils.minmax_points_of_polygon(polygon_slu_dp)
 
+        for i in range(0, len(bounding_points_osm)):
+            p1 = bounding_points_osm[i]
+            p2 = bounding_points_slu[i]
+            r = geometry_utils.point_distance(p1, p2)
+            avg_pos_error += r
+            counted_points += 1
 
+avg_pos_error /= counted_points
+print("Average position error: " + avg_pos_error)

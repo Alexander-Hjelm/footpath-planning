@@ -86,7 +86,7 @@ def add_areas_recursively(c):
 def minimum_bounding_rectangle(polygon):
     pass
 
-def minmax_points_of_polygon_with_offset(polygon):
+def minmax_points_of_polygon(polygon):
     # TODO: Using this instead of MBR for now, since I have not figured out how to do rotated MBR
     min_point_n = []
     min_point_e = []

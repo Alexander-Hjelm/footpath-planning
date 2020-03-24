@@ -5,8 +5,7 @@
 # - Run building-data-formatter-slu.py
 
 from geojson import Point, Feature, FeatureCollection, load, dump
-from pyproj import Proj, transform
-import shapely.geometry
+import geometry_utils
 
 q_bbox_n = 59.34469860821763
 q_bbox_e = 18.066052311607727
@@ -18,44 +17,6 @@ q_bbox_n = q_bbox_n - q_p
 q_bbox_e = q_bbox_e - q_p
 q_bbox_s = q_bbox_s + q_p
 q_bbox_w = q_bbox_w + q_p
-
-def polygon_line_intersection(polygon, line_point_1, line_point_2):
-    shapely_poly = shapely.geometry.Polygon(polygon)
-    shapely_line = shapely.geometry.LineString([line_point_1, line_point_2])
-    intersection_line = shapely_poly.intersection(shapely_line)
-
-    if intersection_line.length == 0.0:
-        return False
-    return True
-
-def polygon_intersection_area(polygon_1, polygon_2):
-    shapely_poly_1 = shapely.geometry.Polygon(polygon_1)
-    shapely_poly_2 = shapely.geometry.Polygon(polygon_2)
-    return shapely_poly_1.intersection(shapely_poly_2).area
-
-def polygon_area(polygon):
-    shapely_poly = shapely.geometry.Polygon(polygon)
-    return shapely_poly.area
-
-def polygon_relative_overlap(polygon_1, polygon_2):
-    area_overlap = polygon_intersection_area(polygon_1, polygon_2)
-    area_1 = polygon_area(polygon_1)
-    area_2 = polygon_area(polygon_2)
-    return area_overlap / min(area_1, area_2)
-
-def extract_polygon_from_feature(feature):
-    feature_type = feature['geometry']['type']
-
-    if feature_type == 'Polygon':
-        # Even for multipolygons, the big surrounding polygon is always the first one
-        return feature['geometry']['coordinates'][0]
-
-    if feature_type == 'MultiPolygon':
-        #TODO: Return the very first polygon for now. Is this correct?
-        return feature['geometry']['coordinates'][0][0]
-
-    print("extract_polygon_from_feature: feature type not implemented: " + feature_type)
-    print(feature)
 
 # read files
 with open('raw_data/buildings-osm.geojson', 'r') as f:
@@ -73,8 +34,8 @@ query_polygon = [[q_bbox_w, q_bbox_n],[q_bbox_e, q_bbox_n],[q_bbox_e, q_bbox_s],
 
 # Delete any SLU buildings that are outside of the new projected query box
 for feature in SLU_data['features']:
-    polygon = extract_polygon_from_feature(feature)
-    if polygon_relative_overlap(polygon, query_polygon) < 0.999:
+    polygon = geometry_utils.extract_polygon_from_feature(feature)
+    if geometry_utils.polygon_relative_overlap(polygon, query_polygon) < 0.999:
         SLU_data_out.remove(feature)
         print('Remaining SLU features: ' + str(len(SLU_data_out)))
 
@@ -84,13 +45,13 @@ for feature_osm in OSM_data['features']:
     progress+=1.0
 
     # Build polygon
-    polygon_osm = extract_polygon_from_feature(feature_osm)
-    if polygon_relative_overlap(polygon_osm, query_polygon) < 0.999:
+    polygon_osm = geometry_utils.extract_polygon_from_feature(feature_osm)
+    if geometry_utils.polygon_relative_overlap(polygon_osm, query_polygon) < 0.999:
         for feature_slu in SLU_data['features']:
             if feature_slu in SLU_data_out:
-                polygon_slu = extract_polygon_from_feature(feature_slu)
+                polygon_slu = geometry_utils.extract_polygon_from_feature(feature_slu)
 
-                relative_overlap = polygon_relative_overlap(polygon_osm, polygon_slu)
+                relative_overlap = geometry_utils.polygon_relative_overlap(polygon_osm, polygon_slu)
                 if relative_overlap > 0.3:
                     SLU_data_out.remove(feature_slu)
                     print('Remaining SLU features: ' + str(len(SLU_data_out)))
@@ -109,10 +70,10 @@ for feature_osm_1 in OSM_data_out:
         for feature_osm_2 in OSM_data_out:
             if not feature_osm_1 == feature_osm_2:
                 if len(feature_osm_2['geometry']['coordinates']) == 1:
-                    polygon_1 = extract_polygon_from_feature(feature_osm_1)
-                    polygon_2 = extract_polygon_from_feature(feature_osm_2)
-                    if polygon_relative_overlap(polygon_1, polygon_2) > 0.3:
-                        if polygon_area(polygon_1) > polygon_area(polygon_2):
+                    polygon_1 = geometry_utils.extract_polygon_from_feature(feature_osm_1)
+                    polygon_2 = geometry_utils.extract_polygon_from_feature(feature_osm_2)
+                    if geometry_utils.polygon_relative_overlap(polygon_1, polygon_2) > 0.3:
+                        if geometry_utils.polygon_area(polygon_1) > geometry_utils.polygon_area(polygon_2):
                             candidates_for_removal.append(feature_osm_2)
                         else:
                             candidates_for_removal.append(feature_osm_1)
@@ -132,10 +93,10 @@ for feature_slu_1 in SLU_data_out:
         for feature_slu_2 in SLU_data_out:
             if not feature_slu_1 == feature_slu_2:
                 if len(feature_slu_2['geometry']['coordinates']) == 1:
-                    polygon_1 = extract_polygon_from_feature(feature_slu_1)
-                    polygon_2 = extract_polygon_from_feature(feature_slu_2)
-                    if polygon_relative_overlap(polygon_1, polygon_2) > 0.3:
-                        if polygon_area(polygon_1) > polygon_area(polygon_2):
+                    polygon_1 = geometry_utils.extract_polygon_from_feature(feature_slu_1)
+                    polygon_2 = geometry_utils.extract_polygon_from_feature(feature_slu_2)
+                    if geometry_utils.polygon_relative_overlap(polygon_1, polygon_2) > 0.3:
+                        if geometry_utils.polygon_area(polygon_1) > geometry_utils.polygon_area(polygon_2):
                             candidates_for_removal.append(feature_slu_2)
                         else:
                             candidates_for_removal.append(feature_slu_1)

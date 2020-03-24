@@ -3,24 +3,13 @@
 # - Run building-cropper.py
 
 from geojson import Point, Feature, FeatureCollection, load, dump
-from pyproj import Proj, transform
-
-def wgs84_to_epsg3006(point):
-    x = point[0]
-    y = point[1]
-    # Coordinate conversion from EPSG:3006 to WGS:84
-    # Transform using pyproj
-    WGS84 = Proj('EPSG:4326')
-    SWEREF = Proj('EPSG:3006')
-    # Perform the transformation. SLU data has flipped x/y coordinates
-    x_new, y_new = transform(WGS84, SWEREF, y, x)
-    return (y_new, x_new)
+import geometry_utils
 
 def step_recursively(c):
     if type(c) == list:
         if type(c[0]) == float and len(c) == 2:
             # Found a float pair
-            c_new = wgs84_to_epsg3006(c)
+            c_new = geometry_utils.wgs84_to_epsg3006(c)
             c[0] = c_new[0]
             c[1] = c_new[1]
         else:

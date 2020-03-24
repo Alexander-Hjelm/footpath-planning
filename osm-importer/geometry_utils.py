@@ -57,9 +57,7 @@ def polygon_perimeter(polygon):
         perimeter_out += point_distance(polygon[i], polygon[i+1])
     return perimeter_out
 
-def signed_edge_angle(e1p1, e1p2, e2p1, e2p2):
-    vector1 = e1p2-e1p1
-    vector1 = e2p2-e2p1
+def signed_vector_angle(vector1, vector2):
     x1, y1 = vector1
     x2, y2 = vector2
     inner_product = x1*x2 + y1*y2
@@ -155,7 +153,7 @@ def turning_function(polygon):
         edge_len = point_distance(p2, p1)
         acc_len += edge_len
 
-        angle = signed_edge_angle(p1, p2, p2, p3)
+        angle = signed_vector_angle([p2[0]-p1[0], p2[1]-p1[1]], [p3[0]-p2[0], p3[1]-p2[1]])
         acc_angle += angle
         turnpoints_out.append([acc_len, acc_angle])
     return turnpoints_out

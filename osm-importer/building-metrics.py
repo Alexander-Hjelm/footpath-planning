@@ -54,4 +54,24 @@ for feature_osm in OSM_data['features']:
                     overlapping_buildings_osm_bigger[feature_osm['id']] = []
                 overlapping_buildings_osm_bigger[feature_osm['id']].append(feature_slu)
 
-#TODO: Bounding polygon method
+# Calculate turning functions
+for feature_osm in OSM_data['features']:
+    #TODO: Turning function on the convex hull for now? Otherwise no way to map the multiple SLU
+    # Footprints to a single OSM footprint
+    if feature_osm['id'] in overlapping_buildings_osm_bigger:
+        features_slu = overlapping_buildings_osm_bigger[feature_osm['id']]
+
+        # Build polygons
+        polygon_osm = geometry_utils.extract_polygon_from_feature(feature_osm)
+        polygon_slu = []
+        for feature_slu in features_slu:
+            polygon_slu += geometry_utils.extract_polygon_from_feature(feature_slu)
+
+        # Turning funcitons
+        tc_osm = geometry_utils.turning_function(polygon_osm)
+        #tc_slu = geometry_utils.turning_function(polygon_slu)
+
+
+
+
+

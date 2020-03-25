@@ -78,6 +78,10 @@ for feature_osm in OSM_data['features']:
         #plot_utils.plot_polygon(polygon_osm)
         #plot_utils.plot_polygons(polygon_slu)
 
+        mbr_osm = geometry_utils.oriented_mbr(polygon_osm)
+        print(mbr_osm)
+        plot_utils.plot_polygons([polygon_osm, mbr_osm])
+
         # Turning funcitons
         tc_osm = geometry_utils.turning_function(cv_osm)
         tc_slu = geometry_utils.turning_function(cv_slu)

@@ -66,7 +66,8 @@ for feature_osm in OSM_data['features']:
         polygon_osm = geometry_utils.extract_polygon_from_feature(feature_osm)
         polygon_slu = []
         for feature_slu in features_slu:
-            polygon_slu += geometry_utils.extract_polygon_from_feature(feature_slu)
+            polygon_slu.append(geometry_utils.extract_polygon_from_feature(feature_slu))
+
 
         # TODO: Find out how Fan et al did for situations where a building is made up out of many small footprints
         # Compute convex hulls

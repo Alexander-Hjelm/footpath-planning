@@ -63,24 +63,31 @@ for feature_osm in OSM_data['features']:
         features_slu = overlapping_buildings_osm_bigger[feature_osm['id']]
 
         # Build polygons
-        # TODO: Get the convex hull of both and use those as polygons. 
-        # Otherwise no way to map the multiple SLU
         polygon_osm = geometry_utils.extract_polygon_from_feature(feature_osm)
         polygon_slu = []
         for feature_slu in features_slu:
             polygon_slu += geometry_utils.extract_polygon_from_feature(feature_slu)
 
+        # TODO: Find out how Fan et al did for situations where a building is made up out of many small footprints
+        # Compute convex hulls
+        cv_osm = geometry_utils.convex_hull(polygon_osm)
+        cv_slu = geometry_utils.convex_hull(polygon_slu)
+
         # Turning funcitons
-        tc_osm = geometry_utils.turning_function(polygon_osm)
-        #tc_slu = geometry_utils.turning_function(polygon_slu)
+        tc_osm = geometry_utils.turning_function(cv_osm)
+        tc_slu = geometry_utils.turning_function(cv_slu)
+
+        # Remove last points to prepare for Douglas-Peucker
+        cv_osm.pop(-1)
+        cv_slu.pop(-1)
 
         # Douglas Peucker-reduced polygon, 5m tolerance for now
         # TODO: Adjust tolerance
-        polygon_osm_dp = geometry_utils.douglas_peucker(polygon_osm, 5)
-        #polygon_slu_dp = geometry_utils.douglas_peucker()
+        cv_osm_dp = geometry_utils.douglas_peucker(cv_osm, 5)
+        cv_slu_dp = geometry_utils.douglas_peucker(cv_slu, 5)
 
-        bounding_points_osm = geometry_utils.minmax_points_of_polygon(polygon_osm_dp)
-        #bounding_points_slu = geometry_utils.minmax_points_of_polygon(polygon_slu_dp)
+        bounding_points_osm = geometry_utils.minmax_points_of_polygon(cv_osm_dp)
+        bounding_points_slu = geometry_utils.minmax_points_of_polygon(cv_slu_dp)
 
         for i in range(0, len(bounding_points_osm)):
             p1 = bounding_points_osm[i]
@@ -90,4 +97,4 @@ for feature_osm in OSM_data['features']:
             counted_points += 1
 
 avg_pos_error /= counted_points
-print("Average position error: " + avg_pos_error)
+print("Average position error: " + str(avg_pos_error))

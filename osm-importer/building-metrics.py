@@ -4,6 +4,7 @@
 
 from geojson import Point, Feature, FeatureCollection, load
 import geometry_utils
+import plot_utils
 
 OSM_data = {}
 SLU_data = {}
@@ -74,9 +75,16 @@ for feature_osm in OSM_data['features']:
         cv_osm = geometry_utils.convex_hull(polygon_osm)
         cv_slu = geometry_utils.convex_hull(polygon_slu)
 
+        #plot_utils.plot_polygon(polygon_osm)
+        #plot_utils.plot_polygons(polygon_slu)
+
         # Turning funcitons
         tc_osm = geometry_utils.turning_function(cv_osm)
         tc_slu = geometry_utils.turning_function(cv_slu)
+
+        #plot_utils.plot_polygons([cv_osm, polygon_osm])
+        #plot_utils.plot_polygons([cv_slu] + polygon_slu)
+        #plot_utils.plot_polygons([cv_slu, cv_osm])
 
         # Remove last points to prepare for Douglas-Peucker
         cv_osm.pop(-1)
@@ -86,6 +94,10 @@ for feature_osm in OSM_data['features']:
         # TODO: Adjust tolerance
         cv_osm_dp = geometry_utils.douglas_peucker(cv_osm, 5)
         cv_slu_dp = geometry_utils.douglas_peucker(cv_slu, 5)
+
+        #plot_utils.plot_polygons([cv_osm, cv_osm_dp])
+        #plot_utils.plot_polygons([cv_slu, cv_slu_dp])
+        #plot_utils.plot_polygons([cv_osm_dp, cv_slu_dp])
 
         bounding_points_osm = geometry_utils.minmax_points_of_polygon(cv_osm_dp)
         bounding_points_slu = geometry_utils.minmax_points_of_polygon(cv_slu_dp)
@@ -101,12 +113,4 @@ avg_pos_error /= counted_points
 print("Average position error: " + str(avg_pos_error))
 
 
-
-
-
-# TODO: Check if there is source code for Fan's project
-# TODO: What is the turning function used for in Fan's project?
-# TODO: Plot: Check if the convex hull is calculated properly
-# TODO: Plot: Check if the DP-reduction is correct
-# TODO: Plot: Check that the found points on the OSM and SLU convex hulls are calculated properly
-# TODO: Plot: Check that the DP-reduction + MBR finds the correct matching points
+#TODO: Read through Fan et al, make a list of metrics that we will obtain

@@ -153,6 +153,8 @@ The turning function has some nice geometric properties, in that it is invariant
 The similarity of two polygons A and B in terms of their turning function is defined as their distance of their cumulative turning functions: $S_{T}(A, B) = 1 - (\int^{1}_{0} T_{C,A}(l) - T_{C,B}(l) dl)^{1/2}$.
 The value range will be $(0 < S_{T} < 1)$, where $S_{T}(A,B) = 1$ if the polygons are identical. 
 
+TODO: Include a distribution of the shap similarity of matched building footprints, see Fan et al, page 14
+
 \subsection{Correspondence by building area}
 
 (Fan et al., 2014) further discussed how the relative overlap in building area can be used to determine building correspondence between datasets, in cases where there is not much displacement between OSM building footprints data and the reference data set. Figure X (TODO) shows a typical comparison between the OpenStreetMap and SLU datasets, and by eyesight it was determined that the displacement of features is small. The relative building overlap between the OSM and SLU datasets will be defined as folows, given the footprints of any building in the OSM set ($foot_{OSM}$) and the SLU set ($foot_{SLU}$):

@@ -263,6 +263,83 @@ def convex_hull(polygons):
         point = far_point
     return hull_points
 
+def oriented_mbr(points):
+    cv = convex_hull(points)
+    center = polygon_centroid(cv)
+
+    best_area = 0.0
+    best_f_1_min = None
+    best_f_1_max = None
+    best_f_2_min = None
+    best_f_2_max = None
+
+    for i in range(0, len(cv)-1):
+        a = cv[i]
+        b = cv[i+1]
+        ev_1 = [b[0]-a[0], b[1]-a[1]]
+        ev_1 = normalize(ev_1)
+        ev_2 = perpendicular(ev_1)
+
+        # Projected edge points from the center
+        f_1_min = [0.0, 0.0]
+        f_1_max = [0.0, 0.0]
+        f_2_min = [0.0, 0.0]
+        f_2_max = [0.0, 0.0]
+
+        for j in range(0, len(cv)-1):
+            # p = cv[j] - center
+            p = [cv[j][0] - center[0], cv[j][1] - center[1]]
+            print("%%%")
+            print(cv[j])
+            print(center)
+            print(p)
+            print("%%%")
+
+            p_1 = project(p, ev_1)
+            p_2 = project(p, ev_2)
+
+            print("***")
+            print(np.dot(p_1, ev_1))
+            print(np.dot(f_1_max, ev_1))
+            print("***")
+
+            if np.dot(p_1, ev_1) > np.dot(f_1_max, ev_1):
+                f_1_max = p_1
+            if np.dot(p_1, ev_1) < np.dot(f_1_min, ev_1):
+                f_1_min = p_1
+            if np.dot(p_2, ev_2) > np.dot(f_2_max, ev_2):
+                f_2_max = p_2
+            if np.dot(p_2, ev_2) > np.dot(f_2_min, ev_2):
+                f_2_min = p_2
+
+        print(f_1_max)
+        print(f_1_min)
+        print(f_2_max)
+        print(f_2_min)
+
+        area = polygon_area([f_1_min, f_2_min, f_1_max, f_2_max])
+        print(area)
+        if area > best_area:
+            best_f_1_min = f_1_min
+            best_f_1_max = f_1_max
+            best_f_2_min = f_2_min
+            best_f_2_max = f_2_max
+
+    c1_x = best_f_1_max[0] + best_f_2_max[0] + center[0]
+    c1_y = best_f_1_max[1] + best_f_2_max[1] + center[1]
+    c2_x = best_f_2_max[0] + best_f_2_min[0] + center[0]
+    c2_y = best_f_2_max[1] + best_f_2_min[1] + center[1]
+    c3_x = best_f_2_min[0] + best_f_1_min[0] + center[0]
+    c3_y = best_f_2_min[1] + best_f_1_min[1] + center[1]
+    c4_x = best_f_1_min[0] + best_f_1_max[0] + center[0]
+    c4_y = best_f_1_min[1] + best_f_1_max[1] + center[1]
+    corner_1 = [c1_x, c1_y]
+    corner_2 = [c2_x, c2_y]
+    corner_3 = [c3_x, c3_y]
+    corner_4 = [c4_x, c4_y]
+
+    return [corner_1, corner_2, corner_3, corner_4]
+
 def extract_polygon_from_feature(feature):
     feature_type = feature['geometry']['type']
 

@@ -195,6 +195,65 @@ def turning_function(polygon):
         turnpoints_out.append([acc_len, acc_angle])
     return turnpoints_out
 
+def get_vector_orientation(origin, p1, p2):
+        '''
+        Returns the orientation of the Point p1 with regards to Point p2 using origin.
+        Negative if p1 is clockwise of p2.
+        :param p1:
+        :param p2:
+        :return: integer
+        '''
+        difference = (p2[0] - origin[0]) * (p1[1] - origin[1]) - (p1[0] - origin[0]) * (p2[1] - origin[1])
+        return difference
+
+
+def convex_hull(polygons):
+    hull_points = []
+
+    # Build master polygon
+    if type(polygons[0][0]) == list:
+        points = []
+        for p in polygons:
+            points += p
+    elif type(polygons[0][0]) == float:
+        points = polygons
+
+    start = points[0]
+    min_x = start[0]
+    for p in points[1:]:
+        if p[0] < min_x:
+            min_x = p[0]
+            start = p
+
+    point = start
+    hull_points.append(start)
+
+    far_point = None
+    while far_point is not start:
+        # get the first point (initial max) to use to compare with others
+        p1 = None
+        for p in points:
+            if p is point:
+                continue
+            else:
+                p1 = p
+                break
+
+        far_point = p1
+
+        for p2 in points:
+            # ensure we aren't comparing to self or pivot point
+            if p2 is point or p2 is p1:
+                continue
+            else:
+                direction = get_vector_orientation(point, far_point, p2)
+                if direction > 0:
+                    far_point = p2
+
+        hull_points.append(far_point)
+        point = far_point
+    return hull_points
+
 def extract_polygon_from_feature(feature):
     feature_type = feature['geometry']['type']
 

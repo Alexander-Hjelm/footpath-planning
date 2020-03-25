@@ -115,8 +115,23 @@ def perp_distance_point_to_line(point, line_point_1, line_point_2):
     nom = abs((y2-y1)*x0 - (x2-x1)*y0 + x2*y1 - y2*x1)
     denom = math.sqrt((y2-y1)**2 + (x2-x1)**2)
     return nom/denom
-
 def douglas_peucker(polygon, e):
+    # Find starting point, use northernmost point
+    #Pick northernmost point to ensure it is the same in both OSM and SLU cases
+    sp_index = 0
+    y_max = 999999999999.0
+    for i in range(0, len(polygon)):
+        p = polygon[i]
+        if p[1] < y_max:
+            y_max = p[1]
+            sp_index = i
+
+    # Rotate the polygon until the starting point is first
+    polygon_rotated = polygon[sp_index:] + polygon[:sp_index]
+
+    return douglas_peucker_helper(polygon_rotated, e)
+
+def douglas_peucker_helper(polygon, e):
     # Find the point with the maximum distance to the line: polygon[0], polygon[end]
     d_max = 0
     index = 0
@@ -131,8 +146,8 @@ def douglas_peucker(polygon, e):
     #If max distance is greater than epsilon, recursively simplify
     if d_max > e:
         # Recursive call
-        rec_polygon_1 = douglas_peucker(polygon[:index], e)
-        rec_polygon_2 = douglas_peucker(polygon[index:], e)
+        rec_polygon_1 = douglas_peucker_helper(polygon[:index], e)
+        rec_polygon_2 = douglas_peucker_helper(polygon[index:], e)
         # Build the result list
         polygon_out = rec_polygon_1 + rec_polygon_2
     else:

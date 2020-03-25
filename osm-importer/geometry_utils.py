@@ -1,5 +1,6 @@
 import shapely.geometry
 import math
+import numpy as np
 from pyproj import Proj, transform
 
 def wgs84_to_epsg3006(point):
@@ -48,8 +49,33 @@ def polygon_line_intersection(polygon, line_point_1, line_point_2):
         return False
     return True
 
+def polygon_centroid(polygon):
+    centroid = [0.0, 0.0]
+    for i in range(0, len(polygon)):
+        point = polygon[i]
+        if i == len(polygon)-1 and point[0] == polygon[0][0] and point[1] == polygon[0][1]:
+            # Ensure that the starting point is not counted twice
+            continue
+        centroid[0] += point[0]
+        centroid[1] += point[1]
+    centroid[0] /= len(polygon)
+    centroid[1] /= len(polygon)
+    return centroid
+
 def point_distance(p1, p2):
     return math.sqrt((p1[0]-p2[0])**2 + (p1[1]-p2[1])**2)
+
+def point_len(p):
+    return point_distance(p, [0.0, 0.0])
+
+def normalize(a):
+    d = point_len(a)
+    return [a[0]/d, a[1]/d]
+
+def project(a, b):
+    # Project a onto b
+    proj_factor = np.dot(a, b)/point_len(a)**2
+    return [proj_factor*a[0], proj_factor*a[1]]
 
 def polygon_perimeter(polygon):
     perimeter_out = 0.0
@@ -64,6 +90,12 @@ def signed_vector_angle(vector1, vector2):
     len1 = math.hypot(x1, y1)
     len2 = math.hypot(x2, y2)
     return math.acos(inner_product/(len1*len2))
+
+def perpendicular(a):
+    b = np.empty_like(a)
+    b[0] = -a[1]
+    b[1] = a[0]
+    return b
 
 def add_areas_recursively(c):
     area_out = 0.0

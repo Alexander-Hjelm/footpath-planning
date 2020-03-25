@@ -98,3 +98,14 @@ for feature_osm in OSM_data['features']:
 
 avg_pos_error /= counted_points
 print("Average position error: " + str(avg_pos_error))
+
+
+
+
+
+# TODO: Check if there is source code for Fan's project
+# TODO: What is the turning function used for in Fan's project?
+# TODO: Plot: Check if the convex hull is calculated properly
+# TODO: Plot: Check if the DP-reduction is correct
+# TODO: Plot: Check that the found points on the OSM and SLU convex hulls are calculated properly
+# TODO: Plot: Check that the DP-reduction + MBR finds the correct matching points

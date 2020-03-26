@@ -156,4 +156,21 @@ print("Average position error: " + str(avg_pos_error_cp) + " (Counting Points me
 avg_pos_error_mbr /= counted_points_mbr
 print("Average position error: " + str(avg_pos_error_mbr) + " (MBR method, reasonable)")
 
-#TODO: Read through Fan et al, make a list of metrics that we will obtain
+#TODO: Line plot function in plot-utils
+#TODO: Line plot of turning functions
+#TODO: Function for evaluating shape similarity, using turning function
+#TODO: MBR method: Record which quadrant (MBR edge) That the edge was found on. Only match edges on the same sides
+#TODO: Find the SLU MBR that minimizes area overlap between the OSM and SLU MBRs, not the one with least area
+#TODO: Write in the report about why we had to cut buildings close to the boundary
+#TODO: Position accuracy per building by taking the average of the distance between the corresponding points
+#TODO: Fan et al, only buildings with a 1:1 semantic relationship are involved in the measurement of of positional and shape accuracy. Should we do this too?
+    # In the case of turning function, this is the only thing we can do!
+#TODO: Try switching to the area-minimizing MBR implementation that chris sent
+#TODO: Fan et al, normalize shape similarity by the rectangularity of the footprints (area divided by the area of the oriented MBR)
+#TODO: Metric: Number of buildings in each dataset
+#TODO: Metric: Statistic of the matching result using area overlap (Fan et al, page 9)
+#TODO: Metric: Max, min and std deviation of position offsets (Fan et al, page 12)
+#TODO: Metric: Bar diagram of position offsets (Fan et al, page 12)
+#TODO: Metric: Bar diagram of footprint shape similarity (Fan et al, page 12)
+#TODO: Mention as a source of error: Fan et al claimed that the main source of error was the limited resolution of satellite photos
+

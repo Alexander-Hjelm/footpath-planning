@@ -77,10 +77,15 @@ Using a road network to creates an underlying navmesh
 The thesis work will be carried out at the Embodied Social Agents Lab (ESAL) at the Department of Computational Science and Technology (CST). The lab has before been working on systems for generating procedural urban environments, and are interested in the possibility of generating more detailed maps than have been done before, using example-based methods to preserve the aesthetic look of a greater metropolitan area. The lab is particularly interested in the generation of footpaths, since most commercial software that import road maps only import arterial and secondary car roads, and do not include pedestrian walkways, cycle paths and such smaller roads.
 % TODO: any official description of ESAL that can be used here?
 
+\section{Related work}
+Fan et al, 2015
+Kunze, 2012 (reference in Fan et al)
+
+
 \section{The geodata used in this project}
 
 For the purpose of this project, the OpenStreetMap road dataset has been used in the presentation of the road network around Stockholm, and in the generative process of new road networks. To assess and correct path widths and path node locations, the OpenStreetMap building footprint dataset has also been used. To make an assessment on the quality and precision of the OpenStreetMap data, the SLU map from the Swedish National Land Survey was used in comparison with the OpenStreetMap map. The SLU map conatins only building footprints and property limits. Both map segments were obtained around the Stockholm greater metropolitan area.
-The exact map segments that were extracted were in both cases rectangles with the following coordinates in WGS84: (N: 59.42, E: 18.15, S: 59.23, W: 17.79).
+The exact map segments that were extracted were in both cases rectangular boundaries with the following coordinates in WGS84: (N: 59.42, E: 18.15, S: 59.23, W: 17.79).
 Both datasets were collcted on March 18th, 2020.
 
 \subsection{OSM Data}
@@ -134,7 +139,7 @@ The logical accuracy will not be assessed because the underlying logical relatio
 
 \subsection{Assesment of dataset completeness}
 
-(Fan et al., 2014) used the total building area in their reference dataset and the OpenStreetMap dataset to assess the completeness of OpenStreetMap data. The motivation for this is to eliminate semantic differences between both datasets. A very common example of a semantic error when comparing geographic data is that a large building in one dataset may be segmented into several smaller ones in the other, making one-to-one object mapping impossible. Thus using building area as an estimator for completeness solves this issue much better than i.e. the number of buildings or other objects in each dataset.
+(Fan et al., 2014) used the total building area in their reference dataset and the OpenStreetMap dataset to assess the completeness of OpenStreetMap data. The motivation for this is to eliminate semantic differences between both datasets. A very common example of a semantic error when comparing geographic data is that a large building in one dataset may be segmented into several smaller ones in the other, that is to say a building in one set is represented as an aggreation of mutliple buildings in the other set. This makes one-to-one object mapping impossible. Thus using building area as an estimator for completeness solves this issue much better than i.e. the number of buildings or other objects in each dataset.
 This project will use the building area in the OSM dataset versus that of the SLU dataset to determine the completeness of OpenStreetMap building data in the Stockholm area, which will then be used as an argument for how accurate the building correspondence and point proximity measures can be.
 
 \subsection{Building correspondence}

@@ -30,6 +30,18 @@ def polygon_intersection_area(polygon_1, polygon_2):
     shapely_poly_2 = shapely.geometry.Polygon(polygon_2)
     return shapely_poly_1.intersection(shapely_poly_2).area
 
+def get_points_on_rect_perimeter(polygon, rect):
+    assert(len(rect)==4)
+    points_out = []
+    for point in polygon:
+        for i in range(0, 3):
+            corner_1 = rect[i]
+            corner_2 = rect[i+1]
+            if perp_distance_point_to_line(point, corner_1, corner_2) < 0.0001:
+                points_out.append(point)
+                continue
+    return points_out
+
 def polygon_area(polygon):
     shapely_poly = shapely.geometry.Polygon(polygon)
     return shapely_poly.area
@@ -117,9 +129,6 @@ def add_areas_recursively(c):
                 area_out += add_areas_recursively(c_sub)
     return area_out
 
-def minimum_bounding_rectangle(polygon):
-    pass
-
 def minmax_points_of_polygon(polygon):
     # TODO: Using this instead of MBR for now, since I have not figured out how to do rotated MBR
     min_point_n = [0.0, -999999999.0]
@@ -149,6 +158,7 @@ def perp_distance_point_to_line(point, line_point_1, line_point_2):
     nom = abs((y2-y1)*x0 - (x2-x1)*y0 + x2*y1 - y2*x1)
     denom = math.sqrt((y2-y1)**2 + (x2-x1)**2)
     return nom/denom
+
 def douglas_peucker(polygon, e):
     # Find starting point, use northernmost point
     #Pick northernmost point to ensure it is the same in both OSM and SLU cases

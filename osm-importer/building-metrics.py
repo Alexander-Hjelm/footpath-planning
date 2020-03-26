@@ -78,10 +78,6 @@ for feature_osm in OSM_data['features']:
         #plot_utils.plot_polygon(polygon_osm)
         #plot_utils.plot_polygons(polygon_slu)
 
-        mbr_osm = geometry_utils.oriented_mbr(polygon_osm)
-        print(mbr_osm)
-        plot_utils.plot_polygons([polygon_osm, mbr_osm])
-
         # Turning funcitons
         tc_osm = geometry_utils.turning_function(cv_osm)
         tc_slu = geometry_utils.turning_function(cv_slu)
@@ -103,12 +99,24 @@ for feature_osm in OSM_data['features']:
         #plot_utils.plot_polygons([cv_slu, cv_slu_dp])
         #plot_utils.plot_polygons([cv_osm_dp, cv_slu_dp])
 
-        bounding_points_osm = geometry_utils.minmax_points_of_polygon(cv_osm_dp)
-        bounding_points_slu = geometry_utils.minmax_points_of_polygon(cv_slu_dp)
+        mbr_osm = geometry_utils.oriented_mbr(cv_osm)
+        mbr_slu = geometry_utils.oriented_mbr(cv_slu)
 
-        for i in range(0, len(bounding_points_osm)):
-            p1 = bounding_points_osm[i]
-            p2 = bounding_points_slu[i]
+        #plot_utils.plot_polygons([polygon_osm, mbr_osm])
+        #plot_utils.plot_polygons([polygon_slu, mbr_slu])
+
+        points_on_perimeter_osm = geometry_utils.get_points_on_rect_perimeter(cv_osm, mbr_osm)
+        points_on_perimeter_slu = geometry_utils.get_points_on_rect_perimeter(cv_slu, mbr_slu)
+
+        #plot_utils.plot_polygons([points_on_perimeter_osm, mbr_osm])
+        #plot_utils.plot_polygons([points_on_perimeter_slu, mbr_slu])
+
+        print(points_on_perimeter_osm)
+        print(points_on_perimeter_slu)
+
+        for i in range(0, len(mbr_osm)):
+            p1 = mbr_osm[i]
+            p2 = mbr_slu[i]
             r = geometry_utils.point_distance(p1, p2)
             avg_pos_error += r
             counted_points += 1

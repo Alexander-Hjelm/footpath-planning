@@ -65,6 +65,20 @@ def plot_scatter(points):
     plt.ylabel('y')
     plt.show()
 
+def plot_line(points):
+    plot_lines([points])
+
+def plot_lines(lines):
+    for line in lines:
+        data = np.array(line)
+        x, y = data.T
+        plt.plot(x, y)
+
+    plt.title('Line plot')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.show()
+
 def plot_bar(data_values, bar_width):
     min_val = min(data_values)
     max_val = max(data_values)

@@ -56,8 +56,10 @@ for feature_osm in OSM_data['features']:
                 overlapping_buildings_osm_bigger[feature_osm['id']].append(feature_slu)
 
 # Geometrical distance between the two sets
-avg_pos_error = 0.0
-counted_points = 0
+avg_pos_error_cp = 0.0
+counted_points_cp = 0
+avg_pos_error_mbr = 0.0
+counted_points_mbr = 0
 for feature_osm in OSM_data['features']:
     # Footprints to a single OSM footprint
     if feature_osm['id'] in overlapping_buildings_osm_bigger:
@@ -111,18 +113,45 @@ for feature_osm in OSM_data['features']:
         #plot_utils.plot_polygons([points_on_perimeter_osm, mbr_osm])
         #plot_utils.plot_polygons([points_on_perimeter_slu, mbr_slu])
 
-        print(points_on_perimeter_osm)
-        print(points_on_perimeter_slu)
+        #print(edges_on_perimeter_osm)
+        #print(edges_on_perimeter_slu)
 
-        for i in range(0, len(mbr_osm)):
-            p1 = mbr_osm[i]
-            p2 = mbr_slu[i]
-            r = geometry_utils.point_distance(p1, p2)
-            avg_pos_error += r
-            counted_points += 1
+        # While both edge sets are non-emptyh
+        while edges_on_perimeter_osm and edges_on_perimeter_slu:
+            edge_osm = edges_on_perimeter_osm[0]
+            best_edge_slu = None
+            min_edge_distance = 99999999999.0
+            for edge_slu in edges_on_perimeter_slu:
+                edge_distance = geometry_utils.edge_endpoints_distance(edge_osm, edge_slu)
+                if edge_distance < min_edge_distance:
+                    best_edge_slu = edge_slu
+                    min_edge_distance = edge_distance
+            if(min_edge_distance < 10.0):
+                avg_pos_error_mbr += min_edge_distance
+                counted_points_mbr += 2
+                print(min_edge_distance)
+            edges_on_perimeter_osm.remove(edge_osm)
+            edges_on_perimeter_slu.remove(best_edge_slu)
 
-avg_pos_error /= counted_points
-print("Average position error: " + str(avg_pos_error))
+            for i in range(0, len(mbr_osm)):
+                p1 = mbr_osm[i]
+                best_r = 9999999999.0
+                p2_best = None
+                for p2 in mbr_slu:
+                    r = geometry_utils.point_distance(p1, p2)
+                    if r < best_r:
+                        p2_best = p2
+                        best_r = r
+                avg_pos_error_cp += best_r
+                counted_points_cp += 1
+
+avg_pos_error_cp /= counted_points_cp
+print("Average position error: " + str(avg_pos_error_cp) + " (Counting Points method, upper threshold)")
+
+avg_pos_error_mbr /= counted_points_mbr
+print("Average position error: " + str(avg_pos_error_mbr) + " (MBR method, reasonable)")
+
+
 
 
 #TODO: Read through Fan et al, make a list of metrics that we will obtain

@@ -24,9 +24,6 @@ for feature in OSM_data['features']:
     total_area_OSM += geometry_utils.add_areas_recursively(feature['geometry']['coordinates'])
 for feature in SLU_data['features']:
     total_area_SLU += geometry_utils.add_areas_recursively(feature['geometry']['coordinates'])
-print("Total area, OSM: " + str(total_area_OSM))
-print("Total area, SLU: " + str(total_area_SLU))
-print("Total area, fraction: " + str(total_area_OSM / total_area_SLU))
 
 # Feature mapping
 overlapping_buildings_osm_bigger = {}
@@ -129,7 +126,7 @@ for feature_osm in OSM_data['features']:
             if(min_edge_distance < 10.0):   # Cutoff point to remove points that were inducted due to mismatching of edges
                 avg_pos_error_mbr += min_edge_distance
                 counted_points_mbr += 2
-                print(min_edge_distance)
+                #print(min_edge_distance)
             edges_on_perimeter_osm.remove(edge_osm)
             edges_on_perimeter_slu.remove(best_edge_slu)
 
@@ -145,13 +142,18 @@ for feature_osm in OSM_data['features']:
                 avg_pos_error_cp += best_r
                 counted_points_cp += 1
 
+### OUTPUT ###
+
+print("Results...")
+
+print("Total area, OSM: " + str(total_area_OSM))
+print("Total area, SLU: " + str(total_area_SLU))
+print("Total area, fraction: " + str(total_area_OSM / total_area_SLU))
+
 avg_pos_error_cp /= counted_points_cp
 print("Average position error: " + str(avg_pos_error_cp) + " (Counting Points method, upper threshold)")
 
 avg_pos_error_mbr /= counted_points_mbr
 print("Average position error: " + str(avg_pos_error_mbr) + " (MBR method, reasonable)")
 
-#TODO: plot_utils: Scatter plot, 1D, thick mode in the middle
-#TODO: plot_utils: Bar diagram with intervals
-#TODO: Scatterplot of the (MRB) error datapoints to determine a cutoff point
 #TODO: Read through Fan et al, make a list of metrics that we will obtain

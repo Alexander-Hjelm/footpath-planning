@@ -53,3 +53,38 @@ def plot_polygons(polygons):
 
 def plot_polygon(polygon):
     plot_polygons([polygon])
+
+def plot_scatter(points):
+    data = np.array(points)
+    x, y = data.T
+
+    # Plot
+    plt.scatter(x, y)
+    plt.title('Scatter plot')
+    plt.xlabel('x')
+    plt.ylabel('y')
+    plt.show()
+
+def plot_bar(data_values, bar_width):
+    min_val = min(data_values)
+    max_val = max(data_values)
+    counter = min_val
+    bars = []
+    while counter < max_val:
+        bars.append(counter)
+        counter += bar_width
+    values = []
+    for i in range(0, len(bars)):
+        values.append(0)
+    for val in data_values:
+        added = False
+        for i in range(0, len(bars)-1):
+            if val > bars[i] and val < bars[i+1]:
+                values[i] += 1
+                added = True
+                break
+        if not added:
+            values[-1] += 1
+
+    plt.bar(bars, values)
+    plt.show()

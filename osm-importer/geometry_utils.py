@@ -30,17 +30,29 @@ def polygon_intersection_area(polygon_1, polygon_2):
     shapely_poly_2 = shapely.geometry.Polygon(polygon_2)
     return shapely_poly_1.intersection(shapely_poly_2).area
 
-def get_points_on_rect_perimeter(polygon, rect):
+def get_edges_on_rect_perimeter(polygon, rect):
     assert(len(rect)==4)
-    points_out = []
-    for point in polygon:
-        for i in range(0, 3):
-            corner_1 = rect[i]
-            corner_2 = rect[i+1]
-            if perp_distance_point_to_line(point, corner_1, corner_2) < 0.0001:
-                points_out.append(point)
+    edges_out = []
+    for i in range(0, len(polygon)-1):
+        for j in range(0, 3):
+            point_1 = polygon[i]
+            point_2 = polygon[i+1]
+            corner_1 = rect[j]
+            corner_2 = rect[j+1]
+            if perp_distance_point_to_line(point_1, corner_1, corner_2) < 1:
+                if perp_distance_point_to_line(point_2, corner_1, corner_2) < 1:
+                    edges_out.append([point_1, point_2])
                 continue
-    return points_out
+    return edges_out
+
+def edge_endpoints_distance(edge_1, edge_2):
+    p11 = edge_1[0]
+    p12 = edge_1[1]
+    p21 = edge_2[0]
+    p22 = edge_2[1]
+    d1 = point_distance(p11, p21) + point_distance(p12, p22)
+    d2 = point_distance(p12, p21) + point_distance(p11, p22)
+    return min(d1, d2)
 
 def polygon_area(polygon):
     shapely_poly = shapely.geometry.Polygon(polygon)

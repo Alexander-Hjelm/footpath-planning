@@ -105,8 +105,8 @@ for feature_osm in OSM_data['features']:
         #plot_utils.plot_polygons([polygon_osm, mbr_osm])
         #plot_utils.plot_polygons([polygon_slu, mbr_slu])
 
-        points_on_perimeter_osm = geometry_utils.get_points_on_rect_perimeter(cv_osm, mbr_osm)
-        points_on_perimeter_slu = geometry_utils.get_points_on_rect_perimeter(cv_slu, mbr_slu)
+        edges_on_perimeter_osm = geometry_utils.get_edges_on_rect_perimeter(cv_osm, mbr_osm)
+        edges_on_perimeter_slu = geometry_utils.get_edges_on_rect_perimeter(cv_slu, mbr_slu)
 
         #plot_utils.plot_polygons([points_on_perimeter_osm, mbr_osm])
         #plot_utils.plot_polygons([points_on_perimeter_slu, mbr_slu])

@@ -81,6 +81,8 @@ for feature_osm in OSM_data['features']:
         tc_osm = geometry_utils.turning_function(cv_osm)
         tc_slu = geometry_utils.turning_function(cv_slu)
 
+        plot_utils.plot_lines([tc_osm, tc_slu])
+
         #plot_utils.plot_polygons([cv_osm, polygon_osm])
         #plot_utils.plot_polygons([cv_slu] + polygon_slu)
         #plot_utils.plot_polygons([cv_slu, cv_osm])
@@ -156,8 +158,6 @@ print("Average position error: " + str(avg_pos_error_cp) + " (Counting Points me
 avg_pos_error_mbr /= counted_points_mbr
 print("Average position error: " + str(avg_pos_error_mbr) + " (MBR method, reasonable)")
 
-#TODO: Line plot function in plot-utils
-#TODO: Line plot of turning functions
 #TODO: Function for evaluating shape similarity, using turning function
 #TODO: MBR method: Record which quadrant (MBR edge) That the edge was found on. Only match edges on the same sides
 #TODO: Find the SLU MBR that minimizes area overlap between the OSM and SLU MBRs, not the one with least area

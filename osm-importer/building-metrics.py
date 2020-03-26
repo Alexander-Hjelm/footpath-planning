@@ -148,6 +148,9 @@ for feature_osm in OSM_data['features']:
 
 print("Results...")
 
+print("#Buildings, OSM: " + str(len(OSM_data['features'])))
+print("#Buildings, SLU: " + str(len(SLU_data['features'])))
+
 print("Total area, OSM: " + str(total_area_OSM))
 print("Total area, SLU: " + str(total_area_SLU))
 print("Total area, fraction: " + str(total_area_OSM / total_area_SLU))
@@ -167,7 +170,6 @@ print("Average position error: " + str(avg_pos_error_mbr) + " (MBR method, reaso
     # In the case of turning function, this is the only thing we can do!
 #TODO: Try switching to the area-minimizing MBR implementation that chris sent
 #TODO: Fan et al, normalize shape similarity by the rectangularity of the footprints (area divided by the area of the oriented MBR)
-#TODO: Metric: Number of buildings in each dataset
 #TODO: Metric: Statistic of the matching result using area overlap (Fan et al, page 9)
 #TODO: Metric: Max, min and std deviation of position offsets (Fan et al, page 12)
 #TODO: Metric: Bar diagram of position offsets (Fan et al, page 12)

@@ -126,7 +126,7 @@ for feature_osm in OSM_data['features']:
                 if edge_distance < min_edge_distance:
                     best_edge_slu = edge_slu
                     min_edge_distance = edge_distance
-            if(min_edge_distance < 10.0):
+            if(min_edge_distance < 10.0):   # Cutoff point to remove points that were inducted due to mismatching of edges
                 avg_pos_error_mbr += min_edge_distance
                 counted_points_mbr += 2
                 print(min_edge_distance)
@@ -151,7 +151,7 @@ print("Average position error: " + str(avg_pos_error_cp) + " (Counting Points me
 avg_pos_error_mbr /= counted_points_mbr
 print("Average position error: " + str(avg_pos_error_mbr) + " (MBR method, reasonable)")
 
-
-
-
+#TODO: plot_utils: Scatter plot, 1D, thick mode in the middle
+#TODO: plot_utils: Bar diagram with intervals
+#TODO: Scatterplot of the (MRB) error datapoints to determine a cutoff point
 #TODO: Read through Fan et al, make a list of metrics that we will obtain

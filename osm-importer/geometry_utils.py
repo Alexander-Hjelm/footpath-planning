@@ -74,10 +74,10 @@ def normalize(a):
     d = point_len(a)
     return [a[0]/d, a[1]/d]
 
-def project(a, b):
+def project(b, a):
     # Project a onto b
-    proj_factor = np.dot(a, b)/point_len(b)**2
-    return [proj_factor*b[0], proj_factor*b[1]]
+    proj_factor = np.dot(a, b)/(point_len(a)**2)
+    return [proj_factor*a[0], proj_factor*a[1]]
 
 def polygon_perimeter(polygon):
     perimeter_out = 0.0
@@ -269,7 +269,7 @@ def oriented_mbr(points):
     cv = convex_hull(points)
     center = polygon_centroid(cv)
 
-    best_area = 0.0
+    best_area = 9999999999999.0
     best_corner_1 = None
     best_corner_2 = None
     best_corner_3 = None
@@ -291,24 +291,8 @@ def oriented_mbr(points):
         for j in range(0, len(cv)-1):
             # p = cv[j] - center
             p = [cv[j][0] - center[0], cv[j][1] - center[1]]
-            print("%%%")
-            print("polygon point: " + str(cv[j]))
-            print("center: " + str(center))
-            print("p-c: " + str(p))
-            print("ev_1: " + str(ev_1))
-            print("ev_2: " + str(ev_2))
-            print("%%%")
-
             p_1 = project(p, ev_1)
             p_2 = project(p, ev_2)
-
-            print("p_1: " + str(p_1))
-            print("p_2: " + str(p_2))
-
-            print("***")
-            print(np.dot(p_1, ev_1))
-            print(np.dot(f_1_max, ev_1))
-            print("***")
 
             if np.dot(p_1, ev_1) > np.dot(f_1_max, ev_1):
                 f_1_max = p_1
@@ -316,34 +300,29 @@ def oriented_mbr(points):
                 f_1_min = p_1
             if np.dot(p_2, ev_2) > np.dot(f_2_max, ev_2):
                 f_2_max = p_2
-            if np.dot(p_2, ev_2) > np.dot(f_2_min, ev_2):
+            if np.dot(p_2, ev_2) < np.dot(f_2_min, ev_2):
                 f_2_min = p_2
-
-        print(f_1_max)
-        print(f_1_min)
-        print(f_2_max)
-        print(f_2_min)
 
         c1_x = f_1_max[0] + f_2_max[0] + center[0]
         c1_y = f_1_max[1] + f_2_max[1] + center[1]
-        c2_x = f_2_max[0] + f_2_min[0] + center[0]
-        c2_y = f_2_max[1] + f_2_min[1] + center[1]
-        c3_x = f_2_min[0] + f_1_min[0] + center[0]
-        c3_y = f_2_min[1] + f_1_min[1] + center[1]
-        c4_x = f_1_min[0] + f_1_max[0] + center[0]
-        c4_y = f_1_min[1] + f_1_max[1] + center[1]
+        c2_x = f_2_max[0] + f_1_min[0] + center[0]
+        c2_y = f_2_max[1] + f_1_min[1] + center[1]
+        c3_x = f_1_min[0] + f_2_min[0] + center[0]
+        c3_y = f_1_min[1] + f_2_min[1] + center[1]
+        c4_x = f_2_min[0] + f_1_max[0] + center[0]
+        c4_y = f_2_min[1] + f_1_max[1] + center[1]
         corner_1 = [c1_x, c1_y]
         corner_2 = [c2_x, c2_y]
         corner_3 = [c3_x, c3_y]
         corner_4 = [c4_x, c4_y]
 
         area = polygon_area([corner_1, corner_2, corner_3, corner_4])
-        print("Area: " + str(area))
-        if area > best_area:
+        if area < best_area:
             best_corner_1 = corner_1
             best_corner_2 = corner_2
             best_corner_3 = corner_3
             best_corner_4 = corner_4
+            best_area = area
 
     return [best_corner_1, best_corner_2, best_corner_3, best_corner_4]
 

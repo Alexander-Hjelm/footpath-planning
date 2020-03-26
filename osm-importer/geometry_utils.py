@@ -51,6 +51,7 @@ def polygon_line_intersection(polygon, line_point_1, line_point_2):
 
 def polygon_centroid(polygon):
     centroid = [0.0, 0.0]
+    counted_points = 0
     for i in range(0, len(polygon)):
         point = polygon[i]
         if i == len(polygon)-1 and point[0] == polygon[0][0] and point[1] == polygon[0][1]:
@@ -58,8 +59,9 @@ def polygon_centroid(polygon):
             continue
         centroid[0] += point[0]
         centroid[1] += point[1]
-    centroid[0] /= len(polygon)
-    centroid[1] /= len(polygon)
+        counted_points += 1
+    centroid[0] /= counted_points
+    centroid[1] /= counted_points
     return centroid
 
 def point_distance(p1, p2):
@@ -74,8 +76,8 @@ def normalize(a):
 
 def project(a, b):
     # Project a onto b
-    proj_factor = np.dot(a, b)/point_len(a)**2
-    return [proj_factor*a[0], proj_factor*a[1]]
+    proj_factor = np.dot(a, b)/point_len(b)**2
+    return [proj_factor*b[0], proj_factor*b[1]]
 
 def polygon_perimeter(polygon):
     perimeter_out = 0.0
@@ -268,10 +270,10 @@ def oriented_mbr(points):
     center = polygon_centroid(cv)
 
     best_area = 0.0
-    best_f_1_min = None
-    best_f_1_max = None
-    best_f_2_min = None
-    best_f_2_max = None
+    best_corner_1 = None
+    best_corner_2 = None
+    best_corner_3 = None
+    best_corner_4 = None
 
     for i in range(0, len(cv)-1):
         a = cv[i]
@@ -290,13 +292,18 @@ def oriented_mbr(points):
             # p = cv[j] - center
             p = [cv[j][0] - center[0], cv[j][1] - center[1]]
             print("%%%")
-            print(cv[j])
-            print(center)
-            print(p)
+            print("polygon point: " + str(cv[j]))
+            print("center: " + str(center))
+            print("p-c: " + str(p))
+            print("ev_1: " + str(ev_1))
+            print("ev_2: " + str(ev_2))
             print("%%%")
 
             p_1 = project(p, ev_1)
             p_2 = project(p, ev_2)
+
+            print("p_1: " + str(p_1))
+            print("p_2: " + str(p_2))
 
             print("***")
             print(np.dot(p_1, ev_1))
@@ -317,28 +324,28 @@ def oriented_mbr(points):
         print(f_2_max)
         print(f_2_min)
 
-        area = polygon_area([f_1_min, f_2_min, f_1_max, f_2_max])
-        print(area)
+        c1_x = f_1_max[0] + f_2_max[0] + center[0]
+        c1_y = f_1_max[1] + f_2_max[1] + center[1]
+        c2_x = f_2_max[0] + f_2_min[0] + center[0]
+        c2_y = f_2_max[1] + f_2_min[1] + center[1]
+        c3_x = f_2_min[0] + f_1_min[0] + center[0]
+        c3_y = f_2_min[1] + f_1_min[1] + center[1]
+        c4_x = f_1_min[0] + f_1_max[0] + center[0]
+        c4_y = f_1_min[1] + f_1_max[1] + center[1]
+        corner_1 = [c1_x, c1_y]
+        corner_2 = [c2_x, c2_y]
+        corner_3 = [c3_x, c3_y]
+        corner_4 = [c4_x, c4_y]
+
+        area = polygon_area([corner_1, corner_2, corner_3, corner_4])
+        print("Area: " + str(area))
         if area > best_area:
-            best_f_1_min = f_1_min
-            best_f_1_max = f_1_max
-            best_f_2_min = f_2_min
-            best_f_2_max = f_2_max
+            best_corner_1 = corner_1
+            best_corner_2 = corner_2
+            best_corner_3 = corner_3
+            best_corner_4 = corner_4
 
-    c1_x = best_f_1_max[0] + best_f_2_max[0] + center[0]
-    c1_y = best_f_1_max[1] + best_f_2_max[1] + center[1]
-    c2_x = best_f_2_max[0] + best_f_2_min[0] + center[0]
-    c2_y = best_f_2_max[1] + best_f_2_min[1] + center[1]
-    c3_x = best_f_2_min[0] + best_f_1_min[0] + center[0]
-    c3_y = best_f_2_min[1] + best_f_1_min[1] + center[1]
-    c4_x = best_f_1_min[0] + best_f_1_max[0] + center[0]
-    c4_y = best_f_1_min[1] + best_f_1_max[1] + center[1]
-    corner_1 = [c1_x, c1_y]
-    corner_2 = [c2_x, c2_y]
-    corner_3 = [c3_x, c3_y]
-    corner_4 = [c4_x, c4_y]
-
-    return [corner_1, corner_2, corner_3, corner_4]
+    return [best_corner_1, best_corner_2, best_corner_3, best_corner_4]
 
 def extract_polygon_from_feature(feature):
     feature_type = feature['geometry']['type']

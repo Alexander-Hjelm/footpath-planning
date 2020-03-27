@@ -209,6 +209,7 @@ def douglas_peucker_helper(polygon, e):
         polygon_out = [polygon[0], polygon[end]]
     return polygon_out
 
+#TODO: Turning function fixes
 def turning_function(polygon):
     turnpoints_out = []
     acc_len = 0.0 # Accumluated length that has been stepped through
@@ -289,6 +290,7 @@ def convex_hull(polygons):
     return hull_points
 
 def oriented_mbr(points):
+    #TODO: Try switching to the area-minimizing MBR implementation that chris sent
     cv = convex_hull(points)
     center = polygon_centroid(cv)
 
@@ -351,6 +353,7 @@ def oriented_mbr(points):
 
 def step_funtion_area(points):
     # Area under a step function by piecewise summation
+    # TODO: Incorrect at the moment, need to actually integrate the difference between the curves
     area_out = 0.0
     for i in range(0, len(points)-1):
         p1 = points[i]
@@ -383,12 +386,11 @@ def normalized_shape_dissimilarity(polygon_1, polygon_2):
 def extract_polygon_from_feature(feature):
     feature_type = feature['geometry']['type']
 
+    # Even for multipolygons, the big surrounding polygon is always the first one
     if feature_type == 'Polygon':
-        # Even for multipolygons, the big surrounding polygon is always the first one
         return feature['geometry']['coordinates'][0]
 
     if feature_type == 'MultiPolygon':
-        #TODO: Return the very first polygon for now. Is this correct?
         return feature['geometry']['coordinates'][0][0]
 
     print("extract_polygon_from_feature: feature type not implemented: " + feature_type)

@@ -26,6 +26,7 @@ for feature in SLU_data['features']:
     total_area_SLU += geometry_utils.add_areas_recursively(feature['geometry']['coordinates'])
 
 # Feature mapping
+#TODO: Metric: Statistic of the matching result using area overlap (Fan et al, page 9)
 overlapping_buildings_osm_bigger = {}
 overlapping_buildings_slu_bigger = {}
 progress = 0.0
@@ -121,6 +122,7 @@ for feature_osm in OSM_data['features']:
         #print(edges_on_perimeter_slu)
 
         # While both edge sets are non-emptyh
+        #TODO: MBR method: Record which quadrant (MBR edge) That the edge was found on. Only match edges on the same sides
         while edges_on_perimeter_osm and edges_on_perimeter_slu:
             edge_osm = edges_on_perimeter_osm[0]
             best_edge_slu = None
@@ -136,6 +138,9 @@ for feature_osm in OSM_data['features']:
                 #print(min_edge_distance)
             edges_on_perimeter_osm.remove(edge_osm)
             edges_on_perimeter_slu.remove(best_edge_slu)
+            #TODO: Position accuracy per building by taking the average of the distance between the corresponding points
+            #TODO: Metric: Bar diagram of position offsets (Fan et al, page 12)
+            #TODO: Metric: Max, min and std deviation of position offsets (Fan et al, page 12)
 
         for i in range(0, len(mbr_osm)):
             p1 = mbr_osm[i]
@@ -165,17 +170,4 @@ print("Average position error: " + str(avg_pos_error_cp) + " (Counting Points me
 
 avg_pos_error_mbr /= counted_points_mbr
 print("Average position error: " + str(avg_pos_error_mbr) + " (MBR method, reasonable)")
-
-
-#TODO: Position accuracy per building by taking the average of the distance between the corresponding points
-
-#TODO: Turning function fixes
-#TODO: Function for evaluating shape similarity, using turning function
-#TODO: MBR method: Record which quadrant (MBR edge) That the edge was found on. Only match edges on the same sides
-#TODO: Find the SLU MBR that minimizes area overlap between the OSM and SLU MBRs, not the one with least area
-#TODO: Write in the report about why we had to cut buildings close to the boundary
-#TODO: Try switching to the area-minimizing MBR implementation that chris sent
-#TODO: Metric: Statistic of the matching result using area overlap (Fan et al, page 9)
-#TODO: Metric: Max, min and std deviation of position offsets (Fan et al, page 12)
-#TODO: Metric: Bar diagram of position offsets (Fan et al, page 12)
 

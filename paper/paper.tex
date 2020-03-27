@@ -107,6 +107,12 @@ Property limits and building features have a position accuracy requirement of 5 
 
 The SLU dataset is delivered in the SWEREF 99 TM (Lantmäteriet, 2019). SWEREF 99 TM is a projected coordinate system and there is no linear transformation to WGS 48, which OpenStreetMap uses (OSM 19). The coordinate conversions for this paper were obtained using proj: a Linux commandline application for geospatial coordinate conversion.
 
+\subsection{Specific preprocessing for SLU-OSM geodata}
+
+The SLU map is delivered with cropped buildings to exactly matched the query coordinates. This means that area comparsion will not work.
+Therefore it was neccessary to crop both datasets to ensure that all buildings were complete and had matching candidates in the other set.
+(Show a picture)
+
 \section{Evaluation of the quality of geodata}
 
 (Haklay 2010) specifices a comprehesive list of 8 accuracy classes when it comes to evaluating the quality of geographic information.

@@ -137,17 +137,17 @@ for feature_osm in OSM_data['features']:
             edges_on_perimeter_osm.remove(edge_osm)
             edges_on_perimeter_slu.remove(best_edge_slu)
 
-            for i in range(0, len(mbr_osm)):
-                p1 = mbr_osm[i]
-                best_r = 9999999999.0
-                p2_best = None
-                for p2 in mbr_slu:
-                    r = geometry_utils.point_distance(p1, p2)
-                    if r < best_r:
-                        p2_best = p2
-                        best_r = r
-                avg_pos_error_cp += best_r
-                counted_points_cp += 1
+        for i in range(0, len(mbr_osm)):
+            p1 = mbr_osm[i]
+            best_r = 9999999999.0
+            p2_best = None
+            for p2 in mbr_slu:
+                r = geometry_utils.point_distance(p1, p2)
+                if r < best_r:
+                    p2_best = p2
+                    best_r = r
+            avg_pos_error_cp += best_r
+            counted_points_cp += 1
 
 ### OUTPUT ###
 

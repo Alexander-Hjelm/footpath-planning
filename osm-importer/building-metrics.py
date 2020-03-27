@@ -5,6 +5,7 @@
 from geojson import Point, Feature, FeatureCollection, load
 import geometry_utils
 import plot_utils
+import statistics
 
 OSM_data = {}
 SLU_data = {}
@@ -56,7 +57,6 @@ for feature_osm in OSM_data['features']:
 # Geometrical distance between the two sets
 avg_pos_error_cp = 0.0
 counted_points_cp = 0
-avg_pos_error_mbr = 0.0
 counted_data_points_mbr = []
 shape_dissimilarity_data = []
 for feature_osm in OSM_data['features']:
@@ -145,9 +145,7 @@ for feature_osm in OSM_data['features']:
             edges_on_perimeter_slu.remove(best_edge_slu)
 
         if counted_points > 0:
-            avg_pos_error_mbr += avg_point_distance/counted_points
             counted_data_points_mbr.append(avg_point_distance/counted_points)
-        #TODO: Metric: Max, min and std deviation of position offsets (Fan et al, page 12)
 
         for i in range(0, len(mbr_osm)):
             p1 = mbr_osm[i]
@@ -175,8 +173,11 @@ print("Total area, fraction: " + str(total_area_OSM / total_area_SLU))
 avg_pos_error_cp /= counted_points_cp
 print("Average position error: " + str(avg_pos_error_cp) + " (Counting Points method, upper threshold)")
 
-avg_pos_error_mbr /= len(counted_data_points_mbr)
-print("Average position error: " + str(avg_pos_error_mbr) + " (MBR method, reasonable)")
+# Metric: Max, min and std deviation of position offsets (Fan et al, page 12)
+print("Average position error: " + str(statistics.mean(counted_data_points_mbr)) + " (MBR method, reasonable)")
+print("Position error, max: " + str(max(counted_data_points_mbr)))
+print("Position error, min: " + str(min(counted_data_points_mbr)))
+print("Position error, stdev: " + str(statistics.stdev(counted_data_points_mbr)))
 
 # Metric: Bar diagram of position offsets (Fan et al, page 12)
 plot_utils.plot_bar(counted_data_points_mbr, 1.0)

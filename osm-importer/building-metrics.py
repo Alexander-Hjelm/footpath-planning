@@ -161,6 +161,7 @@ print("Average position error: " + str(avg_pos_error_cp) + " (Counting Points me
 avg_pos_error_mbr /= counted_points_mbr
 print("Average position error: " + str(avg_pos_error_mbr) + " (MBR method, reasonable)")
 
+#TODO: Turning function fixes
 #TODO: Function for evaluating shape similarity, using turning function
 #TODO: MBR method: Record which quadrant (MBR edge) That the edge was found on. Only match edges on the same sides
 #TODO: Find the SLU MBR that minimizes area overlap between the OSM and SLU MBRs, not the one with least area

@@ -57,7 +57,7 @@ for feature_osm in OSM_data['features']:
 avg_pos_error_cp = 0.0
 counted_points_cp = 0
 avg_pos_error_mbr = 0.0
-counted_points_mbr = 0
+counted_data_points_mbr = []
 for feature_osm in OSM_data['features']:
     # Footprints to a single OSM footprint
     if feature_osm['id'] in overlapping_buildings_osm_bigger:
@@ -80,7 +80,7 @@ for feature_osm in OSM_data['features']:
         tc_osm = geometry_utils.turning_function(cv_osm)
         tc_slu = geometry_utils.turning_function(cv_slu)
 
-        plot_utils.plot_lines([tc_osm, tc_slu])
+        #plot_utils.plot_lines([tc_osm, tc_slu])
 
         # Normalized shape dissimilarities, only if there is a 1:1 match
         if len(polygon_slu) == 1:
@@ -121,7 +121,12 @@ for feature_osm in OSM_data['features']:
         #print(edges_on_perimeter_osm)
         #print(edges_on_perimeter_slu)
 
+        # Calculate average positional offset
+        # Position accuracy per building by taking the average of the distance between the corresponding points
+        avg_point_distance = 0.0
+        counted_points = 0
         # While both edge sets are non-emptyh
+        #TODO: Try to only match poisition error for 1:1 building matches, and see what that does for the spread of the results
         #TODO: MBR method: Record which quadrant (MBR edge) That the edge was found on. Only match edges on the same sides
         while edges_on_perimeter_osm and edges_on_perimeter_slu:
             edge_osm = edges_on_perimeter_osm[0]
@@ -132,15 +137,19 @@ for feature_osm in OSM_data['features']:
                 if edge_distance < min_edge_distance:
                     best_edge_slu = edge_slu
                     min_edge_distance = edge_distance
-            if(min_edge_distance < 10.0):   # Cutoff point to remove points that were inducted due to mismatching of edges
-                avg_pos_error_mbr += min_edge_distance
-                counted_points_mbr += 2
+            #if(min_edge_distance < 10.0):   # Cutoff point to remove points that were inducted due to mismatching of edges
+            avg_point_distance += min_edge_distance
+            counted_points += 2
                 #print(min_edge_distance)
             edges_on_perimeter_osm.remove(edge_osm)
             edges_on_perimeter_slu.remove(best_edge_slu)
-            #TODO: Position accuracy per building by taking the average of the distance between the corresponding points
-            #TODO: Metric: Bar diagram of position offsets (Fan et al, page 12)
-            #TODO: Metric: Max, min and std deviation of position offsets (Fan et al, page 12)
+
+        print(counted_points)
+        if counted_points > 0:
+            print(avg_point_distance/counted_points)
+            avg_pos_error_mbr += avg_point_distance/counted_points
+            counted_data_points_mbr.append(avg_point_distance/counted_points)
+        #TODO: Metric: Max, min and std deviation of position offsets (Fan et al, page 12)
 
         for i in range(0, len(mbr_osm)):
             p1 = mbr_osm[i]
@@ -168,6 +177,9 @@ print("Total area, fraction: " + str(total_area_OSM / total_area_SLU))
 avg_pos_error_cp /= counted_points_cp
 print("Average position error: " + str(avg_pos_error_cp) + " (Counting Points method, upper threshold)")
 
-avg_pos_error_mbr /= counted_points_mbr
+avg_pos_error_mbr /= len(counted_data_points_mbr)
 print("Average position error: " + str(avg_pos_error_mbr) + " (MBR method, reasonable)")
+
+# Metric: Bar diagram of position offsets (Fan et al, page 12)
+plot_utils.plot_bar(counted_data_points_mbr, 1.0)
 

@@ -27,9 +27,12 @@ for feature in SLU_data['features']:
     total_area_SLU += geometry_utils.add_areas_recursively(feature['geometry']['coordinates'])
 
 # Feature mapping
-#TODO: Metric: Statistic of the matching result using area overlap (Fan et al, page 9)
 overlapping_buildings_osm_bigger = {}
 overlapping_buildings_slu_bigger = {}
+one_to_one_matches_count = 0
+one_to_many_matches_count = 0
+total_matches_count = 0
+
 progress = 0.0
 for feature_osm in OSM_data['features']:
     # Debug only, limit the wating time
@@ -53,6 +56,19 @@ for feature_osm in OSM_data['features']:
                 if not feature_osm['id'] in overlapping_buildings_osm_bigger.keys():
                     overlapping_buildings_osm_bigger[feature_osm['id']] = []
                 overlapping_buildings_osm_bigger[feature_osm['id']].append(feature_slu)
+
+    if feature_osm['id'] in overlapping_buildings_osm_bigger.keys():
+        if len(overlapping_buildings_osm_bigger[feature_osm['id']]) == 1:
+            one_to_one_matches_count += 1
+        elif len(overlapping_buildings_osm_bigger[feature_osm['id']]) > 1:
+            one_to_many_matches_count += 1
+    total_matches_count += 1
+
+for id_slu in overlapping_buildings_slu_bigger.keys():
+    if len(overlapping_buildings_slu_bigger[id_slu]) == 1:
+        one_to_one_matches_count += 1
+    elif len(overlapping_buildings_slu_bigger[id_slu]) > 1:
+        one_to_many_matches_count += 1
 
 # Geometrical distance between the two sets
 avg_pos_error_cp = 0.0
@@ -169,6 +185,11 @@ print("#Buildings, SLU: " + str(len(SLU_data['features'])))
 print("Total area, OSM: " + str(total_area_OSM))
 print("Total area, SLU: " + str(total_area_SLU))
 print("Total area, fraction: " + str(total_area_OSM / total_area_SLU))
+
+# Metric: Statistic of the matching result using area overlap (Fan et al, page 9)
+print("Number of 1:1 matches: " + str(one_to_one_matches_count))
+print("Number of 1:N matches: " + str(one_to_many_matches_count))
+print("Number of 1:0 matches: " + str(total_matches_count - one_to_one_matches_count - one_to_many_matches_count))
 
 avg_pos_error_cp /= counted_points_cp
 print("Average position error: " + str(avg_pos_error_cp) + " (Counting Points method, upper threshold)")

@@ -58,6 +58,7 @@ avg_pos_error_cp = 0.0
 counted_points_cp = 0
 avg_pos_error_mbr = 0.0
 counted_data_points_mbr = []
+shape_dissimilarity_data = []
 for feature_osm in OSM_data['features']:
     # Footprints to a single OSM footprint
     if feature_osm['id'] in overlapping_buildings_osm_bigger:
@@ -84,10 +85,9 @@ for feature_osm in OSM_data['features']:
 
         # Normalized shape dissimilarities, only if there is a 1:1 match
         if len(polygon_slu) == 1:
-            #TODO: Metric: Bar diagram of footprint shape similarity (Fan et al, page 12)
             # Only buildings with a 1:1 semantic relationship are involved in the measurement of of positional and shape accuracy. Should we do this too?
             shape_dissimilarity_normalized = geometry_utils.normalized_shape_dissimilarity(polygon_osm, polygon_slu)
-            print("1:1 MATCH MATCH MATCH")
+            shape_dissimilarity_data.append(shape_dissimilarity_normalized)
 
         #plot_utils.plot_polygons([cv_osm, polygon_osm])
         #plot_utils.plot_polygons([cv_slu] + polygon_slu)
@@ -144,9 +144,7 @@ for feature_osm in OSM_data['features']:
             edges_on_perimeter_osm.remove(edge_osm)
             edges_on_perimeter_slu.remove(best_edge_slu)
 
-        print(counted_points)
         if counted_points > 0:
-            print(avg_point_distance/counted_points)
             avg_pos_error_mbr += avg_point_distance/counted_points
             counted_data_points_mbr.append(avg_point_distance/counted_points)
         #TODO: Metric: Max, min and std deviation of position offsets (Fan et al, page 12)
@@ -183,3 +181,5 @@ print("Average position error: " + str(avg_pos_error_mbr) + " (MBR method, reaso
 # Metric: Bar diagram of position offsets (Fan et al, page 12)
 plot_utils.plot_bar(counted_data_points_mbr, 1.0)
 
+# Metric: Bar diagram of footprint shape similarity (Fan et al, page 12)
+plot_utils.plot_bar(shape_dissimilarity_data, 0.1)

@@ -222,7 +222,7 @@ def turning_function(polygon):
         edge_len = point_distance(p2, p1)
         acc_len += edge_len
 
-        turnpoints_out.append([acc_len-0.001, acc_angle])
+        turnpoints_out.append([acc_len-0.0000001, acc_angle])
 
         angle = signed_vector_angle([p2[0]-p1[0], p2[1]-p1[1]], [p3[0]-p2[0], p3[1]-p2[1]])
         acc_angle += angle
@@ -348,6 +348,37 @@ def oriented_mbr(points):
             best_area = area
 
     return [best_corner_1, best_corner_2, best_corner_3, best_corner_4]
+
+def step_funtion_area(points):
+    # Area under a step function by piecewise summation
+    area_out = 0.0
+    for i in range(0, len(points)-1):
+        p1 = points[i]
+        p2 = points[i+1]
+        x_diff = p2[0]-p1[0]
+        y = p1[1]
+        area_out += y*x_diff
+    return area_out
+
+def polygon_rectangularity(polygon):
+    mbr = oriented_mbr(polygon)
+    a_poly = polygon_area(polygon)
+    a_rect = polygon_area(mbr)
+    return a_poly/a_rect
+
+def shape_dissimilarity(polygon_1, polygon_2):
+    # Implementation of eqn 1, Fan et al
+    tc_1 = turning_function(polygon_1)
+    tc_2 = turning_function(polygon_2)
+    area_diff = step_funtion_area(tc_1) - step_funtion_area(tc_2)
+    return math.sqrt(abs(area_diff))
+
+def normalized_shape_dissimilarity(polygon_1, polygon_2):
+    # Implementation of eqn 4, Fan et al
+    # Normalize shape similarity by the rectangularity of the footprints (area divided by the area of the oriented MBR)
+    rectangularity = polygon_rectangularity(polygon_1)
+    mbr = oriented_mbr(polygon_1)
+    return 1 - shape_dissimilarity(polygon_1, polygon_2)*(1-rectangularity)/shape_dissimilarity(polygon_1, mbr)
 
 def extract_polygon_from_feature(feature):
     feature_type = feature['geometry']['type']

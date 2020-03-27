@@ -68,8 +68,6 @@ for feature_osm in OSM_data['features']:
         for feature_slu in features_slu:
             polygon_slu.append(geometry_utils.extract_polygon_from_feature(feature_slu))
 
-
-        # TODO: Find out how Fan et al did for situations where a building is made up out of many small footprints
         # Compute convex hulls
         cv_osm = geometry_utils.convex_hull(polygon_osm)
         cv_slu = geometry_utils.convex_hull(polygon_slu)
@@ -82,6 +80,13 @@ for feature_osm in OSM_data['features']:
         tc_slu = geometry_utils.turning_function(cv_slu)
 
         plot_utils.plot_lines([tc_osm, tc_slu])
+
+        # Normalized shape dissimilarities, only if there is a 1:1 match
+        if len(polygon_slu) == 1:
+            #TODO: Metric: Bar diagram of footprint shape similarity (Fan et al, page 12)
+            # Only buildings with a 1:1 semantic relationship are involved in the measurement of of positional and shape accuracy. Should we do this too?
+            shape_dissimilarity_normalized = geometry_utils.normalized_shape_dissimilarity(polygon_osm, polygon_slu)
+            print("1:1 MATCH MATCH MATCH")
 
         #plot_utils.plot_polygons([cv_osm, polygon_osm])
         #plot_utils.plot_polygons([cv_slu] + polygon_slu)
@@ -161,19 +166,16 @@ print("Average position error: " + str(avg_pos_error_cp) + " (Counting Points me
 avg_pos_error_mbr /= counted_points_mbr
 print("Average position error: " + str(avg_pos_error_mbr) + " (MBR method, reasonable)")
 
+
+#TODO: Position accuracy per building by taking the average of the distance between the corresponding points
+
 #TODO: Turning function fixes
 #TODO: Function for evaluating shape similarity, using turning function
 #TODO: MBR method: Record which quadrant (MBR edge) That the edge was found on. Only match edges on the same sides
 #TODO: Find the SLU MBR that minimizes area overlap between the OSM and SLU MBRs, not the one with least area
 #TODO: Write in the report about why we had to cut buildings close to the boundary
-#TODO: Position accuracy per building by taking the average of the distance between the corresponding points
-#TODO: Fan et al, only buildings with a 1:1 semantic relationship are involved in the measurement of of positional and shape accuracy. Should we do this too?
-    # In the case of turning function, this is the only thing we can do!
 #TODO: Try switching to the area-minimizing MBR implementation that chris sent
-#TODO: Fan et al, normalize shape similarity by the rectangularity of the footprints (area divided by the area of the oriented MBR)
 #TODO: Metric: Statistic of the matching result using area overlap (Fan et al, page 9)
 #TODO: Metric: Max, min and std deviation of position offsets (Fan et al, page 12)
 #TODO: Metric: Bar diagram of position offsets (Fan et al, page 12)
-#TODO: Metric: Bar diagram of footprint shape similarity (Fan et al, page 12)
-#TODO: Mention as a source of error: Fan et al claimed that the main source of error was the limited resolution of satellite photos
 

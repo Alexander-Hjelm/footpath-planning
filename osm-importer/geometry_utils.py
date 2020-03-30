@@ -109,13 +109,17 @@ def polygon_perimeter(polygon):
         perimeter_out += point_distance(polygon[i], polygon[i+1])
     return perimeter_out
 
+def signed_angle(vector):
+    x, y = vector
+    return math.atan2(y, x)
+
 def signed_vector_angle(vector1, vector2):
-    x1, y1 = vector1
-    x2, y2 = vector2
-    inner_product = x1*x2 + y1*y2
-    len1 = math.hypot(x1, y1)
-    len2 = math.hypot(x2, y2)
-    return math.acos(inner_product/(len1*len2))
+    angle_diff = signed_angle(vector2) - signed_angle(vector1)
+    if angle_diff > math.pi/2:
+        angle_diff -= math.pi
+    elif angle_diff < -math.pi/2:
+        angle_diff += math.pi
+    return angle_diff
 
 def perpendicular(a):
     b = np.empty_like(a)

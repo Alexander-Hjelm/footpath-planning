@@ -93,17 +93,17 @@ for feature_osm in OSM_data['features']:
         #plot_utils.plot_polygon(polygon_osm)
         #plot_utils.plot_polygons(polygon_slu)
 
-        # Turning funcitons
-        tc_osm = geometry_utils.turning_function(cv_osm)
-        tc_slu = geometry_utils.turning_function(cv_slu)
-
-        #plot_utils.plot_lines([tc_osm, tc_slu])
-
         # Normalized shape dissimilarities, only if there is a 1:1 match
         if len(polygon_slu) == 1:
             # Only buildings with a 1:1 semantic relationship are involved in the measurement of of positional and shape accuracy. Should we do this too?
-            shape_dissimilarity_normalized = geometry_utils.normalized_shape_dissimilarity(polygon_osm, polygon_slu)
+            shape_dissimilarity_normalized = geometry_utils.normalized_shape_dissimilarity(polygon_osm, polygon_slu[0])
             shape_dissimilarity_data.append(shape_dissimilarity_normalized)
+step_functions_area_between
+            # Turning funcitons
+            #tc_osm = geometry_utils.turning_function(polygon_osm)
+            #tc_slu = geometry_utils.turning_function(polygon_slu[0])
+            #plot_utils.plot_lines([tc_osm, tc_slu])
+            #print("Shape dissimilarity:" + str(shape_dissimilarity_normalized))
 
         #plot_utils.plot_polygons([cv_osm, polygon_osm])
         #plot_utils.plot_polygons([cv_slu] + polygon_slu)
@@ -142,8 +142,8 @@ for feature_osm in OSM_data['features']:
         avg_point_distance = 0.0
         counted_points = 0
         # While both edge sets are non-emptyh
-        #TODO: Try to only match poisition error for 1:1 building matches, and see what that does for the spread of the results
-        #TODO: MBR method: Record which quadrant (MBR edge) That the edge was found on. Only match edges on the same sides
+        # (3) TODO: Try to only match poisition error for 1:1 building matches, and see what that does for the spread of the results
+        # (4) TODO: MBR method: Record which quadrant (MBR edge) That the edge was found on. Only match edges on the same sides
         while edges_on_perimeter_osm and edges_on_perimeter_slu:
             edge_osm = edges_on_perimeter_osm[0]
             best_edge_slu = None

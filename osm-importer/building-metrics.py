@@ -100,10 +100,10 @@ for feature_osm in OSM_data['features']:
             shape_dissimilarity_data.append(shape_dissimilarity_normalized)
 
             # Turning funcitons
-            tc_osm = geometry_utils.turning_function(polygon_osm)
-            tc_slu = geometry_utils.turning_function(polygon_slu[0])
-            plot_utils.plot_lines([tc_osm, tc_slu])
-            print("Shape dissimilarity:" + str(shape_dissimilarity_normalized))
+            #tc_osm = geometry_utils.turning_function(polygon_osm)
+            #tc_slu = geometry_utils.turning_function(polygon_slu[0])
+            #plot_utils.plot_lines([tc_osm, tc_slu])
+            #print("Shape dissimilarity:" + str(shape_dissimilarity_normalized))
 
         #plot_utils.plot_polygons([cv_osm, polygon_osm])
         #plot_utils.plot_polygons([cv_slu] + polygon_slu)

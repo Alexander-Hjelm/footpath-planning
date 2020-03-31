@@ -413,43 +413,42 @@ def oriented_mbr(points):
 
     return [best_corner_1, best_corner_2, best_corner_3, best_corner_4]
 
-def step_functions_normalized_area_between(f1, f2):
+def step_functions_area_between(f1, f2):
     # Area between two normalized step functions by piecewise summation
     area_out = 0.0
+    i = 0.0
     i1 = 0
     i2 = 0
-    f1_normalized = []
-    f2_normalized = []
-    f1_start_x = f1[0][0]
-    f2_start_x = f2[0][0]
-    f1_total_len = f1[-1][0] - f1_start_x
-    f2_total_len = f2[-1][0] - f2_start_x
 
-    # Normalize by accumulated length
-    for point in f1:
-        f1_normalized.append([(point[0]-f1_start_x)/f1_total_len, point[1]])
-    for point in f2:
-        f2_normalized.append([(point[0]-f2_start_x)/f2_total_len, point[1]])
+    # Assert that the x length is the same for both functions
+    assert(f1[-1][0] == f2[-1][0])
+    f_len = f1[-1][0]
 
-    while i1 < len(f1_normalized)-1 and i2 < len(f2_normalized)-1:
-        p1 = f1_normalized[i1]
-        p2 = f2_normalized[i2]
-        p1_next = f1_normalized[i1+1]
-        p2_next = f2_normalized[i2+1]
+    while i<f_len:
+        p1 = f1[i1]
+        p2 = f2[i2]
+        p1_next = f1[i1+1]
+        p2_next = f2[i2+1]
+
+        d_x = None
 
         if p1_next[0] < p2_next[0]:
             # Next evaluation point is on f1
-            area_out += (p1_next[0] - p1[0]) * (p1[1]-p2[1])
+            d_x = p1_next[0] - i
             i1+=1
         elif p2_next[0] < p1_next[0]:
             # Next evaluation point is on f2
-            area_out += (p2_next[0] - p2[0]) * (p1[1]-p2[1])
+            d_x = p2_next[0] - i
             i2+=1
         else:
             # p1_next.x == p2_next.x
-            area_out += min(p1_next[0]-p1[0], p2_next[0]-p2[0]) * (p1[1]-p2[1])
+            d_x = p1_next[0] - i
             i1+=1
             i2+=1
+        print("Next interval: " + str(i) + ", " +  str(i+d_x))
+        area_out += (d_x) * (p2[1]-p1[1])
+        i += d_x
+
     return area_out
 
 def polygon_rectangularity(polygon):
@@ -472,7 +471,7 @@ def prune_polygon(polygon):
 def shape_dissimilarity(polygon_1, polygon_2):
     # Implementation of eqn 1, Fan et al
     tc_1, tc_2 = turning_function_2(polygon_1, polygon_2)
-    area_diff = step_functions_normalized_area_between(tc_1, tc_2)
+    area_diff = step_functions_area_between(tc_1, tc_2)
     return math.sqrt(abs(area_diff))
 
 def normalized_shape_dissimilarity(polygon_1, polygon_2):

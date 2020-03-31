@@ -65,6 +65,23 @@ def plot_scatter(points):
     plt.ylabel('y')
     plt.show()
 
+def plot_step_function(points):
+    plot_step_functions([points])
+
+def plot_step_functions(fns):
+    fns_edited = []
+    for f in fns:
+        fn_edited = []
+        for i in range(0, len(f)-1):
+            p1 = f[i]
+            p2 = f[i+1]
+            fn_edited.append(p1)
+            fn_edited.append([p2[0]-0.0000001, p1[1]])
+        fns_edited.append(fn_edited)
+    plot_lines(fns_edited)
+    print(fns)
+    print(fns_edited)
+
 def plot_line(points):
     plot_lines([points])
 

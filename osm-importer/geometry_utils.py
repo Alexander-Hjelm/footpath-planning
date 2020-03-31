@@ -115,10 +115,10 @@ def signed_angle(vector):
 
 def signed_vector_angle(vector1, vector2):
     angle_diff = signed_angle(vector2) - signed_angle(vector1)
-    if angle_diff > math.pi/2:
-        angle_diff -= math.pi
-    elif angle_diff < -math.pi/2:
-        angle_diff += math.pi
+    if angle_diff > math.pi:
+        angle_diff -= 2*math.pi
+    elif angle_diff < -math.pi:
+        angle_diff += 2*math.pi
     return angle_diff
 
 def perpendicular(a):

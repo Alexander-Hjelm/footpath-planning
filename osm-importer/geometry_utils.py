@@ -240,25 +240,54 @@ def douglas_peucker_helper(polygon, e):
         polygon_out = [polygon[0], polygon[end]]
     return polygon_out
 
-# (2) TODO: Turning function fixes
+# Turning functions for two polygons
+# Need to input two polygons to solve the issues of dissimilarity (clockwise/Cclockwise, starting point)
+def turning_function_2(polygon_1, polygon_2):
+    poly_1_rotated = copy.deepcopy(polygon_1)
+    poly_2_rotated = copy.deepcopy(polygon_2)
+
+    # Reverse the polygon enumerations if they are not clockwise
+    if not is_polygon_clockwise(polygon_1):
+        poly_1_rotated = poly_1_rotated[::-1]
+    if not is_polygon_clockwise(polygon_2):
+        poly_2_rotated = poly_2_rotated[::-1]
+
+    # Get indices of starting points (pick the closest pair of points between the sets)
+    start_point_1, start_point_2, start_index_1, start_index_2 = closest_points_between_polygons(poly_1_rotated, poly_2_rotated)
+
+    # Rotate the polygon indices until the starting points are first in the lists
+    poly_1_rotated = poly_1_rotated[start_index_1:] + poly_1_rotated[:start_index_1]
+    poly_2_rotated = poly_2_rotated[start_index_2:] + poly_2_rotated[:start_index_2]
+
+    tc_1 = turning_function(poly_1_rotated)
+    tc_2 = turning_function(poly_2_rotated)
+
+    return tc_1, tc_2
+
 def turning_function(polygon):
+    # Rotate the polygon until the starting point is first
     turnpoints_out = []
     acc_len = 0.0 # Accumluated length that has been stepped through
     total_len = polygon_perimeter(polygon)
     acc_angle = 0.0
-    for i in range(0, len(polygon)-2):
+
+    turnpoints_out.append([0.0, 0.0])
+    for i in range(0, len(polygon)-1):
         p1 = polygon[i]
         p2 = polygon[i+1]
-        p3 = polygon[i+2]
+        p3 = polygon[(i+2)%len(polygon)]
 
         edge_len = point_distance(p2, p1)
-        acc_len += edge_len
+        acc_len += edge_len/total_len
 
         turnpoints_out.append([acc_len-0.0000001, acc_angle])
 
         angle = signed_vector_angle([p2[0]-p1[0], p2[1]-p1[1]], [p3[0]-p2[0], p3[1]-p2[1]])
         acc_angle += angle
         turnpoints_out.append([acc_len, acc_angle])
+
+    turnpoints_out.append([1.0, acc_angle])
+
     return turnpoints_out
 
 def get_vector_orientation(origin, p1, p2):

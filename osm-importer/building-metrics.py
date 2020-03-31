@@ -70,6 +70,14 @@ for id_slu in overlapping_buildings_slu_bigger.keys():
     elif len(overlapping_buildings_slu_bigger[id_slu]) > 1:
         one_to_many_matches_count += 1
 
+# Delete too similar points for each polygon in the data sets
+for feature_osm in OSM_data['features']:
+    polygon = geometry_utils.extract_polygon_from_feature(feature_osm)
+    geometry_utils.prune_polygon(polygon)
+for feature_slu in SLU_data['features']:
+    polygon = geometry_utils.extract_polygon_from_feature(feature_slu)
+    geometry_utils.prune_polygon(polygon)
+
 # Geometrical distance between the two sets
 avg_pos_error_cp = 0.0
 counted_points_cp = 0

@@ -400,6 +400,17 @@ def polygon_rectangularity(polygon):
     a_rect = polygon_area(mbr)
     return a_poly/a_rect
 
+def prune_polygon(polygon):
+    points_to_remove = []
+    for i in range(0, len(polygon)):
+        p1 = polygon[i]
+        p2 = polygon[(i+1)%len(polygon)]
+        if p1[0] == p2[0] and p1[1] == p2[1]:
+            points_to_remove.append(p2)
+    for point in points_to_remove:
+        polygon.remove(point)
+
+
 def shape_dissimilarity(polygon_1, polygon_2):
     # Implementation of eqn 1, Fan et al
     tc_1 = turning_function(polygon_1)

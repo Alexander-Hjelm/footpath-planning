@@ -282,8 +282,6 @@ def turning_function(polygon):
         edge_len = point_distance(p2, p1)
         acc_len += edge_len/total_len
 
-        turnpoints_out.append([acc_len-0.0000001, acc_angle])
-
         angle = signed_vector_angle([p2[0]-p1[0], p2[1]-p1[1]], [p3[0]-p2[0], p3[1]-p2[1]])
         acc_angle += angle
         turnpoints_out.append([acc_len, acc_angle])

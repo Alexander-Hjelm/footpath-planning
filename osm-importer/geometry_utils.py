@@ -478,7 +478,12 @@ def normalized_shape_dissimilarity(polygon_1, polygon_2):
     # Normalize shape similarity by the rectangularity of the footprints (area divided by the area of the oriented MBR)
     rectangularity = polygon_rectangularity(polygon_1)
     mbr = oriented_mbr(polygon_1)
-    return 1 - shape_dissimilarity(polygon_1, polygon_2)*(1-rectangularity)/shape_dissimilarity(polygon_1, mbr)
+
+    d_p1_p2 = shape_dissimilarity(polygon_1, polygon_2)
+    tc_1, tc_2 = turning_function_2(polygon_1, mbr)
+    d_p1_mbr = shape_dissimilarity(polygon_1, mbr)
+
+    return 1 - d_p1_p2*(1-rectangularity)/d_p1_mbr
 
 def extract_polygon_from_feature(feature):
     feature_type = feature['geometry']['type']

@@ -445,8 +445,7 @@ def step_functions_area_between(f1, f2):
             d_x = p1_next[0] - i
             i1+=1
             i2+=1
-        print("Next interval: " + str(i) + ", " +  str(i+d_x))
-        area_out += (d_x) * (p2[1]-p1[1])
+        area_out += abs((d_x) * (p2[1]-p1[1]))
         i += d_x
 
     return area_out

@@ -79,8 +79,6 @@ def plot_step_functions(fns):
             fn_edited.append([p2[0]-0.0000001, p1[1]])
         fns_edited.append(fn_edited)
     plot_lines(fns_edited)
-    print(fns)
-    print(fns_edited)
 
 def plot_line(points):
     plot_lines([points])

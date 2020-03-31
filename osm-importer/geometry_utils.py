@@ -163,6 +163,33 @@ def minmax_points_of_polygon(polygon):
 
     return [min_point_n, min_point_e, min_point_s, min_point_w]
 
+def closest_points_between_polygons(polygon_1, polygon_2):
+    closest_1 = None
+    closest_2 = None
+    closest_index_1 = -1
+    closest_index_2 = -1
+    closest_d = 99999999999999.0
+    for i in range(0, len(polygon_1)):
+        p1 = polygon_1[i]
+        for j in range(0, len(polygon_2)):
+            p2 = polygon_2[j]
+            d = point_distance(p1, p2)
+            if d < closest_d:
+                closest_1 = p1
+                closest_2 = p2
+                closest_index_1 = i
+                closest_index_2 = j
+                closest_d = d;
+    return closest_1, closest_2, closest_index_1, closest_index_2
+
+def is_polygon_clockwise(polygon):
+    sum_out = 0.0
+    for i in range(0, len(polygon)):
+        p1 = polygon[i]
+        p2 = polygon[(i+1)%len(polygon)]
+        sum_out += (p2[0]-p1[0])*(p2[1]+p1[1])
+    return sum_out >= 0
+
 def perp_distance_point_to_line(point, line_point_1, line_point_2):
     x0 = point[0]
     y0 = point[1]

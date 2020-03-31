@@ -6,6 +6,24 @@ from geojson import Point, Feature, FeatureCollection, load
 import geometry_utils
 import plot_utils
 import statistics
+import sys
+
+"""
+### Turning function + shape similarity test ###
+p1 = [[0.0,0.0],[3.0,0.0],[3.0,3.0],[0.0,3.0]]
+p2 = [[0.0,0.0],[4.0,0.0],[4.0,3.0],[0.0,3.0]]
+tc_1, tc_2 = geometry_utils.turning_function_2(p1, p2)
+print(tc_1)
+print(tc_2)
+area = geometry_utils.step_functions_area_between(tc_1, tc_2)
+d_p1_p2 = geometry_utils.shape_dissimilarity(p1, p2)
+sn_p1_p2 = geometry_utils.normalized_shape_dissimilarity(p1, p2)
+print("Area: " + str(area))
+print("d: " + str(d_p1_p2))
+print("Sn: " + str(sn_p1_p2))
+plot_utils.plot_step_functions([tc_1, tc_2])
+sys.exit()
+"""
 
 OSM_data = {}
 SLU_data = {}

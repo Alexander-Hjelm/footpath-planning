@@ -469,8 +469,7 @@ def prune_polygon(polygon):
 
 def shape_dissimilarity(polygon_1, polygon_2):
     # Implementation of eqn 1, Fan et al
-    tc_1 = turning_function(polygon_1)
-    tc_2 = turning_function(polygon_2)
+    tc_1, tc_2 = turning_function_2(polygon_1, polygon_2)
     area_diff = step_functions_normalized_area_between(tc_1, tc_2)
     return math.sqrt(abs(area_diff))
 

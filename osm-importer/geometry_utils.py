@@ -108,6 +108,7 @@ def polygon_perimeter(polygon):
     perimeter_out = 0.0
     for i in range(0, len(polygon)-1):
         perimeter_out += point_distance(polygon[i], polygon[i+1])
+    perimeter_out += point_distance(polygon[-1], polygon[0])
     return perimeter_out
 
 def signed_angle(vector):

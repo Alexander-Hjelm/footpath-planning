@@ -124,7 +124,7 @@ for feature_osm in OSM_data['features']:
             # Only buildings with a 1:1 semantic relationship are involved in the measurement of of positional and shape accuracy. Should we do this too?
             shape_dissimilarity_normalized = geometry_utils.normalized_shape_dissimilarity(polygon_osm, polygon_slu[0])
             shape_dissimilarity_data.append(shape_dissimilarity_normalized)
-            print("SDN: " + str(shape_dissimilarity_normalized))
+            #print("SDN: " + str(shape_dissimilarity_normalized))
 
             # Turning funcitons
             #tc_osm, tc_slu = geometry_utils.turning_function_2(polygon_osm, polygon_slu[0])

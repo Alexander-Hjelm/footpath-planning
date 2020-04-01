@@ -156,8 +156,8 @@ for feature_osm in OSM_data['features']:
         #plot_utils.plot_polygons([polygon_osm, mbr_osm])
         #plot_utils.plot_polygons([polygon_slu, mbr_slu])
 
-        edges_on_perimeter_osm = geometry_utils.get_edges_on_rect_perimeter(cv_osm, mbr_osm)
-        edges_on_perimeter_slu = geometry_utils.get_edges_on_rect_perimeter(cv_slu, mbr_slu)
+        # Pass both polygons at the same time to the matching function, to pick similar starting points (And c-wise/cc-wise orientation?)
+        points_on_perimeter_osm, points_on_perimeter_slu = geometry_utils.get_points_on_rect_perimeter_2(cv_osm_dp, cv_slu_dp)
 
         #plot_utils.plot_polygons([points_on_perimeter_osm, mbr_osm])
         #plot_utils.plot_polygons([points_on_perimeter_slu, mbr_slu])
@@ -169,24 +169,30 @@ for feature_osm in OSM_data['features']:
         # Position accuracy per building by taking the average of the distance between the corresponding points
         avg_point_distance = 0.0
         counted_points = 0
-        # While both edge sets are non-emptyh
-        # (3) TODO: Try to only match poisition error for 1:1 building matches, and see what that does for the spread of the results
-        # (4) TODO: MBR method: Record which quadrant (MBR edge) That the edge was found on. Only match edges on the same sides
-        while edges_on_perimeter_osm and edges_on_perimeter_slu:
-            edge_osm = edges_on_perimeter_osm[0]
-            best_edge_slu = None
-            min_edge_distance = 99999999999.0
-            for edge_slu in edges_on_perimeter_slu:
-                edge_distance = geometry_utils.edge_endpoints_distance(edge_osm, edge_slu)
-                if edge_distance < min_edge_distance:
-                    best_edge_slu = edge_slu
-                    min_edge_distance = edge_distance
-            #if(min_edge_distance < 10.0):   # Cutoff point to remove points that were inducted due to mismatching of edges
-            avg_point_distance += min_edge_distance
-            counted_points += 2
-                #print(min_edge_distance)
-            edges_on_perimeter_osm.remove(edge_osm)
-            edges_on_perimeter_slu.remove(best_edge_slu)
+        # While both edge sets are non-empty
+        #print("CH, OSM: " + str(cv_osm))
+        #print("CH, SLU: " + str(cv_slu))
+        #print("EDGES, OSM: " + str(edges_on_perimeter_osm))
+        #print("EDGES, SLU: " + str(edges_on_perimeter_slu))
+
+        #print(points_on_perimeter_osm)
+        for i in range(0, 4):
+            while points_on_perimeter_osm[i] and points_on_perimeter_slu[i]:
+                # Find the current two closest points
+                closest_1, closest_2, closest_index_1, closest_index_2 = geometry_utils.closest_points_between_polygons(points_on_perimeter_osm[i], points_on_perimeter_slu[i])
+
+                min_edge_distance = geometry_utils.point_distance(closest_1, closest_2)
+                if(min_edge_distance < 10.0):   # Cutoff point to remove points that were inducted due to mismatching of edges
+                    avg_point_distance += min_edge_distance
+                    counted_points += 1
+                #else:
+                    #print(min_edge_distance)
+                #if(min_edge_distance > 20):
+                #    print("Closest point, OSM: " + str(closest_1))
+                #    print("Closest point, SLU: " + str(closest_2))
+                #    plot_utils.plot_polygons([cv_osm, cv_slu])
+                points_on_perimeter_osm[i].remove(closest_1)
+                points_on_perimeter_slu[i].remove(closest_2)
 
         if counted_points > 0:
             counted_data_points_mbr.append(avg_point_distance/counted_points)

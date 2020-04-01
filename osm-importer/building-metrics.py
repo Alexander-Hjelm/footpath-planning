@@ -7,6 +7,7 @@ import geometry_utils
 import plot_utils
 import statistics
 import sys
+import pickle
 
 """
 ### Turning function + shape similarity test ###
@@ -210,6 +211,13 @@ for feature_osm in OSM_data['features']:
             counted_points_cp += 1
 
 ### OUTPUT ###
+
+# Write all datapoints to file for later processing
+with open('metric-data-pos-acc', 'wb') as fp:
+    pickle.dump(counted_data_points_mbr, fp)
+
+with open('metric-data-shape-diss-norm', 'wb') as fp:
+    pickle.dump(shape_dissimilarity_data, fp)
 
 print("Results...")
 

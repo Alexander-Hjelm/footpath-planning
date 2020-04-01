@@ -115,5 +115,5 @@ def plot_bar(data_values, bar_width):
         if not added:
             values[-1] += 1
 
-    plt.bar(bars, values)
+    plt.bar(bars, values, width=bar_width*0.8)
     plt.show()

@@ -31,20 +31,44 @@ def polygon_intersection_area(polygon_1, polygon_2):
     shapely_poly_2 = shapely.geometry.Polygon(polygon_2)
     return shapely_poly_1.intersection(shapely_poly_2).area
 
-def get_edges_on_rect_perimeter(polygon, rect):
-    assert(len(rect)==4)
-    edges_out = []
+def get_points_on_rect_perimeter_2(polygon_1, polygon_2):
+    mbr_1 = oriented_mbr(polygon_1)
+    mbr_2 = oriented_mbr(polygon_2)
+
+    mbr_1 = make_polygon_clockwise(mbr_1)
+    mbr_2 = make_polygon_clockwise(mbr_2)
+
+    # Get indices of starting points (pick the closest pair of points between the sets)
+    start_point_1, start_point_2, start_index_1, start_index_2 = closest_points_between_polygons(mbr_1, mbr_2)
+
+    # Rotate the polygon indices until the starting points are first in the lists
+    mbr_1 = mbr_1[start_index_1:] + mbr_1[:start_index_1]
+    mbr_2 = mbr_2[start_index_2:] + mbr_2[:start_index_2]
+
+    points_out_1 = []
+    points_out_2 = []
+
+    for i in range(0, 4):
+        points_out_1.append(get_points_of_polygon_on_edge(polygon_1, [mbr_1[i], mbr_1[(i+1)%4]], 1.0))
+        points_out_2.append(get_points_of_polygon_on_edge(polygon_2, [mbr_2[i], mbr_2[(i+1)%4]], 1.0))
+    
+    return points_out_1, points_out_2
+
+def get_points_of_polygon_on_edge(polygon, edge_compare, e):
+    assert(len(edge_compare)==2)
+    points_out = []
+    corner_1 = edge_compare[0]
+    corner_2 = edge_compare[1]
     for i in range(0, len(polygon)-1):
         for j in range(0, 3):
             point_1 = polygon[i]
             point_2 = polygon[i+1]
-            corner_1 = rect[j]
-            corner_2 = rect[j+1]
-            if perp_distance_point_to_line(point_1, corner_1, corner_2) < 1:
-                if perp_distance_point_to_line(point_2, corner_1, corner_2) < 1:
-                    edges_out.append([point_1, point_2])
+            if perp_distance_point_to_line(point_1, corner_1, corner_2) < e:
+                if perp_distance_point_to_line(point_2, corner_1, corner_2) < e:
+                    points_out.append(point_1)
+                    points_out.append(point_2)
                 continue
-    return edges_out
+    return points_out
 
 def edge_endpoints_distance(edge_1, edge_2):
     p11 = edge_1[0]
@@ -350,7 +374,7 @@ def convex_hull(polygons):
     return hull_points
 
 def oriented_mbr(points):
-    # (5) TODO: Try switching to the area-minimizing MBR implementation that chris sent
+    # (6) TODO: Try switching to the area-minimizing MBR implementation that chris sent
     cv = convex_hull(points)
     center = polygon_centroid(cv)
 

@@ -208,6 +208,11 @@ def closest_points_between_polygons(polygon_1, polygon_2):
                 closest_d = d;
     return closest_1, closest_2, closest_index_1, closest_index_2
 
+def make_polygon_clockwise(polygon):
+    if not is_polygon_clockwise(polygon):
+        return polygon[::-1]
+    return polygon
+
 def is_polygon_clockwise(polygon):
     sum_out = 0.0
     for i in range(0, len(polygon)):
@@ -273,10 +278,8 @@ def turning_function_2(polygon_1, polygon_2):
     poly_2_rotated = copy.deepcopy(polygon_2)
 
     # Reverse the polygon enumerations if they are not clockwise
-    if not is_polygon_clockwise(polygon_1):
-        poly_1_rotated = poly_1_rotated[::-1]
-    if not is_polygon_clockwise(polygon_2):
-        poly_2_rotated = poly_2_rotated[::-1]
+    poly_1_rotated = make_polygon_clockwise(polygon_1)
+    poly_2_rotated = make_polygon_clockwise(polygon_2)
 
     # Get indices of starting points (pick the closest pair of points between the sets)
     start_point_1, start_point_2, start_index_1, start_index_2 = closest_points_between_polygons(poly_1_rotated, poly_2_rotated)

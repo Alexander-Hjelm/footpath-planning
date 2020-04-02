@@ -27,26 +27,14 @@ class GeometryHashtable:
                 hashtable[i].append([])
 
         for polygon in polygons:
-            x, y = get_hash_keys_of_polygon(polygon)
+            x, y = _get_hash_keys_of_polygon(polygon)
             hashtable[x][y] = polygon
 
         self.hashtable = hashtable
 
-    def get_polygons_in_bucket_surrounding(self, x, y):
-        polygons_out = []
-        for x_i in range(x-1, x+2):
-            for y_i in range(y-1, y+2):
-                polygons_out += self.get_polygons_in_bucket(x_i, y_i)
-        return polygons_out
-
-    def get_polygons_in_bucket(self, x, y):
-        return self.hashtable[x][y]
-
-    def get_hash_keys_of_polygon(self, polygon):
-        center = geometry_utils.polygon_centroid(polygon)
-        x = (center[0]-top_left_x)/cell_size
-        y = (center[1]-top_left_y)/cell_size
-        return round(x), round(y)
+    def get_collision_canditates(self, polygon):
+        x, y = _get_hash_keys_of_polygon(polygon)
+        return _get_polygons_in_bucket_surrounding(x, y)
 
     def write_hashtable_to_file(self):
         with open('geometry-hashtable-' + name, 'wb') as fp:
@@ -55,4 +43,20 @@ class GeometryHashtable:
     def load_hashtable_from_file(self):
         with open ('geometry-hashtable-' + name, 'rb') as fp:
             self.hashtable = pickle.load(fp)
+
+    def _get_polygons_in_bucket_surrounding(self, x, y):
+        polygons_out = []
+        for x_i in range(x-1, x+2):
+            for y_i in range(y-1, y+2):
+                polygons_out += self._get_polygons_in_bucket(x_i, y_i)
+        return polygons_out
+
+    def _get_polygons_in_bucket(self, x, y):
+        return self.hashtable[x][y]
+
+    def _get_hash_keys_of_polygon(self, polygon):
+        center = geometry_utils.polygon_centroid(polygon)
+        x = (center[0]-top_left_x)/cell_size
+        y = (center[1]-top_left_y)/cell_size
+        return round(x), round(y)
 

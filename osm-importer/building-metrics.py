@@ -240,8 +240,7 @@ plot_utils.plot_bar(counted_data_points_mbr, 1.0)
 plot_utils.plot_bar(shape_dissimilarity_data, 0.1)
 
 
-#TODO: Fix hashing so that results are identical
-
 #TODO: Report outline + add space for the metrics and images (think about what metrics and images to include)
-#TODO: Pictures for the report
 #TODO: Crunch metrics for the report (Remember to remove cutoff point)
+
+#TODO: Pictures for the report

@@ -18,8 +18,13 @@ class GeometryHashtable:
         min_x, min_y, max_x, max_y = geometry_utils.minmax_points_of_polygons(polygons)
         x_d = max_x - min_x
         y_d = max_y - min_y
-        cell_count_x = math.ceil(x_d/cell_size)
-        cell_count_y = meah.ceil(y_d/cell_size)
+
+        px = dx - (dx % self.cell_size)
+        px = dy - (dy % self.cell_size)
+
+        cell_count_x = round(px / self.cell_size)
+        cell_count_y = round(py / self.cell_size)
+
         hashtable = []
         for i in range(0, cell_count_x):
             hashtable.append([])
@@ -56,7 +61,14 @@ class GeometryHashtable:
 
     def _get_hash_keys_of_polygon(self, polygon):
         center = geometry_utils.polygon_centroid(polygon)
-        x = (center[0]-top_left_x)/cell_size
-        y = (center[1]-top_left_y)/cell_size
-        return round(x), round(y)
+        dx = center[0] - top_left_x
+        dy = center[1] - top_left_y
+
+        px = dx - (dx % self.cell_size)
+        px = dy - (dy % self.cell_size)
+
+        hx = round(px / self.cell_size)
+        hy = round(py / self.cell_size)
+
+        return hx, hy
 

@@ -171,7 +171,7 @@ def add_areas_recursively(c):
                 area_out += add_areas_recursively(c_sub)
     return area_out
 
-def minmax_points_of_features(features):
+def extents_of_features(features):
     min_point_n = [0.0, -999999999.0]
     min_point_e = [-999999999.0, 0.0]
     min_point_s = [0.0, 999999999.0]
@@ -191,7 +191,12 @@ def minmax_points_of_features(features):
             if point[0] < min_point_w[0]:
                 min_point_w = point
 
-    return [min_point_n, min_point_e, min_point_s, min_point_w]
+    min_x = min_point_w[0]
+    min_y = min_point_s[0]
+    max_x = min_point_e[1]
+    max_y = min_point_n[1]
+
+    return min_x, min_y, max_x, max_y
 
 def minmax_points_of_polygon(polygon):
     min_point_n = [0.0, -999999999.0]

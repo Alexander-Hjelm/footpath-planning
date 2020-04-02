@@ -14,8 +14,8 @@ class GeometryHashtable:
         self.name = name
         self.cell_size = cell_size
 
-    def create_from_polygons_list(self, polygons):
-        min_x, min_y, max_x, max_y = geometry_utils.minmax_points_of_polygons(polygons)
+    def create_from_features_list(self, features):
+        min_x, min_y, max_x, max_y = geometry_utils.minmax_points_of_features(features)
         x_d = max_x - min_x
         y_d = max_y - min_y
 
@@ -31,35 +31,28 @@ class GeometryHashtable:
             for j in range(0, cell_count_y):
                 hashtable[i].append([])
 
-        for polygon in polygons:
-            x, y = _get_hash_keys_of_polygon(polygon)
-            hashtable[x][y] = polygon
+        for feature in features:
+            x, y = _get_hash_keys_of_feature(feature)
+            hashtable[x][y].append(feature)
 
         self.hashtable = hashtable
 
-    def get_collision_canditates(self, polygon):
-        x, y = _get_hash_keys_of_polygon(polygon)
-        return _get_polygons_in_bucket_surrounding(x, y)
+    def get_collision_canditates(self, feature):
+        x, y = _get_hash_keys_of_feature(feature)
+        return _get_features_in_bucket_surrounding(x, y)
 
-    def write_hashtable_to_file(self):
-        with open('geometry-hashtable-' + name, 'wb') as fp:
-            pickle.dump(self.hashtable, fp)
-
-    def load_hashtable_from_file(self):
-        with open ('geometry-hashtable-' + name, 'rb') as fp:
-            self.hashtable = pickle.load(fp)
-
-    def _get_polygons_in_bucket_surrounding(self, x, y):
-        polygons_out = []
+    def _get_features_in_bucket_surrounding(self, x, y):
+        features_out = []
         for x_i in range(x-1, x+2):
             for y_i in range(y-1, y+2):
-                polygons_out += self._get_polygons_in_bucket(x_i, y_i)
-        return polygons_out
+                features_out += self._get_features_in_bucket(x_i, y_i)
+        return features_out
 
-    def _get_polygons_in_bucket(self, x, y):
+    def _get_features_in_bucket(self, x, y):
         return self.hashtable[x][y]
 
-    def _get_hash_keys_of_polygon(self, polygon):
+    def _get_hash_keys_of_feature(self, feature):
+        polygon = geometry_utils.extract_polygon_from_feature(feature)
         center = geometry_utils.polygon_centroid(polygon)
         dx = center[0] - top_left_x
         dy = center[1] - top_left_y

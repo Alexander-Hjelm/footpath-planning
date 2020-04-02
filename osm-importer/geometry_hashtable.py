@@ -15,12 +15,16 @@ class GeometryHashtable:
         self.cell_size = cell_size
 
     def create_from_features_list(self, features):
-        min_x, min_y, max_x, max_y = geometry_utils.minmax_points_of_features(features)
-        x_d = max_x - min_x
-        y_d = max_y - min_y
+        min_x, min_y, max_x, max_y = geometry_utils.extents_of_features(features)
+
+        self.top_left_x = min_x
+        self.top_left_y = max_y
+
+        dx = max_x - min_x
+        dy = max_y - min_y
 
         px = dx - (dx % self.cell_size)
-        px = dy - (dy % self.cell_size)
+        py = dy - (dy % self.cell_size)
 
         cell_count_x = round(px / self.cell_size)
         cell_count_y = round(py / self.cell_size)
@@ -32,13 +36,13 @@ class GeometryHashtable:
                 hashtable[i].append([])
 
         for feature in features:
-            x, y = _get_hash_keys_of_feature(feature)
+            x, y = self._get_hash_keys_of_feature(feature)
             hashtable[x][y].append(feature)
 
         self.hashtable = hashtable
 
     def get_collision_canditates(self, feature):
-        x, y = _get_hash_keys_of_feature(feature)
+        x, y = self._get_hash_keys_of_feature(feature)
         return _get_features_in_bucket_surrounding(x, y)
 
     def _get_features_in_bucket_surrounding(self, x, y):
@@ -54,11 +58,11 @@ class GeometryHashtable:
     def _get_hash_keys_of_feature(self, feature):
         polygon = geometry_utils.extract_polygon_from_feature(feature)
         center = geometry_utils.polygon_centroid(polygon)
-        dx = center[0] - top_left_x
-        dy = center[1] - top_left_y
+        dx = center[0] - self.top_left_x
+        dy = center[1] - self.top_left_y
 
         px = dx - (dx % self.cell_size)
-        px = dy - (dy % self.cell_size)
+        py = dy - (dy % self.cell_size)
 
         hx = round(px / self.cell_size)
         hy = round(py / self.cell_size)

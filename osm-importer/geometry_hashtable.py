@@ -47,8 +47,8 @@ class GeometryHashtable:
 
     def _get_features_in_bucket_surrounding(self, x, y):
         features_out = []
-        for x_i in range(max(x-1, 0), min(x+2, len(self.hashtable)-1)):
-            for y_i in range(max(y-1, 0), min(y+2, len(self.hashtable[0])-1)):
+        for x_i in range(max(x-1, 0), min(x+2, len(self.hashtable))):
+            for y_i in range(max(y-1, 0), min(y+2, len(self.hashtable[0]))):
                 features_out += self._get_features_in_bucket(x_i, y_i)
         return features_out
 

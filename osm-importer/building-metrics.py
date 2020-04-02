@@ -3,6 +3,7 @@
 # - Run buildings-convert-to-sweref.py
 
 from geojson import Point, Feature, FeatureCollection, load
+from geometry_hashtable import GeometryHashtable
 import geometry_utils
 import plot_utils
 import statistics
@@ -37,6 +38,12 @@ with open('raw_data/buildings-slu-sweref.geojson', 'r') as f:
 
 print("Finished loading map data")
 
+# Build polygon hashtables
+print("Building hash tables...")
+hashtable_slu = GeometryHashtable("building-hashtable-slu", 230)
+hashtable_slu.create_from_features_list(SLU_data['features'])
+print("Hash tables complete!")
+
 # Metric: total building area
 total_area_OSM = 0.0
 total_area_SLU = 0.0
@@ -62,7 +69,8 @@ for feature_osm in OSM_data['features']:
 
     # Build polygon and match with SLU polygons
     polygon_osm = geometry_utils.extract_polygon_from_feature(feature_osm)
-    for feature_slu in SLU_data['features']:
+
+    for feature_slu in hashtable_slu.get_collision_canditates(feature_osm):
         polygon_slu = geometry_utils.extract_polygon_from_feature(feature_slu)
 
         relative_overlap = geometry_utils.polygon_relative_overlap(polygon_osm, polygon_slu)

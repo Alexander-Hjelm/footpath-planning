@@ -5,6 +5,7 @@
 # - Run building-data-formatter-slu.py
 
 from geojson import Point, Feature, FeatureCollection, load, dump
+from geometry_hashtable import GeometryHashtable
 import geometry_utils
 
 q_bbox_n = 59.34469860821763
@@ -39,6 +40,14 @@ for feature in SLU_data['features']:
         SLU_data_out.remove(feature)
         print('Remaining SLU features: ' + str(len(SLU_data_out)))
 
+# Build polygon hashtables
+print("Building hash tables...")
+hashtable_slu = GeometryHashtable("building-hashtable-slu-post-import", 230.0)
+hashtable_slu.create_from_features_list(SLU_data['features'])
+hashtable_osm = GeometryHashtable("building-hashtable-osm-post-import", 230.0)
+hashtable_osm.create_from_features_list(OSM_data['features'])
+print("Hash tables complete!")
+
 progress = 0.0
 for feature_osm in OSM_data['features']:
     print("Cropping OSM features, progess: " + str(int(100*progress/len(OSM_data['features']))) + '%')
@@ -47,7 +56,7 @@ for feature_osm in OSM_data['features']:
     # Build polygon
     polygon_osm = geometry_utils.extract_polygon_from_feature(feature_osm)
     if geometry_utils.polygon_relative_overlap(polygon_osm, query_polygon) < 0.999:
-        for feature_slu in SLU_data['features']:
+        for feature_slu in hashtable_slu.get_collision_canditates(feature_osm):
             if feature_slu in SLU_data_out:
                 polygon_slu = geometry_utils.extract_polygon_from_feature(feature_slu)
 
@@ -67,7 +76,7 @@ for feature_osm_1 in OSM_data_out:
     progress+=1.0
     # Do not treat multipolygons, since they can have buildings inside of them
     if len(feature_osm_1['geometry']['coordinates']) == 1:
-        for feature_osm_2 in OSM_data_out:
+        for feature_osm_2 in hashtable_osm.get_collision_canditates(feature_osm_1):
             if not feature_osm_1 == feature_osm_2:
                 if len(feature_osm_2['geometry']['coordinates']) == 1:
                     polygon_1 = geometry_utils.extract_polygon_from_feature(feature_osm_1)
@@ -90,7 +99,7 @@ for feature_slu_1 in SLU_data_out:
     progress+=1.0
     # Do not treat multipolygons, since they can have buildings inside of them
     if len(feature_slu_1['geometry']['coordinates']) == 1:
-        for feature_slu_2 in SLU_data_out:
+        for feature_slu_2 in hashtable_slu.get_collision_canditates(feature_slu_1):
             if not feature_slu_1 == feature_slu_2:
                 if len(feature_slu_2['geometry']['coordinates']) == 1:
                     polygon_1 = geometry_utils.extract_polygon_from_feature(feature_slu_1)

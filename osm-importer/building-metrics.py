@@ -62,8 +62,8 @@ total_matches_count = 0
 progress = 0.0
 for feature_osm in OSM_data['features']:
     # Debug only, limit the wating time
-    if progress>10:
-        break
+    #if progress>10:
+    #    break
     print("Mapping features, progess: " + str(int(100*progress/len(OSM_data['features']))) + '%')
     progress+=1.0
 

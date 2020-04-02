@@ -18,7 +18,7 @@ class GeometryHashtable:
         min_x, min_y, max_x, max_y = geometry_utils.extents_of_features(features)
 
         self.top_left_x = min_x
-        self.top_left_y = max_y
+        self.top_left_y = min_y
 
         dx = max_x - min_x
         dy = max_y - min_y
@@ -26,8 +26,8 @@ class GeometryHashtable:
         px = dx - (dx % self.cell_size)
         py = dy - (dy % self.cell_size)
 
-        cell_count_x = round(px / self.cell_size)
-        cell_count_y = round(py / self.cell_size)
+        cell_count_x = round(px / self.cell_size)+1
+        cell_count_y = round(py / self.cell_size)+1
 
         hashtable = []
         for i in range(0, cell_count_x):
@@ -43,12 +43,12 @@ class GeometryHashtable:
 
     def get_collision_canditates(self, feature):
         x, y = self._get_hash_keys_of_feature(feature)
-        return _get_features_in_bucket_surrounding(x, y)
+        return self._get_features_in_bucket_surrounding(x, y)
 
     def _get_features_in_bucket_surrounding(self, x, y):
         features_out = []
-        for x_i in range(x-1, x+2):
-            for y_i in range(y-1, y+2):
+        for x_i in range(max(x-1, 0), min(x+2, len(self.hashtable)-1)):
+            for y_i in range(max(y-1, 0), min(y+2, len(self.hashtable[0])-1)):
                 features_out += self._get_features_in_bucket(x_i, y_i)
         return features_out
 

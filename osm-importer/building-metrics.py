@@ -106,8 +106,6 @@ for feature_slu in SLU_data['features']:
     geometry_utils.prune_polygon(polygon)
 
 # Geometrical distance between the two sets
-avg_pos_error_cp = 0.0
-counted_points_cp = 0
 counted_data_points_mbr = []
 shape_dissimilarity_data = []
 for feature_osm in OSM_data['features']:
@@ -206,18 +204,6 @@ for feature_osm in OSM_data['features']:
         if counted_points > 0:
             counted_data_points_mbr.append(avg_point_distance/counted_points)
 
-        for i in range(0, len(mbr_osm)):
-            p1 = mbr_osm[i]
-            best_r = 9999999999.0
-            p2_best = None
-            for p2 in mbr_slu:
-                r = geometry_utils.point_distance(p1, p2)
-                if r < best_r:
-                    p2_best = p2
-                    best_r = r
-            avg_pos_error_cp += best_r
-            counted_points_cp += 1
-
 ### OUTPUT ###
 
 # Write all datapoints to file for later processing
@@ -240,9 +226,6 @@ print("Total area, fraction: " + str(total_area_OSM / total_area_SLU))
 print("Number of 1:1 matches: " + str(one_to_one_matches_count))
 print("Number of 1:N matches: " + str(one_to_many_matches_count))
 print("Number of 1:0 matches: " + str(total_matches_count - one_to_one_matches_count - one_to_many_matches_count))
-
-avg_pos_error_cp /= counted_points_cp
-print("Average position error: " + str(avg_pos_error_cp) + " (Counting Points method, upper threshold)")
 
 # Metric: Max, min and std deviation of position offsets (Fan et al, page 12)
 print("Average position error: " + str(statistics.mean(counted_data_points_mbr)) + " (MBR method, reasonable)")

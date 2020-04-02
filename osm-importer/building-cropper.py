@@ -42,9 +42,9 @@ for feature in SLU_data['features']:
 
 # Build polygon hashtables
 print("Building hash tables...")
-hashtable_slu = GeometryHashtable("building-hashtable-slu-post-import", 230.0)
+hashtable_slu = GeometryHashtable("building-hashtable-slu-post-import", 0.0025)
 hashtable_slu.create_from_features_list(SLU_data['features'])
-hashtable_osm = GeometryHashtable("building-hashtable-osm-post-import", 230.0)
+hashtable_osm = GeometryHashtable("building-hashtable-osm-post-import", 0.0025)
 hashtable_osm.create_from_features_list(OSM_data['features'])
 print("Hash tables complete!")
 

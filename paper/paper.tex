@@ -242,6 +242,34 @@ When calculating the area overlap we used the fact that multipolygons in geojson
 
 However, when calculating the relative area overlap, this becomes unesseccary since any semantically incorrect subdivision of the polygon will always be inside the bounding polygon.
 
+\section{Results, Metrics}
+
+\subsection{Completeness by building area}
+
+\begin{table}[]
+\begin{tabular}{lllll}
+    & Total number of buildings & Area cover & Number of buildings (\%) & Area cover (\%) \\
+    OSM & 102755 & 33105023.32... $m^2$ & 60.17\% & 98.18\% \\
+    SLU & 170783 & 33718628.97... $m^2$ & 100.00\% & 100.00\%
+\end{tabular}
+\end{table}
+
+The area cover of the OSM dataset in relation to the SLU dataset was estimated to 98.18\%.
+
+\subsection{Positional offset statistics}
+
+Building matching statistics:
+
+\begin{table}[]
+\begin{tabular}{lllll}
+    & 1:0 & 1:1 & 1:n & Total \\
+    Match count & 9812 & 81722 & 11221 & 102755
+\end{tabular}
+\end{table}
+
+% TODO: Bar plot positional accuracy
+% TODO: Bar plot turning functions
+
 \section{Analysis}
 
 (Fan et al, 2014) claimed that the positional error is largely due to the limited resolution in satellite imagery.

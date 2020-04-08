@@ -94,26 +94,35 @@ def plot_lines(lines):
     plt.ylabel('y')
     plt.show()
 
-def plot_bar(data_values, bar_width):
+def plot_bar(data_values, bar_width, max_value = None, min_value = None, x_label = None, y_label = None):
+    #TODO: Axis labels
     min_val = min(data_values)
     max_val = max(data_values)
-    counter = min_val
+
+    if max_value is not None:
+        max_val = max_value
+    if min_value is not None:
+        min_val = min_value
+
+    counter = min_val + bar_width/2.0
     bars = []
-    while counter < max_val:
+    while counter <= max_val:
         bars.append(counter)
         counter += bar_width
     values = []
     for i in range(0, len(bars)):
         values.append(0)
     for val in data_values:
-        added = False
         for i in range(0, len(bars)-1):
             if val > bars[i] and val < bars[i+1]:
                 values[i] += 1
-                added = True
                 break
-        if not added:
-            values[-1] += 1
+
+    ax2 = plt.axes()
+    if x_label is not None:
+        ax2.set_xlabel(x_label)
+    if y_label is not None:
+        ax2.set_ylabel(y_label)
 
     plt.bar(bars, values, width=bar_width*0.8)
     plt.show()

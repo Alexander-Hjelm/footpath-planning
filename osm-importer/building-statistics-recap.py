@@ -51,7 +51,7 @@ print("Position error, min: " + str(min(counted_data_points_mbr)))
 print("Position error, stdev: " + str(statistics.stdev(counted_data_points_mbr)))
 
 # Metric: Bar diagram of position offsets (Fan et al, page 12)
-plot_utils.plot_bar(counted_data_points_mbr, 1.0)
+plot_utils.plot_bar(counted_data_points_mbr, 0.5, max_value=10.0, min_value=0.0, x_label="Average positional error (m)", y_label="Number of buildings")
 
 # Metric: Bar diagram of footprint shape similarity (Fan et al, page 12)
-plot_utils.plot_bar(shape_dissimilarity_data, 0.1)
+plot_utils.plot_bar(shape_dissimilarity_data, 0.05, max_value=1.1, min_value=0.0, x_label="Turning function distance", y_label="Number of building pairs")

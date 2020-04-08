@@ -148,6 +148,9 @@ The logical accuracy will not be assessed because the underlying logical relatio
 (Fan et al., 2014) used the total building area in their reference dataset and the OpenStreetMap dataset to assess the completeness of OpenStreetMap data. The motivation for this is to eliminate semantic differences between both datasets. A very common example of a semantic error when comparing geographic data is that a large building in one dataset may be segmented into several smaller ones in the other, that is to say a building in one set is represented as an aggreation of mutliple buildings in the other set. This makes one-to-one object mapping impossible. Thus using building area as an estimator for completeness solves this issue much better than i.e. the number of buildings or other objects in each dataset.
 This project will use the building area in the OSM dataset versus that of the SLU dataset to determine the completeness of OpenStreetMap building data in the Stockholm area, which will then be used as an argument for how accurate the building correspondence and point proximity measures can be.
 
+% TODO: Figure: Overlapping buildings, OSM-SLU, 1:1
+% TODO: Figure: Overlapping buildings, OSM-SLU, 1:n
+
 \subsection{Building correspondence}
 
 Feature mapping
@@ -155,6 +158,8 @@ The building footprint correspondence will be evaluated using a similarity funct
 $S(foot_{OSM}, foot_{SLU}) = S_{T}(foot_{OSM}, foot_{SLU}) + S_{RO}(foot_{OSM}, foot_{SLU})$, where $S_{T}$ measures the difference in turning function and $S_{RO}$ measures the relative overlap between the footprints.
 
 \subsection{Turning function definition}
+
+% TODO: Turning function example figure for a polygon
 
 The turning function was first defined by Arkin et al. (1991), as a method for measuring the similarity of two polygons. The Turning function $T_c(l)$ measures the cumulative angle of the polygon's counter-clockwise tangent, as a function of the cumulative normalized length l. This project uses the turning function as it is defined by (Fan et al., 2014). For a polygon with vertices ${v_1 ... v_n}$ and line segments ${e_1 ... e_n}$ It is defined as follows.
 Fix a starting vertex $v_1$.
@@ -164,7 +169,7 @@ The turning function has some nice geometric properties, in that it is invariant
 The similarity of two polygons A and B in terms of their turning function is defined as their distance of their cumulative turning functions: $S_{T}(A, B) = 1 - (\int^{1}_{0} T_{C,A}(l) - T_{C,B}(l) dl)^{1/2}$.
 The value range will be $(0 < S_{T} < 1)$, where $S_{T}(A,B) = 1$ if the polygons are identical. 
 
-TODO: Include a distribution of the shap similarity of matched building footprints, see Fan et al, page 14
+% TODO: Turning function overlap, example figure with two polygos
 
 \subsection{Correspondence by building area}
 
@@ -179,6 +184,15 @@ The relative overlap may be used to determine building matching relations even w
 \subsection{Closest point and point proximity}
 
 The final problem is that even when building polygons have been matched between the two datasets, they may not have one-to-one vertex relationship. Footprints from different datasets may be formed at a different level of detail. Problems that arise are e.g. that the vertex counts are dissimilar, or that vertex clusters may be found at different parts of the polygon in the two datasets. To avoid this effect, key points are extracted using the Douglas-Peucker algorithm (Douglas and Peucker, 1973), to create a simplifed footprint with less points that still retain information about the rough features of the detailed footprint. The idea behind Douglas-Peucker is to recursively divide a polyline. It initially marks only the start and end points $(v_0, v_n)$ to be kept, and finds the point $v_i$ in between whose distance is the greatest to the line segment between $v_0$ and $v_n$. It then recursively refines the line segments $(v_0, v_i)$ and $(v_i, v_n)$, and proceeds to do so until a line segment $(v_j, v_k)$ is found, where every point in between $v_j$ and $v_k$ have a distance to the line segment $(v_j, v_k)$ that is smaller than some resolution $\epsilon$. Then $v_j$ are added to the simplified polyline, and all nodes in between them are discarded. See Algorithm 1 for a detailed view. In either case The Oriented Minimum Bounding Rectangle (MBR) is calculated for the two polygons. Finally the MBR for the OSM building footprint is shifted so that its centroid aligns with the centroid of the MBR of the SLU building footprint. Any edges in the simplified footprints that coinside with the MBR from the same dataset are extracted, and the corresponding points in the original footprints will be matched with each other.
+
+\section{Results, Metrics}
+
+% TODO: Table of positional offset statistics
+% TODO: Table of completeness statistics
+% TODO: Statement on completeness
+
+% TODO: Bar plot positional accuracy
+% TODO: Bar plot turning functions
 
 \begin{algorithm}[H]
 \SetAlgoLined

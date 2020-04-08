@@ -213,6 +213,24 @@ with open('metric-data-pos-acc', 'wb') as fp:
 with open('metric-data-shape-diss-norm', 'wb') as fp:
     pickle.dump(shape_dissimilarity_data, fp)
 
+# Write important statistical features to a dictionary
+statistics_dict = {}
+
+statistics_dict["building_count_osm"] = len(OSM_data['features'])
+statistics_dict["building_count_slu"] = len(SLU_data['features'])
+
+statistics_dict["total_area_osm"] = total_area_OSM
+statistics_dict["total_area_slu"] = total_area_SLU
+
+statistics_dict["total_matches_count"] = total_matches_count
+statistics_dict["one_to_one_matches_count"] = one_to_one_matches_count
+statistics_dict["one_to_many_matches_count"] = one_to_many_matches_count
+
+print(statistics_dict)
+
+with open('metric-data-statistics', 'wb') as fp:
+    pickle.dump(statistics_dict, fp)
+
 print("Results...")
 
 print("#Buildings, OSM: " + str(len(OSM_data['features'])))
@@ -239,8 +257,3 @@ plot_utils.plot_bar(counted_data_points_mbr, 1.0)
 # Metric: Bar diagram of footprint shape similarity (Fan et al, page 12)
 plot_utils.plot_bar(shape_dissimilarity_data, 0.1)
 
-
-#TODO: Report outline + add space for the metrics and images (think about what metrics and images to include)
-#TODO: Crunch metrics for the report (Remember to remove cutoff point)
-
-#TODO: Pictures for the report

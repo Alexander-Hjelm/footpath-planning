@@ -141,8 +141,19 @@ The logical accuracy will not be assessed because the underlying logical relatio
 (Fan et al., 2014) used the total building area in their reference dataset and the OpenStreetMap dataset to assess the completeness of OpenStreetMap data. The motivation for this is to eliminate semantic differences between both datasets. A very common example of a semantic error when comparing geographic data is that a large building in one dataset may be segmented into several smaller ones in the other, that is to say a building in one set is represented as an aggreation of mutliple buildings in the other set. This makes one-to-one object mapping impossible. Thus using building area as an estimator for completeness solves this issue much better than i.e. the number of buildings or other objects in each dataset.
 This project will use the building area in the OSM dataset versus that of the SLU dataset to determine the completeness of OpenStreetMap building data in the Stockholm area, which will then be used as an argument for how accurate the building correspondence and point proximity measures can be.
 
-% TODO: Figure: Overlapping buildings, OSM-SLU, 1:1
-% TODO: Figure: Overlapping buildings, OSM-SLU, 1:n
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.5\textheight]{img_match_1_1}
+\caption{An example of a 1:1 building match, where the sought-after building was found both in the OSM (red) and SLU (blue) datasets.}
+\label{fig:space}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[height=0.5\textheight]{img_match_1_n}
+\caption{An example of a 1:n building match, where the sought-after building was represented as one polygon in the OSM (red) dataset, but divided into many smaller lots in the SLU (multicolored) dataset.}
+\label{fig:space}
+\end{figure}
 
 \subsection{Building correspondence}
 

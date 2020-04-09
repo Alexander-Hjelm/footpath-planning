@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  18 MAR 2020 19:20
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  9 APR 2020 15:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -981,7 +981,17 @@ Package: relsize 2013/03/29 ver 4.1
 \c@algocf=\count149
 \algocf@algoframe=\box73
 \algocf@algobox=\box74
-) (./paper.aux)
+) (./paper.aux
+
+LaTeX Warning: Label `fig:space' multiply defined.
+
+
+LaTeX Warning: Label `fig:space' multiply defined.
+
+
+LaTeX Warning: Label `fig:space' multiply defined.
+
+)
 \openout1 = `paper.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
@@ -998,8 +1008,7 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 21.
 LaTeX Font Info:    ... okay on input line 21.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 21.
 LaTeX Font Info:    ... okay on input line 21.
-
-(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+ (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count150
 \scratchdimen=\dimen182
@@ -1049,67 +1058,108 @@ LaTeX Info: Redefining \nameref on input line 21.
 \@outlinefile=\write4
 \openout4 = `paper.out'.
 
-<test_image.jpg, id=87, 60.225pt x 63.1158pt>
-File: test_image.jpg Graphic file (type jpg)
-<use test_image.jpg>
-Package pdftex.def Info: test_image.jpg  used on input line 28.
-(pdftex.def)             Requested size: 285.40356pt x 299.0pt.
 
 
-LaTeX Warning: Citation `sampleitem1' on page 1 undefined on input line 29.
-
-
-LaTeX Warning: Citation `sampleitem2' on page 1 undefined on input line 33.
+LaTeX Warning: Citation `sampleitem2' on page 1 undefined on input line 26.
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./test_image.jpg>]
-[2] [3]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 110.
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 114.
 
- (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 110.
- [4] [5]
-[6] [7] [8]
-Underfull \hbox (badness 10000) in paragraph at lines 233--236
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 114.
+ [4]
+<img_match_1_1.png, id=147, 692.3466pt x 718.3638pt>
+File: img_match_1_1.png Graphic file (type png)
+<use img_match_1_1.png>
+Package pdftex.def Info: img_match_1_1.png  used on input line 146.
+(pdftex.def)             Requested size: 288.1742pt x 299.0pt.
+ [5]
+<img_match_1_n.png, id=153, 692.3466pt x 718.3638pt>
+File: img_match_1_n.png Graphic file (type png)
+<use img_match_1_n.png>
+Package pdftex.def Info: img_match_1_n.png  used on input line 153.
+(pdftex.def)             Requested size: 288.1742pt x 299.0pt.
+ [6 <./img_match_1_1.png>] [7 <./img_match_1_n.png>]
+<img_turn_function_diff_filled.png, id=171, 1384.6932pt x 718.3638pt>
+File: img_turn_function_diff_filled.png Graphic file (type png)
+<use img_turn_function_diff_filled.png>
+Package pdftex.def Info: img_turn_function_diff_filled.png  used on input line 
+178.
+(pdftex.def)             Requested size: 576.3484pt x 299.0pt.
+
+Overfull \hbox (231.3484pt too wide) in paragraph at lines 178--179
+ [][] 
+ []
+
+[8 <./img_turn_function_diff_filled.png>] [9] [10]
+<img_pos_error_plot.png, id=192, 692.3466pt x 489.9906pt>
+File: img_pos_error_plot.png Graphic file (type png)
+<use img_pos_error_plot.png>
+Package pdftex.def Info: img_pos_error_plot.png  used on input line 289.
+(pdftex.def)             Requested size: 422.48929pt x 299.0pt.
+
+Overfull \hbox (77.48929pt too wide) in paragraph at lines 289--290
+ [][] 
+ []
+
+[11]
+<img_turning_function_plot.png, id=197, 692.3466pt x 489.9906pt>
+File: img_turning_function_plot.png Graphic file (type png)
+<use img_turning_function_plot.png>
+Package pdftex.def Info: img_turning_function_plot.png  used on input line 300.
+
+(pdftex.def)             Requested size: 422.48929pt x 299.0pt.
+
+Overfull \hbox (77.48929pt too wide) in paragraph at lines 300--301
+ [][] 
+ []
+
+[12 <./img_pos_error_plot.png>] [13 <./img_turning_function_plot.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 332--335
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 238--241
+Underfull \hbox (badness 10000) in paragraph at lines 337--340
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 243--246
+Underfull \hbox (badness 10000) in paragraph at lines 342--345
 
  []
 
-[9]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 250.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 250.
+[14]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 349.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 349.
  (./paper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 250.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 250.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 349.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 349.
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: 1DA8CC2C28B01118F39F7BB581B99925;1339.
+(rerunfilecheck)             Checksum: CCC796B32D989029E30E24BD93A9D54C;1873.
 
 
 LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 250.
+
+LaTeX Warning: There were multiply-defined labels.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 349.
  ) 
 Here is how much of TeX's memory you used:
- 17965 strings out of 492982
- 329877 string characters out of 6134896
- 416794 words of memory out of 5000000
- 21166 multiletter control sequences out of 15000+600000
+ 18009 strings out of 492982
+ 330734 string characters out of 6134896
+ 417850 words of memory out of 5000000
+ 21190 multiletter control sequences out of 15000+600000
  9369 words of font info for 34 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,14n,56p,1742b,482s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,14n,56p,1751b,482s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texl
@@ -1122,10 +1172,10 @@ amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
 y10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
 ></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on paper.pdf (9 pages, 195211 bytes).
+Output written on paper.pdf (14 pages, 345766 bytes).
 PDF statistics:
- 217 PDF objects out of 1000 (max. 8388607)
- 190 compressed objects within 2 object streams
- 47 named destinations out of 1000 (max. 500000)
- 178 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 288 PDF objects out of 1000 (max. 8388607)
+ 246 compressed objects within 3 object streams
+ 64 named destinations out of 1000 (max. 500000)
+ 262 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -5,16 +5,24 @@
 \BOOKMARK [2][-]{subsection.2.3}{Evaluation}{section.2}% 5
 \BOOKMARK [2][-]{subsection.2.4}{Background}{section.2}% 6
 \BOOKMARK [2][-]{subsection.2.5}{ESAL, KTH}{section.2}% 7
-\BOOKMARK [1][-]{section.3}{The geodata used in this project}{}% 8
-\BOOKMARK [2][-]{subsection.3.1}{OSM Data}{section.3}% 9
-\BOOKMARK [2][-]{subsection.3.2}{SLU Data}{section.3}% 10
-\BOOKMARK [2][-]{subsection.3.3}{A word on coordinate systems}{section.3}% 11
-\BOOKMARK [1][-]{section.4}{Evaluation of the quality of geodata}{}% 12
-\BOOKMARK [2][-]{subsection.4.1}{The accuracy classes that will not be focused on}{section.4}% 13
-\BOOKMARK [1][-]{section.5}{Dataset quality evaluation}{}% 14
-\BOOKMARK [2][-]{subsection.5.1}{Assesment of dataset completeness}{section.5}% 15
-\BOOKMARK [2][-]{subsection.5.2}{Building correspondence}{section.5}% 16
-\BOOKMARK [2][-]{subsection.5.3}{Turning function definition}{section.5}% 17
-\BOOKMARK [2][-]{subsection.5.4}{Correspondence by building area}{section.5}% 18
-\BOOKMARK [2][-]{subsection.5.5}{Closest point and point proximity}{section.5}% 19
-\BOOKMARK [1][-]{section.6}{Implementation}{}% 20
+\BOOKMARK [1][-]{section.3}{Related work}{}% 8
+\BOOKMARK [1][-]{section.4}{The geodata used in this project}{}% 9
+\BOOKMARK [2][-]{subsection.4.1}{OSM Data}{section.4}% 10
+\BOOKMARK [2][-]{subsection.4.2}{SLU Data}{section.4}% 11
+\BOOKMARK [2][-]{subsection.4.3}{A word on coordinate systems}{section.4}% 12
+\BOOKMARK [2][-]{subsection.4.4}{Specific preprocessing for SLU-OSM geodata}{section.4}% 13
+\BOOKMARK [1][-]{section.5}{Evaluation of the quality of geodata}{}% 14
+\BOOKMARK [2][-]{subsection.5.1}{The accuracy classes that will not be focused on}{section.5}% 15
+\BOOKMARK [1][-]{section.6}{Dataset quality evaluation}{}% 16
+\BOOKMARK [2][-]{subsection.6.1}{Assesment of dataset completeness}{section.6}% 17
+\BOOKMARK [2][-]{subsection.6.2}{Building correspondence}{section.6}% 18
+\BOOKMARK [2][-]{subsection.6.3}{Turning function definition}{section.6}% 19
+\BOOKMARK [2][-]{subsection.6.4}{Correspondence by building area}{section.6}% 20
+\BOOKMARK [2][-]{subsection.6.5}{Closest point and point proximity}{section.6}% 21
+\BOOKMARK [1][-]{section.7}{Implementation}{}% 22
+\BOOKMARK [1][-]{section.8}{Notes about data processing}{}% 23
+\BOOKMARK [1][-]{section.9}{Results, Metrics}{}% 24
+\BOOKMARK [2][-]{subsection.9.1}{Completeness by building area}{section.9}% 25
+\BOOKMARK [2][-]{subsection.9.2}{Positional accuracy statistics}{section.9}% 26
+\BOOKMARK [2][-]{subsection.9.3}{Shape accuracy statistics}{section.9}% 27
+\BOOKMARK [1][-]{section.10}{Analysis}{}% 28

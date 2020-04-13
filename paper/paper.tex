@@ -188,8 +188,6 @@ The turning function has some nice geometric properties, in that it is invariant
 The similarity of two polygons A and B in terms of their turning function is defined as their distance of their cumulative turning functions: $S_{T}(A, B) = 1 - (\int^{1}_{0} T_{C,A}(l) - T_{C,B}(l) dl)^{1/2}$.
 The value range will be $(0 < S_{T} < 1)$, where $S_{T}(A,B) = 1$ if the polygons are identical. 
 
-% TODO: Turning function example figure for a polygon
-
 % TODO: Update project plan
 
 % TODO: Scrape road data with same coords as the large data run
@@ -199,6 +197,13 @@ The value range will be $(0 < S_{T} < 1)$, where $S_{T}(A,B) = 1$ if the polygon
 % TODO: Implement new geometrical hashmap in new script
 % TODO: Assign default path widths (min)
 % TODO: Per road, go over narby features and infer max width, log collisions (max width - min width)
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_turn_function}
+    \caption{An example of the turning function of a polygon.}
+    \label{fig:space}
+\end{figure}
 
 \begin{figure}[H]
     \centering

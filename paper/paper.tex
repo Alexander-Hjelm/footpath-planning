@@ -159,17 +159,10 @@ The logical accuracy will not be assessed because the underlying logical relatio
 This project will use the building area in the OSM dataset versus that of the SLU dataset to determine the completeness of OpenStreetMap building data in the Stockholm area, which will then be used as an argument for how accurate the building correspondence and point proximity measures can be.
 
 \begin{figure}[H]
-\centering
-\includegraphics[height=0.5\textheight]{img_match_1_1}
-\caption{An example of a 1:1 building match, where the sought-after building was found both in the OSM (red) and SLU (blue) datasets.}
-\label{fig:space}
-\end{figure}
-
-\begin{figure}[H]
-\centering
-\includegraphics[height=0.5\textheight]{img_match_1_n}
-\caption{An example of a 1:n building match, where the sought-after building was represented as one polygon in the OSM (red) dataset, but divided into many smaller lots in the SLU (multicolored) dataset.}
-\label{fig:space}
+    \centering
+    \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_building_match}
+    \caption{Examples of a 1:1 building match (left), where the sought-after building was found both in the OSM (red) and SLU (blue) datasets, and of a 1:n building match (right), where the sought-after building was represented as one polygon in the OSM (red) dataset, but divided into many smaller lots in the SLU (multicolored) dataset.}
+    \label{fig:space}
 \end{figure}
 
 \subsection{Building correspondence}
@@ -180,8 +173,6 @@ $S(foot_{OSM}, foot_{SLU}) = S_{T}(foot_{OSM}, foot_{SLU}) + S_{RO}(foot_{OSM}, 
 
 \subsection{Turning function definition}
 
-% TODO: Turning function example figure for a polygon
-
 The turning function was first defined by Arkin et al. (1991), as a method for measuring the similarity of two polygons. The Turning function $T_c(l)$ measures the cumulative angle of the polygon's counter-clockwise tangent, as a function of the cumulative normalized length l. This project uses the turning function as it is defined by (Fan et al., 2014). For a polygon with vertices ${v_1 ... v_n}$ and line segments ${e_1 ... e_n}$ It is defined as follows.
 Fix a starting vertex $v_1$.
 The tangent angle at $v_1$ is $\theta_{n,1}$. This is the angle between the neighbouring line segments $e_n$ and $e_1$.
@@ -190,9 +181,11 @@ The turning function has some nice geometric properties, in that it is invariant
 The similarity of two polygons A and B in terms of their turning function is defined as their distance of their cumulative turning functions: $S_{T}(A, B) = 1 - (\int^{1}_{0} T_{C,A}(l) - T_{C,B}(l) dl)^{1/2}$.
 The value range will be $(0 < S_{T} < 1)$, where $S_{T}(A,B) = 1$ if the polygons are identical. 
 
-% TODO: building match figures in a horisontal grid
 % TODO: figure with buildings-slu-cropped
 % TODO: mention utility buildings inside compounds, source of marginal errors
+% TODO: Turning function example figure for a polygon
+
+% TODO: Update project plan
 
 % TODO: Scrape road data with same coords as the large data run
 % TODO: Organize large building and road datasets
@@ -203,10 +196,10 @@ The value range will be $(0 < S_{T} < 1)$, where $S_{T}(A,B) = 1$ if the polygon
 % TODO: Per road, go over narby features and infer max width, log collisions (max width - min width)
 
 \begin{figure}[H]
-\centering
-\includegraphics[height=0.5\textheight]{img_turn_function_diff_filled}
-\caption{An example of the turning functions of two corresponding buildings, with the area between them highlighted.}
-\label{fig:space}
+    \centering
+    \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_turn_function_diff_filled}
+    \caption{An example of the turning functions of two corresponding buildings, with the area between them highlighted.}
+    \label{fig:space}
 \end{figure}
 
 \subsection{Correspondence by building area}
@@ -314,10 +307,10 @@ Building matching statistics:
 % Bar plot positional accuracy
 
 \begin{figure}[H]
-\centering
-\includegraphics[height=0.5\textheight]{img_pos_error_plot}
-\caption{The average positional accuracies per building as a frequency diagram.}
-\label{fig:space}
+    \centering
+    \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_pos_error_plot}
+    \caption{The average positional accuracies per building as a frequency diagram.}
+    \label{fig:space}
 \end{figure}
 
 \subsection{Shape accuracy statistics}
@@ -325,10 +318,10 @@ Building matching statistics:
 % Bar plot turning functions
 
 \begin{figure}[H]
-\centering
-\includegraphics[height=0.5\textheight]{img_turning_function_plot}
-\caption{The turning function distances between 1:1 building pairs as a frequency diagram.}
-\label{fig:space}
+    \centering
+    \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_turning_function_plot}
+    \caption{The turning function distances between 1:1 building pairs as a frequency diagram.}
+    \label{fig:space}
 \end{figure}
 
 \section{Analysis}

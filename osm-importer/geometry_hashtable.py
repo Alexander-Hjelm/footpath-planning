@@ -35,9 +35,15 @@ class GeometryHashtable:
             for j in range(0, cell_count_y):
                 hashtable[i].append([])
 
+        # Add the feature to every hash bucket that its points belong to
         for feature in features:
-            x, y = self._get_hash_keys_of_feature(feature)
-            hashtable[x][y].append(feature)
+            hashbuckets_added_to = []
+            polygon = geometry_utils.extract_polygon_from_feature(feature)
+            for point in polygon:
+                x, y = self._get_hash_keys_of_feature(point)
+                if not hashtable[x][y] in hashbuckets_added_to:
+                    hashtable[x][y].append(feature)
+                    hashbuckets_added_to.append(hashtable[x][y])
 
         self.hashtable = hashtable
 
@@ -49,17 +55,19 @@ class GeometryHashtable:
         features_out = []
         for x_i in range(max(x-1, 0), min(x+2, len(self.hashtable))):
             for y_i in range(max(y-1, 0), min(y+2, len(self.hashtable[0]))):
-                features_out += self._get_features_in_bucket(x_i, y_i)
+                # Don't add duplicate features
+                features_got = self._get_features_in_bucket(x_i, y_i)
+                for feature in features_got:
+                    if not feature in features_out:
+                        features_out.append(feature)
         return features_out
 
     def _get_features_in_bucket(self, x, y):
         return self.hashtable[x][y]
 
-    def _get_hash_keys_of_feature(self, feature):
-        polygon = geometry_utils.extract_polygon_from_feature(feature)
-        center = geometry_utils.polygon_centroid(polygon)
-        dx = center[0] - self.top_left_x
-        dy = center[1] - self.top_left_y
+    def _get_hash_keys_of_point(self, point):
+        dx = point[0] - self.top_left_x
+        dy = point[1] - self.top_left_y
 
         px = dx - (dx % self.cell_size)
         py = dy - (dy % self.cell_size)

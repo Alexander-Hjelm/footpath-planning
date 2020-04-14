@@ -126,6 +126,10 @@ for feature_osm in OSM_data['features']:
         #plot_utils.plot_polygon(polygon_osm)
         #plot_utils.plot_polygons(polygon_slu)
 
+        #if len(polygon_slu) == 1:
+        #    plot_utils.plot_polygons([polygon_osm, polygon_slu[0]])
+
+
         # Normalized shape dissimilarities, only if there is a 1:1 match
         if len(polygon_slu) == 1:
             # Only buildings with a 1:1 semantic relationship are involved in the measurement of of positional and shape accuracy. Should we do this too?
@@ -134,9 +138,12 @@ for feature_osm in OSM_data['features']:
             #print("SDN: " + str(shape_dissimilarity_normalized))
 
             # Turning funcitons
-            #tc_osm, tc_slu = geometry_utils.turning_function_2(polygon_osm, polygon_slu[0])
-            #plot_utils.plot_step_functions([tc_osm, tc_slu])
+            tc_osm, tc_slu = geometry_utils.turning_function_2(polygon_osm, polygon_slu[0])
             #plot_utils.plot_polygons([polygon_slu[0], polygon_osm])
+            #plot_utils.plot_step_functions([tc_osm, tc_slu])
+
+            plot_utils.plot_polygon(polygon_osm)
+            plot_utils.plot_step_function(tc_osm)
 
             #print("Shape dissimilarity:" + str(shape_dissimilarity_normalized))
 

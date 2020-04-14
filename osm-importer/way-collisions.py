@@ -15,10 +15,10 @@ highway_categories = [
         ]
 
 standard_widths = {
-        'footpath': 0.25,
-        'residential': 0.5,
-        'secondary': 0.75,
-        'primary': 1.0
+        'footpath': 2.0,        # Measured range: 2.0m - 5.0m
+        'residential': 6.0,     # Measured range: 6.0m - 9.0m
+        'secondary': 6.5,       # Measured range: 7.0m - 16.0m
+        'primary': 8.0          # Measured range: 8.0m - 10.0m
         }
 
 way_data = {}

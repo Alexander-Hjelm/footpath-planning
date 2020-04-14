@@ -21,19 +21,24 @@ standard_widths = {
         'primary': 1.0
         }
 
-path_data = {}
+way_data = {}
+building_data = []
 
 # read files
 for hwy in highway_categories:
     with open('raw_data/' + hwy + '.geojson', 'r') as f:
-        path_data[hwy] = load(f)
+        way_data[hwy] = load(f)
+
+with open('raw_data/buildings-osm-sweref.geojson', 'r') as f:
+    building_data = load(f)
+
 
 # Store all found paths by street name
 paths_by_name = {}
 widths_by_id = {}
 
-for hwy in path_data.keys():
-    for feature in path_data[hwy]['features'] :
+for hwy in way_data.keys():
+    for feature in way_data[hwy]['features'] :
         properties = feature['properties']
 
         # Set width to default

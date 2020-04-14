@@ -61,6 +61,25 @@ out body;
 /*end of auto repair*/
 out body;
 
+# LARGE ROAD DATA QUERY
+
+(
+  way(poly:"59.42193948304223 17.794666698423512 59.42193948304223 18.145808596992175 59.22680633612663 18.145808596992175 59.22680633612663 17.794666698423512")["highway"];
+);
+/*added by auto repair*/
+(._;>;);
+/*end of auto repair*/
+out body;
+
+# SMALL ROAD DATA QUERY
+
+(
+  way(poly:"59.34469860821763 18.03809503228281 59.34469860821763 18.066052311607727 59.328128796834925 18.066052311607727 59.328128796834925 18.03809503228281")["highway"];
+);
+/*added by auto repair*/
+(._;>;);
+/*end of auto repair*/
+out body;
 
 
 Large dataset coordinates:

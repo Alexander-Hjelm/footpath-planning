@@ -26,7 +26,7 @@ building_data = []
 
 # read files
 for hwy in highway_categories:
-    with open('raw_data/' + hwy + '.geojson', 'r') as f:
+    with open('raw_data/' + hwy + '-converted.geojson', 'r') as f:
         way_data[hwy] = load(f)
 
 with open('raw_data/buildings-osm-sweref.geojson', 'r') as f:
@@ -54,7 +54,3 @@ for hwy in way_data.keys():
         else:
             print("[WARNING] The following way did not have a name:\n" + str(feature))
 
-# Write all paths widths to file
-with open('raw_data/path_widths.json', 'w') as f:
-    dump(widths_by_id, f)
-        

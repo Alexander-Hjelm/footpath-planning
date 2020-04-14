@@ -26,6 +26,8 @@ Ways
 
 1.      way-data-formatter.py
 
+2.      way-convert-to-sweref.py
+
 2.      Run all building scripts up to building-cropper.py
 
-3.      path-widths.py
+3.      way-collisions.py

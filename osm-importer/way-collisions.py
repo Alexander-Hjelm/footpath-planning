@@ -1,7 +1,8 @@
-# This script reads path data by highway type, and outputs a file with the width of every street by id
-# It requires that way-data-formatter.py has been run first to generate the neccessary road files.
+# This script reads path data by highway type, infers weights and outputs collisions
+# It requires that both OSM way data and OSM building data have been generated in SWEREF
 # REQUIREMENTS:
-# - Run way-data-formatter.py
+# - Run way-convert-to-sweref.py
+# - Run building-convert-to-sweref.py
 
 from geojson import Point, Feature, FeatureCollection, load
 from json import dump

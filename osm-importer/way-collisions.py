@@ -32,6 +32,16 @@ for hwy in highway_categories:
 with open('raw_data/buildings-osm-sweref.geojson', 'r') as f:
     building_data = load(f)
 
+all_features_list = []
+all_features_list += building_data['features']
+for hwy in highway_categories:
+    all_features_list.append(way_data[hwy]['features'])
+
+# Build polygon hashtables
+print("Building hash tables...")
+hashtable = GeometryHashtable("building-way-hashtable", 230)
+hashtable.create_from_features_list(all_features_list)
+print("Hash tables complete!")
 
 # Store all found paths by street name
 paths_by_name = {}

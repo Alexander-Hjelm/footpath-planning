@@ -51,4 +51,28 @@ widths_by_id = {}
 for hwy in way_data.keys():
     for feature in way_data[hwy]['features'] :
         # Set width to default
-        feature.way_width = standard_widths[hwy]
+        feature.min_way_width = standard_widths[hwy]
+        feature.max_way_width = 2*feature.min_way_width
+
+        for feature_2 in hashtable.get_collision_canditates(feature):
+            # Get polygons
+            polygon_1 = geometry_utils.extract_polygon_from_feature(feature)
+            polygon_2 = geometry_utils.extract_polygon_from_feature(feature_2)
+
+            # Get edges
+            for i in range(0, len(polygon_1)-1):
+                edge_1 = [polygon_1[i], polygon_1[i+1]]
+                for j in range(0, len(polygon_2)):
+                    edge_2 = [polygon_2[j], polygon_2[j+1]]
+
+                    shortest_dist = geometry_utils.shortest_distance_between_edges(edge_1, edge_2)
+                    if shortest_dist < feature.way_width:
+                        print("Features collision!")
+                        print(feature)
+                        print(feature_2)
+                        print("min dist: " + feature.min_way_width)
+                        print("************")
+                    else:
+                        feature.max_way_width = min(feature.max_way_width, shortest_dist)
+
+

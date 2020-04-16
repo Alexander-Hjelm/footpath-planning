@@ -259,6 +259,45 @@ def perp_distance_point_to_line(point, line_point_1, line_point_2):
     denom = math.sqrt((y2-y1)**2 + (x2-x1)**2)
     return nom/denom
 
+def shortest_distance_between_edges_projected(edge_1, edge_2):
+    a1 = edge_1[0]
+    a2 = edge_1[1]
+    b1 = edge_2[0]
+    b2 = edge_2[1]
+    a = [a2[0]-a1[0], a2[1]-a1[1]]
+    b = [b2[0]-b1[0], b2[1]-b1[1]]
+
+    b_proj_a = project(b, a)
+    arc_theta = point_len(b_proj_a)/point_len(b)
+
+    b1_proj_a = project(b1, a)
+    b1_proj_a = [b1_proj_a[0]-a1[0], b1_proj_a[1]-a1[1]]
+    b2_proj_a = project(b2, a)
+    b2_proj_a = [b2_proj_a[0]-a2[0], b2_proj_a[1]-a2[1]]
+
+    if np.dot(b1_proj_a, a) < 0 and np.dot(b2_proj_a, a) < 0:
+        return None
+    if np.dot(b1_proj_a, a) > np.dot(a, a) and np.dot(b2_proj_a, a) > np.dot(a, a):
+        return None
+
+    if np.dot(b1_proj_a, a) >= 0:
+        ba1 = [a1[0]-b1[0], a1[1]-b1[1]]
+        bp1 = [ba1[0]/arc_theta, ba1[1]/arc_theta]
+        p1 = [bp1[0]-b1[0], bp1[1]-b1[1]]
+        line_dist_1 = perp_distance_point_to_line(p1, a1, a2)
+    else:
+        line_dist_1 = perp_distance_point_to_line(b1, a1, a2)
+    
+    if np.dot(b2_proj_a, a) <= 0:
+        ba2 = [a2[0]-b2[0], a2[1]-b2[1]]
+        bp2 = [ba2[0]/arc_theta, ba2[1]/arc_theta]
+        p2 = [bp2[0]-b2[0], bp2[1]-b2[1]]
+        line_dist_2 = perp_distance_point_to_line(p2, a1, a2)
+    else:
+        line_dist_2 = perp_distance_point_to_line(b2, a1, a2)
+
+    return min(line_dist_1, line_dist_2)
+
 def douglas_peucker(polygon, e):
     # Find starting point, use northernmost point
     #Pick northernmost point to ensure it is the same in both OSM and SLU cases

@@ -48,18 +48,34 @@ class GeometryHashtable:
         self.hashtable = hashtable
 
     def get_collision_canditates(self, feature):
-        x, y = self._get_hash_keys_of_feature(feature)
-        return self._get_features_in_bucket_surrounding(x, y)
+        polygon = geometry_utils.extract_polygon_from_feature(feature)
+        hash_coords = []
+        for point in polygon:
+            x, y = self._get_hash_keys_of_point(point)
+            if not [x, y] in hash_coords: # Compare by value
+                hash_coords.append([x, y])
+        return self._get_features_in_bucket_surrounding(hash_coords)
 
     def _get_features_in_bucket_surrounding(self, x, y):
+        return self._get_features_in_bucket_surrounding([x,y])
+
+    def _get_features_in_bucket_surrounding(self, coords):
         features_out = []
-        for x_i in range(max(x-1, 0), min(x+2, len(self.hashtable))):
-            for y_i in range(max(y-1, 0), min(y+2, len(self.hashtable[0]))):
-                # Don't add duplicate features
-                features_got = self._get_features_in_bucket(x_i, y_i)
-                for feature in features_got:
-                    if not feature in features_out:
-                        features_out.append(feature)
+        hash_coords = []
+        for c in coords:
+            x = c[0]
+            y = c[1]
+            for x_i in range(max(x-1, 0), min(x+2, len(self.hashtable))):
+                for y_i in range(max(y-1, 0), min(y+2, len(self.hashtable[0]))):
+                    if not [x, y] in hash_coords:
+                        hash_coords.append([x,y])
+
+        for c in hash_coords:
+            # Don't add duplicate features
+            features_got = self._get_features_in_bucket(c[0], c[1])
+            for feature in features_got:
+                if not feature in features_out:
+                    features_out.append(feature)
         return features_out
 
     def _get_features_in_bucket(self, x, y):

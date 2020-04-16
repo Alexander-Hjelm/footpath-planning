@@ -5,6 +5,7 @@
 # - Run building-convert-to-sweref.py
 
 import geometry_utils
+import plot_utils
 from geojson import Point, Feature, FeatureCollection, load
 from geometry_hashtable import GeometryHashtable
 from json import dump
@@ -56,6 +57,9 @@ for hwy in way_data.keys():
         feature.max_way_width = 2*feature.min_way_width
 
         for feature_2 in hashtable.get_collision_canditates(feature):
+            if feature is feature_2:
+                continue
+
             # Get polygons
             polygon_1 = geometry_utils.extract_polygon_from_feature(feature)
             polygon_2 = geometry_utils.extract_polygon_from_feature(feature_2)
@@ -63,17 +67,25 @@ for hwy in way_data.keys():
             # Get edges
             for i in range(0, len(polygon_1)-1):
                 edge_1 = [polygon_1[i], polygon_1[i+1]]
-                for j in range(0, len(polygon_2)):
+                for j in range(0, len(polygon_2)-1):
                     edge_2 = [polygon_2[j], polygon_2[j+1]]
 
-                    shortest_dist = geometry_utils.shortest_distance_between_edges(edge_1, edge_2)
-                    if shortest_dist < feature.way_width:
+                    shortest_dist = geometry_utils.shortest_distance_between_edges_projected(edge_1, edge_2)
+                    if shortest_dist == None:
+                        continue
+                    print("Shortest dist was not None! It was: " + str(shortest_dist))
+                    plot_utils.plot_polygons([polygon_1, polygon_2])
+                    if shortest_dist < feature.min_way_width:
                         print("Features collision!")
                         print(feature)
                         print(feature_2)
-                        print("min dist: " + feature.min_way_width)
+                        print("min dist: " + str(feature.min_way_width))
                         print("************")
+                        plot_utils.plot_polygons([polygon_1, polygon_2])
                     else:
                         feature.max_way_width = min(feature.max_way_width, shortest_dist)
 
+            break
+        break
+    break
 

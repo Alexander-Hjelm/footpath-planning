@@ -49,18 +49,5 @@ widths_by_id = {}
 
 for hwy in way_data.keys():
     for feature in way_data[hwy]['features'] :
-        properties = feature['properties']
-
         # Set width to default
-        widths_by_id[properties['@id']] = standard_widths[hwy]
-
-        # Identify features with same name and store them together
-        if 'name' in properties:
-            name = properties['name']
-
-            if not name in paths_by_name:
-                paths_by_name[name] = []
-            paths_by_name[name].append(feature)
-        else:
-            print("[WARNING] The following way did not have a name:\n" + str(feature))
-
+        feature.way_width = standard_widths[hwy]

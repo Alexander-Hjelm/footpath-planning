@@ -40,7 +40,7 @@ class GeometryHashtable:
             hashbuckets_added_to = []
             polygon = geometry_utils.extract_polygon_from_feature(feature)
             for point in polygon:
-                x, y = self._get_hash_keys_of_feature(point)
+                x, y = self._get_hash_keys_of_point(point)
                 if not hashtable[x][y] in hashbuckets_added_to:
                     hashtable[x][y].append(feature)
                     hashbuckets_added_to.append(hashtable[x][y])

@@ -547,5 +547,8 @@ def extract_polygon_from_feature(feature):
     if feature_type == 'MultiPolygon':
         return feature['geometry']['coordinates'][0][0]
 
+    if feature_type == "LineString":
+        return feature['geometry']['coordinates']
+
     print("extract_polygon_from_feature: feature type not implemented: " + feature_type)
     print(feature)

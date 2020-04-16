@@ -5,6 +5,7 @@
 # - Run building-convert-to-sweref.py
 
 from geojson import Point, Feature, FeatureCollection, load
+from geometry_hashtable import GeometryHashtable
 from json import dump
 
 highway_categories = [
@@ -32,13 +33,13 @@ for hwy in highway_categories:
 with open('raw_data/buildings-osm-sweref.geojson', 'r') as f:
     building_data = load(f)
 
+# Build polygon hashtables
+print("Building hash tables...")
 all_features_list = []
 all_features_list += building_data['features']
 for hwy in highway_categories:
-    all_features_list.append(way_data[hwy]['features'])
+    all_features_list += way_data[hwy]['features']
 
-# Build polygon hashtables
-print("Building hash tables...")
 hashtable = GeometryHashtable("building-way-hashtable", 230)
 hashtable.create_from_features_list(all_features_list)
 print("Hash tables complete!")

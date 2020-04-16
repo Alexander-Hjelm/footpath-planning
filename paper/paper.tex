@@ -84,7 +84,6 @@ Using a road network to creates an underlying navmesh
 
 \subsection{ESAL, KTH}
 The thesis work will be carried out at the Embodied Social Agents Lab (ESAL) at the Department of Computational Science and Technology (CST). The lab has before been working on systems for generating procedural urban environments, and are interested in the possibility of generating more detailed maps than have been done before, using example-based methods to preserve the aesthetic look of a greater metropolitan area. The lab is particularly interested in the generation of footpaths, since most commercial software that import road maps only import arterial and secondary car roads, and do not include pedestrian walkways, cycle paths and such smaller roads.
-% TODO: any official description of ESAL that can be used here?
 
 \section{Related work}
 Fan et al, 2015
@@ -149,7 +148,6 @@ Other than for the purpose of mentioning various sources or error, this project 
 \subsection{The accuracy classes that will not be focused on}
 
 The lineage aspect of the OSM data is available through the OSM History Viewer, an online debugging tool that lets anyone freely view the change history of individual fetures in a commit history-like fashion. There is an option for editors to include a personal note with their changesets to include additional details or motivate why a change was made, but there is no guaratee that the data includes any information on the aquisition method used (OSM 2020). The history aspect of the SLU dataset is not freely available online, but the acquistion method is included in the file metadata on a per-object basis. Lantmäteriet uses internal codes to specifify the acquistion method, and these codes can be referred to in the product description the accompanies the map files. As the scope of this project is limited to making a broad comparison of the positional accuracy of the two datasets, only the required positional accuracy as described by the SLU product description will be used.
-%TODO: Dig deeper in the SLU dataset, how can one find the method of aquisition for Stockholm buildings, and its precision?
 
 The attribute accuracy measure is interesting, as both maps use encoded metadata on a per feature basis, the attribute accuracy of the two datasets could be assessed by doing a simple feature comparison and creating a translation table between the two attribute maps. To the knowledge of the author, this has never been done with specifically these two datasets, at the time of writing.
 
@@ -187,9 +185,16 @@ The turning function has some nice geometric properties, in that it is invariant
 The similarity of two polygons A and B in terms of their turning function is defined as their distance of their cumulative turning functions: $S_{T}(A, B) = 1 - (\int^{1}_{0} T_{C,A}(l) - T_{C,B}(l) dl)^{1/2}$.
 The value range will be $(0 < S_{T} < 1)$, where $S_{T}(A,B) = 1$ if the polygons are identical. 
 
-% TODO: Assign default road widths
-% TODO: Implement closest edge distance (project end points on the other edge, get closest perpendicular distance) 
-% TODO: Per road, go over nearby features and infer max width, log collisions (max width - min width)
+% TODO: Fix whatever is wrong with the shortest_dist_edges_projected function
+
+% REPORT
+% TODO: RELATED WORK
+% TODO: ANALYSIS SECTION
+% TODO: Quote Todor's paper for geodata import services and current state of the field
+% TODO: Format formulas
+% TODO: Figure of street, before and after correction, with collision visible in the first half
+% TODO: Dig deeper in the SLU dataset, how can one find the method of aquisition for Stockholm buildings, and its precision?
+% TODO: any official description of ESAL that can be used here?
 
 \begin{figure}[H]
     \centering

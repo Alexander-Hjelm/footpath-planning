@@ -4,6 +4,7 @@
 # - Run way-convert-to-sweref.py
 # - Run building-convert-to-sweref.py
 
+import geometry_utils
 from geojson import Point, Feature, FeatureCollection, load
 from geometry_hashtable import GeometryHashtable
 from json import dump

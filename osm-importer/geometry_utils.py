@@ -314,9 +314,27 @@ def shortest_distance_between_edges_projected(edge_1, edge_2):
     if x == None:
         return perp_distance_point_to_line(a1, b1, b2)
 
+    # First, check if both the projections of b1 and b2 on a are outside of the a domain. If so, return None
+    b1_x = [b1[0]-x[0], b1[1]-x[1]]
+    b2_x = [b2[0]-x[0], b2[1]-x[1]]
+    d1 = project(b1_x, a)
+    d2 = project(b2_x, a)
+    x_d1 = [d1[0]+x[0], d1[1]+x[1]]
+    x_d2 = [d2[0]+x[0], d2[1]+x[1]]
+    a1_d1 = [x_d1[0]-a1[0], x_d1[1]-a1[1]]
+    a1_d2 = [x_d2[0]-a1[0], x_d2[1]-a1[1]]
+    a2_d1 = [x_d1[0]-a2[0], x_d1[1]-a2[1]]
+    a2_d2 = [x_d2[0]-a2[0], x_d2[1]-a2[1]]
+    if np.dot(a1_d1, a2_d1) > 0 or np.dot(a1_d2, a2_d2) > 0:
+        return None
+
+    #points = [a1, a2, b1, b2, x, x_d1, x_d2]
+    #edges = [[0,1],[2,3]]
+    #plot_utils.plot_edges_and_points(points, edges)
+
+    # Case 2, x between a1 and a2
     x_a1 = [x[0]-a1[0], x[1]-a1[1]]
     a2_x = [a2[0]-x[0], a2[1]-x[1]]
-    # Case 2, x between a1 and a2
     if np.dot(x_a1, a2_x) >= 0.0:
         if line_segment_line_segment_intersection(edge_1, edge_2):
             return 0.0
@@ -324,7 +342,7 @@ def shortest_distance_between_edges_projected(edge_1, edge_2):
             perp_dist_1 = perp_distance_point_to_line(b1, a1, a2)
             perp_dist_2 = perp_distance_point_to_line(b2, a1, a2)
             return min(perp_dist_1, perp_dist_2)
-        
+
     # Case 3, x < a1
     if point_distance(x, a1) < point_distance(x, a2):
     #    print("Case 3")
@@ -352,11 +370,6 @@ def shortest_distance_between_edges_projected(edge_1, edge_2):
     #print("len(b): " + str(point_distance(b, x)))
     theta = math.acos(point_len(d)/point_distance(b, x))
     #print(math.tan(theta)*point_len(k))
-
-    points = [a1, a2, b1, b2, x, ]
-    edges = [[0,1],[2,3]]
-
-    #plot_utils.plot_edges_and_points(points, edges)
 
     return math.tan(theta)*point_len(k)
 

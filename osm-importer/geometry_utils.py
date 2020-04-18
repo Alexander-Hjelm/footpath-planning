@@ -126,6 +126,16 @@ def line_line_intersection(line1, line2):
     y = det(d, ydiff) / div
     return x, y
 
+def line_segment_line_segment_intersection(line1, line2):
+    def ccw(A,B,C):
+        return (C[1]-A[1]) * (B[0]-A[0]) > (B[1]-A[1]) * (C[0]-A[0])
+
+    A = line1[0]
+    B = line1[1]
+    C = line2[0]
+    D = line2[1]
+    return ccw(A,C,D) != ccw(B,C,D) and ccw(A,B,C) != ccw(A,B,D)
+
 def polygon_centroid(polygon):
     centroid = [0.0, 0.0]
     counted_points = 0
@@ -308,8 +318,13 @@ def shortest_distance_between_edges_projected(edge_1, edge_2):
     a2_x = [a2[0]-x[0], a2[1]-x[1]]
     # Case 2, x between a1 and a2
     if np.dot(x_a1, a2_x) >= 0.0:
-        return 0.0
-    
+        if line_segment_line_segment_intersection(edge_1, edge_2):
+            return 0.0
+        else:
+            perp_dist_1 = perp_distance_point_to_line(b1, a1, a2)
+            perp_dist_2 = perp_distance_point_to_line(b2, a1, a2)
+            return min(perp_dist_1, perp_dist_2)
+        
     # Case 3, x < a1
     if point_distance(x, a1) < point_distance(x, a2):
     #    print("Case 3")

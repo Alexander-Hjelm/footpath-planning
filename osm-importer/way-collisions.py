@@ -52,12 +52,24 @@ widths_by_id = {}
 
 for hwy in way_data.keys():
     for feature in way_data[hwy]['features'] :
+        # Skip tunnels
+        if 'tunnel' in feature['properties'] and feature['properties']['tunnel'] == 'yes':
+            continue
+
         # Set width to default
         feature.min_way_width = standard_widths[hwy]
         feature.max_way_width = 2*feature.min_way_width
 
         for feature_2 in hashtable.get_collision_canditates(feature):
             if feature is feature_2:
+                continue
+
+            # Skip tunnels
+            if 'tunnel' in feature_2['properties'] and feature_2['properties']['tunnel'] == 'yes':
+                continue
+            
+            # Skip features that have already been handled
+            if hasattr(feature_2, 'handled'):
                 continue
 
             # Get polygons
@@ -85,7 +97,7 @@ for hwy in way_data.keys():
                     else:
                         feature.max_way_width = min(feature.max_way_width, shortest_dist)
 
-            break
-        break
+        feature.handled = True
+
     break
 

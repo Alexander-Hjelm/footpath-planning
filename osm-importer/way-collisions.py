@@ -74,7 +74,7 @@ for hwy in way_data.keys():
                     if shortest_dist == None:
                         continue
                     print("Shortest dist was not None! It was: " + str(shortest_dist))
-                    plot_utils.plot_polygons([polygon_1, polygon_2])
+                    #plot_utils.plot_polygons([polygon_1, polygon_2])
                     if shortest_dist < feature.min_way_width:
                         print("Features collision!")
                         print(feature)

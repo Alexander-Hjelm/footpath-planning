@@ -312,13 +312,13 @@ def shortest_distance_between_edges_projected(edge_1, edge_2):
     
     # Case 3, x < a1
     if point_distance(x, a1) < point_distance(x, a2):
-        print("Case 3")
+    #    print("Case 3")
         a = a1
         b = b1
 
     # Case 4, x > a2
     elif point_distance(x, a1) > point_distance(x, a2):
-        print("Case 4")
+    #    print("Case 4")
         a = a2
         b = b2
 
@@ -329,19 +329,19 @@ def shortest_distance_between_edges_projected(edge_1, edge_2):
         k = d
     elif point_len(d) < point_len(ax):
         k = ax
-    print("b: " + str(b))
-    print("x: " + str(x))
-    print("b-x: " + str([b[0]-x[0], b[1]-x[1]]))
-    print("d: " + str(d))
-    print("len(d): " + str(point_len(d)))
-    print("len(b): " + str(point_distance(b, x)))
+    #print("b: " + str(b))
+    #print("x: " + str(x))
+    #print("b-x: " + str([b[0]-x[0], b[1]-x[1]]))
+    #print("d: " + str(d))
+    #print("len(d): " + str(point_len(d)))
+    #print("len(b): " + str(point_distance(b, x)))
     theta = math.acos(point_len(d)/point_distance(b, x))
-    print(math.tan(theta)*point_len(k))
+    #print(math.tan(theta)*point_len(k))
 
     points = [a1, a2, b1, b2, x, ]
     edges = [[0,1],[2,3]]
 
-    plot_utils.plot_edges_and_points(points, edges)
+    #plot_utils.plot_edges_and_points(points, edges)
 
     return math.tan(theta)*point_len(k)
 

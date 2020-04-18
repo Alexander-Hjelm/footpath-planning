@@ -288,43 +288,62 @@ def perp_distance_point_to_line(point, line_point_1, line_point_2):
     return nom/denom
 
 def shortest_distance_between_edges_projected(edge_1, edge_2):
-    a1 = edge_1[0]
-    a2 = edge_1[1]
-    b1 = edge_2[0]
-    b2 = edge_2[1]
+    min_endpoints_matching = min_edge_endpoints_matching(edge_1, edge_2)
+
+    a1 = min_endpoints_matching[0][0]
+    a2 = min_endpoints_matching[1][0]
+    b1 = min_endpoints_matching[0][1]
+    b2 = min_endpoints_matching[1][1]
+
     a = [a2[0]-a1[0], a2[1]-a1[1]]
     b = [b2[0]-b1[0], b2[1]-b1[1]]
 
-    b_proj_a = project(b, a)
-    arc_theta = point_len(b_proj_a)/point_len(b)
+    x = line_line_intersection([a1, a2], [b1, b2])
 
-    b1_proj_a = project(b1, a)
-    b1_proj_a = [b1_proj_a[0]-a1[0], b1_proj_a[1]-a1[1]]
-    b2_proj_a = project(b2, a)
-    b2_proj_a = [b2_proj_a[0]-a2[0], b2_proj_a[1]-a2[1]]
+    # Case 1, no intersection, lines are parallel
+    if x == None:
+        return perp_distance_point_to_line(a1, b1, b2)
 
-    if np.dot(b1_proj_a, a) < 0 and np.dot(b2_proj_a, a) < 0:
-        return None
-    if np.dot(b1_proj_a, a) > np.dot(a, a) and np.dot(b2_proj_a, a) > np.dot(a, a):
-        return None
-
-    if np.dot(b1_proj_a, a) >= 0:
-        ba1 = [a1[0]-b1[0], a1[1]-b1[1]]
-        bp1 = [ba1[0]/arc_theta, ba1[1]/arc_theta]
-        p1 = [bp1[0]-b1[0], bp1[1]-b1[1]]
-        line_dist_1 = perp_distance_point_to_line(p1, a1, a2)
-    else:
-        line_dist_1 = perp_distance_point_to_line(b1, a1, a2)
+    x_a1 = [x[0]-a1[0], x[1]-a1[1]]
+    a2_x = [a2[0]-x[0], a2[1]-x[1]]
+    # Case 2, x between a1 and a2
+    if np.dot(x_a1, a2_x) >= 0.0:
+        return 0.0
     
-    if np.dot(b2_proj_a, a) <= 0:
-        ba2 = [a2[0]-b2[0], a2[1]-b2[1]]
-        bp2 = [ba2[0]/arc_theta, ba2[1]/arc_theta]
-        p2 = [bp2[0]-b2[0], bp2[1]-b2[1]]
-        line_dist_2 = perp_distance_point_to_line(p2, a1, a2)
-    else:
-        line_dist_2 = perp_distance_point_to_line(b2, a1, a2)
+    # Case 3, x < a1
+    if point_distance(x, a1) < point_distance(x, a2):
+        print("Case 3")
+        a = a1
+        b = b1
 
-    return min(line_dist_1, line_dist_2)
+    # Case 4, x > a2
+    elif point_distance(x, a1) > point_distance(x, a2):
+        print("Case 4")
+        a = a2
+        b = b2
+
+    bx = [b[0]-x[0], b[1]-x[1]]
+    ax = [a[0]-x[0], a[1]-x[1]]
+    d = project(bx, ax)
+    if point_len(d) >= point_len(ax):
+        k = d
+    elif point_len(d) < point_len(ax):
+        k = ax
+    print("b: " + str(b))
+    print("x: " + str(x))
+    print("b-x: " + str([b[0]-x[0], b[1]-x[1]]))
+    print("d: " + str(d))
+    print("len(d): " + str(point_len(d)))
+    print("len(b): " + str(point_distance(b, x)))
+    theta = math.acos(point_len(d)/point_distance(b, x))
+    print(math.tan(theta)*point_len(k))
+
+    points = [a1, a2, b1, b2, x, ]
+    edges = [[0,1],[2,3]]
+
+    plot_utils.plot_edges_and_points(points, edges)
+
+    return math.tan(theta)*point_len(k)
 
 def douglas_peucker(polygon, e):
     # Find starting point, use northernmost point

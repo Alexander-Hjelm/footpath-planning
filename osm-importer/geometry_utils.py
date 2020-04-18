@@ -70,6 +70,18 @@ def get_points_of_polygon_on_edge(polygon, edge_compare, e):
                 continue
     return points_out
 
+def min_edge_endpoints_matching(edge_1, edge_2):
+    p11 = edge_1[0]
+    p12 = edge_1[1]
+    p21 = edge_2[0]
+    p22 = edge_2[1]
+    d1 = point_distance(p11, p21) + point_distance(p12, p22)
+    d2 = point_distance(p12, p21) + point_distance(p11, p22)
+    if d1 < d2:
+        return [[p11, p21], [p12, p22]]
+    else:
+        return [[p12, p21], [p11, p22]]
+
 def edge_endpoints_distance(edge_1, edge_2):
     p11 = edge_1[0]
     p12 = edge_1[1]

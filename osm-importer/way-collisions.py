@@ -60,6 +60,8 @@ for hwy in way_data.keys():
         feature.min_way_width = standard_widths[hwy]
         feature.max_way_width = 2*feature.min_way_width
 
+        feature_collided = False
+
         for feature_2 in hashtable.get_collision_canditates(feature):
             if feature is feature_2:
                 continue
@@ -82,7 +84,7 @@ for hwy in way_data.keys():
                 for j in range(0, len(polygon_2)-1):
                     edge_2 = [polygon_2[j], polygon_2[j+1]]
 
-                    shortest_dist = geometry_utils.shortest_distance_between_edges_projected(edge_1, edge_2)
+                    shortest_dist, closest_node = geometry_utils.shortest_distance_between_edges_projected(edge_1, edge_2)
                     if shortest_dist == None:
                         continue
 
@@ -104,6 +106,8 @@ for hwy in way_data.keys():
                         feature.max_way_width = min(feature.max_way_width, shortest_dist)
 
         feature.handled = True
+        if feature_collided:
+            stat_collision_feature_count += 1
 
     break
 

@@ -107,3 +107,5 @@ for hwy in way_data.keys():
 
     break
 
+#TODO: Printa statistik: antal kolliderande features, antal kolliderande noder (#/%)
+#TODO: Printa statistik: längd av kolliderande väg, total längd

@@ -173,16 +173,25 @@ This project will use the building area in the OSM dataset versus that of the SL
 
 Feature mapping
 The building footprint correspondence will be evaluated using a similarity function that assesses the turning funciton and relative area overlap. The similarity function between any building in the OSM data set and any building in the SLU datasets will be defined as a function of their respective footprints ($foot_{OSM}, foot_{SLU}$), as follows:
-$S(foot_{OSM}, foot_{SLU}) = S_{T}(foot_{OSM}, foot_{SLU}) + S_{RO}(foot_{OSM}, foot_{SLU})$, where $S_{T}$ measures the difference in turning function and $S_{RO}$ measures the relative overlap between the footprints.
+\begin{center}
+    $S(foot_{OSM}, foot_{SLU}) = S_{T}(foot_{OSM}, foot_{SLU}) + S_{RO}(foot_{OSM}, foot_{SLU})$
+\end{center}
+where $S_{T}$ measures the difference in turning function and $S_{RO}$ measures the relative overlap between the footprints.
 
 \subsection{Turning function definition}
 
 The turning function was first defined by Arkin et al. (1991), as a method for measuring the similarity of two polygons. The Turning function $T_c(l)$ measures the cumulative angle of the polygon's counter-clockwise tangent, as a function of the cumulative normalized length l. This project uses the turning function as it is defined by (Fan et al., 2014). For a polygon with vertices ${v_1 ... v_n}$ and line segments ${e_1 ... e_n}$ It is defined as follows.
 Fix a starting vertex $v_1$.
 The tangent angle at $v_1$ is $\theta_{n,1}$. This is the angle between the neighbouring line segments $e_n$ and $e_1$.
-For any $i$ such that $i>1$ and $n<i$, the tangent angle at $v_i$ is recursively defined as: $\theta_{i, i-1} = \theta_{n,1} + \sum^{i}_{k=1} \theta_{k, k-1}$
+For any $i$ such that $i>1$ and $n<i$, the tangent angle at $v_i$ is recursively defined as:
+\begin{center}
+    $\theta_{i, i-1} = \theta_{n,1} + \sum^{i}_{k=1} \theta_{k, k-1}$
+\end{center}
 The turning function has some nice geometric properties, in that it is invariant to both rotation and scaling of the polygon. The function contains no information of the orientation of the polygon, only of the relative angle between successive line segments, thus it does not change under roation. It also measures only the normalized cumulative length, which does not change under scaling.
-The similarity of two polygons A and B in terms of their turning function is defined as their distance of their cumulative turning functions: $S_{T}(A, B) = 1 - (\int^{1}_{0} T_{C,A}(l) - T_{C,B}(l) dl)^{1/2}$.
+The similarity of two polygons A and B in terms of their turning function is defined as their distance of their cumulative turning functions:
+\begin{center}
+    $S_{T}(A, B) = 1 - (\int^{1}_{0} T_{C,A}(l) - T_{C,B}(l) dl)^{1/2}$.
+\end{center}
 The value range will be $(0 < S_{T} < 1)$, where $S_{T}(A,B) = 1$ if the polygons are identical. 
 
 % REPORT
@@ -213,7 +222,9 @@ The value range will be $(0 < S_{T} < 1)$, where $S_{T}(A,B) = 1$ if the polygon
 
 (Fan et al., 2014) further discussed how the relative overlap in building area can be used to determine building correspondence between datasets, in cases where there is not much displacement between OSM building footprints data and the reference data set. Figure X (TODO) shows a typical comparison between the OpenStreetMap and SLU datasets, and by eyesight it was determined that the displacement of features is small. The relative building overlap between the OSM and SLU datasets will be defined as folows, given the footprints of any building in the OSM set ($foot_{OSM}$) and the SLU set ($foot_{SLU}$):
 
-$S_{RO}(foot_{OSM}, foot_{SLU}) = \frac{A_{Overlap}}{min(A_{foot_{OSM}}, A_{foot_{SLU}}))}$
+\begin{center}
+    $S_{RO}(foot_{OSM}, foot_{SLU}) = \frac{A_{Overlap}}{min(A_{foot_{OSM}}, A_{foot_{SLU}}))}$
+\end{center}
 
 For this project the relative overlap will be used both to find possible matching building candidates, and as a term in their similarity function.
 

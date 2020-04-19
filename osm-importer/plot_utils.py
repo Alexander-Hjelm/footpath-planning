@@ -9,7 +9,6 @@ def plot_polygons_and_edges(polygons, points):
     plot_polygons(polygons,  False)
     edges = []
 
-    print(len(points))
     for i in range(0, len(points)-1):
         edges.append([i, i+1])
     plot_edges_and_points(points, edges)
@@ -43,11 +42,6 @@ def plot_edges(e):
             edges.append([t, t+1])
             t += 1
         t += 1
-
-    print(points)
-    print(e)
-    print(edges)
-
     plot_edges_and_points(points, edges)
     
 

@@ -142,7 +142,6 @@ for hwy in way_data.keys():
                         print("************")
 
                         if 'highway' in feature_2['properties']:
-                            print("PLOT EDGES")
                             plot_utils.plot_edges([polygon_2, polygon_1])
                         else:
                             plot_utils.plot_polygons_and_edges([polygon_2], polygon_1)

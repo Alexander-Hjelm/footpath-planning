@@ -195,7 +195,6 @@ The similarity of two polygons A and B in terms of their turning function is def
 The value range will be $(0 < S_{T} < 1)$, where $S_{T}(A,B) = 1$ if the polygons are identical. 
 
 % TODAY
-% TODO: Mention minimum way widths and the source for obtaining them (visual measurements on OSM and vägverket)
 % TODO: Rework way-collisions to plot buildings as polygons and roads as lines
 % TODO: Quote Todor's paper for geodata import services and current state of the field
 % TODO: RELATED WORK, mention current sources (Haklay, Fan)
@@ -295,6 +294,15 @@ However, when calculating the relative area overlap, this becomes unesseccary si
 \section{Collision checks}
 
 The default minimum widths were obtained from (Lantmäteriet, 20). The standard minimum width for a two-lane road in Sweden is 6.5 meters.
+
+Subsequent visual measurements of a few key locations in the Stockholm area revealed the following minimum way widths:
+\begin{table}[H]
+\begin{tabular}{lllll}
+                  & Footpath & Residential & Secondary & Primary \\
+    Minimum width & 2.0 m    & 6.0 m       & 6.5 m     & 8.0 m   \\
+    Maximum width & 5.0 m    & 9.0 m       & 10.0 m    & 16.0 m
+\end{tabular}
+\end{table}
 
 \section{Results, Metrics}
 

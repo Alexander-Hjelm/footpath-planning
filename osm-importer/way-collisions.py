@@ -85,7 +85,13 @@ for hwy in way_data.keys():
                     shortest_dist = geometry_utils.shortest_distance_between_edges_projected(edge_1, edge_2)
                     if shortest_dist == None:
                         continue
-                    print("Shortest dist was not None! It was: " + str(shortest_dist))
+
+                    # For two roads, move on if the distance is 0 (meaning adjoining roads or intersections)
+                    if 'highway' in feature['properties'] and 'highway' in feature_2['properties']:
+                        if shortest_dist == 0.0:
+                            continue
+                    
+                    #print("Shortest dist was not None! It was: " + str(shortest_dist))
                     #plot_utils.plot_polygons([polygon_1, polygon_2])
                     if shortest_dist < feature.min_way_width:
                         print("Features collision!")
@@ -93,7 +99,7 @@ for hwy in way_data.keys():
                         print(feature_2)
                         print("min dist: " + str(feature.min_way_width))
                         print("************")
-                        plot_utils.plot_polygons([polygon_1, polygon_2])
+                        #plot_utils.plot_polygons([polygon_1, polygon_2])
                     else:
                         feature.max_way_width = min(feature.max_way_width, shortest_dist)
 

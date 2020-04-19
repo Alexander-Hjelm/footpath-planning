@@ -2,6 +2,7 @@ import shapely.geometry
 import math
 import numpy as np
 import copy
+import plot_utils
 from pyproj import Proj, transform
 
 def wgs84_to_epsg3006(point):

@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  19 APR 2020 11:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  19 APR 2020 12:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**paper.tex
-(./paper.tex
+**report.tex
+(./report.tex
 LaTeX2e <2017-04-15>
 Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/base/article.cls
@@ -981,7 +981,7 @@ Package: relsize 2013/03/29 ver 4.1
 \c@algocf=\count149
 \algocf@algoframe=\box73
 \algocf@algobox=\box74
-) (./paper.aux
+) (./report.aux
 
 LaTeX Warning: Label `fig:space' multiply defined.
 
@@ -1001,7 +1001,7 @@ LaTeX Warning: Label `fig:space' multiply defined.
 LaTeX Warning: Label `fig:space' multiply defined.
 
 )
-\openout1 = `paper.aux'.
+\openout1 = `report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 21.
 LaTeX Font Info:    ... okay on input line 21.
@@ -1063,9 +1063,9 @@ LaTeX Info: Redefining \ref on input line 21.
 LaTeX Info: Redefining \pageref on input line 21.
 LaTeX Info: Redefining \nameref on input line 21.
 
-(./paper.out) (./paper.out)
+(./report.out) (./report.out)
 \@outlinefile=\write4
-\openout4 = `paper.out'.
+\openout4 = `report.out'.
 
 
 
@@ -1119,46 +1119,49 @@ Package pdftex.def Info: img_turning_function_plot.png  used on input line 353.
 
 (pdftex.def)             Requested size: 344.99982pt x 244.16478pt.
  [12 <./img_pos_error_plot.png>]
+Overfull \hbox (32.91757pt too wide) in paragraph at lines 362--375
+[][] 
+ []
+
 <img_map_utility_buildings.png, id=214, 983.675pt x 439.6425pt>
 File: img_map_utility_buildings.png Graphic file (type png)
 <use img_map_utility_buildings.png>
-Package pdftex.def Info: img_map_utility_buildings.png  used on input line 376.
+Package pdftex.def Info: img_map_utility_buildings.png  used on input line 383.
 
 (pdftex.def)             Requested size: 344.99686pt x 154.19247pt.
-
 [13 <./img_turning_function_plot.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 406--409
+Underfull \hbox (badness 10000) in paragraph at lines 413--416
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 411--414
+Underfull \hbox (badness 10000) in paragraph at lines 418--421
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 416--419
+Underfull \hbox (badness 10000) in paragraph at lines 423--426
 
  []
 
 [14 <./img_map_utility_buildings.png>]
-Overfull \hbox (213.93471pt too wide) in paragraph at lines 421--422
+Overfull \hbox (213.93471pt too wide) in paragraph at lines 428--429
 []\OT1/cmr/m/n/10 https://trafikverket.ineko.se/Files/sv-SE/71830/Ineko.Product
 .RelatedFiles/2020[]029[]vagar[]och[]gators[]utformning[]krav.pdf 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 421--422
+Underfull \hbox (badness 10000) in paragraph at lines 428--429
 
  []
 
 [15]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 426.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 426.
- (./paper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 426.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 426.
-Package rerunfilecheck Info: File `paper.out' has not changed.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 433.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 433.
+ (./report.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 433.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 433.
+Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: 58C621339CF0C2294E2FAEED9E60E976;2008.
 
 
@@ -1167,16 +1170,16 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 426.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 433.
  ) 
 Here is how much of TeX's memory you used:
  18028 strings out of 492982
- 331189 string characters out of 6134896
+ 331202 string characters out of 6134896
  416941 words of memory out of 5000000
  21202 multiletter control sequences out of 15000+600000
  9369 words of font info for 34 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,14n,56p,1751b,482s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,14n,56p,1752b,482s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texl
@@ -1189,7 +1192,7 @@ amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
 y10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
 ></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on paper.pdf (15 pages, 575744 bytes).
+Output written on report.pdf (15 pages, 575985 bytes).
 PDF statistics:
  307 PDF objects out of 1000 (max. 8388607)
  260 compressed objects within 3 object streams

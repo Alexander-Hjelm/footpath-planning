@@ -5,6 +5,15 @@ import geometry_utils
 from matplotlib.patches import Polygon
 from matplotlib.collections import PatchCollection
 
+def plot_polygons_and_edges(polygons, points):
+    plot_polygons(polygons,  False)
+    edges = []
+
+    print(len(points))
+    for i in range(0, len(points)-1):
+        edges.append([i, i+1])
+    plot_edges_and_points(points, edges)
+
 def plot_edges_and_points(p, e):
     #points = np.array(p)
     #edges = np.array(e)
@@ -23,8 +32,26 @@ def plot_edges_and_points(p, e):
     plt.plot(x, y, 'ro') # Points
     plt.show()
 
+def plot_edges(e):
+    points = []
+    edges = []
+    t = 0
+    for i in range(0, len(e)):
+        edge_collection = e[i]
+        points += edge_collection
+        for j in range(0, len(edge_collection)-1):
+            edges.append([t, t+1])
+            t += 1
+        t += 1
 
-def plot_polygons(polygons):
+    print(points)
+    print(e)
+    print(edges)
+
+    plot_edges_and_points(points, edges)
+    
+
+def plot_polygons(polygons, plot=True):
     fig, ax = plt.subplots()
     ax.set_xlim(0)
     patches = []
@@ -68,7 +95,8 @@ def plot_polygons(polygons):
         max_x += r/2
 
     plt.axis([min_x,max_x,min_y,max_y])
-    plt.show()
+    if plot:
+        plt.show()
 
 def plot_polygon(polygon):
     plot_polygons([polygon])

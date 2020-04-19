@@ -194,22 +194,23 @@ The similarity of two polygons A and B in terms of their turning function is def
 \end{center}
 The value range will be $(0 < S_{T} < 1)$, where $S_{T}(A,B) = 1$ if the polygons are identical. 
 
-% TODAY
-% TODO: Rework way-collisions to plot buildings as polygons and roads as lines
+% MONDAY
+% TODO: Collision correction: Fix collisions by relaxing both feature_1 and feature_2
+% TODO: Collision correction: Store collided features in a tentative map. When a collision is fixed, add both feature_1 and feature_2 to the tentative map
+% TODO: Collision correction: Toss features that cannot be corrected, bump a counter per highway type
+% TODO: Print/save collision statistics
+% TODO: Collision correction run
+
+% TODO: Table for collision correction data in report
 % TODO: Quote Todor's paper for geodata import services and current state of the field
-% TODO: RELATED WORK, mention current sources (Haklay, Fan)
 % TODO: ANALYSIS SECTION, figure out what to write
 
-% TOMORROW
-% TODO: Proof read entire report
-% TODO: Plan collision correction
-% TODO: Collision correction run
-% TODO: Table for collision correction data in report
-
 % TUESDAY
-% TODO: Figure of street, before correction
-% TODO: Figure of street, after correction
+% TODO: Proof read entire report
+% TODO: RELATED WORK, mention current sources (Haklay, Fan)
+% TODO: Figure of street, before correction, after correction
 % TODO: Write analysis section
+
 % TODO: Dig deeper in the SLU dataset, how can one find the method of aquisition for Stockholm buildings, and its precision?
 % TODO: Start large data run, way collision
 

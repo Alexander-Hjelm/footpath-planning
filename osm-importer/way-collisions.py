@@ -140,7 +140,12 @@ for hwy in way_data.keys():
                         print(feature_2)
                         print("min dist: " + str(feature.min_way_width))
                         print("************")
-                        #plot_utils.plot_polygons([polygon_1, polygon_2])
+
+                        if 'highway' in feature_2['properties']:
+                            print("PLOT EDGES")
+                            plot_utils.plot_edges([polygon_2, polygon_1])
+                        else:
+                            plot_utils.plot_polygons_and_edges([polygon_2], polygon_1)
                     else:
                         feature.max_way_width = min(feature.max_way_width, shortest_dist)
 

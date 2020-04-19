@@ -61,11 +61,15 @@ stat_total_edge_len = 0.0
 for hwy in highway_categories:
     stat_total_features_count += len(way_data[hwy]['features'])
 
+progress = 0.0
 for hwy in way_data.keys():
     for feature in way_data[hwy]['features'] :
         # Skip tunnels
         if 'tunnel' in feature['properties'] and feature['properties']['tunnel'] == 'yes':
             continue
+
+        print("Feature collision check, progess: " + str(100*progress/stat_total_features_count) + '%')
+        progress+=1.0
 
         # Set width to default
         feature.min_way_width = standard_widths[hwy]

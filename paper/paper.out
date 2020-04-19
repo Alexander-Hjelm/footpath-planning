@@ -21,8 +21,10 @@
 \BOOKMARK [2][-]{subsection.6.5}{Closest point and point proximity}{section.6}% 21
 \BOOKMARK [1][-]{section.7}{Implementation}{}% 22
 \BOOKMARK [1][-]{section.8}{Notes about data processing}{}% 23
-\BOOKMARK [1][-]{section.9}{Results, Metrics}{}% 24
-\BOOKMARK [2][-]{subsection.9.1}{Completeness by building area}{section.9}% 25
-\BOOKMARK [2][-]{subsection.9.2}{Positional accuracy statistics}{section.9}% 26
-\BOOKMARK [2][-]{subsection.9.3}{Shape accuracy statistics}{section.9}% 27
-\BOOKMARK [1][-]{section.10}{Analysis}{}% 28
+\BOOKMARK [1][-]{section.9}{Collision checks}{}% 24
+\BOOKMARK [1][-]{section.10}{Results, Metrics}{}% 25
+\BOOKMARK [2][-]{subsection.10.1}{Completeness by building area}{section.10}% 26
+\BOOKMARK [2][-]{subsection.10.2}{Positional accuracy statistics}{section.10}% 27
+\BOOKMARK [2][-]{subsection.10.3}{Shape accuracy statistics}{section.10}% 28
+\BOOKMARK [2][-]{subsection.10.4}{Way collision statistics}{section.10}% 29
+\BOOKMARK [1][-]{section.11}{Analysis}{}% 30

@@ -310,6 +310,9 @@ def shortest_distance_between_edges_projected(edge_1, edge_2):
 
     x = line_line_intersection([a1, a2], [b1, b2])
 
+    if a1 == b1 or a1 == b2 or a2 == b1 or a2 == b2:
+        return 0.0
+
     # Case 1, no intersection, lines are parallel
     if x == None:
         return perp_distance_point_to_line(a1, b1, b2)

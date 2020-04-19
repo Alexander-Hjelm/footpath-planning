@@ -51,15 +51,23 @@ print("Hash tables complete!")
 paths_by_name = {}
 widths_by_id = {}
 
-stat_collision_feature_count = 0
-stat_collision_node_count = 0
-stat_collision_edge_len = 0.0
-stat_total_features_count = 0
-stat_total_node_count = 0
-stat_total_edge_len = 0.0
+stat_collision_feature_count = {}
+stat_collision_node_count = {}
+stat_collision_edge_len = {}
+stat_total_features_count = {}
+stat_total_node_count = {}
+stat_total_edge_len = {}
+total_total_features_count = 0
+
 
 for hwy in highway_categories:
-    stat_total_features_count += len(way_data[hwy]['features'])
+    total_total_features_count += len(way_data[hwy]['features'])
+    stat_collision_feature_count[hwy] = 0
+    stat_collision_node_count[hwy] = 0
+    stat_collision_edge_len[hwy] = 0.0
+    stat_total_features_count[hwy] = 0
+    stat_total_node_count[hwy] = 0
+    stat_total_edge_len[hwy] = 0.0
 
 progress = 0.0
 for hwy in way_data.keys():
@@ -68,8 +76,10 @@ for hwy in way_data.keys():
         if 'tunnel' in feature['properties'] and feature['properties']['tunnel'] == 'yes':
             continue
 
-        print("Feature collision check, progess: " + str(100*progress/stat_total_features_count) + '%')
+        print("Feature collision check, progess: " + str(100*progress/total_total_features_count) + '%')
         progress+=1.0
+
+        stat_total_features_count[hwy] += 1
 
         # Set width to default
         feature.min_way_width = standard_widths[hwy]
@@ -96,8 +106,8 @@ for hwy in way_data.keys():
             # Get edges
             for i in range(0, len(polygon_1)-1):
                 edge_1 = [polygon_1[i], polygon_1[i+1]]
-                stat_total_node_count += 1
-                stat_total_edge_len += geometry_utils.point_distance(edge_1[0], edge_1[1])
+                stat_total_node_count[hwy] += 1
+                stat_total_edge_len[hwy] += geometry_utils.point_distance(edge_1[0], edge_1[1])
                 for j in range(0, len(polygon_2)-1):
                     edge_2 = [polygon_2[j], polygon_2[j+1]]
 
@@ -113,15 +123,15 @@ for hwy in way_data.keys():
                     #print("Shortest dist was not None! It was: " + str(shortest_dist))
                     #plot_utils.plot_polygons([polygon_1, polygon_2])
                     if shortest_dist < feature.min_way_width:
-                        stat_collision_node_count += 1
+                        stat_collision_node_count[hwy] += 1
                         if closest_node == polygon_1[0]:
-                            stat_collision_edge_len += geometry_utils.point_distance(polygon_1[0], polygon_1[1]) / 2
+                            stat_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[0], polygon_1[1]) / 2
                         elif closest_node == polygon_1[-1]:
-                            stat_collision_edge_len += geometry_utils.point_distance(polygon_1[-2], polygon_1[-1]) / 2
+                            stat_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[-2], polygon_1[-1]) / 2
                         else:
                             index = polygon_1.index(closest_node)
-                            stat_collision_edge_len += geometry_utils.point_distance(polygon_1[index-1], polygon_1[index]) / 2
-                            stat_collision_edge_len += geometry_utils.point_distance(polygon_1[index], polygon_1[index+1]) / 2
+                            stat_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[index-1], polygon_1[index]) / 2
+                            stat_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[index], polygon_1[index+1]) / 2
 
                         feature_collided = True
 
@@ -136,9 +146,7 @@ for hwy in way_data.keys():
 
         feature.handled = True
         if feature_collided:
-            stat_collision_feature_count += 1
-
-    break
+            stat_collision_feature_count[hwy] += 1
 
 statistics_dict = {}
 
@@ -153,16 +161,20 @@ with open('way-collision-statistics', 'wb') as fp:
     pickle.dump(statistics_dict, fp)
 
 # Results
-print("Results...")
-print("Colliding features count: " + str(stat_collision_feature_count))
-print("Colliding nodes count: " + str(stat_collision_node_count))
-print("Colliding edges cumulative length: " + str(stat_collision_edge_len))
+    print("Results...")
+for hwy in highway_categories:
+    print("****************")
+    print(hwy)
+    print("****************")
+    print("Colliding features count: " + str(stat_collision_feature_count[hwy]))
+    print("Colliding nodes count: " + str(stat_collision_node_count[hwy]))
+    print("Colliding edges cumulative length: " + str(stat_collision_edge_len[hwy]))
 
-print("Total features count: " + str(stat_total_features_count))
-print("Total nodes count: " + str(stat_total_node_count))
-print("Total edges cumulative length: " + str(stat_total_edge_len))
+    print("Total features count: " + str(stat_total_features_count[hwy]))
+    print("Total nodes count: " + str(stat_total_node_count[hwy]))
+    print("Total edges cumulative length: " + str(stat_total_edge_len[hwy]))
 
-print("% features count: " + str(stat_collision_feature_count/stat_total_features_count))
-print("% nodes count: " + str(stat_collision_node_count/stat_total_node_count))
-print("% edges cumulative length: " + str(stat_collision_edge_len/stat_total_edge_len))
+    print("% features count: " + str(stat_collision_feature_count[hwy]/stat_total_features_count[hwy]))
+    print("% nodes count: " + str(stat_collision_node_count[hwy]/stat_total_node_count[hwy]))
+    print("% edges cumulative length: " + str(stat_collision_edge_len[hwy]/stat_total_edge_len[hwy]))
 

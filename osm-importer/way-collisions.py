@@ -6,6 +6,7 @@
 
 import geometry_utils
 import plot_utils
+import pickle
 from geojson import Point, Feature, FeatureCollection, load
 from geometry_hashtable import GeometryHashtable
 from json import dump
@@ -50,6 +51,16 @@ print("Hash tables complete!")
 paths_by_name = {}
 widths_by_id = {}
 
+stat_collision_feature_count = 0
+stat_collision_node_count = 0
+stat_collision_edge_len = 0.0
+stat_total_features_count = 0
+stat_total_node_count = 0
+stat_total_edge_len = 0.0
+
+for hwy in highway_categories:
+    stat_total_features_count += len(way_data[hwy]['features'])
+
 for hwy in way_data.keys():
     for feature in way_data[hwy]['features'] :
         # Skip tunnels
@@ -81,6 +92,8 @@ for hwy in way_data.keys():
             # Get edges
             for i in range(0, len(polygon_1)-1):
                 edge_1 = [polygon_1[i], polygon_1[i+1]]
+                stat_total_node_count += 1
+                stat_total_edge_len += geometry_utils.point_distance(edge_1[0], edge_1[1])
                 for j in range(0, len(polygon_2)-1):
                     edge_2 = [polygon_2[j], polygon_2[j+1]]
 
@@ -96,6 +109,18 @@ for hwy in way_data.keys():
                     #print("Shortest dist was not None! It was: " + str(shortest_dist))
                     #plot_utils.plot_polygons([polygon_1, polygon_2])
                     if shortest_dist < feature.min_way_width:
+                        stat_collision_node_count += 1
+                        if closest_node == polygon_1[0]:
+                            stat_collision_edge_len += geometry_utils.point_distance(polygon_1[0], polygon_1[1]) / 2
+                        elif closest_node == polygon_1[-1]:
+                            stat_collision_edge_len += geometry_utils.point_distance(polygon_1[-2], polygon_1[-1]) / 2
+                        else:
+                            index = polygon_1.index(closest_node)
+                            stat_collision_edge_len += geometry_utils.point_distance(polygon_1[index-1], polygon_1[index]) / 2
+                            stat_collision_edge_len += geometry_utils.point_distance(polygon_1[index], polygon_1[index+1]) / 2
+
+                        feature_collided = True
+
                         print("Features collision!")
                         print(feature)
                         print(feature_2)
@@ -111,5 +136,29 @@ for hwy in way_data.keys():
 
     break
 
-#TODO: Printa statistik: antal kolliderande features, antal kolliderande noder (#/%)
-#TODO: Printa statistik: längd av kolliderande väg, total längd
+statistics_dict = {}
+
+statistics_dict['stat_collision_feature_count'] = stat_collision_feature_count
+statistics_dict['stat_total_feature_count'] = stat_total_features_count
+statistics_dict['stat_collision_node_count'] = stat_collision_node_count
+statistics_dict['stat_total_node_count'] = stat_total_node_count
+statistics_dict['stat_collision_edge_len'] = stat_collision_edge_len
+statistics_dict['stat_total_edge_len'] = stat_total_edge_len
+
+with open('way-collision-statistics', 'wb') as fp:
+    pickle.dump(statistics_dict, fp)
+
+# Results
+print("Results...")
+print("Colliding features count: " + str(stat_collision_feature_count))
+print("Colliding nodes count: " + str(stat_collision_node_count))
+print("Colliding edges cumulative length: " + str(stat_collision_edge_len))
+
+print("Total features count: " + str(stat_total_features_count))
+print("Total nodes count: " + str(stat_total_node_count))
+print("Total edges cumulative length: " + str(stat_total_edge_len))
+
+print("% features count: " + str(stat_collision_feature_count/stat_total_features_count))
+print("% nodes count: " + str(stat_collision_node_count/stat_total_node_count))
+print("% edges cumulative length: " + str(stat_collision_edge_len/stat_total_edge_len))
+

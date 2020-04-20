@@ -7,6 +7,7 @@
 import geometry_utils
 import plot_utils
 import pickle
+from queue import Queue
 from geojson import Point, Feature, FeatureCollection, load
 from geometry_hashtable import GeometryHashtable
 from json import dump
@@ -58,7 +59,7 @@ stat_total_features_count = {}
 stat_total_node_count = {}
 stat_total_edge_len = {}
 total_total_features_count = 0
-
+colliding_features_tentative = {}
 
 for hwy in highway_categories:
     total_total_features_count += len(way_data[hwy]['features'])
@@ -68,6 +69,9 @@ for hwy in highway_categories:
     stat_total_features_count[hwy] = 0
     stat_total_node_count[hwy] = 0
     stat_total_edge_len[hwy] = 0.0
+    colliding_features_tentative[hwy] = Queue()
+
+# Collision detection
 
 progress = 0.0
 for hwy in way_data.keys():
@@ -124,6 +128,12 @@ for hwy in way_data.keys():
                     #plot_utils.plot_polygons([polygon_1, polygon_2])
                     if shortest_dist < feature.min_way_width:
                         stat_collision_node_count[hwy] += 1
+
+                        if not feature in colliding_features_tentative[hwy]:
+                            colliding_features_tentative[hwy].enqueue(feature)
+                        if not feature_2 in colliding_features_tentative[hwy]:
+                            colliding_features_tentative[hwy].enqueue(feature_2)
+
                         if closest_node == polygon_1[0]:
                             stat_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[0], polygon_1[1]) / 2
                         elif closest_node == polygon_1[-1]:

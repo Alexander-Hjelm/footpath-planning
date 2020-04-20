@@ -162,6 +162,96 @@ for hwy in way_data.keys():
         if feature_collided:
             stat_collision_feature_count[hwy] += 1
 
+
+# Collision correction
+# Collision correction: Store collided features in a tentative map. When a collision is fixed, add both feature_1 and feature_2 to the tentative map
+reached_stable = False
+while not reached_stable:
+    reached_stable = True
+
+    feature_1 = colliding_features_tentative.dequeue()
+    polygon_1 = geometry_utils.extract_polygon_from_feature(feature_1)
+    for feature_2 in hashtable.get_collision_canditates(feature):
+        if feature is feature_2:
+            continue
+        polygon_2 = geometry_utils.extract_polygon_from_feature(feature_2)
+    
+        for i in range(0, len(polygon_1)-1):
+            edge_1 = [polygon_1[i], polygon_1[i+1]]
+            for j in range(0, len(polygon_2)-1):
+                edge_2 = [polygon_2[j], polygon_2[j+1]]
+
+                shortest_dist, closest_node = geometry_utils.shortest_distance_between_edges_projected(edge_1, edge_2)
+                if shortest_dist < feature_1.min_way_width:
+
+                    # If a collision was fixed, queue this feature again and continue lates
+                    colliding_features_tentative.enqueue(feature_1)
+                    reached_stable = False
+
+# Collect statistics after correction run
+
+stat_corrected_collision_feature_count = {}
+stat_corrected_collision_node_count = {}
+stat_corrected_collision_edge_len = {}
+stat_corrected_total_features_count = {}
+stat_corrected_total_node_count = {}
+stat_corrected_total_edge_len = {}
+
+for hwy in highway_categories:
+    stat_corrected_collision_feature_count[hwy] = 0
+    stat_corrected_collision_node_count[hwy] = 0
+    stat_corrected_collision_edge_len[hwy] = 0.0
+    stat_corrected_total_features_count[hwy] = 0
+    stat_corrected_total_node_count[hwy] = 0
+    stat_corrected_total_edge_len[hwy] = 0.0
+
+for hwy in way_data.keys():
+    for feature in way_data[hwy]['features'] :
+        for feature_2 in hashtable.get_collision_canditates(feature):
+            if feature is feature_2:
+                continue
+
+            # Get polygons
+            polygon_1 = geometry_utils.extract_polygon_from_feature(feature)
+            polygon_2 = geometry_utils.extract_polygon_from_feature(feature_2)
+
+            # Get edges
+            for i in range(0, len(polygon_1)-1):
+                edge_1 = [polygon_1[i], polygon_1[i+1]]
+                stat_corrected_total_node_count[hwy] += 1
+                stat_corrected_total_edge_len[hwy] += geometry_utils.point_distance(edge_1[0], edge_1[1])
+                for j in range(0, len(polygon_2)-1):
+                    edge_2 = [polygon_2[j], polygon_2[j+1]]
+
+                    shortest_dist, closest_node = geometry_utils.shortest_distance_between_edges_projected(edge_1, edge_2)
+                    if shortest_dist == None:
+                        continue
+
+                    # For two roads, move on if the distance is 0 (meaning adjoining roads or intersections)
+                    if 'highway' in feature['properties'] and 'highway' in feature_2['properties']:
+                        if shortest_dist == 0.0:
+                            continue
+                    
+                    #print("Shortest dist was not None! It was: " + str(shortest_dist))
+                    #plot_utils.plot_polygons([polygon_1, polygon_2])
+                    if shortest_dist < feature.min_way_width:
+                        stat_correced_collision_node_count[hwy] += 1
+
+                        if closest_node == polygon_1[0]:
+                            stat_correced_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[0], polygon_1[1]) / 2
+                        elif closest_node == polygon_1[-1]:
+                            stat_correced_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[-2], polygon_1[-1]) / 2
+                        else:
+                            index = polygon_1.index(closest_node)
+                            stat_correced_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[index-1], polygon_1[index]) / 2
+                            stat_correced_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[index], polygon_1[index+1]) / 2
+
+                        feature_collided = True
+
+        feature.handled = True
+        if feature_collided:
+            stat_corrected_collision_feature_count[hwy] += 1
+
 statistics_dict = {}
 
 statistics_dict['stat_collision_feature_count'] = stat_collision_feature_count

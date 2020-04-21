@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  20 APR 2020 15:55
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  21 APR 2020 14:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1073,95 +1073,101 @@ LaTeX Warning: Citation `sampleitem2' on page 1 undefined on input line 45.
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 132.
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
+Overfull \hbox (1.69498pt too wide) in paragraph at lines 79--83
+[]\OT1/cmr/m/n/10 Procedural city-generation mod-els com-bine ar-chi-tec-tural 
+el-emets, such as streets,
+ []
 
+[3] [4]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 141.
 
-(/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 132.
-<img_map_compare.png, id=153, 983.675pt x 889.3225pt>
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 141.
+ [5]
+<img_map_compare.png, id=158, 983.675pt x 889.3225pt>
 File: img_map_compare.png Graphic file (type png)
 <use img_map_compare.png>
-Package pdftex.def Info: img_map_compare.png  used on input line 146.
+Package pdftex.def Info: img_map_compare.png  used on input line 155.
 (pdftex.def)             Requested size: 330.72269pt x 299.00029pt.
- [5] [6 <./img_map_compare.png>]
+ [6 <./img_map_compare.png>]
 <img_building_match.png, id=167, 1384.6932pt x 718.3638pt>
 File: img_building_match.png Graphic file (type png)
 <use img_building_match.png>
-Package pdftex.def Info: img_building_match.png  used on input line 170.
+Package pdftex.def Info: img_building_match.png  used on input line 179.
 (pdftex.def)             Requested size: 344.98924pt x 178.97667pt.
- [7 <./img_building_match.png>]
-<img_turn_function.png, id=175, 922.1652pt x 336.7782pt>
+ [7] [8 <./img_building_match.png>]
+<img_turn_function.png, id=184, 922.1652pt x 336.7782pt>
 File: img_turn_function.png Graphic file (type png)
 <use img_turn_function.png>
-Package pdftex.def Info: img_turn_function.png  used on input line 222.
+Package pdftex.def Info: img_turn_function.png  used on input line 230.
 (pdftex.def)             Requested size: 344.99498pt x 125.99345pt.
-<img_turn_function_diff_filled.png, id=176, 1384.6932pt x 718.3638pt>
+<img_turn_function_diff_filled.png, id=185, 1384.6932pt x 718.3638pt>
 File: img_turn_function_diff_filled.png Graphic file (type png)
 <use img_turn_function_diff_filled.png>
 Package pdftex.def Info: img_turn_function_diff_filled.png  used on input line 
-229.
+237.
 (pdftex.def)             Requested size: 344.98924pt x 178.97667pt.
- [8 <./img_turn_function.png>] [9 <./img_turn_function_diff_filled.png>] [10] [
-11]
+ [9 <./img_turn_function.png> <./img_turn_function_diff_filled.png>] [10] [11]
 <img_pos_error_plot.png, id=206, 692.3466pt x 489.9906pt>
 File: img_pos_error_plot.png Graphic file (type png)
 <use img_pos_error_plot.png>
-Package pdftex.def Info: img_pos_error_plot.png  used on input line 355.
+Package pdftex.def Info: img_pos_error_plot.png  used on input line 363.
 (pdftex.def)             Requested size: 344.99982pt x 244.16478pt.
-<img_turning_function_plot.png, id=207, 692.3466pt x 489.9906pt>
+ [12]
+<img_turning_function_plot.png, id=211, 692.3466pt x 489.9906pt>
 File: img_turning_function_plot.png Graphic file (type png)
 <use img_turning_function_plot.png>
-Package pdftex.def Info: img_turning_function_plot.png  used on input line 366.
+Package pdftex.def Info: img_turning_function_plot.png  used on input line 374.
 
 (pdftex.def)             Requested size: 344.99982pt x 244.16478pt.
- [12 <./img_pos_error_plot.png>]
-Overfull \hbox (32.91757pt too wide) in paragraph at lines 375--388
+
+Overfull \hbox (32.91757pt too wide) in paragraph at lines 383--396
 [][] 
  []
 
-[13 <./img_turning_function_plot.png>]
+[13 <./img_pos_error_plot.png> <./img_turning_function_plot.png>]
 <img_map_utility_buildings.png, id=221, 983.675pt x 439.6425pt>
 File: img_map_utility_buildings.png Graphic file (type png)
 <use img_map_utility_buildings.png>
-Package pdftex.def Info: img_map_utility_buildings.png  used on input line 414.
+Package pdftex.def Info: img_map_utility_buildings.png  used on input line 422.
 
 (pdftex.def)             Requested size: 344.99686pt x 154.19247pt.
- [14 <./img_map_utility_buildings.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 444--447
+ [14]
+Underfull \hbox (badness 10000) in paragraph at lines 452--455
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 449--452
+Underfull \hbox (badness 10000) in paragraph at lines 457--460
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 454--457
+Underfull \hbox (badness 10000) in paragraph at lines 462--465
 
  []
 
-
-Overfull \hbox (213.93471pt too wide) in paragraph at lines 459--460
+[15 <./img_map_utility_buildings.png>]
+Overfull \hbox (213.93471pt too wide) in paragraph at lines 467--468
 []\OT1/cmr/m/n/10 https://trafikverket.ineko.se/Files/sv-SE/71830/Ineko.Product
 .RelatedFiles/2020[]029[]vagar[]och[]gators[]utformning[]krav.pdf 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 459--460
+Underfull \hbox (badness 10000) in paragraph at lines 467--468
 
  []
 
-[15]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 468.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 468.
+[16]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 479.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 479.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 468.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 468.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 479.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 479.
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: 58C621339CF0C2294E2FAEED9E60E976;2008.
 
@@ -1171,13 +1177,13 @@ LaTeX Warning: There were undefined references.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 468.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 479.
  ) 
 Here is how much of TeX's memory you used:
- 18030 strings out of 492982
- 331237 string characters out of 6134896
- 416941 words of memory out of 5000000
- 21203 multiletter control sequences out of 15000+600000
+ 18033 strings out of 492982
+ 331273 string characters out of 6134896
+ 417978 words of memory out of 5000000
+ 21204 multiletter control sequences out of 15000+600000
  9369 words of font info for 34 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,14n,56p,1752b,482s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1193,10 +1199,10 @@ amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
 y10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
 ></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on report.pdf (15 pages, 576305 bytes).
+Output written on report.pdf (16 pages, 578452 bytes).
 PDF statistics:
- 308 PDF objects out of 1000 (max. 8388607)
- 261 compressed objects within 3 object streams
- 70 named destinations out of 1000 (max. 500000)
+ 313 PDF objects out of 1000 (max. 8388607)
+ 265 compressed objects within 3 object streams
+ 72 named destinations out of 1000 (max. 500000)
  288 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -412,9 +412,23 @@ After collision correction:
 \end{tabular}
 \end{table}
 
-\section{Analysis}
+\section{Analysis and Future Work}
 
-The difference in area cover can partially be explained by small utility buildings that are often not represented in the OpenStreetMap dataset. Particularily the residential areas in downtown, Stockholm, are characteristic in that each city block consists of a street front and an open, communal compound in the middle, inside of which there are usually a number of small utility buildings such as bicycle garages, toolsheds, refuse rooms and such.
+\subsection{Quality of the OSM dataset}
+
+Accuracy: we can assume that Stockholm, being one of the more developed cities in one of the most technologically connected country in the world, would be fairly well mapped in OpenStreetMap. The positional accuracy has improved by roughly 3.5 meters since the study by (Haklay, 2010), and by roughly 1.5 meters since the study by (Fan et al, 2014), if the SLU reference dataset is to be believed as absolute.
+
+The completeness analysis by building area shows that the OSM Stockholm dataset has high completeness in terms of both building area and counted features, in the same level as the study of Munich by (Fan et al, 2014).
+
+The difference in area cover can partially be explained by small utility buildings that are often not represented in the OpenStreetMap dataset. Particularily the residential areas in downtown, Stockholm, are characteristic in that each city block consists of a street front and an open, communal compound in the middle, inside of which there are usually a number of small utility buildings such as bicycle garages, toolsheds, refuse rooms and such. These buildings are likely hard to make out and trace on publicly available satellite image data. They are, according to (Fan et al, 2014) occluded by their surroundings due to shadows or forestry. This appears to be a large consensus in the field.
+
+The low semantic accuracy has made analysis hard. The available SLU dataset from Lantmäteriet uses a plot-based subdivision of buildings, whereas OSM uses a subdivision that more closely resembles the actual building footprint as seen from above. In many cases whole city blocks are represented as single buildings, which means that many less meaningful feature matches can be found.
+As seen in table ***, about 80\% of all OSM features were found to have a 1:1 mapping to the SLU dataset, but upon further visual comparison it can be seen that many of the 1:n matches are found in a very specified area, namely the residential areas in downtown, Stockholm. This is problematic since this typical area with the same level of accessibility was likely measured with the same measuring technique, and the unsystematic positional error will likely be similar in these areas. The question is wether it comforms well to the positional error in the rest of the dataset or not. This analysis will not be carried out in this project, but could be a good subject for a future master's thesis project.
+
+\subsection{Utility in real world applications}
+
+TODO: Interview with Todor
+
 
 \begin{figure}[H]
     \centering

@@ -95,12 +95,11 @@ The thesis work will be carried out at the Embodied Social Agents Lab (ESAL) at 
 \section{Related work}
 Van Oorts criteria for evaluating the quality of geographical information, which at the time of publication received attention from surveyors and cartographers. (van Oort, 2006)
 
-Haklay
+Since then a number of publications have examined slices of geodata from van Oort's criteria. In 2008, (Haklay, 2010) conducted such a study to estimate of the quality of OpenStreetMap positional geodata in London and England. Since the OpenStreetMap (OSM) project started in London it was thought that OSM data in the London metropolitan area would be representative of the highest quality data available, and therefore a good indicator for the whole global OSM dataset. The study was conducted by comparing OSM data to Ordnance Survey datasets. The study showed that the OSM dataset had a rough positional accuracy of 6 meters from the reference dataset. However, at the time of the study, the OSM project had captured roughly 29\% of the area of England, meaning that the data completeness was fairly low.
 
+The next notable study to assess the quality of OpenStreetMap data was published by (Kunze, 2012). The study applied different methods to assess the completeness of OSM data in two federal states in Germany, mainly by analysing the area difference between the OSM dataset and an administrative dataset.
 
-Fan et al, 2015
-Kunze, 2012 (reference in Fan et al)
-
+Finally, a notable study in 2013-2014, conducted by researchers from various universities in Norway and Germany (Fan et al, 2014), examined the quality and accuracy in building footprint data of the Munich area, at a time and place where the completeness of the OSM dataset was significantly higher (the results of their study showed that the OSM had captured close to 100\% of all building footprints). At the time Munich was one of the most developed cities in OSM. Their study included an insight in the geometrical calculations neccessary to match features and points between two datasets, and how to reliably calculate the metrics needed for the most important and assessible of van Oorts criteria. Their study revealed that although the feature completeness of OSM was high, some architectural details were missing. The results reveal that the positional accuracy of OSM data at the time was about 4 meters.
 
 \section{The geodata used in this project}
 
@@ -110,6 +109,7 @@ Both datasets were collcted on March 18th, 2020.
 
 \subsection{OSM Data}
 
+Volunteered Geographical Information.
 OpenStreetMap road data and building footprints are commonly obtained by manually tracing features in commercially available satellite images. Such images have a limit on their resolution which puts a theoretical limit on the accuracy of map features compared to their real-world equivalents (Haklay 2010). Particularily the high resolution imagery from Bing in 2010 led to an increase in building information in OpenStreetMap (Fan et al, 2014).
 
 To separate sidewalks from detached footpaths, I used the fact that OSM generally provides sidewalks with the same name as the adjacent motorway. Thus they can be paired together and measured against each other.
@@ -207,7 +207,6 @@ The similarity of two polygons A and B in terms of their turning function is def
 The value range will be $(0 < S_{T} < 1)$, where $S_{T}(A,B) = 1$ if the polygons are identical. 
 
 % TUESDAY
-% TODO: RELATED WORK, mention current sources (Haklay, Fan)
 % TODO: ANALYSIS SECTION, figure out what to write
 
 % TODO: Collision correction: Fix collisions by relaxing both feature_1 and feature_2
@@ -472,6 +471,11 @@ Under review
 
 \bibitem{van-oort-06}
 van Oort P A J. 2006. Spatial Data Quality: From Description to Application. PhD Thesis, Wageningen University.
+
+\bibitem{kunze-12}
+Kunze, C. 2012. Vergleichsanalyse des Gebäudedatenbestandes aus OpenStreetMap mit amtlichen Datenquellen. \\
+Student research project at the Technical University of Dresden, online avaiable: http://nbn- \\
+resolving.de/urn:nbn:de:bsz:14-qucosa-88141
 
 \end{thebibliography}
 

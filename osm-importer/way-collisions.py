@@ -162,6 +162,7 @@ for hwy in way_data.keys():
         if feature_collided:
             stat_collision_feature_count[hwy] += 1
 
+print("Collision correction...")
 
 # Collision correction
 # Collision correction: Store collided features in a tentative map. When a collision is fixed, add both feature_1 and feature_2 to the tentative map
@@ -191,6 +192,7 @@ while not reached_stable:
                     reached_stable = False
 
 # Collect statistics after correction run
+print("Statistics collection...")
 
 stat_corrected_collision_feature_count = {}
 stat_corrected_collision_node_count = {}

@@ -184,6 +184,15 @@ while not reached_stable:
                 edge_2 = [polygon_2[j], polygon_2[j+1]]
 
                 shortest_dist, closest_node = geometry_utils.shortest_distance_between_edges_projected(edge_1, edge_2)
+
+                if shortest_dist == None:
+                    continue
+
+                # For two roads, move on if the distance is 0 (meaning adjoining roads or intersections)
+                if 'highway' in feature['properties'] and 'highway' in feature_2['properties']:
+                    if shortest_dist == 0.0:
+                        continue
+
                 collision = False
                 if 'highway' in feature_2['properties']:
                     # If the other feature is a path, factor in its road width

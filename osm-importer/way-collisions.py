@@ -270,6 +270,11 @@ for hwy in highway_categories:
 
 for hwy in way_data.keys():
     for feature in way_data[hwy]['features'] :
+
+        # Skip tunnels
+        if 'tunnel' in feature['properties'] and feature['properties']['tunnel'] == 'yes':
+            continue
+
         for feature_2 in hashtable.get_collision_canditates(feature):
             if feature is feature_2:
                 continue

@@ -169,7 +169,7 @@ reached_stable = False
 while not reached_stable:
     reached_stable = True
 
-    feature_1 = colliding_features_tentative.pop()
+    feature_1 = colliding_features_tentative.pop(0)
     polygon_1 = geometry_utils.extract_polygon_from_feature(feature_1)
     for feature_2 in hashtable.get_collision_canditates(feature):
         if feature is feature_2:

@@ -309,16 +309,16 @@ for hwy in way_data.keys():
                         collision = shortest_dist < feature.min_way_width
 
                     if collision:
-                        stat_correced_collision_node_count[hwy] += 1
+                        stat_corrected_collision_node_count[hwy] += 1
 
                         if closest_node == polygon_1[0]:
-                            stat_correced_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[0], polygon_1[1]) / 2
+                            stat_corrected_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[0], polygon_1[1]) / 2
                         elif closest_node == polygon_1[-1]:
-                            stat_correced_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[-2], polygon_1[-1]) / 2
+                            stat_corrected_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[-2], polygon_1[-1]) / 2
                         else:
                             index = polygon_1.index(closest_node)
-                            stat_correced_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[index-1], polygon_1[index]) / 2
-                            stat_correced_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[index], polygon_1[index+1]) / 2
+                            stat_corrected_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[index-1], polygon_1[index]) / 2
+                            stat_corrected_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[index], polygon_1[index+1]) / 2
 
                         feature_collided = True
 

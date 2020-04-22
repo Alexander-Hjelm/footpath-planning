@@ -183,9 +183,25 @@ while not reached_stable:
                 edge_2 = [polygon_2[j], polygon_2[j+1]]
 
                 shortest_dist, closest_node = geometry_utils.shortest_distance_between_edges_projected(edge_1, edge_2)
-                if shortest_dist == None:
-                    continue
-                if shortest_dist < feature_1.min_way_width:
+                collision = False
+                if 'highway' in feature_2['properties']:
+                    # If the other feature is a path, factor in its road width
+                    collision = shortest_dist < feature.min_way_width + feature_2.min_way_width
+                else:
+                    collision = shortest_dist < feature.min_way_width
+
+                if collision:
+                    # Feature correction by relaxing both edges in the opposite direction
+                    # TODO: Figure out a way to do dis
+
+                    translation_vec = 
+                    translation_vec = geometry_utils.normalize(translation_vec)
+                    translation_dist = shortest_dist/2
+
+                    edge_1[0] = edge_1[0] + translation_vec[0]*translation_dist
+                    edge_1[1] = edge_1[1] + translation_vec[1]*translation_dist
+                    edge_2[0] = edge_2[0] - translation_vec[0]*translation_dist
+                    edge_2[1] = edge_2[1] - translation_vec[1]*translation_dist
 
                     # If a collision was fixed, queue this feature again and continue lates
                     colliding_features_tentative.append(feature_1)

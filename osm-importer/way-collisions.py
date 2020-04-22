@@ -58,7 +58,7 @@ stat_total_features_count = {}
 stat_total_node_count = {}
 stat_total_edge_len = {}
 total_total_features_count = 0
-colliding_features_tentative = {}
+colliding_features_tentative = []
 
 for hwy in highway_categories:
     total_total_features_count += len(way_data[hwy]['features'])
@@ -68,7 +68,6 @@ for hwy in highway_categories:
     stat_total_features_count[hwy] = 0
     stat_total_node_count[hwy] = 0
     stat_total_edge_len[hwy] = 0.0
-    colliding_features_tentative[hwy] = []
 
 # Collision detection
 
@@ -128,10 +127,10 @@ for hwy in way_data.keys():
                     if shortest_dist < feature.min_way_width:
                         stat_collision_node_count[hwy] += 1
 
-                        if not feature in colliding_features_tentative[hwy]:
-                            colliding_features_tentative[hwy].append(feature)
-                        if not feature_2 in colliding_features_tentative[hwy]:
-                            colliding_features_tentative[hwy].append(feature_2)
+                        if not feature in colliding_features_tentative:
+                            colliding_features_tentative.append(feature)
+                        if not feature_2 in colliding_features_tentative:
+                            colliding_features_tentative.append(feature_2)
 
                         if closest_node == polygon_1[0]:
                             stat_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[0], polygon_1[1]) / 2

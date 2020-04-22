@@ -7,7 +7,6 @@
 import geometry_utils
 import plot_utils
 import pickle
-from queue import Queue
 from geojson import Point, Feature, FeatureCollection, load
 from geometry_hashtable import GeometryHashtable
 from json import dump
@@ -69,7 +68,7 @@ for hwy in highway_categories:
     stat_total_features_count[hwy] = 0
     stat_total_node_count[hwy] = 0
     stat_total_edge_len[hwy] = 0.0
-    colliding_features_tentative[hwy] = Queue()
+    colliding_features_tentative[hwy] = []
 
 # Collision detection
 
@@ -130,9 +129,9 @@ for hwy in way_data.keys():
                         stat_collision_node_count[hwy] += 1
 
                         if not feature in colliding_features_tentative[hwy]:
-                            colliding_features_tentative[hwy].enqueue(feature)
+                            colliding_features_tentative[hwy].append(feature)
                         if not feature_2 in colliding_features_tentative[hwy]:
-                            colliding_features_tentative[hwy].enqueue(feature_2)
+                            colliding_features_tentative[hwy].append(feature_2)
 
                         if closest_node == polygon_1[0]:
                             stat_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[0], polygon_1[1]) / 2
@@ -151,10 +150,12 @@ for hwy in way_data.keys():
                         print("min dist: " + str(feature.min_way_width))
                         print("************")
 
+                        """
                         if 'highway' in feature_2['properties']:
                             plot_utils.plot_edges([polygon_2, polygon_1])
                         else:
                             plot_utils.plot_polygons_and_edges([polygon_2], polygon_1)
+                        """
                     else:
                         feature.max_way_width = min(feature.max_way_width, shortest_dist)
 
@@ -169,7 +170,7 @@ reached_stable = False
 while not reached_stable:
     reached_stable = True
 
-    feature_1 = colliding_features_tentative.dequeue()
+    feature_1 = colliding_features_tentative.pop()
     polygon_1 = geometry_utils.extract_polygon_from_feature(feature_1)
     for feature_2 in hashtable.get_collision_canditates(feature):
         if feature is feature_2:
@@ -185,7 +186,7 @@ while not reached_stable:
                 if shortest_dist < feature_1.min_way_width:
 
                     # If a collision was fixed, queue this feature again and continue lates
-                    colliding_features_tentative.enqueue(feature_1)
+                    colliding_features_tentative.append(feature_1)
                     reached_stable = False
 
 # Collect statistics after correction run

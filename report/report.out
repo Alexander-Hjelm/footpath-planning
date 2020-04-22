@@ -27,4 +27,6 @@
 \BOOKMARK [2][-]{subsection.10.2}{Positional accuracy statistics}{section.10}% 27
 \BOOKMARK [2][-]{subsection.10.3}{Shape accuracy statistics}{section.10}% 28
 \BOOKMARK [2][-]{subsection.10.4}{Way collision statistics}{section.10}% 29
-\BOOKMARK [1][-]{section.11}{Analysis}{}% 30
+\BOOKMARK [1][-]{section.11}{Analysis and Future Work}{}% 30
+\BOOKMARK [2][-]{subsection.11.1}{Quality of the OSM dataset}{section.11}% 31
+\BOOKMARK [2][-]{subsection.11.2}{Utility in real world applications}{section.11}% 32

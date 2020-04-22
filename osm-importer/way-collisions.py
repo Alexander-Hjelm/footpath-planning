@@ -129,7 +129,7 @@ for hwy in way_data.keys():
 
                         if not feature in colliding_features_tentative:
                             colliding_features_tentative.append(feature)
-                        if not feature_2 in colliding_features_tentative:
+                        if 'highway' in feature_2['properties'] and not feature_2 in colliding_features_tentative:
                             colliding_features_tentative.append(feature_2)
 
                         if closest_node == polygon_1[0]:
@@ -182,6 +182,8 @@ while not reached_stable:
                 edge_2 = [polygon_2[j], polygon_2[j+1]]
 
                 shortest_dist, closest_node = geometry_utils.shortest_distance_between_edges_projected(edge_1, edge_2)
+                if shortest_dist == None:
+                    continue
                 if shortest_dist < feature_1.min_way_width:
 
                     # If a collision was fixed, queue this feature again and continue lates

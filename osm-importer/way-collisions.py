@@ -70,6 +70,12 @@ for hwy in highway_categories:
     stat_total_node_count[hwy] = 0
     stat_total_edge_len[hwy] = 0.0
 
+# Set way default widths per features
+for hwy in way_data.keys():
+    for feature in way_data[hwy]['features'] :
+        feature.min_way_width = standard_widths[hwy]
+        feature.max_way_width = 2*feature.min_way_width
+
 # Collision detection
 
 progress = 0.0
@@ -83,10 +89,6 @@ for hwy in way_data.keys():
         progress+=1.0
 
         stat_total_features_count[hwy] += 1
-
-        # Set width to default
-        feature.min_way_width = standard_widths[hwy]
-        feature.max_way_width = 2*feature.min_way_width
 
         feature_collided = False
 
@@ -123,9 +125,15 @@ for hwy in way_data.keys():
                         if shortest_dist == 0.0:
                             continue
                     
-                    #print("Shortest dist was not None! It was: " + str(shortest_dist))
                     #plot_utils.plot_polygons([polygon_1, polygon_2])
-                    if shortest_dist < feature.min_way_width:
+                    collision = False
+                    if 'highway' in feature_2['properties']:
+                        # If the other feature is a path, factor in its road width
+                        collision = shortest_dist < feature.min_way_width + feature_2.min_way_width
+                    else:
+                        collision = shortest_dist < feature.min_way_width
+
+                    if collision:
                         stat_collision_node_count[hwy] += 1
 
                         if not feature in colliding_features_tentative:
@@ -143,12 +151,6 @@ for hwy in way_data.keys():
                             stat_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[index], polygon_1[index+1]) / 2
 
                         feature_collided = True
-
-                        print("Features collision!")
-                        print(feature)
-                        print(feature_2)
-                        print("min dist: " + str(feature.min_way_width))
-                        print("************")
 
                         """
                         if 'highway' in feature_2['properties']:
@@ -262,15 +264,36 @@ for hwy in highway_categories:
     stat_corrected_collision_node_count[hwy] = 0
     stat_corrected_collision_edge_len[hwy] = 0.0
 
+# Mark all features as unhandled
+for hwy in way_data.keys():
+    for feature in way_data[hwy]['features']:
+        feature.handled = False
+
+for feature in building_data['features']:
+    feature.handled = False
+
+progress = 0.0
 for hwy in way_data.keys():
     for feature in way_data[hwy]['features'] :
-
         # Skip tunnels
         if 'tunnel' in feature['properties'] and feature['properties']['tunnel'] == 'yes':
             continue
 
+        print("Feature collision check, progess: " + str(100*progress/total_total_features_count) + '%')
+        progress+=1.0
+
+        feature_collided = False
+
         for feature_2 in hashtable.get_collision_canditates(feature):
             if feature is feature_2:
+                continue
+
+            # Skip tunnels
+            if 'tunnel' in feature_2['properties'] and feature_2['properties']['tunnel'] == 'yes':
+                    continue
+
+            # Skip features that have alreay been handled
+            if feature_2.handled:
                 continue
 
             # Get polygons
@@ -287,16 +310,11 @@ for hwy in way_data.keys():
                     if shortest_dist == None:
                         continue
 
-                    # Skip tunnels
-                    if 'tunnel' in feature_2['properties'] and feature_2['properties']['tunnel'] == 'yes':
-                        continue
-
                     # For two roads, move on if the distance is 0 (meaning adjoining roads or intersections)
                     if 'highway' in feature['properties'] and 'highway' in feature_2['properties']:
                         if shortest_dist == 0.0:
                             continue
                     
-                    #print("Shortest dist was not None! It was: " + str(shortest_dist))
                     #plot_utils.plot_polygons([polygon_1, polygon_2])
                     collision = False
                     if 'highway' in feature_2['properties']:

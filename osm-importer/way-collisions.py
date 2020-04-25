@@ -170,9 +170,12 @@ iter_count = 1
 # Collision correction
 # Collision correction: Store collided features in a tentative map. When a collision is fixed, add both feature_1 and feature_2 to the tentative map
 reached_stable = False
-while not reached_stable:
+rounds_with_same_feature_count = 0
+
+while not reached_stable and rounds_with_same_feature_count < 40:
     print("Iteration #" + str(iter_count) + ", remaining features: " + str(len(colliding_features_tentative)))
     iter_count += 1
+    feature_count = len(colliding_features_tentative)
 
     reached_stable = True
 
@@ -281,6 +284,10 @@ while not reached_stable:
                     break
             if feature_fixed:
                 break
+
+    if len(colliding_features_tentative) == feature_count:
+        rounds_with_same_feature_count += 1
+
 
 # Collect statistics after correction run
 print("Statistics collection...")

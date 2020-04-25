@@ -175,8 +175,8 @@ while not reached_stable:
 
     feature_1 = colliding_features_tentative.pop(0)
     polygon_1 = geometry_utils.extract_polygon_from_feature(feature_1)
-    for feature_2 in hashtable.get_collision_canditates(feature):
-        if feature is feature_2:
+    for feature_2 in hashtable.get_collision_canditates(feature_1):
+        if feature_1 is feature_2:
             continue
         polygon_2 = geometry_utils.extract_polygon_from_feature(feature_2)
     
@@ -195,16 +195,16 @@ while not reached_stable:
                     continue
 
                 # For two roads, move on if the distance is 0 (meaning adjoining roads or intersections)
-                if 'highway' in feature['properties'] and 'highway' in feature_2['properties']:
+                if 'highway' in feature_1['properties'] and 'highway' in feature_2['properties']:
                     if shortest_dist == 0.0:
                         continue
 
                 collision = False
                 if 'highway' in feature_2['properties']:
                     # If the other feature is a path, factor in its road width
-                    collision = shortest_dist < feature.min_way_width + feature_2.min_way_width
+                    collision = shortest_dist < feature_1.min_way_width + feature_2.min_way_width
                 else:
-                    collision = shortest_dist < feature.min_way_width
+                    collision = shortest_dist < feature_1.min_way_width
 
                 if collision:
                     # Feature correction by relaxing both edges in the opposite direction
@@ -250,6 +250,7 @@ while not reached_stable:
 
                     # If a collision was fixed, queue this feature again and continue lates
                     colliding_features_tentative.append(feature_1)
+                    colliding_features_tentative.append(feature_2)
                     reached_stable = False
 
 # Collect statistics after correction run

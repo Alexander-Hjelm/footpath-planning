@@ -63,8 +63,9 @@ class GeometryHashtable:
         features_out = []
         hash_coords = []
         for c in coords:
-            x = c[0]
-            y = c[1]
+            x = int(c[0])
+            y = int(c[1])
+
             for x_i in range(max(x-1, 0), min(x+2, len(self.hashtable))):
                 for y_i in range(max(y-1, 0), min(y+2, len(self.hashtable[0]))):
                     if not [x, y] in hash_coords:

@@ -169,16 +169,12 @@ for hwy in way_data.keys():
 print("Collision correction...")
 iter_count = 1
 
-original_polygons = {}
-#TODO: build original polygons, compare the distance to the original points and only make adjustments if the distance from the target point to the original points is smaller than 2.05
-
 # Collision correction
 # Collision correction: Store collided features in a tentative map. When a collision is fixed, add both feature_1 and feature_2 to the tentative map
 reached_stable = False
 best_solution = 9999999999
 rounds_with_same_best_solution = 0
 unfixable_features = []
-# TODO: Add and compare unfixable features. First round only, to optimize
 
 while not reached_stable and rounds_with_same_best_solution < 20:
     print("Iteration #" + str(iter_count) + ", remaining features: " + str(len(colliding_features_tentative)))

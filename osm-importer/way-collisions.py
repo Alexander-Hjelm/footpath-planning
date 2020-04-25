@@ -214,7 +214,7 @@ while not reached_stable:
                     perp_2 = geometry_utils.normalize(perp_2)
 
                     translation_vec = None
-                    if np.dot(perp_1, perp_2) > np.dot(perp_1, -perp_2):
+                    if np.dot(perp_1, perp_2) > 0.0:
                         translation_vec = [perp_1[0]+perp_2[0], perp_1[1]+perp_2[1]]
                     else:
                         translation_vec = [perp_1[0]-perp_2[0], perp_1[1]-perp_2[1]]

@@ -169,15 +169,20 @@ for hwy in way_data.keys():
 print("Collision correction...")
 iter_count = 1
 
+original_polygons = {}
+#TODO: build original polygons
+
 # Collision correction
 # Collision correction: Store collided features in a tentative map. When a collision is fixed, add both feature_1 and feature_2 to the tentative map
 reached_stable = False
-rounds_with_same_feature_count = 0
+best_solution = 0
+rounds_with_same_best_solution = 0
+unfixable_features = []
+# TODO: Add and compare unfixable features. First round only
 
-while not reached_stable and rounds_with_same_feature_count < 40:
+while not reached_stable and rounds_with_same_best_solution < 20:
     print("Iteration #" + str(iter_count) + ", remaining features: " + str(len(colliding_features_tentative)))
     iter_count += 1
-    feature_count = len(colliding_features_tentative)
 
     reached_stable = True
 
@@ -265,7 +270,6 @@ while not reached_stable and rounds_with_same_feature_count < 40:
                         avg_dist_2 = geometry_utils.point_distance(matching_2[0][0], matching_2[0][1]) + geometry_utils.point_distance(matching_2[1][0], matching_2[1][1])
 
                         # vertex swap
-                        # Convert to list to avoid conversion to ndarray
                         if avg_dist_1 > avg_dist_2:
                             polygon_1[i] = edge_1_tr_1[0]
                             polygon_1[i+1] = edge_1_tr_1[1]
@@ -280,13 +284,15 @@ while not reached_stable and rounds_with_same_feature_count < 40:
                         # If a collision was fixed, queue this feature again and continue lates
                         if not feature_1 in colliding_features_tentative:
                             colliding_features_tentative.append(feature_1)
-                        #if not feature_2 in colliding_features_tentative:
-                            #colliding_features_tentative.append(feature_2)
+                        if 'highway' in feature_2['properties']:
+                            if not feature_2 in colliding_features_tentative:
+                                colliding_features_tentative.append(feature_2)
                         reached_stable = False
 
-    if len(colliding_features_tentative) == feature_count:
-        rounds_with_same_feature_count += 1
-
+    rounds_with_same_best_solution += 1
+    if len(colliding_features_tentative) < best_solution:
+        rounds_with_same_best_solution = 0
+        best_solution = len(colliding_features_tentative)
 
 # Collect statistics after correction run
 print("Statistics collection...")

@@ -222,10 +222,10 @@ while not reached_stable:
                     translation_vec = geometry_utils.normalize(translation_vec)
                     translation_dist = shortest_dist/2
 
-                    edge_1_tr_1 = []
-                    edge_2_tr_1 = []
-                    edge_1_tr_2 = []
-                    edge_2_tr_2 = []
+                    edge_1_tr_1 = [0.0, 0.0]
+                    edge_2_tr_1 = [0.0, 0.0]
+                    edge_1_tr_2 = [0.0, 0.0]
+                    edge_2_tr_2 = [0.0, 0.0]
 
                     edge_1_tr_1[0] = edge_1[0] + translation_vec[0]*translation_dist
                     edge_1_tr_1[1] = edge_1[1] + translation_vec[1]*translation_dist

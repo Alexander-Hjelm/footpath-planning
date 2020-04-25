@@ -311,9 +311,10 @@ def shortest_distance_between_edges_projected(edge_1, edge_2):
 
     x = line_line_intersection([a1, a2], [b1, b2])
 
-    if a1 == b1 or a1 == b2:
+    # If any of the endpoints are the same, the distance is 0
+    if (a1[0] == b1[0] and a1[1] == b1[1]) or (a1[0] == b2[0] and a1[1] == b2[1]):
         return 0.0, a1
-    if a2 == b1 or a2 == b2:
+    if (a2[0] == b1[0] and a2[1] == b1[1]) or (a2[0] == b2[0] and a2[1] == b2[1]):
         return 0.0, a2
 
     # Case 1, no intersection, lines are parallel

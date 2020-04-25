@@ -28,6 +28,8 @@ standard_widths = {
 way_data = {}
 building_data = []
 
+max_feature_distance = 2.0579
+
 # read files
 for hwy in highway_categories:
     with open('raw_data/' + hwy + '-converted.geojson', 'r') as f:

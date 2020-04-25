@@ -130,9 +130,9 @@ for hwy in way_data.keys():
                     collision = False
                     if 'highway' in feature_2['properties']:
                         # If the other feature is a path, factor in its road width
-                        collision = shortest_dist < feature.min_way_width + feature_2.min_way_width
+                        collision = shortest_dist < feature.min_way_width/2 + feature_2.min_way_width/2
                     else:
-                        collision = shortest_dist < feature.min_way_width
+                        collision = shortest_dist < feature.min_way_width/2
 
                     if collision:
                         stat_collision_node_count[hwy] += 1
@@ -212,9 +212,9 @@ while not reached_stable and rounds_with_same_feature_count < 40:
                     collision = False
                     if 'highway' in feature_2['properties']:
                         # If the other feature is a path, factor in its road width
-                        collision = shortest_dist < feature_1.min_way_width + feature_2.min_way_width
+                        collision = shortest_dist < feature_1.min_way_width/2 + feature_2.min_way_width/2
                     else:
-                        collision = shortest_dist < feature_1.min_way_width
+                        collision = shortest_dist < feature_1.min_way_width/2
 
                     if collision:
 
@@ -231,7 +231,10 @@ while not reached_stable and rounds_with_same_feature_count < 40:
                             translation_vec = [perp_1[0]-perp_2[0], perp_1[1]-perp_2[1]]
 
                         translation_vec = geometry_utils.normalize(translation_vec)
-                        translation_dist = shortest_dist/2
+                        if 'highway' in feature_2['properties']:
+                            translation_dist = feature_1.min_way_width/2 + feature_2.min_way_width/2 - shortest_dist
+                        else:
+                            translation_dist = feature_1.min_way_width/2 - shortest_dist
 
                         edge_1_tr_1 = [[0,0], [0,0]]
                         edge_2_tr_1 = [[0,0], [0,0]]
@@ -352,9 +355,9 @@ for hwy in way_data.keys():
                     collision = False
                     if 'highway' in feature_2['properties']:
                         # If the other feature is a path, factor in its road width
-                        collision = shortest_dist < feature.min_way_width + feature_2.min_way_width
+                        collision = shortest_dist < feature.min_way_width/2 + feature_2.min_way_width/2
                     else:
-                        collision = shortest_dist < feature.min_way_width
+                        collision = shortest_dist < feature.min_way_width/2
 
                     if collision:
                         stat_corrected_collision_node_count[hwy] += 1

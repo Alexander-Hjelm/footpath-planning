@@ -165,108 +165,122 @@ for hwy in way_data.keys():
             stat_collision_feature_count[hwy] += 1
 
 print("Collision correction...")
+iter_count = 1
 
 # Collision correction
 # Collision correction: Store collided features in a tentative map. When a collision is fixed, add both feature_1 and feature_2 to the tentative map
 reached_stable = False
 while not reached_stable:
+    print("Iteration #" + str(iter_count) + ", remaining features: " + str(len(colliding_features_tentative)))
+    iter_count += 1
+
     reached_stable = True
 
-    feature_1 = colliding_features_tentative.pop(0)
-    polygon_1 = geometry_utils.extract_polygon_from_feature(feature_1)
-    for feature_2 in hashtable.get_collision_canditates(feature_1):
-        if feature_1 is feature_2:
-            continue
-        polygon_2 = geometry_utils.extract_polygon_from_feature(feature_2)
-    
-        for i in range(0, len(polygon_1)-1):
-            edge_1 = [polygon_1[i], polygon_1[i+1]]
-            for j in range(0, len(polygon_2)-1):
-                edge_2 = [polygon_2[j], polygon_2[j+1]]
+    feature_count = len(colliding_features_tentative)
+    for f in range(0, feature_count):
+        feature_fixed = False
+        feature_1 = colliding_features_tentative.pop(0)
+        polygon_1 = geometry_utils.extract_polygon_from_feature(feature_1)
+        for feature_2 in hashtable.get_collision_canditates(feature_1):
+            if feature_1 is feature_2:
+                continue
+            polygon_2 = geometry_utils.extract_polygon_from_feature(feature_2)
+        
+            for i in range(0, len(polygon_1)-1):
+                edge_1 = [polygon_1[i], polygon_1[i+1]]
+                for j in range(0, len(polygon_2)-1):
+                    edge_2 = [polygon_2[j], polygon_2[j+1]]
 
-                shortest_dist, closest_node = geometry_utils.shortest_distance_between_edges_projected(edge_1, edge_2)
+                    shortest_dist, closest_node = geometry_utils.shortest_distance_between_edges_projected(edge_1, edge_2)
 
-                if shortest_dist == None:
-                    continue
-
-                # Skip tunnels
-                if 'tunnel' in feature_2['properties'] and feature_2['properties']['tunnel'] == 'yes':
-                    continue
-
-                # For two roads, move on if the distance is 0 (meaning adjoining roads or intersections)
-                if 'highway' in feature_1['properties'] and 'highway' in feature_2['properties']:
-                    if shortest_dist == 0.0:
+                    if shortest_dist == None:
                         continue
 
-                collision = False
-                if 'highway' in feature_2['properties']:
-                    # If the other feature is a path, factor in its road width
-                    collision = shortest_dist < feature_1.min_way_width + feature_2.min_way_width
-                else:
-                    collision = shortest_dist < feature_1.min_way_width
+                    # Skip tunnels
+                    if 'tunnel' in feature_2['properties'] and feature_2['properties']['tunnel'] == 'yes':
+                        continue
 
-                if collision:
-                    # Feature correction by relaxing both edges in the opposite direction
-                    perp_1 = geometry_utils.perpendicular([edge_1[1][0]-edge_1[0][0], edge_1[1][1]-edge_1[0][1]])
-                    perp_2 = geometry_utils.perpendicular([edge_2[1][0]-edge_2[0][0], edge_2[1][1]-edge_2[0][1]])
-                    perp_1 = geometry_utils.normalize(perp_1)
-                    perp_2 = geometry_utils.normalize(perp_2)
+                    # For two roads, move on if the distance is 0 (meaning adjoining roads or intersections)
+                    if 'highway' in feature_1['properties'] and 'highway' in feature_2['properties']:
+                        if shortest_dist == 0.0:
+                            continue
 
-                    translation_vec = None
-                    if geometry_utils.dot(perp_1, perp_2) > 0.0:
-                        translation_vec = [perp_1[0]+perp_2[0], perp_1[1]+perp_2[1]]
+                    collision = False
+                    if 'highway' in feature_2['properties']:
+                        # If the other feature is a path, factor in its road width
+                        collision = shortest_dist < feature_1.min_way_width + feature_2.min_way_width
                     else:
-                        translation_vec = [perp_1[0]-perp_2[0], perp_1[1]-perp_2[1]]
+                        collision = shortest_dist < feature_1.min_way_width
 
-                    translation_vec = geometry_utils.normalize(translation_vec)
-                    translation_dist = shortest_dist/2
+                    if collision:
 
-                    edge_1_tr_1 = [[0,0], [0,0]]
-                    edge_2_tr_1 = [[0,0], [0,0]]
-                    edge_1_tr_2 = [[0,0], [0,0]]
-                    edge_2_tr_2 = [[0,0], [0,0]]
+                        # Feature correction by relaxing both edges in the opposite direction
+                        perp_1 = geometry_utils.perpendicular([edge_1[1][0]-edge_1[0][0], edge_1[1][1]-edge_1[0][1]])
+                        perp_2 = geometry_utils.perpendicular([edge_2[1][0]-edge_2[0][0], edge_2[1][1]-edge_2[0][1]])
+                        perp_1 = geometry_utils.normalize(perp_1)
+                        perp_2 = geometry_utils.normalize(perp_2)
 
-                    edge_1_tr_1[0][0] = edge_1[0][0] + translation_vec[0]*translation_dist
-                    edge_1_tr_1[0][1] = edge_1[0][1] + translation_vec[1]*translation_dist
-                    edge_1_tr_1[1][0] = edge_1[1][0] + translation_vec[0]*translation_dist
-                    edge_1_tr_1[1][1] = edge_1[1][1] + translation_vec[1]*translation_dist
-                    edge_2_tr_1[0][0] = edge_2[0][0] - translation_vec[0]*translation_dist
-                    edge_2_tr_1[0][1] = edge_2[0][1] - translation_vec[1]*translation_dist
-                    edge_2_tr_1[1][0] = edge_2[1][0] - translation_vec[0]*translation_dist
-                    edge_2_tr_1[1][1] = edge_2[1][1] - translation_vec[1]*translation_dist
+                        translation_vec = None
+                        if geometry_utils.dot(perp_1, perp_2) > 0.0:
+                            translation_vec = [perp_1[0]+perp_2[0], perp_1[1]+perp_2[1]]
+                        else:
+                            translation_vec = [perp_1[0]-perp_2[0], perp_1[1]-perp_2[1]]
 
+                        translation_vec = geometry_utils.normalize(translation_vec)
+                        translation_dist = shortest_dist/2
 
-                    edge_1_tr_2[0][0] = edge_1[0][0] - translation_vec[0]*translation_dist
-                    edge_1_tr_2[0][1] = edge_1[0][1] - translation_vec[1]*translation_dist
-                    edge_1_tr_2[1][0] = edge_1[1][0] - translation_vec[0]*translation_dist
-                    edge_1_tr_2[1][1] = edge_1[1][1] - translation_vec[1]*translation_dist
-                    edge_2_tr_2[0][0] = edge_2[0][0] + translation_vec[0]*translation_dist
-                    edge_2_tr_2[0][1] = edge_2[0][1] + translation_vec[1]*translation_dist
-                    edge_2_tr_2[1][0] = edge_2[1][0] + translation_vec[0]*translation_dist
-                    edge_2_tr_2[1][1] = edge_2[1][1] + translation_vec[1]*translation_dist
+                        edge_1_tr_1 = [[0,0], [0,0]]
+                        edge_2_tr_1 = [[0,0], [0,0]]
+                        edge_1_tr_2 = [[0,0], [0,0]]
+                        edge_2_tr_2 = [[0,0], [0,0]]
 
-                    matching_1 = geometry_utils.min_edge_endpoints_matching(edge_1_tr_1, edge_2_tr_1)
-                    matching_2 = geometry_utils.min_edge_endpoints_matching(edge_1_tr_2, edge_2_tr_2)
-                    avg_dist_1 = geometry_utils.point_distance(matching_1[0][0], matching_1[0][1]) + geometry_utils.point_distance(matching_1[1][0], matching_1[1][1])
-                    avg_dist_2 = geometry_utils.point_distance(matching_2[0][0], matching_2[0][1]) + geometry_utils.point_distance(matching_2[1][0], matching_2[1][1])
+                        edge_1_tr_1[0][0] = edge_1[0][0] + translation_vec[0]*translation_dist
+                        edge_1_tr_1[0][1] = edge_1[0][1] + translation_vec[1]*translation_dist
+                        edge_1_tr_1[1][0] = edge_1[1][0] + translation_vec[0]*translation_dist
+                        edge_1_tr_1[1][1] = edge_1[1][1] + translation_vec[1]*translation_dist
+                        edge_2_tr_1[0][0] = edge_2[0][0] - translation_vec[0]*translation_dist
+                        edge_2_tr_1[0][1] = edge_2[0][1] - translation_vec[1]*translation_dist
+                        edge_2_tr_1[1][0] = edge_2[1][0] - translation_vec[0]*translation_dist
+                        edge_2_tr_1[1][1] = edge_2[1][1] - translation_vec[1]*translation_dist
 
-                    # vertex swap
-                    # Convert to list to avoid conversion to ndarray
-                    if avg_dist_1 > avg_dist_2:
-                        polygon_1[i] = edge_1_tr_1[0]
-                        polygon_1[i+1] = edge_1_tr_1[1]
-                        polygon_2[j] = edge_2_tr_1[0]
-                        polygon_2[j+1] = edge_2_tr_1[1]
-                    else:
-                        polygon_1[i] = edge_1_tr_2[0]
-                        polygon_1[i+1] = edge_1_tr_2[1]
-                        polygon_2[j] = edge_2_tr_2[0]
-                        polygon_2[j+1] = edge_2_tr_2[1]
+                        edge_1_tr_2[0][0] = edge_1[0][0] - translation_vec[0]*translation_dist
+                        edge_1_tr_2[0][1] = edge_1[0][1] - translation_vec[1]*translation_dist
+                        edge_1_tr_2[1][0] = edge_1[1][0] - translation_vec[0]*translation_dist
+                        edge_1_tr_2[1][1] = edge_1[1][1] - translation_vec[1]*translation_dist
+                        edge_2_tr_2[0][0] = edge_2[0][0] + translation_vec[0]*translation_dist
+                        edge_2_tr_2[0][1] = edge_2[0][1] + translation_vec[1]*translation_dist
+                        edge_2_tr_2[1][0] = edge_2[1][0] + translation_vec[0]*translation_dist
+                        edge_2_tr_2[1][1] = edge_2[1][1] + translation_vec[1]*translation_dist
 
-                    # If a collision was fixed, queue this feature again and continue lates
-                    colliding_features_tentative.append(feature_1)
-                    colliding_features_tentative.append(feature_2)
-                    reached_stable = False
+                        matching_1 = geometry_utils.min_edge_endpoints_matching(edge_1_tr_1, edge_2_tr_1)
+                        matching_2 = geometry_utils.min_edge_endpoints_matching(edge_1_tr_2, edge_2_tr_2)
+                        avg_dist_1 = geometry_utils.point_distance(matching_1[0][0], matching_1[0][1]) + geometry_utils.point_distance(matching_1[1][0], matching_1[1][1])
+                        avg_dist_2 = geometry_utils.point_distance(matching_2[0][0], matching_2[0][1]) + geometry_utils.point_distance(matching_2[1][0], matching_2[1][1])
+
+                        # vertex swap
+                        # Convert to list to avoid conversion to ndarray
+                        if avg_dist_1 > avg_dist_2:
+                            polygon_1[i] = edge_1_tr_1[0]
+                            polygon_1[i+1] = edge_1_tr_1[1]
+                            polygon_2[j] = edge_2_tr_1[0]
+                            polygon_2[j+1] = edge_2_tr_1[1]
+                        else:
+                            polygon_1[i] = edge_1_tr_2[0]
+                            polygon_1[i+1] = edge_1_tr_2[1]
+                            polygon_2[j] = edge_2_tr_2[0]
+                            polygon_2[j+1] = edge_2_tr_2[1]
+
+                        # If a collision was fixed, queue this feature again and continue lates
+                        colliding_features_tentative.append(feature_1)
+                        #colliding_features_tentative.append(feature_2)
+                        reached_stable = False
+                        feature_fixed = True
+                        break
+
+                if feature_fixed:
+                    break
+            if feature_fixed:
+                break
 
 # Collect statistics after correction run
 print("Statistics collection...")

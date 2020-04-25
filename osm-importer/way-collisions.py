@@ -221,31 +221,47 @@ while not reached_stable:
                     translation_vec = geometry_utils.normalize(translation_vec)
                     translation_dist = shortest_dist/2
 
-                    edge_1_tr_1 = [0.0, 0.0]
-                    edge_2_tr_1 = [0.0, 0.0]
-                    edge_1_tr_2 = [0.0, 0.0]
-                    edge_2_tr_2 = [0.0, 0.0]
+                    edge_1_tr_1 = [[0,0], [0,0]]
+                    edge_2_tr_1 = [[0,0], [0,0]]
+                    edge_1_tr_2 = [[0,0], [0,0]]
+                    edge_2_tr_2 = [[0,0], [0,0]]
 
-                    edge_1_tr_1[0] = edge_1[0] + translation_vec[0]*translation_dist
-                    edge_1_tr_1[1] = edge_1[1] + translation_vec[1]*translation_dist
-                    edge_2_tr_1[0] = edge_2[0] - translation_vec[0]*translation_dist
-                    edge_2_tr_1[1] = edge_2[1] - translation_vec[1]*translation_dist
+                    edge_1_tr_1[0][0] = edge_1[0][0] + translation_vec[0]*translation_dist
+                    edge_1_tr_1[0][1] = edge_1[0][1] + translation_vec[1]*translation_dist
+                    edge_1_tr_1[1][0] = edge_1[1][0] + translation_vec[0]*translation_dist
+                    edge_1_tr_1[1][1] = edge_1[1][1] + translation_vec[1]*translation_dist
+                    edge_2_tr_1[0][0] = edge_2[0][0] - translation_vec[0]*translation_dist
+                    edge_2_tr_1[0][1] = edge_2[0][1] - translation_vec[1]*translation_dist
+                    edge_2_tr_1[1][0] = edge_2[1][0] - translation_vec[0]*translation_dist
+                    edge_2_tr_1[1][1] = edge_2[1][1] - translation_vec[1]*translation_dist
 
-                    edge_1_tr_2[0] = edge_1[0] - translation_vec[0]*translation_dist
-                    edge_1_tr_2[1] = edge_1[1] - translation_vec[1]*translation_dist
-                    edge_2_tr_2[0] = edge_2[0] + translation_vec[0]*translation_dist
-                    edge_2_tr_2[1] = edge_2[1] + translation_vec[1]*translation_dist
+
+                    edge_1_tr_2[0][0] = edge_1[0][0] - translation_vec[0]*translation_dist
+                    edge_1_tr_2[0][1] = edge_1[0][1] - translation_vec[1]*translation_dist
+                    edge_1_tr_2[1][0] = edge_1[1][0] - translation_vec[0]*translation_dist
+                    edge_1_tr_2[1][1] = edge_1[1][1] - translation_vec[1]*translation_dist
+                    edge_2_tr_2[0][0] = edge_2[0][0] + translation_vec[0]*translation_dist
+                    edge_2_tr_2[0][1] = edge_2[0][1] + translation_vec[1]*translation_dist
+                    edge_2_tr_2[1][0] = edge_2[1][0] + translation_vec[0]*translation_dist
+                    edge_2_tr_2[1][1] = edge_2[1][1] + translation_vec[1]*translation_dist
 
                     matching_1 = geometry_utils.min_edge_endpoints_matching(edge_1_tr_1, edge_2_tr_1)
                     matching_2 = geometry_utils.min_edge_endpoints_matching(edge_1_tr_2, edge_2_tr_2)
                     avg_dist_1 = geometry_utils.point_distance(matching_1[0][0], matching_1[0][1]) + geometry_utils.point_distance(matching_1[1][0], matching_1[1][1])
                     avg_dist_2 = geometry_utils.point_distance(matching_2[0][0], matching_2[0][1]) + geometry_utils.point_distance(matching_2[1][0], matching_2[1][1])
+
+                    # vertex swap
+                    # Convert to list to avoid conversion to ndarray
                     if avg_dist_1 > avg_dist_2:
-                        edge_1 = edge_1_tr_1
-                        edge_2 = edge_2_tr_1
+                        polygon_1[i] = edge_1_tr_1[0]
+                        polygon_1[i+1] = edge_1_tr_1[1]
+                        polygon_2[j] = edge_2_tr_1[0]
+                        polygon_2[j+1] = edge_2_tr_1[1]
                     else:
-                        edge_1 = edge_1_tr_2
-                        edge_2 = edge_2_tr_2
+                        polygon_1[i] = edge_1_tr_2[0]
+                        polygon_1[i+1] = edge_1_tr_2[1]
+                        polygon_2[j] = edge_2_tr_2[0]
+                        polygon_2[j+1] = edge_2_tr_2[1]
 
                     # If a collision was fixed, queue this feature again and continue lates
                     colliding_features_tentative.append(feature_1)

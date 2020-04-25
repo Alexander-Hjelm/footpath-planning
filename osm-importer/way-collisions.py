@@ -183,7 +183,6 @@ while not reached_stable and rounds_with_same_feature_count < 40:
 
     feature_count = len(colliding_features_tentative)
     for f in range(0, feature_count):
-        feature_fixed = False
         feature_1 = colliding_features_tentative.pop(0)
         polygon_1 = geometry_utils.extract_polygon_from_feature(feature_1)
         for feature_2 in hashtable.get_collision_canditates(feature_1):
@@ -276,16 +275,11 @@ while not reached_stable and rounds_with_same_feature_count < 40:
                             polygon_2[j+1] = edge_2_tr_2[1]
 
                         # If a collision was fixed, queue this feature again and continue lates
-                        colliding_features_tentative.append(feature_1)
-                        #colliding_features_tentative.append(feature_2)
+                        if not feature_1 in colliding_features_tentative:
+                            colliding_features_tentative.append(feature_1)
+                        #if not feature_2 in colliding_features_tentative:
+                            #colliding_features_tentative.append(feature_2)
                         reached_stable = False
-                        feature_fixed = True
-                        break
-
-                if feature_fixed:
-                    break
-            if feature_fixed:
-                break
 
     if len(colliding_features_tentative) == feature_count:
         rounds_with_same_feature_count += 1

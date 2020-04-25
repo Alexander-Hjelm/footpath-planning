@@ -175,7 +175,7 @@ original_polygons = {}
 # Collision correction
 # Collision correction: Store collided features in a tentative map. When a collision is fixed, add both feature_1 and feature_2 to the tentative map
 reached_stable = False
-best_solution = 0
+best_solution = 9999999999
 rounds_with_same_best_solution = 0
 unfixable_features = []
 # TODO: Add and compare unfixable features. First round only

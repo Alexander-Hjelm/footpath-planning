@@ -27,6 +27,9 @@ def epsg3006_to_wgs84(point):
     x_new, y_new = transform(SWEREF, WGS84, y, x)
     return (y_new, x_new)
 
+def dot(vec_1, vec_2):
+    return np.dot(vec_1, vec_2)
+
 def polygon_intersection_area(polygon_1, polygon_2):
     shapely_poly_1 = shapely.geometry.Polygon(polygon_1)
     shapely_poly_2 = shapely.geometry.Polygon(polygon_2)

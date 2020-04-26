@@ -386,7 +386,7 @@ for hwy in way_data.keys():
 
                         if not feature_1['id'] in stat_colliding_features_after_correction:
                             stat_colliding_features_after_correction[feature_1['id']] = {}
-                        if not feature_2 in stat_colliding_features_after_correction[feature_1['id']]:
+                        if not feature_2['id'] in stat_colliding_features_after_correction[feature_1['id']]:
                             stat_colliding_features_after_correction[feature_1['id']][feature_2['id']] = [
                                     feature,
                                     feature_2,

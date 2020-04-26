@@ -152,10 +152,14 @@ for hwy in way_data.keys():
                             stat_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[index-1], polygon_1[index]) / 2
                             stat_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[index], polygon_1[index+1]) / 2
 
-                        if not feature in stat_colliding_features_before_correction:
-                            stat_colliding_features_before_correction[feature] = {}
-                        if not feature_2 in stat_colliding_features_before_correction[feature]:
-                            stat_colliding_features_before_correction[feature][feature_2] = [geometry_utils.deepcopy_polygon(polygon_1), geometry_utils.deepcopy_polygon(polygon_2)]
+                        if not feature['id'] in stat_colliding_features_before_correction:
+                            stat_colliding_features_before_correction[feature['id']] = {}
+                        if not feature_2['id'] in stat_colliding_features_before_correction[feature['id']]:
+                            stat_colliding_features_before_correction[feature['id']][feature_2['id']] = [
+                                    feature,
+                                    feature_2,
+                                    geometry_utils.deepcopy_polygon(polygon_1),
+                                    geometry_utils.deepcopy_polygon(polygon_2)]
 
                         feature_collided = True
 
@@ -380,10 +384,14 @@ for hwy in way_data.keys():
                             stat_corrected_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[index-1], polygon_1[index]) / 2
                             stat_corrected_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[index], polygon_1[index+1]) / 2
 
-                        if not feature_1 in stat_colliding_features_after_correction:
-                            stat_colliding_features_after_correction[feature_1] = {}
-                        if not feature_2 in stat_colliding_features_after_correction[feature_1]:
-                            stat_colliding_features_after_correction[feature_1][feature_2] = [geometry_utils.deepcopy_polygon(polygon_1), geometry_utils.deepcopy_polygon(polygon_2)]
+                        if not feature_1['id'] in stat_colliding_features_after_correction:
+                            stat_colliding_features_after_correction[feature_1['id']] = {}
+                        if not feature_2 in stat_colliding_features_after_correction[feature_1['id']]:
+                            stat_colliding_features_after_correction[feature_1['id']][feature_2['id']] = [
+                                    feature,
+                                    feature_2,
+                                    geometry_utils.deepcopy_polygon(polygon_1),
+                                    geometry_utils.deepcopy_polygon(polygon_2)]
 
                         feature_collided = True
 

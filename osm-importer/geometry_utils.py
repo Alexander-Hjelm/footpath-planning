@@ -33,8 +33,8 @@ def dot(vec_1, vec_2):
 def deepcopy_polygon(polygon):
     polygon_out = []
     for point in polygon:
-        polygon_out.append[point[0], point[1]]
-    return points_out
+        polygon_out.append([point[0], point[1]])
+    return polygon_out
 
 def polygon_intersection_area(polygon_1, polygon_2):
     shapely_poly_1 = shapely.geometry.Polygon(polygon_1)

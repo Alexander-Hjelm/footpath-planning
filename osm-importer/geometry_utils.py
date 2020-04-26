@@ -30,6 +30,12 @@ def epsg3006_to_wgs84(point):
 def dot(vec_1, vec_2):
     return np.dot(vec_1, vec_2)
 
+def deepcopy_polygon(polygon):
+    polygon_out = []
+    for point in polygon:
+        polygon_out.append[point[0], point[1]]
+    return points_out
+
 def polygon_intersection_area(polygon_1, polygon_2):
     shapely_poly_1 = shapely.geometry.Polygon(polygon_1)
     shapely_poly_2 = shapely.geometry.Polygon(polygon_2)

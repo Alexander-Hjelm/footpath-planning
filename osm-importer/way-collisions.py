@@ -56,7 +56,7 @@ widths_by_id = {}
 stat_collision_feature_count = {}
 stat_collision_node_count = {}
 stat_collision_edge_len = {}
-stat_total_features_count = {}
+stat_total_feature_count = {}
 stat_total_node_count = {}
 stat_total_edge_len = {}
 stat_colliding_features_before_correction = {}
@@ -68,7 +68,7 @@ for hwy in highway_categories:
     stat_collision_feature_count[hwy] = 0
     stat_collision_node_count[hwy] = 0
     stat_collision_edge_len[hwy] = 0.0
-    stat_total_features_count[hwy] = 0
+    stat_total_feature_count[hwy] = 0
     stat_total_node_count[hwy] = 0
     stat_total_edge_len[hwy] = 0.0
 
@@ -90,7 +90,7 @@ for hwy in way_data.keys():
         print("Feature collision check, progess: " + str(100*progress/total_total_features_count) + '%')
         progress+=1.0
 
-        stat_total_features_count[hwy] += 1
+        stat_total_feature_count[hwy] += 1
 
         feature_collided = False
 
@@ -328,7 +328,7 @@ for hwy in way_data.keys():
         if 'tunnel' in feature['properties'] and feature['properties']['tunnel'] == 'yes':
             continue
 
-        print("Feature collision check, progess: " + str(100*progress/total_total_features_count) + '%')
+        #print("Feature collision check, progess: " + str(100*progress/total_total_features_count) + '%')
         progress+=1.0
 
         feature_collided = False
@@ -402,7 +402,7 @@ for hwy in way_data.keys():
 statistics_dict = {}
 
 statistics_dict['stat_collision_feature_count'] = stat_collision_feature_count
-statistics_dict['stat_total_feature_count'] = stat_total_features_count
+statistics_dict['stat_total_feature_count'] = stat_total_feature_count
 statistics_dict['stat_collision_node_count'] = stat_collision_node_count
 statistics_dict['stat_total_node_count'] = stat_total_node_count
 statistics_dict['stat_collision_edge_len'] = stat_collision_edge_len
@@ -428,11 +428,11 @@ for hwy in highway_categories:
     print("Colliding nodes count: " + str(stat_collision_node_count[hwy]))
     print("Colliding edges cumulative length: " + str(stat_collision_edge_len[hwy]))
 
-    print("Total features count: " + str(stat_total_features_count[hwy]))
+    print("Total features count: " + str(stat_total_feature_count[hwy]))
     print("Total nodes count: " + str(stat_total_node_count[hwy]))
     print("Total edges cumulative length: " + str(stat_total_edge_len[hwy]))
 
-    print("% features count: " + str(stat_collision_feature_count[hwy]/stat_total_features_count[hwy]))
+    print("% features count: " + str(stat_collision_feature_count[hwy]/stat_total_feature_count[hwy]))
     print("% nodes count: " + str(stat_collision_node_count[hwy]/stat_total_node_count[hwy]))
     print("% edges cumulative length: " + str(stat_collision_edge_len[hwy]/stat_total_edge_len[hwy]))
 
@@ -443,7 +443,7 @@ for hwy in highway_categories:
     print("Colliding nodes count: " + str(stat_corrected_collision_node_count[hwy]))
     print("Colliding edges cumulative length: " + str(stat_corrected_collision_edge_len[hwy]))
 
-    print("% features count: " + str(stat_corrected_collision_feature_count[hwy]/stat_total_features_count[hwy]))
+    print("% features count: " + str(stat_corrected_collision_feature_count[hwy]/stat_total_feature_count[hwy]))
     print("% nodes count: " + str(stat_corrected_collision_node_count[hwy]/stat_total_node_count[hwy]))
     print("% edges cumulative length: " + str(stat_corrected_collision_edge_len[hwy]/stat_total_edge_len[hwy]))
 

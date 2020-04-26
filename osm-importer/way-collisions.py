@@ -59,6 +59,7 @@ stat_collision_edge_len = {}
 stat_total_features_count = {}
 stat_total_node_count = {}
 stat_total_edge_len = {}
+stat_colliding_features_before_correction = {}
 total_total_features_count = 0
 colliding_features_tentative = []
 
@@ -150,6 +151,11 @@ for hwy in way_data.keys():
                             index = polygon_1.index(closest_node)
                             stat_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[index-1], polygon_1[index]) / 2
                             stat_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[index], polygon_1[index+1]) / 2
+
+                        if not feature in stat_colliding_features_before_correction:
+                            stat_colliding_features_before_correction[feature] = {}
+                        if not feature_2 in stat_colliding_features_before_correction[feature]:
+                            stat_colliding_features_before_correction[feature][feature_2] = [geometry_utils.deepcopy_polygon(polygon_1), geometry_utils.deepcopy_polygon(polygon_2)]
 
                         feature_collided = True
 
@@ -296,6 +302,7 @@ print("Statistics collection...")
 stat_corrected_collision_feature_count = {}
 stat_corrected_collision_node_count = {}
 stat_corrected_collision_edge_len = {}
+stat_colliding_features_after_correction = {}
 
 for hwy in highway_categories:
     stat_corrected_collision_feature_count[hwy] = 0
@@ -373,6 +380,11 @@ for hwy in way_data.keys():
                             stat_corrected_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[index-1], polygon_1[index]) / 2
                             stat_corrected_collision_edge_len[hwy] += geometry_utils.point_distance(polygon_1[index], polygon_1[index+1]) / 2
 
+                        if not feature_1 in stat_colliding_features_after_correction:
+                            stat_colliding_features_after_correction[feature_1] = {}
+                        if not feature_2 in stat_colliding_features_after_correction[feature_1]:
+                            stat_colliding_features_after_correction[feature_1][feature_2] = [geometry_utils.deepcopy_polygon(polygon_1), geometry_utils.deepcopy_polygon(polygon_2)]
+
                         feature_collided = True
 
         feature.handled = True
@@ -390,6 +402,8 @@ statistics_dict['stat_total_edge_len'] = stat_total_edge_len
 statistics_dict['stat_corrected_collision_feature_count'] = stat_corrected_collision_feature_count
 statistics_dict['stat_corrected_collision_node_count'] = stat_corrected_collision_node_count
 statistics_dict['stat_corrected_collision_edge_len'] = stat_corrected_collision_edge_len
+statistics_dict['stat_colliding_features_before_correction'] = stat_colliding_features_before_correction
+statistics_dict['stat_colliding_features_after_correction'] = stat_colliding_features_after_correction
 
 with open('way-collision-statistics', 'wb') as fp:
     pickle.dump(statistics_dict, fp)

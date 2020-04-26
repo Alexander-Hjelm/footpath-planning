@@ -5,15 +5,20 @@ import geometry_utils
 from matplotlib.patches import Polygon
 from matplotlib.collections import PatchCollection
 
-def plot_polygons_and_edges(polygons, points):
+def plot_polygons_and_paths(polygons, paths):
     plot_polygons(polygons,  False)
-    edges = []
 
-    for i in range(0, len(points)-1):
-        edges.append([i, i+1])
-    plot_edges_and_points(points, edges)
+    for i in range(0, len(paths)):
+        path = paths[i]
+        edges = []
+        for i in range(0, len(path)-1):
+            edges.append([i, i+1])
 
-def plot_edges_and_points(p, e):
+        plot_edges_and_points(path, edges, False)
+
+    plt.show()
+
+def plot_edges_and_points(p, e, plot=True):
     #points = np.array(p)
     #edges = np.array(e)
 
@@ -29,7 +34,9 @@ def plot_edges_and_points(p, e):
     y = points[:,1].flatten()
     plt.plot(x[edges.T], y[edges.T], 'y-') # Edges
     plt.plot(x, y, 'ro') # Points
-    plt.show()
+
+    if plot:
+        plt.show()
 
 def plot_edges(e):
     points = []

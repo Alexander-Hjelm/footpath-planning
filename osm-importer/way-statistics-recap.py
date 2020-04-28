@@ -33,7 +33,7 @@ for hwy in highway_categories:
     print("****************")
     print(hwy)
     print("****************")
-    print("Pre correction")
+    print("Simple way widths")
     print("----------------")
     print("Colliding features count: " + str(stat_collision_feature_count[hwy]))
     print("Colliding nodes count: " + str(stat_collision_node_count[hwy]))
@@ -48,7 +48,7 @@ for hwy in highway_categories:
     print("% edges cumulative length: " + str(stat_collision_edge_len[hwy]/stat_total_edge_len[hwy]))
 
     print("----------------")
-    print("Post correction")
+    print("Including offset distance")
     print("----------------")
     print("Colliding features count: " + str(stat_corrected_collision_feature_count[hwy]))
     print("Colliding nodes count: " + str(stat_corrected_collision_node_count[hwy]))

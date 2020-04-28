@@ -94,6 +94,14 @@ for hwy in way_data.keys():
         if 'tunnel' in feature_1['properties'] and feature_1['properties']['tunnel'] == 'yes':
             continue
 
+        # Skip roads that are polygons
+        if 'highway' in feature_1['properties'] and 'area' in feature_1['properties'] and feature_1['properties']['area'] == 'yes':
+            continue
+
+        # Skip roads that are also buildings
+        if 'highway' in feature_1['properties'] and 'building' in feature_1['properties']:
+            continue
+
         print("Feature collision check, progess: " + str(100*progress/total_total_features_count) + '%')
         progress+=1.0
 
@@ -108,6 +116,14 @@ for hwy in way_data.keys():
 
             # Skip tunnels
             if 'tunnel' in feature_2['properties'] and feature_2['properties']['tunnel'] == 'yes':
+                continue
+
+            # Skip roads that are polygons
+            if 'highway' in feature_2['properties'] and 'area' in feature_2['properties'] and feature_2['properties']['area'] == 'yes':
+                continue
+
+            # Skip roads that are also buildings
+            if 'highway' in feature_2['properties'] and 'building' in feature_2['properties']:
                 continue
             
             # Skip features that have already been handled
@@ -125,6 +141,10 @@ for hwy in way_data.keys():
                 stat_total_edge_len[hwy] += geometry_utils.point_distance(edge_1[0], edge_1[1])
                 for j in range(0, len(polygon_2)-1):
                     edge_2 = [polygon_2[j], polygon_2[j+1]]
+
+                    # Prevention against double points, happens in the dataset
+                    if edge_1[0] == edge_1[1] or edge_2[0] == edge_2[1]:
+                        continue
 
                     shortest_dist, closest_node = geometry_utils.shortest_distance_between_edges_projected(edge_1, edge_2)
                     if shortest_dist == None:

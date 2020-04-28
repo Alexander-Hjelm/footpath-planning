@@ -386,7 +386,12 @@ def shortest_distance_between_edges_projected(edge_1, edge_2):
     #points = [a1, a2, b1, b2, x]
     #edges = [[0,1],[2,3]]
     #plot_utils.plot_edges_and_points(points, edges)
-    theta = math.acos(point_len(d)/point_distance(b, x))
+
+    # Protection against math domain errors
+    try:
+        theta = math.acos(point_len(d)/point_distance(b, x))
+    except:
+        return None, None
 
     #print(math.tan(theta)*point_len(k))
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  21 APR 2020 22:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  28 APR 2020 17:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1087,109 +1087,110 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 141.
-<img_map_compare.png, id=157, 983.675pt x 889.3225pt>
+<img_map_compare.png, id=165, 983.675pt x 889.3225pt>
 File: img_map_compare.png Graphic file (type png)
 <use img_map_compare.png>
 Package pdftex.def Info: img_map_compare.png  used on input line 155.
 (pdftex.def)             Requested size: 330.72269pt x 299.00029pt.
  [6]
 [7 <./img_map_compare.png>]
-<img_building_match.png, id=172, 1384.6932pt x 718.3638pt>
+<img_building_match.png, id=180, 1384.6932pt x 718.3638pt>
 File: img_building_match.png Graphic file (type png)
 <use img_building_match.png>
 Package pdftex.def Info: img_building_match.png  used on input line 179.
 (pdftex.def)             Requested size: 344.98924pt x 178.97667pt.
  [8 <./img_building_match.png>]
-<img_turn_function.png, id=179, 922.1652pt x 336.7782pt>
+<img_turn_function.png, id=187, 922.1652pt x 336.7782pt>
 File: img_turn_function.png Graphic file (type png)
 <use img_turn_function.png>
-Package pdftex.def Info: img_turn_function.png  used on input line 224.
+Package pdftex.def Info: img_turn_function.png  used on input line 223.
 (pdftex.def)             Requested size: 344.99498pt x 125.99345pt.
-<img_turn_function_diff_filled.png, id=180, 1384.6932pt x 718.3638pt>
+<img_turn_function_diff_filled.png, id=188, 1384.6932pt x 718.3638pt>
 File: img_turn_function_diff_filled.png Graphic file (type png)
 <use img_turn_function_diff_filled.png>
 Package pdftex.def Info: img_turn_function_diff_filled.png  used on input line 
-231.
+230.
 (pdftex.def)             Requested size: 344.98924pt x 178.97667pt.
  [9 <./img_turn_function.png>] [10 <./img_turn_function_diff_filled.png>] [11] 
 [12]
-<img_pos_error_plot.png, id=210, 692.3466pt x 489.9906pt>
+<img_pos_error_plot.png, id=218, 692.3466pt x 489.9906pt>
 File: img_pos_error_plot.png Graphic file (type png)
 <use img_pos_error_plot.png>
-Package pdftex.def Info: img_pos_error_plot.png  used on input line 358.
+Package pdftex.def Info: img_pos_error_plot.png  used on input line 359.
 (pdftex.def)             Requested size: 344.99982pt x 244.16478pt.
-<img_turning_function_plot.png, id=211, 692.3466pt x 489.9906pt>
+<img_turning_function_plot.png, id=219, 692.3466pt x 489.9906pt>
 File: img_turning_function_plot.png Graphic file (type png)
 <use img_turning_function_plot.png>
-Package pdftex.def Info: img_turning_function_plot.png  used on input line 369.
+Package pdftex.def Info: img_turning_function_plot.png  used on input line 370.
 
 (pdftex.def)             Requested size: 344.99982pt x 244.16478pt.
  [13 <./img_pos_error_plot.png>]
-Overfull \hbox (32.91757pt too wide) in paragraph at lines 378--391
+Overfull \hbox (39.02873pt too wide) in paragraph at lines 379--392
 [][] 
  []
 
 [14 <./img_turning_function_plot.png>]
-<img_map_utility_buildings.png, id=225, 983.675pt x 439.6425pt>
+<img_map_utility_buildings.png, id=233, 983.675pt x 439.6425pt>
 File: img_map_utility_buildings.png Graphic file (type png)
 <use img_map_utility_buildings.png>
-Package pdftex.def Info: img_map_utility_buildings.png  used on input line 431.
+Package pdftex.def Info: img_map_utility_buildings.png  used on input line 429.
 
 (pdftex.def)             Requested size: 344.99686pt x 154.19247pt.
  [15]
-Underfull \hbox (badness 10000) in paragraph at lines 461--464
+<img_feature_overlap_cases.png, id=238, 922.1652pt x 1010.3346pt>
+File: img_feature_overlap_cases.png Graphic file (type png)
+<use img_feature_overlap_cases.png>
+Package pdftex.def Info: img_feature_overlap_cases.png  used on input line 436.
+
+(pdftex.def)             Requested size: 272.90878pt x 299.00194pt.
+ [16 <./img_map_utility_buildings.png>] [17 <./img_feature_overlap_cases.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 468--471
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 466--469
-
- []
-
-[16 <./img_map_utility_buildings.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 471--474
+Underfull \hbox (badness 10000) in paragraph at lines 473--476
 
  []
 
 
-Overfull \hbox (213.93471pt too wide) in paragraph at lines 476--477
+Underfull \hbox (badness 10000) in paragraph at lines 478--481
+
+ []
+
+
+Overfull \hbox (213.93471pt too wide) in paragraph at lines 483--484
 []\OT1/cmr/m/n/10 https://trafikverket.ineko.se/Files/sv-SE/71830/Ineko.Product
 .RelatedFiles/2020[]029[]vagar[]och[]gators[]utformning[]krav.pdf 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 476--477
+Underfull \hbox (badness 10000) in paragraph at lines 483--484
 
  []
 
-[17]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 493.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 493.
+[18]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 500.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 500.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 493.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 493.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 500.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 500.
+Package rerunfilecheck Info: File `report.out' has not changed.
+(rerunfilecheck)             Checksum: 315E9579E877AF203539D6D08803F746;2188.
 
-
-Package rerunfilecheck Warning: File `report.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `report.out':
-(rerunfilecheck)             Before: 58C621339CF0C2294E2FAEED9E60E976;2008
-(rerunfilecheck)             After:  315E9579E877AF203539D6D08803F746;2188.
 
 LaTeX Warning: There were undefined references.
 
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 493.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 500.
  ) 
 Here is how much of TeX's memory you used:
- 18038 strings out of 492982
- 331333 string characters out of 6134896
+ 18047 strings out of 492982
+ 331546 string characters out of 6134896
  417043 words of memory out of 5000000
- 21205 multiletter control sequences out of 15000+600000
+ 21211 multiletter control sequences out of 15000+600000
  9369 words of font info for 34 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,14n,56p,1752b,482s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1205,10 +1206,10 @@ amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
 y10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
 ></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on report.pdf (17 pages, 582746 bytes).
+Output written on report.pdf (18 pages, 670630 bytes).
 PDF statistics:
- 322 PDF objects out of 1000 (max. 8388607)
- 273 compressed objects within 3 object streams
- 76 named destinations out of 1000 (max. 500000)
- 288 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 335 PDF objects out of 1000 (max. 8388607)
+ 283 compressed objects within 3 object streams
+ 78 named destinations out of 1000 (max. 500000)
+ 309 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -451,31 +451,35 @@ Propagation of error, have to include all the edited features in the next pass
 
 (Fan et al, 2014) claimed that the positional error is largely due to the limited resolution in satellite imagery.
 
+\subsection{Suggested algorithms for correcting feature overlap}
+
+All collision cases can be solved with relatively simply geometric algorithms. This section will present suggestions on algorithms that will resolve collisions by identifying individualcolliding nodes and translating them, after which some degree of smoothing (such as linear interpolation) can be applied to preserve visual features. Cases 1 and 3-5 will be handled, while 2 will be left since case 2 collisions do not inherently cause feature overlap when extruding a 3D road mesh from the way edges. Thus it will me up to the individual developer to decide what to do with Case 2 collisions.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_feature_overlap_fix_1}
-    \caption{}
+    \caption{Case 1 collisions can be solved by translating colliding way points away from the building, along the normal of the nearest surface. Smoothing can then be applied as seen fit.}
     \label{fig:space}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_feature_overlap_fix_2}
-    \caption{}
+    \caption{Case 3 collisions can be solved by eliminating the building features that intersect with the way, and then applying the same algorithm as in case 1.}
     \label{fig:space}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_feature_overlap_fix_3}
-    \caption{}
+    \caption{Case 4 collisions can be solved by calculating the average normal over all colliding edges for both ways, and translating colliding points along the normal, away from the other way. Smoothing can then be applied as seen fit.}
     \label{fig:space}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_feature_overlap_fix_4}
-    \caption{}
+    \caption{Case 5 collisions can be solved simply by translating the colliding point along the tangent of the closest edge, and then applying smoothing as seen fit.}
     \label{fig:space}
 \end{figure}
 

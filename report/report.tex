@@ -209,8 +209,7 @@ The value range will be $(0 < S_{T} < 1)$, where $S_{T}(A,B) = 1$ if the polygon
 % REPORT
 % TODO: Proposed fixing algorithm: building-road
 % TODO: Proposed fixing algorithm: road-road
-% TODO: Figure, suggested morphing, building-road case
-% TODO: Figure, suggested morphing, road-road case
+% TODO: Mention propagation of error, have to include all the edited features in the next pass
 % TODO: Proof read report
 
 \begin{figure}[H]
@@ -430,6 +429,34 @@ As seen in table ***, about 80\% of all OSM features were found to have a 1:1 ma
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_feature_overlap_cases}
     \caption{The 5 identified cases over feature overlap. Top left: A building lies in paralel with a road, and the distance between the two is smaller than the minimum width of the road. Top right: A road shares a node with a building. Middle: A road is intersecting with certain building features. Bottom left: Two roads have a minimum distance that is smaller than the sum of the minimum widths of both roads. Bottom right: Two roads share a node, and a subsequent node in one road lies within the minimum width of the other road.}
+    \label{fig:space}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_feature_overlap_fix_1}
+    \caption{}
+    \label{fig:space}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_feature_overlap_fix_2}
+    \caption{}
+    \label{fig:space}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_feature_overlap_fix_3}
+    \caption{}
+    \label{fig:space}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_feature_overlap_fix_4}
+    \caption{}
     \label{fig:space}
 \end{figure}
 

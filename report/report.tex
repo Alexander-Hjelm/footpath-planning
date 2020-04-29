@@ -209,7 +209,6 @@ The value range will be $(0 < S_{T} < 1)$, where $S_{T}(A,B) = 1$ if the polygon
 % REPORT
 % TODO: Proposed fixing algorithm: building-road
 % TODO: Proposed fixing algorithm: road-road
-% TODO: Mention propagation of error, have to include all the edited features in the next pass
 % TODO: Proof read report
 
 \begin{figure}[H]
@@ -413,11 +412,6 @@ The difference in area cover can partially be explained by small utility buildin
 The low semantic accuracy has made analysis hard. The available SLU dataset from Lantmäteriet uses a plot-based subdivision of buildings, whereas OSM uses a subdivision that more closely resembles the actual building footprint as seen from above. In many cases whole city blocks are represented as single buildings, which means that many less meaningful feature matches can be found.
 As seen in table ***, about 80\% of all OSM features were found to have a 1:1 mapping to the SLU dataset, but upon further visual comparison it can be seen that many of the 1:n matches are found in a very specified area, namely the residential areas in downtown, Stockholm. This is problematic since this typical area with the same level of accessibility was likely measured with the same measuring technique, and the unsystematic positional error will likely be similar in these areas. The question is wether it comforms well to the positional error in the rest of the dataset or not. This analysis will not be carried out in this project, but could be a good subject for a future master's thesis project.
 
-\subsection{Utility in real world applications}
-
-% TODO: Interview with Todor
-
-
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_map_utility_buildings}
@@ -425,12 +419,37 @@ As seen in table ***, about 80\% of all OSM features were found to have a 1:1 ma
     \label{fig:space}
 \end{figure}
 
+\subsection{Utility in real world applications}
+
+% TODO: Interview with Todor
+
+\subsection{Feature overlap}
+
+After visual inspection of the cases where features collide, it was determined that all collision occurences can be almost exclusively classified into one of five categories:
+
+\begin{enumerate}
+\item Case 1: A building lies in paralel with a road, and the distance between the two is smaller than the minimum width of the road.
+\item Case 2: A road shares a node with a building.
+\item Case 3: A road is intersecting with certain building features.
+\item Case 4: Two roads have a minimum distance that is smaller than the sum of the minimum widths of both roads. 
+\item Case 5: Two roads share a node, and a subsequent node in one road lies within the minimum width of the other road.
+\end{enumerate}
+
+Each case is exemplified in figure X. %{TODO}
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_feature_overlap_cases}
-    \caption{The 5 identified cases over feature overlap. Top left: A building lies in paralel with a road, and the distance between the two is smaller than the minimum width of the road. Top right: A road shares a node with a building. Middle: A road is intersecting with certain building features. Bottom left: Two roads have a minimum distance that is smaller than the sum of the minimum widths of both roads. Bottom right: Two roads share a node, and a subsequent node in one road lies within the minimum width of the other road.}
+    \caption{The 5 identified cases over feature overlap. Top left: Case 1. Top right: Case 2. Middle: Case 3. Bottom left: Case 4. Bottom right: Case 5.}
     \label{fig:space}
 \end{figure}
+
+All these cases will create issues when generating the 3D mesh representation of the city.
+Conslusion: footpaths were not worse than other categories, which are included in many unity packages already
+
+Propagation of error, have to include all the edited features in the next pass
+
+(Fan et al, 2014) claimed that the positional error is largely due to the limited resolution in satellite imagery.
 
 \begin{figure}[H]
     \centering
@@ -460,10 +479,6 @@ As seen in table ***, about 80\% of all OSM features were found to have a 1:1 ma
     \label{fig:space}
 \end{figure}
 
-All these cases will create issues when generating the 3D mesh representation of the city.
-Conslusion: footpaths were not worse than other categories, which are included in many unity packages already
-
-(Fan et al, 2014) claimed that the positional error is largely due to the limited resolution in satellite imagery.
 
 \begin{thebibliography}{9}
 

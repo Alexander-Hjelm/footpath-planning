@@ -26,9 +26,7 @@
 This project assesses the feasibility of creating a 3D representation of geodata with the inclusion of pedestrian footpaths.
 \\
 Procedural modeling of road networks and even entire cities is of interest to the fields of urban planning and urban architecture.
-In recent years there has been an advent of interactive tools that aid urban planners in placing or generating features of an urban plan, particularly roads and road networks.
-These tools are created with the purpose of aiding urban planners by giving them increased visualization capabilities, and the ability to quickly perform editing both in the large scale and small scale, and quickly view the results.
-Specifically, there have been an advent of tools that exract geodata from OpenStreetMap (OSM) and generate 3D representations of real world locations by placing terrain, buildings, roads and other features.
+In recent years, there have been an advent of tools that extract geodata from OpenStreetMap (OSM) and generate 3D representations of real world locations by placing terrain, buildings, roads and other features.
 However, freely available such tools seldom include smaller roads and pedestrian footpaths such as walkways, sidewalks or trails.
 \\
 This project assesses the feasibility of creating such a service, by focusing on OSM road and building data in the Stockholm metropolitan area.
@@ -37,7 +35,8 @@ This estimate of the positional error was used to assess the integrity of the OS
 An algortitm then took the road network and made adjustments that were within the found margin of error for the OSM dataset, to eliminate as many collisions as possible.
 As secondary contributions, the completeness and shape accuracy of the OSM data set have also been estimated and commented.
 \\
-It was found that the average positional error in the OSM dataset was about 2m, and approximately 98\% of all buildings in the reference dataset were represented in the OSM dataset.
+It was found that the average positional error in the OSM dataset was about 2 meters, and approximately 98\% of all buildings in the reference dataset were represented in the OSM dataset.
+%TODO: Include a summary of the collision run
 The report concludes with a discussion of the findings of this study, and an assessment of the feasibility of generating city models with pedestrian footpaths in a number of different applications from urban planning tools to videogames.
 
 \section{Introduction}
@@ -46,11 +45,11 @@ This report covers... \cite{sampleitem2}
 
 \subsection{Research Question}
 
-This research question deals with the procedural generation of road networks from example data sets, and the edge cases that arise when dealing with footpath planning. A common problem is that footpaths are in their nature placed densely. How can the program identify critical areas where the footpath width is so large that it collides with existing roads? Can this be done so efficiently that the example-driven program can still run in real time? An additional question that arises is how much road data will be necessary to create believable procedural road networks for new zones in the Stockholm metropolitan area. How can this data be sampled and processed efficiently?
+This project has dealt with the feasibility of including footpath data when generating 3D representations of OpenStreetMap data.
 
-The previous work by Nishida et. al. has shown that it is possible to create believable procedural road maps from examples. Their program has created a network of 35 km road in less than a second, so for the application of zoning new city areas my hypothesis is that such a program can be made to run in real time with such minimal waiting time that it can be used in a real application by a city planner.
+The primary contribution is an investigation into the rate of collision between map features in OpenStreetMap. In order to create a 3D representation of geodata, individual features will be extruded to give them width, which may create situations where meshes are intersecting. The question is: how can a program identify critical areas where the footpath width is so large that it collides with existing roads? Can these collisions be easily fixed by making adjustments that are within the positional accuracy of the OpenStreetMap data? The features will be categorized according to type, so that the rate of collisions between footpaths and other features can be compared to that of other way types (primary, secondary, residential).
 
-The challenge lies in how to extract the footpath data and tie it together with the existing road map. the work by Nishida et. al. only deals with arterial and secondary roads, and I will be adding a tertiary layer of roads, wich is highly possible, but may increase the data consumption and program running time. The same applies for the statistical model that identifies colliding roads, which I will be adding on top of that.
+The secondary contribution will be an assesment of the geometrical precision of OpenStreetMap data around the Stockholm area. The positional accuracy will be needed to assess where road collisions occur and whether they can easily be corrected.
 
 \subsection{Problem Constraints}
 

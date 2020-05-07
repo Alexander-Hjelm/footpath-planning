@@ -47,15 +47,37 @@ A key issue in creating 3D representations of geodata is that since individual f
 \\
 The primary contribution is an investigation into the rate of collision between map features in OSM.
 A program has identified critical areas in the OSM dataset, where the paths are so wide that they collide with existing map features.
-This has been done both using the linear OSM road representation and on a dataset where each road has been assigned a standard width that is in line with Swedish regulations.
-The program has also calculated how many of these colliding features that can be corrected by making adjustments that are within the positional accuracy of the OSM data (See the following paragraph for the secondary contribution).
-The features will be categorized according to type, so that the rate of collisions between footpaths and other features can be compared to that of other way types (primary, secondary, residential).
 Here, features are defined as the geometrical components that comprise the OSM map.
 For the purpose of this report, features will refer mainly to roads and building footprints.
 \\
 The secondary contribution will be an assesment of the geometrical precision of OSM data around the Stockholm area.
 The positional accuracy will be estimated by comparing feature points between the OSM dataset and a reference dataset.
 The positional accuracy will be needed to assess where road collisions occur and whether they can easily be corrected.
+
+\subsection{Implementation overview}
+
+\subsubsection{Assesment of Geodata Precision}
+
+The geometrical precision study has been carried out in a number of steps that are all detailed below.
+First a feature map was found, which mapped individual features between the OSM dataset and a reference dataset.
+A program then took matching building pairs and extracted matching geometrical points after first simplifying the polygons using the Douglas-Peucker algorithm.
+Once a set of matching points has been found across the whole dataset, the average distance between them was taken as a measure of the positional accuracy.
+\\
+Additionally, a number of auxillary calculations were neccessary for this study.
+The completeness of the OSM dataset were first calculated by comparing how many features are represented in both the OSM dataset and the reference dataset.
+The completeness is needed to estimate the error boundary of the positional accuracy.
+Additionally, the shape accuracy of the OSM dataset has also been calculated and graphed as an extra verification of the similarity between the datasets.
+Shape accuracy is a measure of polygon similarity that was obtained by comparing polygon turning function between matching features, feature by feature.
+See section XX for more details about the shape accuracy measure. %TODO
+
+\subsubsection{Collision study}
+
+For the purpose of the collision study, each road has been assigned a standard width that is in line with Swedish regulations, since in the OSM dataset, roads are represented as simple polylines, lacking width.
+In a 3D representation however, it is crucial that each road object has a spacial width in order to be rendered and seen.
+After the width assignment, program has iterated over all features and calculated how many of them that overlap with any other feature, as well as the total length of the road polylines that is intersecting some other feature.
+The program has then calculated how many of these colliding features that can be corrected by making adjustments that are within the positional accuracy of the OSM data (As obtained by the previous study in this report: Assessment of Geodata Precision).
+The features will be categorized according to type, so that the rate of collisions between footpaths and other features can be compared to that of other road types.
+OSM makes the distinction between primary, secondary, residential and footpath roads, so this classification will also be used in this report.
 
 \subsection{Evaluation}
 

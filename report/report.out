@@ -6,31 +6,31 @@
 \BOOKMARK [3][-]{subsubsection.2.2.2}{Collision study}{subsection.2.2}% 6
 \BOOKMARK [2][-]{subsection.2.3}{Evaluation}{section.2}% 7
 \BOOKMARK [1][-]{section.3}{Background}{}% 8
-\BOOKMARK [1][-]{section.4}{Background of 3D City Representation}{}% 9
-\BOOKMARK [1][-]{section.5}{Related work}{}% 10
-\BOOKMARK [2][-]{subsection.5.1}{ESAL, KTH}{section.5}% 11
-\BOOKMARK [2][-]{subsection.5.2}{Problem Constraints}{section.5}% 12
-\BOOKMARK [1][-]{section.6}{The geodata used in this project}{}% 13
-\BOOKMARK [2][-]{subsection.6.1}{OSM Data}{section.6}% 14
-\BOOKMARK [2][-]{subsection.6.2}{SLU Data}{section.6}% 15
-\BOOKMARK [2][-]{subsection.6.3}{A word on coordinate systems}{section.6}% 16
-\BOOKMARK [2][-]{subsection.6.4}{Specific preprocessing for SLU-OSM geodata}{section.6}% 17
-\BOOKMARK [1][-]{section.7}{Evaluation of the quality of geodata}{}% 18
-\BOOKMARK [2][-]{subsection.7.1}{The accuracy classes that will not be focused on}{section.7}% 19
-\BOOKMARK [2][-]{subsection.7.2}{Assesment of dataset completeness}{section.7}% 20
-\BOOKMARK [2][-]{subsection.7.3}{Building correspondence}{section.7}% 21
-\BOOKMARK [2][-]{subsection.7.4}{Turning function definition}{section.7}% 22
-\BOOKMARK [2][-]{subsection.7.5}{Correspondence by building area}{section.7}% 23
-\BOOKMARK [2][-]{subsection.7.6}{Closest point and point proximity}{section.7}% 24
-\BOOKMARK [2][-]{subsection.7.7}{Notes about data processing}{section.7}% 25
-\BOOKMARK [1][-]{section.8}{Collision checks}{}% 26
-\BOOKMARK [1][-]{section.9}{Results, Metrics}{}% 27
-\BOOKMARK [2][-]{subsection.9.1}{Completeness by building area}{section.9}% 28
-\BOOKMARK [2][-]{subsection.9.2}{Positional accuracy statistics}{section.9}% 29
-\BOOKMARK [2][-]{subsection.9.3}{Shape accuracy statistics}{section.9}% 30
-\BOOKMARK [2][-]{subsection.9.4}{Way collision statistics}{section.9}% 31
-\BOOKMARK [1][-]{section.10}{Analysis and Future Work}{}% 32
-\BOOKMARK [2][-]{subsection.10.1}{Quality of the OSM dataset}{section.10}% 33
-\BOOKMARK [2][-]{subsection.10.2}{Utility in real world applications}{section.10}% 34
-\BOOKMARK [2][-]{subsection.10.3}{Feature overlap}{section.10}% 35
-\BOOKMARK [2][-]{subsection.10.4}{Suggested algorithms for correcting feature overlap}{section.10}% 36
+\BOOKMARK [2][-]{subsection.3.1}{Background of 3D City Representation}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.2}{Related work}{section.3}% 10
+\BOOKMARK [2][-]{subsection.3.3}{ESAL, KTH}{section.3}% 11
+\BOOKMARK [2][-]{subsection.3.4}{Problem Constraints}{section.3}% 12
+\BOOKMARK [1][-]{section.4}{The geodata used in this project}{}% 13
+\BOOKMARK [2][-]{subsection.4.1}{OSM Data}{section.4}% 14
+\BOOKMARK [2][-]{subsection.4.2}{SLU Data}{section.4}% 15
+\BOOKMARK [2][-]{subsection.4.3}{A word on coordinate systems}{section.4}% 16
+\BOOKMARK [2][-]{subsection.4.4}{Specific preprocessing for SLU-OSM geodata}{section.4}% 17
+\BOOKMARK [1][-]{section.5}{Evaluation of the quality of geodata}{}% 18
+\BOOKMARK [2][-]{subsection.5.1}{The accuracy classes that will not be focused on}{section.5}% 19
+\BOOKMARK [2][-]{subsection.5.2}{Assesment of dataset completeness}{section.5}% 20
+\BOOKMARK [2][-]{subsection.5.3}{Building correspondence}{section.5}% 21
+\BOOKMARK [2][-]{subsection.5.4}{Turning function definition}{section.5}% 22
+\BOOKMARK [2][-]{subsection.5.5}{Correspondence by building area}{section.5}% 23
+\BOOKMARK [2][-]{subsection.5.6}{Closest point and point proximity}{section.5}% 24
+\BOOKMARK [2][-]{subsection.5.7}{Notes about data processing}{section.5}% 25
+\BOOKMARK [1][-]{section.6}{Collision checks}{}% 26
+\BOOKMARK [1][-]{section.7}{Results, Metrics}{}% 27
+\BOOKMARK [2][-]{subsection.7.1}{Completeness by building area}{section.7}% 28
+\BOOKMARK [2][-]{subsection.7.2}{Positional accuracy statistics}{section.7}% 29
+\BOOKMARK [2][-]{subsection.7.3}{Shape accuracy statistics}{section.7}% 30
+\BOOKMARK [2][-]{subsection.7.4}{Way collision statistics}{section.7}% 31
+\BOOKMARK [1][-]{section.8}{Analysis and Future Work}{}% 32
+\BOOKMARK [2][-]{subsection.8.1}{Quality of the OSM dataset}{section.8}% 33
+\BOOKMARK [2][-]{subsection.8.2}{Utility in real world applications}{section.8}% 34
+\BOOKMARK [2][-]{subsection.8.3}{Feature overlap}{section.8}% 35
+\BOOKMARK [2][-]{subsection.8.4}{Suggested algorithms for correcting feature overlap}{section.8}% 36

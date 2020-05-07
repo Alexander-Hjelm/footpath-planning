@@ -44,14 +44,18 @@ As secondary contributions, the completeness and shape accuracy of the OSM data 
 \subsection{Research Question}
 
 This project has dealt with the feasibility of including footpath data when generating 3D representations of OpenStreetMap (OSM) data.
+A key issue in creating 3D representations of geodata is that since individual features will be extruded to give them width, situations may arise where the generated 3D meshes are intersecting.
 \\
 The primary contribution is an investigation into the rate of collision between map features in OSM.
-In order to create a 3D representation of geodata, individual features will be extruded to give them width, which may create situations where meshes are intersecting.
-The question is: how can a program identify critical areas where the footpath width is so large that it collides with existing roads?
-Can these collisions be easily fixed by making adjustments that are within the positional accuracy of the OSM data?
+A program has identified critical areas in the OSM dataset, where the paths are so wide that they collide with existing map features.
+This has been done both using the linear OSM road representation and on a dataset where each road has been assigned a standard width that is in line with Swedish regulations.
+The program has also calculated how many of these colliding features that can be corrected by making adjustments that are within the positional accuracy of the OSM data (See the following paragraph for the secondary contribution).
 The features will be categorized according to type, so that the rate of collisions between footpaths and other features can be compared to that of other way types (primary, secondary, residential).
+Here, features are defined as the geometrical components that comprise the OSM map.
+For the purpose of this report, features will refer mainly to roads and building footprints.
 \\
 The secondary contribution will be an assesment of the geometrical precision of OSM data around the Stockholm area.
+The positional accuracy will be estimated by comparing feature points between the OSM dataset and a reference dataset.
 The positional accuracy will be needed to assess where road collisions occur and whether they can easily be corrected.
 
 \subsection{Evaluation}

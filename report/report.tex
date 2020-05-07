@@ -23,21 +23,17 @@
 
 \section{Abstract}
 
-This project assesses the feasibility of creating a 3D representation of geodata with the inclusion of pedestrian footpaths.
+This project assesses the feasibility of creating a 3D representation of OpenStreetMap (OSM) geodata with the inclusion of pedestrian footpaths, by focusing on OSM road and building data in the Stockholm metropolitan area.
 \\
-Procedural modeling of road networks and even entire cities is of interest to the fields of urban planning and urban architecture.
-In recent years, there have been an advent of tools that extract geodata from OpenStreetMap (OSM) and generate 3D representations of real world locations by placing terrain, buildings, roads and other features.
-However, freely available such tools seldom include smaller roads and pedestrian footpaths such as walkways, sidewalks or trails.
-\\
-This project assesses the feasibility of creating such a service, by focusing on OSM road and building data in the Stockholm metropolitan area.
 An estimate of the positional accuracy of OSM data has been obtained by comparing OSM positional data to a dataset with a known accuracy, which was obtained from the Swedish National Land Survey.
-This estimate of the positional error was used to assess the integrity of the OSM Stockholm road network, by locating critical points where supplying the roads and paths with indivdual widths would cause collision with other features.
-An algortitm then took the road network and made adjustments that were within the found margin of error for the OSM dataset, to eliminate as many collisions as possible.
-As secondary contributions, the completeness and shape accuracy of the OSM data set have also been estimated and commented.
-\\
 It was found that the average positional error in the OSM dataset was about 2 meters, and approximately 98\% of all buildings in the reference dataset were represented in the OSM dataset.
-%TODO: Include a summary of the collision run
+\\
+This estimate of the positional error was used to assess the integrity of the OSM Stockholm road network, by locating critical points where extending the roads and paths with indivdual widths would cause collision with other features.
+An algortitm then took the road network and made adjustments that were within the found margin of error for the OSM dataset, to eliminate as many collisions as possible.
+It was found that extending all roads with a standard width led to collisions between roughly 12\% of all roads in the dataset. The total length of road that intersected with other features was less than 0.1\% of the total road length. It was measured that roughly 80\% of these colliding features could be corrected by simple geometrical translation by a distance smaller than the posiional accuracy of the OSM dataset. Similarily, the amount of colliding road by length that could be corrected was calculated to around 99\%.
+\\
 The report concludes with a discussion of the findings of this study, and an assessment of the feasibility of generating city models with pedestrian footpaths in a number of different applications from urban planning tools to videogames.
+As secondary contributions, the completeness and shape accuracy of the OSM data set have also been estimated and commented.
 
 \section{Introduction}
 
@@ -83,6 +79,9 @@ Some of the most prominent examples are CityEngine (made by the startup Procedur
 But such tools are as of today not commonly applied in urbanist practises, due to failures in reflecting the unique workspace of arcitects and their design needs. Urban arcitecture is a social factors, stakeholders. Each arcitect is an actor in a continously developing environment, and affecting that environment in a complex manner through their action.
 
 (Stojanivski, 2020)
+
+In recent years, there have been an advent of tools that extract geodata from OpenStreetMap (OSM) and generate 3D representations of real world locations by placing terrain, buildings, roads and other features.
+However, freely available such tools seldom include smaller roads and pedestrian footpaths such as walkways, sidewalks or trails.
 
 Additionally, the topic is of interest for 3D content creators in for example the fields of video game design or 3D animation. A trend in these fields is using methods of procedural modeling to create large amounts of 3D content quickly and efficiently, while requiring as little hand modeling as possible. Studios who create large worlds are often interested in solutions that generate large road networks without any hand modeling.
 Navigation agents, they might fail navigating when faced with a too narrow path or intersecting obstacles
@@ -373,7 +372,7 @@ Building matching statistics:
     Edge length, colliding  & 110.67 km     & 66.18 km     & 9389.30 m   & 20.41 km    \\
     Features, percent       & 12.05 \%      & 9.81 \%      & 13.53 \%    & 16.55 \%    \\
     Nodes, percent          & 0.11 \%       & 0.04 \%      & 0.07 \%     & 0.20 \%     \\
-    Edge length, percent    & 0.09 \%       & 0.04 \%      & 0.03 \%     & 0133 \%
+    Edge length, percent    & 0.09 \%       & 0.04 \%      & 0.03 \%     & 0.13 \%
 
 \end{tabular}
 \end{table}

@@ -175,8 +175,6 @@ The temporal accuracy will not be assessed as this projects focuses on comparing
 
 The logical accuracy will not be assessed because the underlying logical relations between features in both maps serve no purpose to this project.
 
-\section{Dataset quality evaluation}
-
 \subsection{Assesment of dataset completeness}
 
 (Fan et al., 2014) used the total building area in their reference dataset and the OSM dataset to assess the completeness of OSM data. The motivation for this is to eliminate semantic differences between both datasets. A very common example of a semantic error when comparing geographic data is that a large building in one dataset may be segmented into several smaller ones in the other, that is to say a building in one set is represented as an aggreation of mutliple buildings in the other set. This makes one-to-one object mapping impossible. Thus using building area as an estimator for completeness solves this issue much better than i.e. the number of buildings or other objects in each dataset.
@@ -280,13 +278,7 @@ The final problem is that even when building polygons have been matched between 
 
 Finally, when two building footprints and their vertices have been mapped, we will use the offset of matching vertices as a measure of positional error. The average and variance in vertex spread will be calculated and used to make an assessment of the geometric precision of the OSM dataset, and this precision will further be used to form an upper boundary on geometrical corrections that can be made to the map once it has been imported into the application.
 
-\section{Implementation}
-
-In this implementation, roads of different types were allowed to merge into one another to form common intersections. To facilitate this, it was neccessary to work with a path-by-path representation of the point data. When two path share a node with common coordinates, they form an intersection which can be of multiple different types.
-
-% TODO: Write disposition for implementation of the collision checker
-
-\section{Notes about data processing}
+\subsection{Notes about data processing}
 
 Once data from the both sets had been extracted, they looked dissimilar. (Show picture) Had to go over all OSM buildings that intersected with the query box and remove them, along with any SLU buildings that intersected with them.
 
@@ -295,6 +287,9 @@ When calculating the area overlap we used the fact that multipolygons in geojson
 However, when calculating the relative area overlap, this becomes unesseccary since any semantically incorrect subdivision of the polygon will always be inside the bounding polygon.
 
 \section{Collision checks}
+
+% TODO: Write disposition for implementation of the collision checker
+In this implementation, roads of different types were allowed to merge into one another to form common intersections. To facilitate this, it was neccessary to work with a path-by-path representation of the point data. When two path share a node with common coordinates, they form an intersection which can be of multiple different types.
 
 The default minimum widths were obtained from (Lantmäteriet, 20). The standard minimum width for a two-lane road in Sweden is 6.5 meters.
 

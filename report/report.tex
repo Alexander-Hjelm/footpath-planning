@@ -43,11 +43,15 @@ As secondary contributions, the completeness and shape accuracy of the OSM data 
 
 \subsection{Research Question}
 
-This project has dealt with the feasibility of including footpath data when generating 3D representations of OpenStreetMap data.
-The primary contribution is an investigation into the rate of collision between map features in OpenStreetMap.
+This project has dealt with the feasibility of including footpath data when generating 3D representations of OpenStreetMap (OSM) data.
+\\
+The primary contribution is an investigation into the rate of collision between map features in OSM.
 In order to create a 3D representation of geodata, individual features will be extruded to give them width, which may create situations where meshes are intersecting.
-The question is: how can a program identify critical areas where the footpath width is so large that it collides with existing roads? Can these collisions be easily fixed by making adjustments that are within the positional accuracy of the OpenStreetMap data? The features will be categorized according to type, so that the rate of collisions between footpaths and other features can be compared to that of other way types (primary, secondary, residential).
-The secondary contribution will be an assesment of the geometrical precision of OpenStreetMap data around the Stockholm area.
+The question is: how can a program identify critical areas where the footpath width is so large that it collides with existing roads?
+Can these collisions be easily fixed by making adjustments that are within the positional accuracy of the OSM data?
+The features will be categorized according to type, so that the rate of collisions between footpaths and other features can be compared to that of other way types (primary, secondary, residential).
+\\
+The secondary contribution will be an assesment of the geometrical precision of OSM data around the Stockholm area.
 The positional accuracy will be needed to assess where road collisions occur and whether they can easily be corrected.
 
 \subsection{Evaluation}
@@ -73,7 +77,7 @@ But such tools are as of today not commonly applied in urbanist practises, due t
 
 (Stojanivski, 2020)
 
-In recent years, there have been an advent of tools that extract geodata from OpenStreetMap (OSM) and generate 3D representations of real world locations by placing terrain, buildings, roads and other features.
+In recent years, there have been an advent of tools that extract geodata from OSM and generate 3D representations of real world locations by placing terrain, buildings, roads and other features.
 However, freely available such tools seldom include smaller roads and pedestrian footpaths such as walkways, sidewalks or trails.
 
 Additionally, the topic is of interest for 3D content creators in for example the fields of video game design or 3D animation. A trend in these fields is using methods of procedural modeling to create large amounts of 3D content quickly and efficiently, while requiring as little hand modeling as possible. Studios who create large worlds are often interested in solutions that generate large road networks without any hand modeling.
@@ -86,9 +90,9 @@ The thesis work will be carried out at the Embodied Social Agents Lab (ESAL) at 
 \section{Related work}
 Van Oorts criteria for evaluating the quality of geographical information, which at the time of publication received attention from surveyors and cartographers. (van Oort, 2006)
 
-Since then a number of publications have examined slices of geodata from van Oort's criteria. In 2008, (Haklay, 2010) conducted such a study to estimate of the quality of OpenStreetMap positional geodata in London and England. Since the OpenStreetMap (OSM) project started in London it was thought that OSM data in the London metropolitan area would be representative of the highest quality data available, and therefore a good indicator for the whole global OSM dataset. The study was conducted by comparing OSM data to Ordnance Survey datasets. The study showed that the OSM dataset had a rough positional accuracy of 6 meters from the reference dataset. However, at the time of the study, the OSM project had captured roughly 29\% of the area of England, meaning that the data completeness was fairly low.
+Since then a number of publications have examined slices of geodata from van Oort's criteria. In 2008, (Haklay, 2010) conducted such a study to estimate of the quality of OSM positional geodata in London and England. Since the OSM project started in London it was thought that OSM data in the London metropolitan area would be representative of the highest quality data available, and therefore a good indicator for the whole global OSM dataset. The study was conducted by comparing OSM data to Ordnance Survey datasets. The study showed that the OSM dataset had a rough positional accuracy of 6 meters from the reference dataset. However, at the time of the study, the OSM project had captured roughly 29\% of the area of England, meaning that the data completeness was fairly low.
 
-The next notable study to assess the quality of OpenStreetMap data was published by (Kunze, 2012). The study applied different methods to assess the completeness of OSM data in two federal states in Germany, mainly by analysing the area difference between the OSM dataset and an administrative dataset.
+The next notable study to assess the quality of OSM data was published by (Kunze, 2012). The study applied different methods to assess the completeness of OSM data in two federal states in Germany, mainly by analysing the area difference between the OSM dataset and an administrative dataset.
 
 Finally, a notable study in 2013-2014, conducted by researchers from various universities in Norway and Germany (Fan et al, 2014), examined the quality and accuracy in building footprint data of the Munich area, at a time and place where the completeness of the OSM dataset was significantly higher (the results of their study showed that the OSM had captured close to 100\% of all building footprints). At the time Munich was one of the most developed cities in OSM. Their study included an insight in the geometrical calculations neccessary to match features and points between two datasets, and how to reliably calculate the metrics needed for the most important and assessible of van Oorts criteria. Their study revealed that although the feature completeness of OSM was high, some architectural details were missing. The results reveal that the positional accuracy of OSM data at the time was about 4 meters.
 
@@ -103,14 +107,14 @@ Finally, a notable study in 2013-2014, conducted by researchers from various uni
 
 \section{The geodata used in this project}
 
-For the purpose of this project, the OpenStreetMap road dataset has been used in the presentation of the road network around Stockholm, and in the generative process of new road networks. To assess and correct path widths and path node locations, the OpenStreetMap building footprint dataset has also been used. To make an assessment on the quality and precision of the OpenStreetMap data, the SLU map from the Swedish National Land Survey was used in comparison with the OpenStreetMap map. The SLU map conatins only building footprints and property limits. Both map segments were obtained around the Stockholm greater metropolitan area.
+For the purpose of this project, the OOSMroad dataset has been used in the presentation of the road network around Stockholm, and in the generative process of new road networks. To assess and correct path widths and path node locations, the OSM building footprint dataset has also been used. To make an assessment on the quality and precision of the OSM data, the SLU map from the Swedish National Land Survey was used in comparison with the OSM map. The SLU map conatins only building footprints and property limits. Both map segments were obtained around the Stockholm greater metropolitan area.
 The exact map segments that were extracted were in both cases rectangular boundaries with the following coordinates in WGS84: (N: 59.42, E: 18.15, S: 59.23, W: 17.79).
 Both datasets were collcted on March 18th, 2020.
 
 \subsection{OSM Data}
 
 Volunteered Geographical Information.
-OpenStreetMap road data and building footprints are commonly obtained by manually tracing features in commercially available satellite images. Such images have a limit on their resolution which puts a theoretical limit on the accuracy of map features compared to their real-world equivalents (Haklay 2010). Particularily the high resolution imagery from Bing in 2010 led to an increase in building information in OpenStreetMap (Fan et al, 2014).
+OSM road data and building footprints are commonly obtained by manually tracing features in commercially available satellite images. Such images have a limit on their resolution which puts a theoretical limit on the accuracy of map features compared to their real-world equivalents (Haklay 2010). Particularily the high resolution imagery from Bing in 2010 led to an increase in building information in OSM (Fan et al, 2014).
 
 To separate sidewalks from detached footpaths, I used the fact that OSM generally provides sidewalks with the same name as the adjacent motorway. Thus they can be paired together and measured against each other.
 
@@ -125,7 +129,7 @@ Building features have a position accuracy requirement of 2 meters.
 
 \subsection{A word on coordinate systems}
 
-The SLU dataset is delivered in the SWEREF 99 TM (Lantmäteriet, 2019). SWEREF 99 TM is a projected coordinate system and there is no linear transformation to WGS 48, which OpenStreetMap uses (OSM 19). The coordinate conversions for this paper were obtained using proj: a Linux commandline application for geospatial coordinate conversion.
+The SLU dataset is delivered in the SWEREF 99 TM (Lantmäteriet, 2019). SWEREF 99 TM is a projected coordinate system and there is no linear transformation to WGS 48, which OSM uses (OSM 19). The coordinate conversions for this paper were obtained using proj: a Linux commandline application for geospatial coordinate conversion.
 
 \subsection{Specific preprocessing for SLU-OSM geodata}
 
@@ -171,8 +175,8 @@ The logical accuracy will not be assessed because the underlying logical relatio
 
 \subsection{Assesment of dataset completeness}
 
-(Fan et al., 2014) used the total building area in their reference dataset and the OpenStreetMap dataset to assess the completeness of OpenStreetMap data. The motivation for this is to eliminate semantic differences between both datasets. A very common example of a semantic error when comparing geographic data is that a large building in one dataset may be segmented into several smaller ones in the other, that is to say a building in one set is represented as an aggreation of mutliple buildings in the other set. This makes one-to-one object mapping impossible. Thus using building area as an estimator for completeness solves this issue much better than i.e. the number of buildings or other objects in each dataset.
-This project will use the building area in the OSM dataset versus that of the SLU dataset to determine the completeness of OpenStreetMap building data in the Stockholm area, which will then be used as an argument for how accurate the building correspondence and point proximity measures can be.
+(Fan et al., 2014) used the total building area in their reference dataset and the OSM dataset to assess the completeness of OSM data. The motivation for this is to eliminate semantic differences between both datasets. A very common example of a semantic error when comparing geographic data is that a large building in one dataset may be segmented into several smaller ones in the other, that is to say a building in one set is represented as an aggreation of mutliple buildings in the other set. This makes one-to-one object mapping impossible. Thus using building area as an estimator for completeness solves this issue much better than i.e. the number of buildings or other objects in each dataset.
+This project will use the building area in the OSM dataset versus that of the SLU dataset to determine the completeness of OSM building data in the Stockholm area, which will then be used as an argument for how accurate the building correspondence and point proximity measures can be.
 
 \begin{figure}[H]
     \centering
@@ -222,7 +226,7 @@ The value range will be $(0 < S_{T} < 1)$, where $S_{T}(A,B) = 1$ if the polygon
 
 \subsection{Correspondence by building area}
 
-(Fan et al., 2014) further discussed how the relative overlap in building area can be used to determine building correspondence between datasets, in cases where there is not much displacement between OSM building footprints data and the reference data set. Figure X (TODO) shows a typical comparison between the OpenStreetMap and SLU datasets, and by eyesight it was determined that the displacement of features is small. The relative building overlap between the OSM and SLU datasets will be defined as folows, given the footprints of any building in the OSM set ($foot_{OSM}$) and the SLU set ($foot_{SLU}$):
+(Fan et al., 2014) further discussed how the relative overlap in building area can be used to determine building correspondence between datasets, in cases where there is not much displacement between OSM building footprints data and the reference data set. Figure X (TODO) shows a typical comparison between the OSM and SLU datasets, and by eyesight it was determined that the displacement of features is small. The relative building overlap between the OSM and SLU datasets will be defined as folows, given the footprints of any building in the OSM set ($foot_{OSM}$) and the SLU set ($foot_{SLU}$):
 
 \begin{center}
     $S_{RO}(foot_{OSM}, foot_{SLU}) = \frac{A_{Overlap}}{min(A_{foot_{OSM}}, A_{foot_{SLU}}))}$
@@ -270,7 +274,7 @@ The final problem is that even when building polygons have been matched between 
     \caption{Douglas-Peucker}
 \end{algorithm}
 
-Finally, when two building footprints and their vertices have been mapped, we will use the offset of matching vertices as a measure of positional error. The average and variance in vertex spread will be calculated and used to make an assessment of the geometric precision of the OpenStreetMap dataset, and this precision will further be used to form an upper boundary on geometrical corrections that can be made to the map once it has been imported into the application.
+Finally, when two building footprints and their vertices have been mapped, we will use the offset of matching vertices as a measure of positional error. The average and variance in vertex spread will be calculated and used to make an assessment of the geometric precision of the OSM dataset, and this precision will further be used to form an upper boundary on geometrical corrections that can be made to the map once it has been imported into the application.
 
 \section{Implementation}
 
@@ -398,11 +402,11 @@ After collision correction:
 
 \subsection{Quality of the OSM dataset}
 
-Accuracy: we can assume that Stockholm, being one of the more developed cities in one of the most technologically connected country in the world, would be fairly well mapped in OpenStreetMap. The positional accuracy has improved by roughly 3.5 meters since the study by (Haklay, 2010), and by roughly 1.5 meters since the study by (Fan et al, 2014), if the SLU reference dataset is to be believed as absolute.
+Accuracy: we can assume that Stockholm, being one of the more developed cities in one of the most technologically connected country in the world, would be fairly well mapped in OSM. The positional accuracy has improved by roughly 3.5 meters since the study by (Haklay, 2010), and by roughly 1.5 meters since the study by (Fan et al, 2014), if the SLU reference dataset is to be believed as absolute.
 
 The completeness analysis by building area shows that the OSM Stockholm dataset has high completeness in terms of both building area and counted features, in the same level as the study of Munich by (Fan et al, 2014).
 
-The difference in area cover can partially be explained by small utility buildings that are often not represented in the OpenStreetMap dataset. Particularily the residential areas in downtown, Stockholm, are characteristic in that each city block consists of a street front and an open, communal compound in the middle, inside of which there are usually a number of small utility buildings such as bicycle garages, toolsheds, refuse rooms and such. These buildings are likely hard to make out and trace on publicly available satellite image data. They are, according to (Fan et al, 2014) occluded by their surroundings due to shadows or forestry. This appears to be a large consensus in the field.
+The difference in area cover can partially be explained by small utility buildings that are often not represented in the OSM dataset. Particularily the residential areas in downtown, Stockholm, are characteristic in that each city block consists of a street front and an open, communal compound in the middle, inside of which there are usually a number of small utility buildings such as bicycle garages, toolsheds, refuse rooms and such. These buildings are likely hard to make out and trace on publicly available satellite image data. They are, according to (Fan et al, 2014) occluded by their surroundings due to shadows or forestry. This appears to be a large consensus in the field.
 
 The low semantic accuracy has made analysis hard. The available SLU dataset from Lantmäteriet uses a plot-based subdivision of buildings, whereas OSM uses a subdivision that more closely resembles the actual building footprint as seen from above. In many cases whole city blocks are represented as single buildings, which means that many less meaningful feature matches can be found.
 As seen in table ***, about 80\% of all OSM features were found to have a 1:1 mapping to the SLU dataset, but upon further visual comparison it can be seen that many of the 1:n matches are found in a very specified area, namely the residential areas in downtown, Stockholm. This is problematic since this typical area with the same level of accessibility was likely measured with the same measuring technique, and the unsystematic positional error will likely be similar in these areas. The question is wether it comforms well to the positional error in the rest of the dataset or not. This analysis will not be carried out in this project, but could be a good subject for a future master's thesis project.

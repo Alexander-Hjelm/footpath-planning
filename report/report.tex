@@ -67,7 +67,9 @@ The evaluation plan will consist of programmatic evaluations and quantifyable me
   2. If I let my program generate a large number of city parcels from a dataset, the resulting feature distribution should look like to the source dataset, and unlike datasets of other cities.
 These distributions could be created for primary, secondary roads and footpaths separately.
 
-\subsection{Background}
+\section{Background}
+
+\section{Background of 3D City Representation}
 
 Procedural modeling of road networks is of interest to the fields of urban planning and urban architecture. In recent years there has been an advent of interactive tools that aid urban planners in placing or generating features of an urban plan, particularly roads and road networks. Procedural and AI solutions that aid the arcitect in a form of human-machine symbiosis.
 
@@ -87,9 +89,6 @@ Additionally, the topic is of interest for 3D content creators in for example th
 Navigation agents, they might fail navigating when faced with a too narrow path or intersecting obstacles
 Using a road network to creates an underlying navmesh
 
-\subsection{ESAL, KTH}
-The thesis work will be carried out at the Embodied Social Agents Lab (ESAL) at the Department of Computational Science and Technology (CST). The lab has before been working on systems for generating procedural urban environments, and are interested in the possibility of generating more detailed maps than have been done before, using example-based methods to preserve the aesthetic look of a greater metropolitan area. The lab is particularly interested in the generation of footpaths, since most commercial software that import road maps only import arterial and secondary car roads, and do not include pedestrian walkways, cycle paths and such smaller roads.
-
 \section{Related work}
 Van Oorts criteria for evaluating the quality of geographical information, which at the time of publication received attention from surveyors and cartographers. (van Oort, 2006)
 
@@ -98,6 +97,9 @@ Since then a number of publications have examined slices of geodata from van Oor
 The next notable study to assess the quality of OSM data was published by (Kunze, 2012). The study applied different methods to assess the completeness of OSM data in two federal states in Germany, mainly by analysing the area difference between the OSM dataset and an administrative dataset.
 
 Finally, a notable study in 2013-2014, conducted by researchers from various universities in Norway and Germany (Fan et al, 2014), examined the quality and accuracy in building footprint data of the Munich area, at a time and place where the completeness of the OSM dataset was significantly higher (the results of their study showed that the OSM had captured close to 100\% of all building footprints). At the time Munich was one of the most developed cities in OSM. Their study included an insight in the geometrical calculations neccessary to match features and points between two datasets, and how to reliably calculate the metrics needed for the most important and assessible of van Oorts criteria. Their study revealed that although the feature completeness of OSM was high, some architectural details were missing. The results reveal that the positional accuracy of OSM data at the time was about 4 meters.
+
+\subsection{ESAL, KTH}
+The thesis work will be carried out at the Embodied Social Agents Lab (ESAL) at the Department of Computational Science and Technology (CST). The lab has before been working on systems for generating procedural urban environments, and are interested in the possibility of generating more detailed maps than have been done before, using example-based methods to preserve the aesthetic look of a greater metropolitan area. The lab is particularly interested in the generation of footpaths, since most commercial software that import road maps only import arterial and secondary car roads, and do not include pedestrian walkways, cycle paths and such smaller roads.
 
 \subsection{Problem Constraints}
 

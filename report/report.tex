@@ -182,7 +182,7 @@ The SLU map is delivered with cropped buildings to exactly matched the query coo
 Therefore it was neccessary to crop both datasets to ensure that all buildings were complete and had matching candidates in the other set.
 (Show a picture)
 
-\section{Evaluation of the quality of geodata}
+\section{Implemenation: Evaluation of the quality of geodata}
 
 (Haklay 2010) presents a comprehesive list of 8 accuracy classes when it comes to evaluating the quality of geographic information (van Oorts criteria)
 
@@ -319,9 +319,8 @@ When calculating the area overlap we used the fact that multipolygons in geojson
 
 However, when calculating the relative area overlap, this becomes unesseccary since any semantically incorrect subdivision of the polygon will always be inside the bounding polygon.
 
-\section{Collision checks}
+\section{Implementation: Collision checks}
 
-% TODO: Write disposition for implementation of the collision checker
 The maximum distance between two features was set to 2 times the positional accuracy, since then there will always be ample room to make changes to any features that would collide with the newly noved nodes, and thus we do not need to worry about feature collisions propagating.
 
 In this implementation, roads of different types were allowed to merge into one another to form common intersections. To facilitate this, it was neccessary to work with a path-by-path representation of the point data. When two path share a node with common coordinates, they form an intersection which can be of multiple different types.

@@ -228,17 +228,9 @@ This project will use the building area in the OSM dataset versus that of the SL
     \label{fig:space}
 \end{figure}
 
-\subsection{Building correspondence}
+\subsection{Shape accuracy definition}
 
-Feature mapping
-The building footprint correspondence will be evaluated using a similarity function that assesses the turning funciton and relative area overlap. The similarity function between any building in the OSM data set and any building in the SLU datasets will be defined as a function of their respective footprints ($foot_{OSM}, foot_{SLU}$), as follows:
-\begin{center}
-    $S(foot_{OSM}, foot_{SLU}) = S_{T}(foot_{OSM}, foot_{SLU}) + S_{RO}(foot_{OSM}, foot_{SLU})$
-\end{center}
-where $S_{T}$ measures the difference in turning function and $S_{RO}$ measures the relative overlap between the footprints.
-
-\subsection{Turning function definition}
-
+The building footprint correspondence will be evaluated using a similarity function that difference between the turning funcitons of matching building footprints in both datasets.
 The turning function was first defined by Arkin et al. (1991), as a method for measuring the similarity of two polygons. The Turning function $T_c(l)$ measures the cumulative angle of the polygon's counter-clockwise tangent, as a function of the cumulative normalized length l. This project uses the turning function as it is defined by (Fan et al., 2014). For a polygon with vertices ${v_1 ... v_n}$ and line segments ${e_1 ... e_n}$ It is defined as follows.
 Fix a starting vertex $v_1$.
 The tangent angle at $v_1$ is $\theta_{n,1}$. This is the angle between the neighbouring line segments $e_n$ and $e_1$.

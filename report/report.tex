@@ -63,6 +63,29 @@ The secondary contribution will be an assesment of the geometrical precision of 
 The positional accuracy will be estimated by comparing feature points between the OSM dataset and a reference dataset.
 The positional accuracy will be needed to assess where road collisions occur and whether they can easily be corrected.
 
+\subsection{Evaluation}
+
+The primary study of the rate of collision between roads and other features, will serve to obtain the following three metrics:
+
+\begin{enumerate}
+    \item The number of road features that collide with any other feature (road or building).
+    \item The number of road edges that intersect with any other building polygon or road polyline.
+    \item The total length in meters of these edges will also be calculated as a measure of the total length of road.
+\end{enumerate}
+
+The road features will be categorized according to type, so that the rate of collisions between footpaths and other features can be compared to that of other road types.
+OSM mainly makes the distinction between primary, secondary, residential and footpath roads, so this classification will also be used in this report.
+The above features will be calculated for each road type separately by summing over each road feature of a certain type.
+
+Following this, an algorithm will find the exact same metrics with regards to how many road features that can in theory be corrected by simple geometrical translation of their vertices.
+This will also be preseneted in terms of the number of road features, the number of edges and the total length in meters of remaining colliding road.
+
+The secondary study about geodata precision will primarily serve to obtain an estimate of the positional accuracy of the OSM dataset, in meters.
+A number of auxillary metrics will be needed to estimate the domain of error on the positional accuracy, namely the feature completeness and shape accuracy of the OSM dataset.
+The completeness of the OSM dataset will be taken as a the number of features are represented in both datasets, as a perentage of the total numer of features in the reference dataset.
+Shape accuracy is a measure of polygon similarity that was obtained by comparing polygon turning function between matching features, feature by feature.
+See section XX for more details about the shape accuracy measure. %TODO
+
 \subsection{Implementation overview}
 
 \subsubsection{Assesment of Geodata Precision}
@@ -76,8 +99,6 @@ Additionally, a number of auxillary calculations were neccessary for this study.
 The completeness of the OSM dataset were first calculated by comparing how many features are represented in both the OSM dataset and the reference dataset.
 The completeness is needed to estimate the error boundary of the positional accuracy.
 Additionally, the shape accuracy of the OSM dataset has also been calculated and graphed as an extra verification of the similarity between the datasets.
-Shape accuracy is a measure of polygon similarity that was obtained by comparing polygon turning function between matching features, feature by feature.
-See section XX for more details about the shape accuracy measure. %TODO
 
 \subsubsection{Collision study}
 
@@ -85,18 +106,6 @@ For the purpose of the collision study, each road has been assigned a standard w
 In a 3D representation however, it is crucial that each road object has a spacial width in order to be rendered and seen.
 After the width assignment, program has iterated over all features and calculated how many of them that overlap with any other feature, as well as the total length of the road polylines that is intersecting some other feature.
 The program has then calculated how many of these colliding features that can be corrected by making adjustments that are within the positional accuracy of the OSM data (As obtained by the previous study in this report: Assessment of Geodata Precision).
-The features will be categorized according to type, so that the rate of collisions between footpaths and other features can be compared to that of other road types.
-OSM makes the distinction between primary, secondary, residential and footpath roads, so this classification will also be used in this report.
-
-\subsection{Evaluation}
-
-The question will be examined primarily by creating a piece of software that can generate urban maps with primary and secondary roads, as well as footpaths, from example.
-I will experiment with different methods of collecting road data as well as different sample amounts and densities.
-
-The evaluation plan will consist of programmatic evaluations and quantifyable metrics. My main idea is to sample metrics about intersections only (number of connecting roads, the angles between them, distance to connecting intersections, curviness of roads, etc). If I can sample all that and create a distribution for a few different cities, I have the two following hypothesises:
-  1. There should be selection of features that produce an observable difference in the distributions between cities that look vastly different.
-  2. If I let my program generate a large number of city parcels from a dataset, the resulting feature distribution should look like to the source dataset, and unlike datasets of other cities.
-These distributions could be created for primary, secondary roads and footpaths separately.
 
 \section{Background}
 

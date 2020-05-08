@@ -1,22 +1,22 @@
 \babel@toc {english}{}
 \contentsline {section}{\numberline {1}Abstract}{1}{section.1}
-\contentsline {section}{\numberline {2}Introduction}{4}{section.2}
-\contentsline {subsection}{\numberline {2.1}Research Question}{4}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Implementation overview}{4}{subsection.2.2}
-\contentsline {subsubsection}{\numberline {2.2.1}Assesment of Geodata Precision}{4}{subsubsection.2.2.1}
-\contentsline {subsubsection}{\numberline {2.2.2}Collision study}{5}{subsubsection.2.2.2}
-\contentsline {subsection}{\numberline {2.3}Evaluation}{5}{subsection.2.3}
+\contentsline {section}{\numberline {2}Introduction}{3}{section.2}
+\contentsline {subsection}{\numberline {2.1}Research Question}{3}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Evaluation}{3}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Implementation overview}{4}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}Assesment of Geodata Precision}{4}{subsubsection.2.3.1}
+\contentsline {subsubsection}{\numberline {2.3.2}Collision study}{4}{subsubsection.2.3.2}
 \contentsline {section}{\numberline {3}Background}{5}{section.3}
 \contentsline {subsection}{\numberline {3.1}Background of 3D City Representation}{5}{subsection.3.1}
 \contentsline {subsection}{\numberline {3.2}Related work}{6}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}ESAL, KTH}{7}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.3}ESAL, KTH}{6}{subsection.3.3}
 \contentsline {subsection}{\numberline {3.4}Problem Constraints}{7}{subsection.3.4}
-\contentsline {section}{\numberline {4}The geodata used in this project}{8}{section.4}
-\contentsline {subsection}{\numberline {4.1}OSM Data}{8}{subsection.4.1}
+\contentsline {section}{\numberline {4}The geodata used in this project}{7}{section.4}
+\contentsline {subsection}{\numberline {4.1}OSM Data}{7}{subsection.4.1}
 \contentsline {subsection}{\numberline {4.2}SLU Data}{8}{subsection.4.2}
-\contentsline {subsection}{\numberline {4.3}A word on coordinate systems}{9}{subsection.4.3}
-\contentsline {subsection}{\numberline {4.4}Specific preprocessing for SLU-OSM geodata}{9}{subsection.4.4}
-\contentsline {section}{\numberline {5}Evaluation of the quality of geodata}{9}{section.5}
+\contentsline {subsection}{\numberline {4.3}A word on coordinate systems}{8}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Specific preprocessing for SLU-OSM geodata}{8}{subsection.4.4}
+\contentsline {section}{\numberline {5}Evaluation of the quality of geodata}{8}{section.5}
 \contentsline {subsection}{\numberline {5.1}The accuracy classes that will not be focused on}{10}{subsection.5.1}
 \contentsline {subsection}{\numberline {5.2}Assesment of dataset completeness}{11}{subsection.5.2}
 \contentsline {subsection}{\numberline {5.3}Building correspondence}{12}{subsection.5.3}

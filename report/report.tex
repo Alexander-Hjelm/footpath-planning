@@ -12,6 +12,7 @@
 \usepackage[ruled,vlined]{algorithm2e}
 
 \setlength\parindent{0pt}
+\setlength{\parskip}{1em}
 \setcounter{tocdepth}{2}
 
 \title{Quality Assesment of OpenStreetMap Footpath Data for 3D City Modelling}
@@ -26,17 +27,17 @@
 \section{Abstract}
 
 This project assesses the feasibility of creating a 3D representation of OpenStreetMap (OSM) geodata with the inclusion of pedestrian footpaths, by focusing on OSM road and building data in the Stockholm metropolitan area.
-\\
+
 An estimate of the positional accuracy of OSM data has been obtained by comparing OSM positional data to a dataset with a known accuracy, which was obtained from the Swedish National Land Survey.
 It was found that the average positional error in the OSM dataset was about 2 meters, and approximately 98\% of all buildings in the reference dataset were represented in the OSM dataset.
-\\
+
 This estimate of the positional error was used to assess the integrity of the OSM Stockholm road network, by locating critical points where assigning widths to the roads would cause collision with other features.
 An algortitm then took the road network and made adjustments that were within the found margin of error for the OSM dataset, to eliminate as many collisions as possible.
 It was found that extending all roads with a standard width led to collisions between roughly 12\% of all roads in the dataset.
 The total length of road that intersected with other features was less than 0.1\% of the total road length.
 It was measured that roughly 80\% of these colliding features, and 99\% of the colliding road by length, could be corrected by simple geometrical translation by a distance smaller than the posiional accuracy of the OSM dataset.
 It was found that footpaths were much less problematic than other road types (primary, secondary, residential), in terms of feature collisions.
-\\
+
 The report concludes with a discussion of the findings of this study, and an assessment of the feasibility of generating city models with pedestrian footpaths in a number of different applications from urban planning tools to videogames.
 As secondary contributions, the completeness and shape accuracy of the OSM data set have also been estimated and commented.
 
@@ -44,7 +45,7 @@ As secondary contributions, the completeness and shape accuracy of the OSM data 
 \tableofcontents
 \newpage
 
-%TODO: Section padding, bottom
+%TODO: Import research questions from google doc
 
 \section{Introduction}
 
@@ -52,12 +53,12 @@ As secondary contributions, the completeness and shape accuracy of the OSM data 
 
 This project has dealt with the feasibility of including footpath data when generating 3D representations of OpenStreetMap (OSM) data.
 A key issue in creating 3D representations of geodata is that since individual features will be extruded to give them width, situations may arise where the generated 3D meshes are intersecting.
-\\
+
 The primary contribution is an investigation into the rate of collision between map features in OSM.
 A program has identified critical areas in the OSM dataset, where the paths are so wide that they collide with existing map features.
 Here, features are defined as the geometrical components that comprise the OSM map.
 For the purpose of this report, features will refer mainly to roads and building footprints.
-\\
+
 The secondary contribution will be an assesment of the geometrical precision of OSM data around the Stockholm area.
 The positional accuracy will be estimated by comparing feature points between the OSM dataset and a reference dataset.
 The positional accuracy will be needed to assess where road collisions occur and whether they can easily be corrected.
@@ -70,7 +71,7 @@ The geometrical precision study has been carried out in a number of steps that a
 First a feature map was found, which mapped individual features between the OSM dataset and a reference dataset.
 A program then took matching building pairs and extracted matching geometrical points after first simplifying the polygons using the Douglas-Peucker algorithm.
 Once a set of matching points has been found across the whole dataset, the average distance between them was taken as a measure of the positional accuracy.
-\\
+
 Additionally, a number of auxillary calculations were neccessary for this study.
 The completeness of the OSM dataset were first calculated by comparing how many features are represented in both the OSM dataset and the reference dataset.
 The completeness is needed to estimate the error boundary of the positional accuracy.

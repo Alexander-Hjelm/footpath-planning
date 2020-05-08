@@ -13,14 +13,14 @@
 \BOOKMARK [2][-]{subsection.4.2}{SLU Data}{section.4}% 13
 \BOOKMARK [2][-]{subsection.4.3}{A word on coordinate systems}{section.4}% 14
 \BOOKMARK [2][-]{subsection.4.4}{Specific preprocessing for SLU-OSM geodata}{section.4}% 15
-\BOOKMARK [1][-]{section.5}{Evaluation of the quality of geodata}{}% 16
+\BOOKMARK [1][-]{section.5}{Implemenation: Evaluation of the quality of geodata}{}% 16
 \BOOKMARK [2][-]{subsection.5.1}{The accuracy classes that will not be focused on}{section.5}% 17
 \BOOKMARK [2][-]{subsection.5.2}{Assesment of dataset completeness}{section.5}% 18
 \BOOKMARK [2][-]{subsection.5.3}{Shape accuracy definition}{section.5}% 19
 \BOOKMARK [2][-]{subsection.5.4}{Correspondence by building area}{section.5}% 20
 \BOOKMARK [2][-]{subsection.5.5}{Closest point and point proximity}{section.5}% 21
 \BOOKMARK [2][-]{subsection.5.6}{Notes about data processing}{section.5}% 22
-\BOOKMARK [1][-]{section.6}{Collision checks}{}% 23
+\BOOKMARK [1][-]{section.6}{Implementation: Collision checks}{}% 23
 \BOOKMARK [1][-]{section.7}{Results, Metrics}{}% 24
 \BOOKMARK [2][-]{subsection.7.1}{Completeness by building area}{section.7}% 25
 \BOOKMARK [2][-]{subsection.7.2}{Positional accuracy statistics}{section.7}% 26

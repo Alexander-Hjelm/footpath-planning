@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  9 MAY 2020 21:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  9 MAY 2020 22:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1120,57 +1120,57 @@ Package pdftex.def Info: img_turn_function_diff_filled.png  used on input line
 299.
 (pdftex.def)             Requested size: 344.98924pt x 178.97667pt.
  [14 <./img_turn_function.png> <./img_turn_function_diff_filled.png>] [15] [16]
-<img_pos_error_plot.png, id=281, 692.3466pt x 489.9906pt>
+<img_pos_error_plot.png, id=282, 692.3466pt x 489.9906pt>
 File: img_pos_error_plot.png Graphic file (type png)
 <use img_pos_error_plot.png>
-Package pdftex.def Info: img_pos_error_plot.png  used on input line 428.
+Package pdftex.def Info: img_pos_error_plot.png  used on input line 429.
 (pdftex.def)             Requested size: 344.99982pt x 244.16478pt.
-<img_turning_function_plot.png, id=282, 692.3466pt x 489.9906pt>
+<img_turning_function_plot.png, id=283, 692.3466pt x 489.9906pt>
 File: img_turning_function_plot.png Graphic file (type png)
 <use img_turning_function_plot.png>
-Package pdftex.def Info: img_turning_function_plot.png  used on input line 439.
+Package pdftex.def Info: img_turning_function_plot.png  used on input line 440.
 
 (pdftex.def)             Requested size: 344.99982pt x 244.16478pt.
  [17 <./img_pos_error_plot.png>]
-Overfull \hbox (39.02873pt too wide) in paragraph at lines 448--461
+Overfull \hbox (39.02873pt too wide) in paragraph at lines 449--462
 [][] 
  []
 
 [18 <./img_turning_function_plot.png>] [19]
-<img_map_utility_buildings.png, id=306, 983.675pt x 439.6425pt>
+<img_map_utility_buildings.png, id=307, 983.675pt x 439.6425pt>
 File: img_map_utility_buildings.png Graphic file (type png)
 <use img_map_utility_buildings.png>
-Package pdftex.def Info: img_map_utility_buildings.png  used on input line 506.
+Package pdftex.def Info: img_map_utility_buildings.png  used on input line 507.
 
 (pdftex.def)             Requested size: 344.99686pt x 154.19247pt.
-<img_feature_overlap_cases.png, id=308, 922.1652pt x 1010.3346pt>
+<img_feature_overlap_cases.png, id=309, 922.1652pt x 1010.3346pt>
 File: img_feature_overlap_cases.png Graphic file (type png)
 <use img_feature_overlap_cases.png>
 Package pdftex.def Info: img_feature_overlap_cases.png  used on input line 532.
 
 (pdftex.def)             Requested size: 272.90878pt x 299.00194pt.
  [20 <./img_map_utility_buildings.png>]
-<img_feature_overlap_fix_1.png, id=321, 922.1652pt x 336.7782pt>
+<img_feature_overlap_fix_1.png, id=322, 922.1652pt x 336.7782pt>
 File: img_feature_overlap_fix_1.png Graphic file (type png)
 <use img_feature_overlap_fix_1.png>
 Package pdftex.def Info: img_feature_overlap_fix_1.png  used on input line 548.
 
 (pdftex.def)             Requested size: 344.99498pt x 125.99345pt.
  [21 <./img_feature_overlap_cases.png>]
-<img_feature_overlap_fix_2.png, id=327, 461.0826pt x 336.0555pt>
+<img_feature_overlap_fix_2.png, id=328, 461.0826pt x 336.0555pt>
 File: img_feature_overlap_fix_2.png Graphic file (type png)
 <use img_feature_overlap_fix_2.png>
 Package pdftex.def Info: img_feature_overlap_fix_2.png  used on input line 555.
 
 (pdftex.def)             Requested size: 345.00903pt x 251.45644pt.
-<img_feature_overlap_fix_3.png, id=328, 922.1652pt x 336.0555pt>
+<img_feature_overlap_fix_3.png, id=329, 922.1652pt x 336.0555pt>
 File: img_feature_overlap_fix_3.png Graphic file (type png)
 <use img_feature_overlap_fix_3.png>
 Package pdftex.def Info: img_feature_overlap_fix_3.png  used on input line 562.
 
 (pdftex.def)             Requested size: 344.99498pt x 125.72308pt.
  [22 <./img_feature_overlap_fix_1.png> <./img_feature_overlap_fix_2.png>]
-<img_feature_overlap_fix_4.png, id=337, 459.6372pt x 336.7782pt>
+<img_feature_overlap_fix_4.png, id=338, 459.6372pt x 336.7782pt>
 File: img_feature_overlap_fix_4.png Graphic file (type png)
 <use img_feature_overlap_fix_4.png>
 Package pdftex.def Info: img_feature_overlap_fix_4.png  used on input line 569.
@@ -1232,10 +1232,10 @@ amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
 y10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
 ></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on report.pdf (25 pages, 775522 bytes).
+Output written on report.pdf (25 pages, 775631 bytes).
 PDF statistics:
- 440 PDF objects out of 1000 (max. 8388607)
- 372 compressed objects within 4 object streams
+ 441 PDF objects out of 1000 (max. 8388607)
+ 373 compressed objects within 4 object streams
  107 named destinations out of 1000 (max. 500000)
  329 words of extra memory for PDF output out of 10000 (max. 10000000)
 

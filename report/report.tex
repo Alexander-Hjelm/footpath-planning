@@ -209,7 +209,7 @@ Other than for the purpose of mentioning various sources or error, this project 
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_map_compare}
     \caption{Example segments of the Stockholm metropolitan area with unsystematic errors in precision. The SLU building dataset (blue) in superimposed on the OSM dataset (dark gray). The top picture is centered on a city block which shows a semantic mismatching between the two datasets. The whole block consists of only two buildings in the OSM dataset, but is divided into 15 smaller building lots in the SLU dataset. The bottom picture shows 4 smaller buildings whose the positional accuracy is low, due to the buildings being incorrectly scaled, skewed and rotated.}
-    \label{fig:space}
+    \label{fig:osm-slu-map}
 \end{figure}
 
 \subsection{The accuracy classes that will not be focused on}
@@ -231,7 +231,7 @@ This project will use the building area in the OSM dataset versus that of the SL
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_building_match}
     \caption{Examples of a 1:1 building match (left), where the sought-after building was found both in the OSM (red) and SLU (blue) datasets, and of a 1:n building match (right), where the sought-after building was represented as one polygon in the OSM (red) dataset, but divided into many smaller lots in the SLU (multicolored) dataset.}
-    \label{fig:space}
+    \label{fig:building-match-types}
 \end{figure}
 
 \subsection{Correspondence by building area}
@@ -277,14 +277,14 @@ The value range will be $(0 < S_{T} < 1)$, where $S_{T}(A,B) = 1$ if the polygon
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_turn_function}
     \caption{An example of the turning function of a polygon.}
-    \label{fig:space}
+    \label{fig:turning-function}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_turn_function_diff_filled}
     \caption{An example of the turning functions of two corresponding buildings, with the area between them highlighted.}
-    \label{fig:space}
+    \label{fig:turning-function-compare}
 \end{figure}
 
 \subsection{Closest point and point proximity}
@@ -402,7 +402,7 @@ Building matching statistics:
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_pos_error_plot}
     \caption{The average positional accuracies per building as a frequency diagram.}
-    \label{fig:space}
+    \label{fig:bar-plot-positional-accuracy}
 \end{figure}
 
 \subsection{Shape accuracy statistics}
@@ -412,8 +412,8 @@ Building matching statistics:
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_turning_function_plot}
-    \caption{The turning function distances between 1:1 building pairs as a frequency diagram.}
-    \label{fig:space}
+    \caption{The shape similarities between 1:1 building pairs as a frequency diagram.}
+    \label{fig:bar-plot-similarity}
 \end{figure}
 
 
@@ -472,7 +472,7 @@ As seen in table ***, about 80\% of all OSM features were found to have a 1:1 ma
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_map_utility_buildings}
     \caption{A map segment which shows an area with many small utility buildings that are represented in the SLU dataset but not in the OSM dataset.}
-    \label{fig:space}
+    \label{fig:osm-slu-map-utility-buildings}
 \end{figure}
 
 % TODO: Interview with Todor
@@ -498,7 +498,7 @@ Each case is exemplified in figure 8.
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_feature_overlap_cases}
     \caption{The 5 identified cases over feature overlap. Top left: Case 1. Top right: Case 2. Middle: Case 3. Bottom left: Case 4. Bottom right: Case 5.}
-    \label{fig:space}
+    \label{fig:collision-cases}
 \end{figure}
 
 All these cases will create issues when generating the 3D mesh representation of the city.
@@ -514,28 +514,28 @@ All collision cases can be solved with relatively simply geometric algorithms. T
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_feature_overlap_fix_1}
     \caption{Case 1 collisions can be solved by translating colliding way points away from the building, along the normal of the nearest surface. Smoothing can then be applied as seen fit.}
-    \label{fig:space}
+    \label{fig:collision-case-1}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_feature_overlap_fix_2}
     \caption{Case 3 collisions can be solved by eliminating the building features that intersect with the way, and then applying the same algorithm as in case 1.}
-    \label{fig:space}
+    \label{fig:collision-case-3}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_feature_overlap_fix_3}
     \caption{Case 4 collisions can be solved by calculating the average normal over all colliding edges for both roads, and translating colliding points along the normal, away from the other road. Smoothing can then be applied as seen fit.}
-    \label{fig:space}
+    \label{fig:collision-case-4}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_feature_overlap_fix_4}
     \caption{Case 5 collisions can be solved simply by translating the colliding point along the tangent of the closest edge, and then applying smoothing as seen fit.}
-    \label{fig:space}
+    \label{fig:collision-case-5}
 \end{figure}
 
 \subsection{Utility in real world applications}

@@ -55,7 +55,9 @@ This project has dealt with the feasibility of including footpath data when gene
 A key issue in creating 3D representations of geodata is that since individual features will be extruded to give them width, situations may arise where the generated 3D meshes are intersecting.
 
 The primary contribution is an investigation into the rate of collision between map features in OSM.
-A program has identified critical areas in the OSM dataset, where the paths are so wide that they collide with existing map features.
+A program has taken an OSM dataset of the Stockholm area and assigned each road with standard withds according to swedish regulation.
+It has then identified critical areas in the OSM dataset, where the paths are so wide that they collide with existing map features.
+It has also identified how many of those areas can in theory be corrected by simple translation of the road vertices, without propagation of collision to other features.
 Here, features are defined as the geometrical components that comprise the OSM map.
 For the purpose of this report, features will refer mainly to roads and building footprints.
 
@@ -96,7 +98,7 @@ A program then took matching building pairs and extracted matching geometrical p
 Once a set of matching points has been found across the whole dataset, the average distance between them was taken as a measure of the positional accuracy.
 
 Additionally, a number of auxillary calculations were neccessary for this study.
-The completeness of the OSM dataset were first calculated by comparing how many features are represented in both the OSM dataset and the reference dataset.
+The estimated completeness of the OSM dataset (a measure of how many features are represented in both the OSM dataset and the reference dataset) was calculated as the relative difference in area of all building footprints, between the two datasets.
 The completeness is needed to estimate the error boundary of the positional accuracy.
 Additionally, the shape accuracy of the OSM dataset has also been calculated and graphed as an extra verification of the similarity between the datasets.
 
@@ -104,8 +106,19 @@ Additionally, the shape accuracy of the OSM dataset has also been calculated and
 
 For the purpose of the collision study, each road has been assigned a standard width that is in line with Swedish regulations, since in the OSM dataset, roads are represented as simple polylines, lacking width.
 In a 3D representation however, it is crucial that each road object has a spacial width in order to be rendered and seen.
-After the width assignment, program has iterated over all features and calculated how many of them that overlap with any other feature, as well as the total length of the road polylines that is intersecting some other feature.
+After the width assignment, a program has iterated over all features and calculated how many of them that overlap with any other feature, as well as the total length of the road polylines that is intersecting some other feature.
 The program has then calculated how many of these colliding features that can be corrected by making adjustments that are within the positional accuracy of the OSM data (As obtained by the previous study in this report: Assessment of Geodata Precision).
+
+\subsection{Problem Constraints}
+
+In this study, when working with OSM geodata, the following assumptions have been made about the dataset to reduce the size of the problem domain:
+
+\begin{enumerate}
+    \item The program will not handle terrain features and altitude. It will be assumed that the road mesh can be projected on a flat 2D surface without feature intersection.
+    \item It will be assumed that the city map consists of only arterial (primary) roads, secondary roads and footpaths.
+    \item It will be assumed that the OSM dataset represents all roads as simple polylines, and building footprints as simple connected polygons. Any other features (such as squares, which are roads represented as polygons) will be omitted from the dataset.
+    \item The road network is assumed to be a 2D simple graph. This means that any overlapping roads, such as tunnels and bridges that cross over street-level roads, will be eliminated from the dataset. Any self-connected nodes will also be eliminated from the dataset.
+\end{enumerate}
 
 \section{Background}
 
@@ -130,38 +143,29 @@ Navigation agents, they might fail navigating when faced with a too narrow path 
 Using a road network to creates an underlying navmesh
 
 \subsection{Related work}
-Van Oorts criteria for evaluating the quality of geographical information, which at the time of publication received attention from surveyors and cartographers. (van Oort, 2006)
+When assessing the completeness of geodata, a very common scale is Van Oorts criteria for evaluating the quality of geographical information, which at the time of publication received attention from surveyors and cartographers. (van Oort, 2006) Since then a number of publications have examined slices of geodata from van Oort's criteria. In 2008, (Haklay, 2010) conducted such a study to estimate of the quality of OSM positional geodata in London and England. Since the OSM project started in London it was thought that OSM data in the London metropolitan area would be representative of the highest quality data available, and therefore a good indicator for the whole global OSM dataset. The study was conducted by comparing OSM data to Ordnance Survey datasets. The study showed that the OSM dataset had a rough positional accuracy of 6 meters from the reference dataset. However, at the time of the study, the OSM project had captured roughly 29\% of the area of England, meaning that the data completeness was fairly low.
 
-Since then a number of publications have examined slices of geodata from van Oort's criteria. In 2008, (Haklay, 2010) conducted such a study to estimate of the quality of OSM positional geodata in London and England. Since the OSM project started in London it was thought that OSM data in the London metropolitan area would be representative of the highest quality data available, and therefore a good indicator for the whole global OSM dataset. The study was conducted by comparing OSM data to Ordnance Survey datasets. The study showed that the OSM dataset had a rough positional accuracy of 6 meters from the reference dataset. However, at the time of the study, the OSM project had captured roughly 29\% of the area of England, meaning that the data completeness was fairly low.
-
-The next notable study to assess the quality of OSM data was published by (Kunze, 2012). The study applied different methods to assess the completeness of OSM data in two federal states in Germany, mainly by analysing the area difference between the OSM dataset and an administrative dataset.
-
-Finally, a notable study in 2013-2014, conducted by researchers from various universities in Norway and Germany (Fan et al, 2014), examined the quality and accuracy in building footprint data of the Munich area, at a time and place where the completeness of the OSM dataset was significantly higher (the results of their study showed that the OSM had captured close to 100\% of all building footprints). At the time Munich was one of the most developed cities in OSM. Their study included an insight in the geometrical calculations neccessary to match features and points between two datasets, and how to reliably calculate the metrics needed for the most important and assessible of van Oorts criteria. Their study revealed that although the feature completeness of OSM was high, some architectural details were missing. The results reveal that the positional accuracy of OSM data at the time was about 4 meters.
+The next notable study to assess the quality of OSM data was published by (Kunze, 2012). The study applied different methods to assess the completeness of OSM data in two federal states in Germany, mainly by analysing the area difference between the OSM dataset and an administrative dataset. Finally, a notable study in 2013-2014, conducted by researchers from various universities in Norway and Germany (Fan et al, 2014), examined the quality and accuracy in building footprint data of the Munich area, at a time and place where the completeness of the OSM dataset was significantly higher (the results of their study showed that the OSM had captured close to 100\% of all building footprints). At the time Munich was one of the most developed cities in OSM. Their study included an insight in the geometrical calculations neccessary to match features and points between two datasets, and how to reliably calculate the metrics needed for the most important and assessible of van Oorts criteria. Their study revealed that although the feature completeness of OSM was high, some architectural details were missing. The results reveal that the positional accuracy of OSM data at the time was about 4 meters.
 
 \subsection{ESAL, KTH}
 The thesis work will be carried out at the Embodied Social Agents Lab (ESAL) at the Department of Computational Science and Technology (CST). The lab has before been working on systems for generating procedural urban environments, and are interested in the possibility of generating more detailed maps than have been done before, using example-based methods to preserve the aesthetic look of a greater metropolitan area. The lab is particularly interested in the generation of footpaths, since most commercial software that import road maps only import arterial and secondary car roads, and do not include pedestrian walkways, cycle paths and such smaller roads.
 
-\subsection{Problem Constraints}
-
-\begin{enumerate}
-\item The road network is assumed to be a 2D simple graph. This means that any overlapping roads, such as tunnels and bridges that cross over street-level roads, will be eliminated from the training set. Any self-connected nodes will also be eliminated from the training set.
-\item It will be assumed that the city map consists of only arterial (primary) roads, secondary roads and footpaths.
-\item It will be assumed that the primary, secondary and tertiatry roads all have a fixed width. Primary roads have a set width, and secondary roads and footpaths as well.
-\item The program will not handle terrain features and altitude. It will be assume that the road mesh is projected on a flat 2D surface.
-\end{enumerate}
-
 \section{The geodata used in this project}
 
-For the purpose of this project, the OOSMroad dataset has been used in the presentation of the road network around Stockholm, and in the generative process of new road networks. To assess and correct path widths and path node locations, the OSM building footprint dataset has also been used. To make an assessment on the quality and precision of the OSM data, the SLU map from the Swedish National Land Survey was used in comparison with the OSM map. The SLU map conatins only building footprints and property limits. Both map segments were obtained around the Stockholm greater metropolitan area.
+For the purpose of this project, the OSM road dataset has been sampled around Stockholm metropolitan area.
+To assess and correct path widths and path node locations, the OSM building footprint dataset areound the same area has also been used.
+As a reference dataset, the SLU map from the Swedish National Land Survey was used in comparison with the OSM map.
+%TODO: What does SLU stand for?
+The SLU map conatins only building and property footprints.
 The exact map segments that were extracted were in both cases rectangular boundaries with the following coordinates in WGS84: (N: 59.42, E: 18.15, S: 59.23, W: 17.79).
 Both datasets were collcted on March 18th, 2020.
 
 \subsection{OSM Data}
 
-Volunteered Geographical Information.
-OSM road data and building footprints are commonly obtained by manually tracing features in commercially available satellite images. Such images have a limit on their resolution which puts a theoretical limit on the accuracy of map features compared to their real-world equivalents (Haklay 2010). Particularily the high resolution imagery from Bing in 2010 led to an increase in building information in OSM (Fan et al, 2014).
-
-To separate sidewalks from detached footpaths, I used the fact that OSM generally provides sidewalks with the same name as the adjacent motorway. Thus they can be paired together and measured against each other.
+The OSM project is based on Volunteered Geographical Information (VGI).
+OSM road data and building footprints are commonly obtained by manually tracing features in commercially available satellite images.
+Such images have a limit on their resolution which puts a theoretical limit on the accuracy of map features compared to their real-world equivalents (Haklay 2010).
+Particularily the high resolution imagery from Bing in 2010 led to an increase in building information in OSM (Fan et al, 2014).
 
 \subsection{SLU Data}
 
@@ -169,18 +173,20 @@ The SLU map contains building features and property limits, but no road data.
 The SLU map is maintained by The Swedish National Land Survey (Swedish: Lantmäteriet).
 The SLU data is aqqcuired by land surveying methods such as GPS or DGNSS positioning, or by reproduction of features from ortophoto or stereo mapping from 3D aerial images.
 The map is updated continously by Lantmäteriet, in conjoncture with the forming or reforming of property.
-Building features have a position accuracy requirement of 2 meters.
+Building features in the SLU dataset have a position accuracy requirement of 2 meters.
 (Lantmäteriet, 2019)
 
 \subsection{A word on coordinate systems}
 
-The SLU dataset is delivered in the SWEREF 99 TM (Lantmäteriet, 2019). SWEREF 99 TM is a projected coordinate system and there is no linear transformation to WGS 48, which OSM uses (OSM 19). The coordinate conversions for this paper were obtained using proj: a Linux commandline application for geospatial coordinate conversion.
+The SLU dataset is delivered in the SWEREF 99 TM coordinate system (Lantmäteriet, 2019). SWEREF 99 TM is a projected coordinate system and there is no linear transformation to the WGS 48 system, which OSM uses (OSM 19). The coordinate conversions for this paper were obtained using proj: a Linux commandline application for geospatial coordinate conversion.
 
-\subsection{Specific preprocessing for SLU-OSM geodata}
+\subsection{Specific preprocessing for SLU and OSM geodata}
 
-The SLU map is delivered with cropped buildings to exactly matched the query coordinates. This means that area comparsion will not work.
-Therefore it was neccessary to crop both datasets to ensure that all buildings were complete and had matching candidates in the other set.
-(Show a picture)
+Upon delivery of the OSM dataset, all features that intersect with the user-specified domain are included, with their full geometry.
+The SLU map however, is delivered with building footprints cropped to exactly match the query coordinates, meaning that buildings at the edge of the user-specified domain can have cropped geometries.
+Any building area outside of the query domain will be excluded.
+Since the principles behind what features are delivered and how differ between the datasets, it is neccessary to crop both datasets to ensure that all buildings are complete and have matching candidates in the other set.
+Any features that intersect the edge of the rectagular boundary, in both datasets, were therefore excluded from the study.
 
 \section{Implemenation: Evaluation of the quality of geodata}
 
@@ -218,7 +224,7 @@ The logical accuracy will not be assessed because the underlying logical relatio
 
 \subsection{Assesment of dataset completeness}
 
-(Fan et al., 2014) used the total building area in their reference dataset and the OSM dataset to assess the completeness of OSM data. The motivation for this is to eliminate semantic differences between both datasets. A very common example of a semantic error when comparing geographic data is that a large building in one dataset may be segmented into several smaller ones in the other, that is to say a building in one set is represented as an aggreation of mutliple buildings in the other set. This makes one-to-one object mapping impossible. Thus using building area as an estimator for completeness solves this issue much better than i.e. the number of buildings or other objects in each dataset.
+(Fan et al., 2014) used the fraction of the total building area in their reference dataset and the OSM dataset to assess the completeness of OSM data. The motivation for this is to eliminate semantic differences between both datasets. A very common example of a semantic error when comparing geographic data is that a large building in one dataset may be segmented into several smaller ones in the other, that is to say a building in one set is represented as an aggreation of mutliple buildings in the other set. This makes one-to-one object mapping impossible. Thus using building area as an estimator for completeness solves this issue much better than i.e. the number of buildings or other objects in each dataset.
 This project will use the building area in the OSM dataset versus that of the SLU dataset to determine the completeness of OSM building data in the Stockholm area, which will then be used as an argument for how accurate the building correspondence and point proximity measures can be.
 
 \begin{figure}[H]
@@ -228,9 +234,31 @@ This project will use the building area in the OSM dataset versus that of the SL
     \label{fig:space}
 \end{figure}
 
+\subsection{Correspondence by building area}
+
+(Fan et al., 2014) further discussed how the relative overlap in building area can be used as an estimate of the building correspondence between datasets.
+In this project, relative area overlap was used in order to pair buildings from the two datasets together and create a feature map.
+This can only be done in cases where there is not much displacement between OSM building footprints data and the reference data set.
+Figure 1 under Section 5 shows a typical comparison between the OSM and SLU datasets.
+By eyesight it was determined that the displacement of features is small.
+
+The relative building overlap between the OSM and SLU datasets will be defined as folows, given the footprints of any building in the OSM set ($foot_{OSM}$) and the SLU set ($foot_{SLU}$):
+\begin{center}
+    $S_{RO}(foot_{OSM}, foot_{SLU}) = \frac{A_{Overlap}}{min(A_{foot_{OSM}}, A_{foot_{SLU}}))}$
+\end{center}
+
+The relative overlap may be used to determine building matching relations even when the semantic accuracy is low.
+If a large building is represented by a single footprint in one dataset but by several smaller footprints in the other, (Rutzinger et al, 2009) found that if $S_{RO}(foot_{A}, foot_{B}) < 30\%$ for two buildings $A$ and $B$ from different sets, then $A$ and $B$ are highly likely to be separate, neighbouring buildings and not in fact identical.
+Therefore it will here be assumed that two buildings are matching candidates if their relative area overlap is greater than 30\%.
+If a one-to-many object matching is found, the compound perimeter of the footprints in the many-set will be used when calculating the shape accuracy and finding closest vertices between the polygons.
+
+When calculating the area overlap, it was utilized the fact that multipolygons in geojson are represented with the main, bounding polygon first.
+Any subsequent polygons always represent cutouts or crop-outs in the footprint.
+When calculating the area of a multipolygon building, the area of the first polygon was therefore taken and subtracted with those of the subsequent polygons.
+
 \subsection{Shape accuracy definition}
 
-The building footprint correspondence will be evaluated using a similarity function that difference between the turning funcitons of matching building footprints in both datasets.
+The building footprint correspondence will be evaluated using a similarity function that depends on the difference between the turning funcitons of matching building footprints in both datasets.
 The turning function was first defined by Arkin et al. (1991), as a method for measuring the similarity of two polygons. The Turning function $T_c(l)$ measures the cumulative angle of the polygon's counter-clockwise tangent, as a function of the cumulative normalized length l. This project uses the turning function as it is defined by (Fan et al., 2014). For a polygon with vertices ${v_1 ... v_n}$ and line segments ${e_1 ... e_n}$ It is defined as follows.
 Fix a starting vertex $v_1$.
 The tangent angle at $v_1$ is $\theta_{n,1}$. This is the angle between the neighbouring line segments $e_n$ and $e_1$.
@@ -259,21 +287,9 @@ The value range will be $(0 < S_{T} < 1)$, where $S_{T}(A,B) = 1$ if the polygon
     \label{fig:space}
 \end{figure}
 
-\subsection{Correspondence by building area}
-
-(Fan et al., 2014) further discussed how the relative overlap in building area can be used to determine building correspondence between datasets, in cases where there is not much displacement between OSM building footprints data and the reference data set. Figure 1 shows a typical comparison between the OSM and SLU datasets, and by eyesight it was determined that the displacement of features is small. The relative building overlap between the OSM and SLU datasets will be defined as folows, given the footprints of any building in the OSM set ($foot_{OSM}$) and the SLU set ($foot_{SLU}$):
-
-\begin{center}
-    $S_{RO}(foot_{OSM}, foot_{SLU}) = \frac{A_{Overlap}}{min(A_{foot_{OSM}}, A_{foot_{SLU}}))}$
-\end{center}
-
-For this project the relative overlap will be used both to find possible matching building candidates, and as a term in their similarity function.
-
-The relative overlap may be used to determine building matching relations even when the semantic accuracy is low. If a large building is represented by a single footprint in one dataset but by several smaller footprints in the other, (Rutzinger et al, 2009) found that if $S_{RO}(foot_{A}, foot_{B}) < 30\%$ for two buildings $A$ and $B$ from different sets, then $A$ and $B$ are highly likely to be separate, neighbouring buildings and not in fact identical. Therefore we will here assume that two buildings are matching candidates if their relative area overlap is greater than 30\%. If a one-to-many object matching is found, the compound perimeter of the footprints in the many-set will be used when calculating the turning function and finding closest vertices between the polygons.
-
 \subsection{Closest point and point proximity}
 
-The final problem is that even when building polygons have been matched between the two datasets, they may not have one-to-one vertex relationship. Footprints from different datasets may be formed at a different level of detail. Problems that arise are e.g. that the vertex counts are dissimilar, or that vertex clusters may be found at different parts of the polygon in the two datasets. To avoid this effect, key points are extracted using the Douglas-Peucker algorithm (Douglas and Peucker, 1973), to create a simplifed footprint with less points that still retain information about the rough features of the detailed footprint. The idea behind Douglas-Peucker is to recursively divide a polyline. It initially marks only the start and end points $(v_0, v_n)$ to be kept, and finds the point $v_i$ in between whose distance is the greatest to the line segment between $v_0$ and $v_n$. It then recursively refines the line segments $(v_0, v_i)$ and $(v_i, v_n)$, and proceeds to do so until a line segment $(v_j, v_k)$ is found, where every point in between $v_j$ and $v_k$ have a distance to the line segment $(v_j, v_k)$ that is smaller than some resolution $\epsilon$. Then $v_j$ are added to the simplified polyline, and all nodes in between them are discarded. See Algorithm 1 for a detailed view. In either case The Oriented Minimum Bounding Rectangle (MBR) is calculated for the two polygons. Finally the MBR for the OSM building footprint is shifted so that its centroid aligns with the centroid of the MBR of the SLU building footprint. Any edges in the simplified footprints that coinside with the MBR from the same dataset are extracted, and the corresponding points in the original footprints will be matched with each other.
+The final problem is that even when building polygons have been matched between the two datasets, they may not have one-to-one vertex relationship. Footprints from different datasets may be formed at a different level of detail. Problems that arise are e.g. that the vertex counts are dissimilar, or that vertex clusters may be found at different parts of the polygon in the two datasets. To avoid this effect, key points are extracted using the Douglas-Peucker algorithm (Douglas and Peucker, 1973), to create a simplifed footprint with less points that still retain information about the rough features of the detailed footprint. The idea behind Douglas-Peucker is to recursively divide a polyline. It initially marks only the start and end points $(v_0, v_n)$ to be kept, and finds the point $v_i$ in between whose distance is the greatest to the line segment between $v_0$ and $v_n$. It then recursively refines the line segments $(v_0, v_i)$ and $(v_i, v_n)$, and proceeds to do so until a line segment $(v_j, v_k)$ is found, where every point in between $v_j$ and $v_k$ have a distance to the line segment $(v_j, v_k)$ that is smaller than some resolution $\epsilon$. Then $v_j$ are added to the simplified polyline, and all nodes in between them are discarded. See Algorithm 1 for a detailed view. In either case The Oriented Minimum Bounding Rectangle (OMBR) is calculated for the two polygons. Finally the OMBR for the OSM building footprint is shifted so that its centroid aligns with the centroid of the OMBR of the SLU building footprint. Any edges in the simplified footprints that coinside with the OMBR from the same dataset are extracted, and the corresponding points in the original footprints will be matched with each other.
 
 \begin{algorithm}[H]
 \SetAlgoLined
@@ -311,23 +327,16 @@ The final problem is that even when building polygons have been matched between 
 
 Finally, when two building footprints and their vertices have been mapped, we will use the offset of matching vertices as a measure of positional error. The average and variance in vertex spread will be calculated and used to make an assessment of the geometric precision of the OSM dataset, and this precision will further be used to form an upper boundary on geometrical corrections that can be made to the map once it has been imported into the application.
 
-\subsection{Notes about data processing}
+\section{Implementation: Collision study}
 
-Once data from the both sets had been extracted, they looked dissimilar. (Show picture) Had to go over all OSM buildings that intersected with the query box and remove them, along with any SLU buildings that intersected with them.
-
-When calculating the area overlap we used the fact that multipolygons in geojson are represented with the main, bounding polygon first. When calculating the area of a multipolygon building, we simply took the area of the first polygon and subtracted the subsequent ones.
-
-However, when calculating the relative area overlap, this becomes unesseccary since any semantically incorrect subdivision of the polygon will always be inside the bounding polygon.
-
-\section{Implementation: Collision checks}
-
-The maximum distance between two features was set to 2 times the positional accuracy, since then there will always be ample room to make changes to any features that would collide with the newly noved nodes, and thus we do not need to worry about feature collisions propagating.
-
-In this implementation, roads of different types were allowed to merge into one another to form common intersections. To facilitate this, it was neccessary to work with a path-by-path representation of the point data. When two path share a node with common coordinates, they form an intersection which can be of multiple different types.
+The maximum distance between two features was set to 1 times the positional accuracy, since then there will always be ample room to make changes to any features that would collide with the newly moved nodes, and thus we do not need to worry about feature collisions propagating.
+In this implementation, roads of different types were allowed to merge into one another to form common intersections.
+To facilitate this, it was neccessary to work with a path-by-path representation of the point data.
+When two path share a node with common coordinates, they form an intersection which can be of multiple different types.
 
 The default minimum widths were obtained from (Lantmäteriet, 20). The standard minimum width for a two-lane road in Sweden is 6.5 meters.
-
 Subsequent visual measurements of a few key locations in the Stockholm area revealed the following minimum way widths:
+
 \begin{table}[H]
 \begin{tabular}{lllll}
                   & Footpath & Residential & Secondary & Primary \\
@@ -435,13 +444,14 @@ After collision correction:
 
 \subsection{Quality of the OSM dataset}
 
-Accuracy: we can assume that Stockholm, being one of the more developed cities in one of the most technologically connected country in the world, would be fairly well mapped in OSM. The positional accuracy has improved by roughly 3.5 meters since the study by (Haklay, 2010), and by roughly 1.5 meters since the study by (Fan et al, 2014), if the SLU reference dataset is to be believed as absolute.
+We can assume that Stockholm, being one of the more developed cities in one of the most technologically connected country in the world, would be fairly well mapped in OSM. The positional accuracy has improved by roughly 3.5 meters since the study by (Haklay, 2010), and by roughly 1.5 meters since the study by (Fan et al, 2014), if the SLU reference dataset is to be believed as absolute.
 
 The completeness analysis by building area shows that the OSM Stockholm dataset has high completeness in terms of both building area and counted features, in the same level as the study of Munich by (Fan et al, 2014).
 
 The difference in area cover can partially be explained by small utility buildings that are often not represented in the OSM dataset. Particularily the residential areas in downtown, Stockholm, are characteristic in that each city block consists of a street front and an open, communal compound in the middle, inside of which there are usually a number of small utility buildings such as bicycle garages, toolsheds, refuse rooms and such. These buildings are likely hard to make out and trace on publicly available satellite image data. They are, according to (Fan et al, 2014) occluded by their surroundings due to shadows or forestry. This appears to be a large consensus in the field.
 
 The low semantic accuracy has made analysis hard. The available SLU dataset from Lantmäteriet uses a plot-based subdivision of buildings, whereas OSM uses a subdivision that more closely resembles the actual building footprint as seen from above. In many cases whole city blocks are represented as single buildings, which means that many less meaningful feature matches can be found.
+% TODO: Table reference
 As seen in table ***, about 80\% of all OSM features were found to have a 1:1 mapping to the SLU dataset, but upon further visual comparison it can be seen that many of the 1:n matches are found in a very specified area, namely the residential areas in downtown, Stockholm. This is problematic since this typical area with the same level of accessibility was likely measured with the same measuring technique, and the unsystematic positional error will likely be similar in these areas. The question is wether it comforms well to the positional error in the rest of the dataset or not. This analysis will not be carried out in this project, but could be a good subject for a future master's thesis project.
 
 \begin{figure}[H]
@@ -451,9 +461,10 @@ As seen in table ***, about 80\% of all OSM features were found to have a 1:1 ma
     \label{fig:space}
 \end{figure}
 
-\subsection{Utility in real world applications}
-
 % TODO: Interview with Todor
+% TODO: Figure showing how turning function is calculated from edges and angles
+% TODO: Figure refs, all figures
+% TODO: Table numberings + references
 
 \subsection{Feature overlap}
 
@@ -479,13 +490,11 @@ Each case is exemplified in figure 8.
 All these cases will create issues when generating the 3D mesh representation of the city.
 Conslusion: footpaths were not worse than other categories, which are included in many unity packages already
 
-Propagation of error, have to include all the edited features in the next pass
-
 (Fan et al, 2014) claimed that the positional error is largely due to the limited resolution in satellite imagery.
 
 \subsection{Suggested algorithms for correcting feature overlap}
 
-All collision cases can be solved with relatively simply geometric algorithms. This section will present suggestions on algorithms that will resolve collisions by identifying individualcolliding nodes and translating them, after which some degree of smoothing (such as linear interpolation) can be applied to preserve visual features. Cases 1 and 3-5 will be handled, while 2 will be left since case 2 collisions do not inherently cause feature overlap when extruding a 3D road mesh from the way edges. Thus it will me up to the individual developer to decide what to do with Case 2 collisions.
+All collision cases can be solved with relatively simply geometric algorithms. This section will present suggestions on algorithms that will resolve collisions by identifying individual colliding nodes and translating them, after which some degree of smoothing (such as linear interpolation) can be applied to preserve visual features. Cases 1 and 3-5 will be handled, while 2 will be left since case 2 collisions do not inherently cause feature overlap when extruding a 3D road mesh from the way edges. Thus it will me up to the individual developer to decide what to do with Case 2 collisions.
 
 \begin{figure}[H]
     \centering
@@ -504,7 +513,7 @@ All collision cases can be solved with relatively simply geometric algorithms. T
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_feature_overlap_fix_3}
-    \caption{Case 4 collisions can be solved by calculating the average normal over all colliding edges for both ways, and translating colliding points along the normal, away from the other way. Smoothing can then be applied as seen fit.}
+    \caption{Case 4 collisions can be solved by calculating the average normal over all colliding edges for both roads, and translating colliding points along the normal, away from the other road. Smoothing can then be applied as seen fit.}
     \label{fig:space}
 \end{figure}
 
@@ -514,6 +523,8 @@ All collision cases can be solved with relatively simply geometric algorithms. T
     \caption{Case 5 collisions can be solved simply by translating the colliding point along the tangent of the closest edge, and then applying smoothing as seen fit.}
     \label{fig:space}
 \end{figure}
+
+\subsection{Utility in real world applications}
 
 
 \begin{thebibliography}{9}

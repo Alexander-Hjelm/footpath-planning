@@ -359,8 +359,9 @@ In this implementation, roads of different types were allowed to merge into one 
 To facilitate this, it was neccessary to work with a path-by-path representation of the point data.
 When two path share a node with common coordinates, they form an intersection which can be of multiple different types.
 
-The default minimum widths were obtained from (Lantmäteriet, 20). The standard minimum width for a two-lane road in Sweden is 6.5 meters.
+The default minimum widths were obtained from (Lantmäteriet, 20). The standard recommended minimum width for a two-lane road in Sweden is 6.5 meters.
 Subsequent visual measurements of a few key locations in the Stockholm area revealed the following minimum way widths:
+Table \ref{table:road-widths} shows the minimum and maximum road widths that were found during these measurements, and that will be used in the collision study.
 
 \begin{table}[H]
     \begin{tabular}{lllll}
@@ -510,8 +511,6 @@ This analysis will not be carried out in this project, but could be a good subje
 
 % TODO: Interview with Todor
 % TODO: Figure showing how turning function is calculated from edges and angles
-% TODO: Figure refs, all figures
-% TODO: Table numberings + references
 
 \subsection{Feature overlap}
 

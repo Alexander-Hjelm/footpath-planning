@@ -338,12 +338,12 @@ The default minimum widths were obtained from (Lantmäteriet, 20). The standard 
 Subsequent visual measurements of a few key locations in the Stockholm area revealed the following minimum way widths:
 
 \begin{table}[H]
-\begin{tabular}{lllll}
-                  & Footpath & Residential & Secondary & Primary \\
-    Minimum width & 2.0 m    & 6.0 m       & 6.5 m     & 8.0 m   \\
-    Maximum width & 5.0 m    & 9.0 m       & 10.0 m    & 16.0 m
-\end{tabular}
-\captionof{table}{Standard road widths used for the collision study}\label{road-widths-table}
+    \begin{tabular}{lllll}
+                      & Footpath & Residential & Secondary & Primary \\
+        Minimum width & 2.0 m    & 6.0 m       & 6.5 m     & 8.0 m   \\
+        Maximum width & 5.0 m    & 9.0 m       & 10.0 m    & 16.0 m
+    \end{tabular}
+    \captionof{table}{Standard road widths used for the collision study}\label{road-widths-table}
 \end{table}
 
 \section{Results, Metrics}
@@ -351,21 +351,21 @@ Subsequent visual measurements of a few key locations in the Stockholm area reve
 \subsection{Completeness by building area}
 
 \begin{table}[H]
-\begin{tabular}{lllll}
-    & Total number of buildings & Area cover \\
-    OSM & 102755 & 33105023.32... $m^2$ \\
-    SLU & 170783 & 33718628.97... $m^2$
-\end{tabular}
-\captionof{table}{Total number of buildings and their cumulative area}\label{num-of-buildings-table}
+    \begin{tabular}{lllll}
+        & Total number of buildings & Area cover \\
+        OSM & 102755 & 33105023.32... $m^2$ \\
+        SLU & 170783 & 33718628.97... $m^2$
+    \end{tabular}
+    \captionof{table}{Total number of buildings and their cumulative area}\label{num-of-buildings-table}
 \end{table}
 
 \begin{table}[H]
-\begin{tabular}{lllll}
-    & Number of buildings (\%) & Area cover (\%) \\
-    OSM & 60.17\% & 98.18\% \\
-    SLU & 100.00\% & 100.00\%
-\end{tabular}
-\captionof{table}{Total number of buildings and cumulative area as percentages}\label{num-of-buildings-percent-table}
+    \begin{tabular}{lllll}
+        & Number of buildings (\%) & Area cover (\%) \\
+        OSM & 60.17\% & 98.18\% \\
+        SLU & 100.00\% & 100.00\%
+    \end{tabular}
+    \captionof{table}{Total number of buildings and cumulative area as percentages}\label{num-of-buildings-percent-table}
 \end{table}
 
 The area cover of the OSM dataset in relation to the SLU dataset was estimated to 98.18\%.
@@ -373,22 +373,22 @@ The area cover of the OSM dataset in relation to the SLU dataset was estimated t
 \subsection{Positional accuracy statistics}
 
 \begin{table}[H]
-\begin{tabular}{lllll}
-    $e_{average}$ & $e_{max}$ & $e_{min}$ & $e_{standard deviation}$ \\
-    2.0579... & 9.9878... & 0.0 & 1.2464...
-\end{tabular}
-\captionof{table}{The estimated positional accuracy of the OSM dataset: average, max, min and standard deviation}\label{positional-accuracy-table}
+    \begin{tabular}{lllll}
+        $e_{average}$ & $e_{max}$ & $e_{min}$ & $e_{standard deviation}$ \\
+        2.0579... & 9.9878... & 0.0 & 1.2464...
+    \end{tabular}
+    \captionof{table}{The estimated positional accuracy of the OSM dataset: average, max, min and standard deviation}\label{positional-accuracy-table}
 \end{table}
 
 Building matching statistics:
 
 \begin{table}[H]
-\begin{tabular}{lllll}
-    & 1:0 & 1:1 & 1:n & Total \\
-    Match count & 9812   & 81722   & 11221   & 102755 \\
-    Percent     & 9.55\% & 79.53\% & 10.92\% & 100\%
-\end{tabular}
-\captionof{table}{The number and percentages of matching buildings between both datasets, ordered by type of correlation (1:0, 1:1 or 1:n)}\label{building-matching-table}
+    \begin{tabular}{lllll}
+        & 1:0 & 1:1 & 1:n & Total \\
+        Match count & 9812   & 81722   & 11221   & 102755 \\
+        Percent     & 9.55\% & 79.53\% & 10.92\% & 100\%
+    \end{tabular}
+    \captionof{table}{The number and percentages of matching buildings between both datasets, ordered by type of correlation (1:0, 1:1 or 1:n)}\label{building-matching-table}
 \end{table}
 
 % Bar plot positional accuracy
@@ -415,36 +415,36 @@ Building matching statistics:
 \subsection{Road collision statistics}
 
 \begin{table}[H]
-\begin{tabular}{lllll}
-                            & Footpath      & Residential  & Secondary   & Primary     \\
-    Features, total         & 26473         & 10523        & 3044        & 2756        \\
-    Edges, total            & 6382579       & 6612383      & 968420      & 420810      \\
-    Edge length, total      & 129984.79 km  & 186089.55 km & 29304.57 km & 16162.95 km \\
-    Features, colliding     & 3189          & 1032         & 412         & 456         \\
-    Edges, colliding        & 7330          & 2362         & 643         & 824         \\
-    Edge length, colliding  & 110.67 km     & 66.18 km     & 9389.30 m   & 20.41 km    \\
-    Features, percent       & 12.05 \%      & 9.81 \%      & 13.53 \%    & 16.55 \%    \\
-    Edges, percent          & 0.11 \%       & 0.04 \%      & 0.07 \%     & 0.20 \%     \\
-    Edge length, percent    & 0.09 \%       & 0.04 \%      & 0.03 \%     & 0.13 \%
+    \begin{tabular}{lllll}
+                                & Footpath      & Residential  & Secondary   & Primary     \\
+        Features, total         & 26473         & 10523        & 3044        & 2756        \\
+        Edges, total            & 6382579       & 6612383      & 968420      & 420810      \\
+        Edge length, total      & 129984.79 km  & 186089.55 km & 29304.57 km & 16162.95 km \\
+        Features, colliding     & 3189          & 1032         & 412         & 456         \\
+        Edges, colliding        & 7330          & 2362         & 643         & 824         \\
+        Edge length, colliding  & 110.67 km     & 66.18 km     & 9389.30 m   & 20.41 km    \\
+        Features, percent       & 12.05 \%      & 9.81 \%      & 13.53 \%    & 16.55 \%    \\
+        Edges, percent          & 0.11 \%       & 0.04 \%      & 0.07 \%     & 0.20 \%     \\
+        Edge length, percent    & 0.09 \%       & 0.04 \%      & 0.03 \%     & 0.13 \%
 
-\end{tabular}
-\captionof{table}{The first result table of the collision study. This table shows the amount of features and edges, as well as the cumulative edge length, in total and which are intersecting with any other feature.}\label{road-collision-table}
+    \end{tabular}
+    \captionof{table}{The first result table of the collision study. This table shows the amount of features and edges, as well as the cumulative edge length, in total and which are intersecting with any other feature.}\label{road-collision-table}
 \end{table}
 
 After collision correction:
 
 \begin{table}[H]
-\begin{tabular}{lllll}
-                            & Footpath      & Residential  & Secondary   & Primary     \\
-    Features, colliding     & 134           & 336          & 246         & 277         \\
-    Edges, colliding        & 157           & 530          & 306         & 407         \\
-    Edge length, colliding  & 3248.73       & 6475.99 m    & 3840.00 m   & 8039.54 m   \\
-    Features, percent       & 0.51 \%       & 3.19 \%      & 8.08 \%     & 10.51 \%    \\
-    Edges, percent          & 0.00 \%       & 0.00 \%      & 0.03 \%     & 0.09 \%     \\
-    Edge length, percent    & 0.00 \%       & 0.00 \%      & 0.01 \%     & 0.05 \%
+    \begin{tabular}{lllll}
+                                & Footpath      & Residential  & Secondary   & Primary     \\
+        Features, colliding     & 134           & 336          & 246         & 277         \\
+        Edges, colliding        & 157           & 530          & 306         & 407         \\
+        Edge length, colliding  & 3248.73       & 6475.99 m    & 3840.00 m   & 8039.54 m   \\
+        Features, percent       & 0.51 \%       & 3.19 \%      & 8.08 \%     & 10.51 \%    \\
+        Edges, percent          & 0.00 \%       & 0.00 \%      & 0.03 \%     & 0.09 \%     \\
+        Edge length, percent    & 0.00 \%       & 0.00 \%      & 0.01 \%     & 0.05 \%
 
-\end{tabular}
-\captionof{table}{The second result table of the collision study. This table shows the amount of features and edges, as well as the cumulative edge length, which can be corrected by simple geometric translation.}\label{road-collision-corrected-table}
+    \end{tabular}
+    \captionof{table}{The second result table of the collision study. This table shows the amount of features and edges, as well as the cumulative edge length, which can be corrected by simple geometric translation.}\label{road-collision-corrected-table}
 \end{table}
 
 \section{Analysis and Future Work}

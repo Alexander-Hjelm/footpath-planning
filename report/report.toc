@@ -25,9 +25,9 @@
 \contentsline {section}{\numberline {6}Implementation: Collision study}{16}{section.6}
 \contentsline {section}{\numberline {7}Results, Metrics}{16}{section.7}
 \contentsline {subsection}{\numberline {7.1}Completeness by building area}{16}{subsection.7.1}
-\contentsline {subsection}{\numberline {7.2}Positional accuracy statistics}{16}{subsection.7.2}
+\contentsline {subsection}{\numberline {7.2}Positional accuracy statistics}{17}{subsection.7.2}
 \contentsline {subsection}{\numberline {7.3}Shape accuracy statistics}{18}{subsection.7.3}
-\contentsline {subsection}{\numberline {7.4}Way collision statistics}{18}{subsection.7.4}
+\contentsline {subsection}{\numberline {7.4}Road collision statistics}{18}{subsection.7.4}
 \contentsline {section}{\numberline {8}Analysis and Future Work}{19}{section.8}
 \contentsline {subsection}{\numberline {8.1}Quality of the OSM dataset}{19}{subsection.8.1}
 \contentsline {subsection}{\numberline {8.2}Feature overlap}{20}{subsection.8.2}

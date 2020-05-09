@@ -10,6 +10,7 @@
 \usepackage{hyperref}
 \usepackage{multicol}
 \usepackage[ruled,vlined]{algorithm2e}
+\usepackage{caption}
 
 \setlength\parindent{0pt}
 \setlength{\parskip}{1em}
@@ -132,7 +133,6 @@ The last decade has seen multiple startups in the area of software that aid urba
 Some of the most prominent examples are CityEngine (made by the startup Procedural, bought by ESRI), Urban Canvas (made by the startup Synthicity, bought by Autodesk, now defunct) and ArcGIS (***) %TODO.
 
 But such tools are as of today not commonly applied in urbanist practises, due to failures in reflecting the unique workspace of arcitects and their design needs. Urban arcitecture is a social factors, stakeholders. Each arcitect is an actor in a continously developing environment, and affecting that environment in a complex manner through their action.
-
 (Stojanivski, 2020)
 
 In recent years, there have been an advent of tools that extract geodata from OSM and generate 3D representations of real world locations by placing terrain, buildings, roads and other features.
@@ -343,6 +343,7 @@ Subsequent visual measurements of a few key locations in the Stockholm area reve
     Minimum width & 2.0 m    & 6.0 m       & 6.5 m     & 8.0 m   \\
     Maximum width & 5.0 m    & 9.0 m       & 10.0 m    & 16.0 m
 \end{tabular}
+\captionof{table}{Standard road widths used for the collision study}\label{road-widths-table}
 \end{table}
 
 \section{Results, Metrics}
@@ -355,6 +356,7 @@ Subsequent visual measurements of a few key locations in the Stockholm area reve
     OSM & 102755 & 33105023.32... $m^2$ \\
     SLU & 170783 & 33718628.97... $m^2$
 \end{tabular}
+\captionof{table}{Total number of buildings and their cumulative area}\label{num-of-buildings-table}
 \end{table}
 
 \begin{table}[H]
@@ -363,6 +365,7 @@ Subsequent visual measurements of a few key locations in the Stockholm area reve
     OSM & 60.17\% & 98.18\% \\
     SLU & 100.00\% & 100.00\%
 \end{tabular}
+\captionof{table}{Total number of buildings and cumulative area as percentages}\label{num-of-buildings-percent-table}
 \end{table}
 
 The area cover of the OSM dataset in relation to the SLU dataset was estimated to 98.18\%.
@@ -374,6 +377,7 @@ The area cover of the OSM dataset in relation to the SLU dataset was estimated t
     $e_{average}$ & $e_{max}$ & $e_{min}$ & $e_{standard deviation}$ \\
     2.0579... & 9.9878... & 0.0 & 1.2464...
 \end{tabular}
+\captionof{table}{The estimated positional accuracy of the OSM dataset: average, max, min and standard deviation}\label{positional-accuracy-table}
 \end{table}
 
 Building matching statistics:
@@ -384,6 +388,7 @@ Building matching statistics:
     Match count & 9812   & 81722   & 11221   & 102755 \\
     Percent     & 9.55\% & 79.53\% & 10.92\% & 100\%
 \end{tabular}
+\captionof{table}{The number and percentages of matching buildings between both datasets, ordered by type of correlation (1:0, 1:1 or 1:n)}\label{building-matching-table}
 \end{table}
 
 % Bar plot positional accuracy
@@ -407,7 +412,7 @@ Building matching statistics:
 \end{figure}
 
 
-\subsection{Way collision statistics}
+\subsection{Road collision statistics}
 
 \begin{table}[H]
 \begin{tabular}{lllll}
@@ -423,6 +428,7 @@ Building matching statistics:
     Edge length, percent    & 0.09 \%       & 0.04 \%      & 0.03 \%     & 0.13 \%
 
 \end{tabular}
+\captionof{table}{The first result table of the collision study. This table shows the amount of features and edges, as well as the cumulative edge length, in total and which are intersecting with any other feature.}\label{road-collision-table}
 \end{table}
 
 After collision correction:
@@ -438,6 +444,7 @@ After collision correction:
     Edge length, percent    & 0.00 \%       & 0.00 \%      & 0.01 \%     & 0.05 \%
 
 \end{tabular}
+\captionof{table}{The second result table of the collision study. This table shows the amount of features and edges, as well as the cumulative edge length, which can be corrected by simple geometric translation.}\label{road-collision-corrected-table}
 \end{table}
 
 \section{Analysis and Future Work}

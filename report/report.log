@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  9 MAY 2020 22:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  9 MAY 2020 22:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1146,71 +1146,71 @@ Package pdftex.def Info: img_map_utility_buildings.png  used on input line 507.
 <img_feature_overlap_cases.png, id=309, 922.1652pt x 1010.3346pt>
 File: img_feature_overlap_cases.png Graphic file (type png)
 <use img_feature_overlap_cases.png>
-Package pdftex.def Info: img_feature_overlap_cases.png  used on input line 531.
+Package pdftex.def Info: img_feature_overlap_cases.png  used on input line 533.
 
 (pdftex.def)             Requested size: 272.90878pt x 299.00194pt.
  [20 <./img_map_utility_buildings.png>]
 <img_feature_overlap_fix_1.png, id=322, 922.1652pt x 336.7782pt>
 File: img_feature_overlap_fix_1.png Graphic file (type png)
 <use img_feature_overlap_fix_1.png>
-Package pdftex.def Info: img_feature_overlap_fix_1.png  used on input line 547.
+Package pdftex.def Info: img_feature_overlap_fix_1.png  used on input line 549.
 
 (pdftex.def)             Requested size: 344.99498pt x 125.99345pt.
  [21 <./img_feature_overlap_cases.png>]
 <img_feature_overlap_fix_2.png, id=328, 461.0826pt x 336.0555pt>
 File: img_feature_overlap_fix_2.png Graphic file (type png)
 <use img_feature_overlap_fix_2.png>
-Package pdftex.def Info: img_feature_overlap_fix_2.png  used on input line 554.
+Package pdftex.def Info: img_feature_overlap_fix_2.png  used on input line 556.
 
 (pdftex.def)             Requested size: 345.00903pt x 251.45644pt.
 <img_feature_overlap_fix_3.png, id=329, 922.1652pt x 336.0555pt>
 File: img_feature_overlap_fix_3.png Graphic file (type png)
 <use img_feature_overlap_fix_3.png>
-Package pdftex.def Info: img_feature_overlap_fix_3.png  used on input line 561.
+Package pdftex.def Info: img_feature_overlap_fix_3.png  used on input line 563.
 
 (pdftex.def)             Requested size: 344.99498pt x 125.72308pt.
  [22 <./img_feature_overlap_fix_1.png> <./img_feature_overlap_fix_2.png>]
 <img_feature_overlap_fix_4.png, id=338, 459.6372pt x 336.7782pt>
 File: img_feature_overlap_fix_4.png Graphic file (type png)
 <use img_feature_overlap_fix_4.png>
-Package pdftex.def Info: img_feature_overlap_fix_4.png  used on input line 568.
+Package pdftex.def Info: img_feature_overlap_fix_4.png  used on input line 570.
 
 (pdftex.def)             Requested size: 345.00758pt x 252.78857pt.
  [23 <./img_feature_overlap_fix_3.png> <./img_feature_overlap_fix_4.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 599--602
+Underfull \hbox (badness 10000) in paragraph at lines 601--604
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 604--607
+Underfull \hbox (badness 10000) in paragraph at lines 606--609
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 609--612
+Underfull \hbox (badness 10000) in paragraph at lines 611--614
 
  []
 
 
-Overfull \hbox (213.93471pt too wide) in paragraph at lines 614--615
+Overfull \hbox (213.93471pt too wide) in paragraph at lines 616--617
 []\OT1/cmr/m/n/10 https://trafikverket.ineko.se/Files/sv-SE/71830/Ineko.Product
 .RelatedFiles/2020[]029[]vagar[]och[]gators[]utformning[]krav.pdf 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 614--615
+Underfull \hbox (badness 10000) in paragraph at lines 616--617
 
  []
 
 [24] [25]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 631.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 631.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 633.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 633.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 631.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 631.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 633.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 633.
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: D13C610F4DFB7569ED2F01881E9579D3;2284.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 631.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 633.
  ) 
 Here is how much of TeX's memory you used:
  19151 strings out of 492982
@@ -1232,7 +1232,7 @@ amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
 s/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
 y10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
 ></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb>
-Output written on report.pdf (25 pages, 775768 bytes).
+Output written on report.pdf (25 pages, 775510 bytes).
 PDF statistics:
  441 PDF objects out of 1000 (max. 8388607)
  373 compressed objects within 4 object streams

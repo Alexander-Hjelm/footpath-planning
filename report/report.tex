@@ -526,7 +526,19 @@ This analysis will not be carried out in this project, but could be a good subje
 % TODO: Spell check
 % TODO: Go over report one final time
 
-\subsection{Feature overlap}
+\subsection{Collision study}
+
+The biggest reason is thought to be that footpaths in their nature are narrow, so narrow that they can be displaced by more than half of their full width before the positional accuracy is reached.
+
+Conslusion: footpaths were not worse than other categories, which are included in many unity packages already
+(Fan et al, 2014) claimed that the positional error is largely due to the limited resolution in satellite imagery.
+
+***\% of feautures collide and ***\% of edges.
+This means that for each colliding road, on average ***\% of its edges will be intersecting some other feature, thus bearing responsibility for the collision.
+In total there are ***\% feautures ***\% edges, meaning that each feature on average is contructed out of *** edges.
+Thus the percentage of edges colliding per road is on average ***\%.
+The conclusion is that most often, a small part of a road is colliding, and will need correction.
+Visual inspection of the cases where roads collide with other features has supported this.
 
 After visual inspection of the cases where features collide, it was determined that all collision occurences can be almost exclusively classified into one of five categories:
 
@@ -548,9 +560,6 @@ Each case is exemplified in figure \ref{fig:collision-cases}.
 \end{figure}
 
 All these cases will create issues when generating the 3D mesh representation of the city.
-Conslusion: footpaths were not worse than other categories, which are included in many unity packages already
-
-(Fan et al, 2014) claimed that the positional error is largely due to the limited resolution in satellite imagery.
 
 \subsection{Suggested algorithms for correcting feature overlap}
 

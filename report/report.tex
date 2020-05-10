@@ -524,8 +524,6 @@ This analysis will not be carried out in this project, but could be a good subje
     \label{fig:osm-slu-map-utility-buildings}
 \end{figure}
 
-% TODO: Reformat 8.3 to show the suggested algorithms in a list, with figure references
-
 % TODO: Proper citations (Fix links)
 % TODO: Expand on analysis about Feature overlap
 
@@ -577,31 +575,38 @@ All these cases will create issues when generating the 3D mesh representation of
 
 All collision cases can be solved with relatively simply geometric algorithms. This section will present suggestions on algorithms that will resolve collisions by identifying individual colliding nodes and translating them, after which some degree of smoothing (such as linear interpolation) can be applied to preserve visual features. Cases 1 and 3-5 will be handled, while 2 will be left since case 2 collisions do not inherently cause feature overlap when extruding a 3D road mesh from the way edges. Thus it will me up to the individual developer to decide what to do with Case 2 collisions.
 
+\begin{enumerate}
+\item Case 1 collisions can be solved by translating colliding way points away from the building, along the normal of the nearest surface. Smoothing can then be applied as seen fit.
+\item Case 3 collisions can be solved by eliminating the building features that intersect with the way, and then applying the same algorithm as in case 1.
+\item Case 4 collisions can be solved by calculating the average normal over all colliding edges for both roads, and translating colliding points along the normal, away from the other road. Smoothing can then be applied as seen fit.
+\item Case 5 collisions can be solved simply by translating the colliding point along the tangent of the closest edge, and then applying smoothing as seen fit.
+\end{enumerate}
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_feature_overlap_fix_1}
-    \caption{Case 1 collisions can be solved by translating colliding way points away from the building, along the normal of the nearest surface. Smoothing can then be applied as seen fit.}
     \label{fig:collision-case-1}
+    \caption{Example of the solution algorithm for case 1 collision. The yellow line shows the original road placement. The blue line shows the updated road placement. The second picture illustrates how smoothing can be applied to the translated road if desired.}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_feature_overlap_fix_2}
-    \caption{Case 3 collisions can be solved by eliminating the building features that intersect with the way, and then applying the same algorithm as in case 1.}
     \label{fig:collision-case-3}
+    \caption{Example of the solution algorithm for case 3 collision. The portruding building feature as seen in \ref{fig:collision-cases} has been eliminated. The yellow line shows the original road placement. The blue line shows the updated road placement.}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_feature_overlap_fix_3}
-    \caption{Case 4 collisions can be solved by calculating the average normal over all colliding edges for both roads, and translating colliding points along the normal, away from the other road. Smoothing can then be applied as seen fit.}
+    \caption{Example of the solution algorithm for case 4 collision. The yellow lines show the original road placements. The blue lines show the updated road placements. The second picture illustrates how smoothing can be applied to the translated road if desired.}
     \label{fig:collision-case-4}
 \end{figure}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_feature_overlap_fix_4}
-    \caption{Case 5 collisions can be solved simply by translating the colliding point along the tangent of the closest edge, and then applying smoothing as seen fit.}
+    \caption{Example of the solution algorithm for case 5 collision. The yellow lines show the original road placements. The blue line segment with the cyan vertex shows the updated placement of the interesting vertex. The remaining blue lines show the boundaries of the original road.}
     \label{fig:collision-case-5}
 \end{figure}
 

@@ -10,10 +10,9 @@
 \contentsline {section}{\numberline {3}Background}{5}{section.3}
 \contentsline {subsection}{\numberline {3.1}Background of 3D City Representation}{5}{subsection.3.1}
 \contentsline {subsection}{\numberline {3.2}Related work}{6}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}ESAL, KTH}{7}{subsection.3.3}
 \contentsline {section}{\numberline {4}The geodata used in this project}{7}{section.4}
 \contentsline {subsection}{\numberline {4.1}OSM Data}{7}{subsection.4.1}
-\contentsline {subsection}{\numberline {4.2}SLU Data}{8}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.2}SLU Data}{7}{subsection.4.2}
 \contentsline {subsection}{\numberline {4.3}A word on coordinate systems}{8}{subsection.4.3}
 \contentsline {subsection}{\numberline {4.4}Specific preprocessing for SLU and OSM geodata}{8}{subsection.4.4}
 \contentsline {section}{\numberline {5}Implemenation: Evaluation of the quality of geodata}{8}{section.5}

@@ -1,5 +1,21 @@
+\documentclass{kththesis}
 
-\documentclass[a4paper]{article}
+\usepackage{blindtext} % This is just to get some nonsense text in this template, can be safely removed
+
+\usepackage{csquotes} % Recommended by biblatex
+\usepackage[style=numeric,sorting=none,backend=biber]{biblatex}
+\addbibresource{references.bib} % The file containing our references, in BibTeX format
+
+\title{Quality Assesment of OpenStreetMap Footpath Data for 3D City Modelling}
+\alttitle{Detta är den svenska översättningen av titeln}
+\author{Alexander Hjelm}
+\email{osquar@kth.se}
+\supervisor{Lotta Larsson}
+\examiner{Lennart Bladgren}
+\hostcompany{Företaget AB} % Remove this line if the project was not done at a host company
+\programme{Master in Computer Science}
+\school{School of Electrical Engineering and Computer Science}
+\date{\today}
 
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
@@ -16,31 +32,52 @@
 \setlength{\parskip}{1em}
 \setcounter{tocdepth}{2}
 
-\title{Quality Assesment of OpenStreetMap Footpath Data for 3D City Modelling}
-
-\author{Alexander Hjelm}
-
-\date{\today}
+% Uncomment the next line to include cover generated at https://intra.kth.se/kth-cover?l=en
+% \kthcover{kth-cover.pdf}
 
 \begin{document}
-\maketitle
 
-\section{Abstract}
+% Frontmatter includes the titlepage, abstracts and table-of-contents
+\frontmatter
 
-This project assesses the feasibility of creating a 3D representation of OpenStreetMap (OSM) geodata with the inclusion of pedestrian footpaths, by focusing on OSM road and building data in the Stockholm metropolitan area.
+\titlepage
 
-An estimate of the positional accuracy of OSM data has been obtained by comparing OSM positional data to a dataset with a known accuracy, which was obtained from the Swedish National Land Survey.
+\begin{abstract}
+  This project assesses the feasibility of creating a 3D representation of OpenStreetMap (OSM) geodata with the inclusion of pedestrian footpaths, by focusing on OSM road and building data in the Stockholm metropolitan area.
+
+  An estimate of the positional accuracy of OSM data has been obtained by comparing OSM positional data to a dataset with a known accuracy, which was obtained from the Swedish National Land Survey.
 It was found that the average positional error in the OSM dataset was about 2 meters, and approximately 98\% of all buildings in the reference dataset were represented in the OSM dataset.
 
-This estimate of the positional error was used to assess the integrity of the OSM Stockholm road network, by locating critical points where assigning widths to the roads would cause collision with other features.
-An algortitm then took the road network and made adjustments that were within the found margin of error for the OSM dataset, to eliminate as many collisions as possible.
-It was found that extending all roads with a standard width led to collisions between roughly 12\% of all roads in the dataset.
-The total length of road that intersected with other features was less than 0.1\% of the total road length.
-It was measured that roughly 80\% of these colliding features, and 99\% of the colliding road by length, could be corrected by simple geometrical translation by a distance smaller than the posiional accuracy of the OSM dataset.
-It was found that footpaths were much less problematic than other road types (primary, secondary, residential), in terms of feature collisions.
+  This estimate of the positional error was used to assess the integrity of the OSM Stockholm road network, by locating critical points where assigning widths to the roads would cause collision with other features.
+  An algortitm then took the road network and made adjustments that were within the found margin of error for the OSM dataset, to eliminate as many collisions as possible.
+  It was found that extending all roads with a standard width led to collisions between roughly 12\% of all roads in the dataset.
+  The total length of road that intersected with other features was less than 0.1\% of the total road length.
+  It was measured that roughly 80\% of these colliding features, and 99\% of the colliding road by length, could be corrected by simple geometrical translation by a distance smaller than the posiional accuracy of the OSM dataset.
+  It was found that footpaths were much less problematic than other road types (primary, secondary, residential), in terms of feature collisions.
 
-The report concludes with a discussion of the findings of this study, and an assessment of the feasibility of generating city models with pedestrian footpaths in a number of different applications from urban planning tools to videogames.
-As secondary contributions, the completeness and shape accuracy of the OSM data set have also been estimated and commented.
+  The report concludes with a discussion of the findings of this study, and an assessment of the feasibility of generating city models with pedestrian footpaths in a number of different applications from urban planning tools to videogames.
+  As secondary contributions, the completeness and shape accuracy of the OSM data set have also been estimated and commented.
+
+  \blindtext
+\end{abstract}
+
+
+\begin{otherlanguage}{swedish}
+  \begin{abstract}
+    Träutensilierna i ett tryckeri äro ingalunda en oviktig faktor,
+    för trevnadens, ordningens och ekonomiens upprätthållande, och
+    dock är det icke sällan som sorgliga erfarenheter göras på grund
+    af det oförstånd med hvilket kaster, formbräden och regaler
+    tillverkas och försäljas Kaster som äro dåligt hopkomna och af
+    otillräckligt.
+  \end{abstract}
+\end{otherlanguage}
+
+\tableofcontents
+
+% Mainmatter is where the actual contents of the thesis goes
+\mainmatter
+
 
 \newpage
 \setlength{\parskip}{0em}
@@ -531,6 +568,7 @@ This analysis will not be carried out in this project, but could be a good subje
 % TODO: Reduce long section headlines
 % TODO: Rename analysis -> conclusions
 % TODO: Shorten abstract
+% TODO: Verify that citings look correct (compare to other reports)
 
 % Thursday:
 % TODO: Abstract: Mention that the scientific study is a contribution
@@ -548,6 +586,7 @@ This analysis will not be carried out in this project, but could be a good subje
 
 % After wednesday meeting with Chris
 % TODO: Figure detailing the steps in the point-matching algorithm
+% TODO: Edge distance algorithm, outline, algorithm + picture
 % TODO: Spell check
 % TODO: Go over report one final time
 
@@ -672,5 +711,10 @@ Ineko.Product.RelatedFiles/2020\_029\_vagar\_och\_gators\_utformning\_krav.pdf
 Van Oort P.A.J. (2006). Spatial Data Quality: From Description to Application. PhD Thesis, Wageningen University.
 
 \end{thebibliography}
+
+\appendix
+
+% Tailmatter inserts the back cover page (if enabled)
+\tailmatter
 
 \end{document}

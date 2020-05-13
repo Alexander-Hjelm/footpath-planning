@@ -1,0 +1,7 @@
+This project assesses the feasibility of creating virtual cities from freely available geodata, with a particular focus on generating footpath networks (e.g. pedestrian walkways, sidewalks and trails).
+
+A key issue in creating 3D representations of geodata is that since individual features will be extruded to give them width, situations may arise where the generated 3D meshes are intersecting.
+
+The primary contribution will be an investigation into the rate of collision between map features in OpenStreetMap (OSM), focusing on how often footpaths collide with other features (building footpaths and roads). As part of the pre-study, a program will be developed, which will take an OSM dataset of the Stockholm area and assign each road with standard widths according to Swedish regulation. It will then identifiy critical areas in the OSM dataset, where the paths are so wide that they collide with existing map features. It will also identifiy how many of those areas can in theory be corrected by simple translation of the road vertices, without propagation of collision to other features.
+
+The secondary contribution will be an assesment of the geometrical precision of OSM data around the Stockholm area. The positional accuracy will be estimated by comparing feature points between the OSM dataset and a reference dataset. The positional accuracy will be needed to assess where road collisions occur and whether they can easily be corrected.

@@ -85,14 +85,14 @@ It was found that the average positional error in the OSM dataset was about 2 me
 This project has dealt with the feasibility of including footpath data when generating 3D representations of OpenStreetMap (OSM) data.
 A key issue in creating 3D representations of geodata is that since individual features will be extruded to give them width, situations may arise where the generated 3D meshes are intersecting.
 
-The primary contribution is an investigation into the rate of collision between map features in OSM.
+The primary contribution is an \emph{investigation into the rate of collision between map features in OSM}.
 A program has taken an OSM dataset of the Stockholm area and assigned each road with standard withds according to swedish regulation.
 It has then identified critical areas in the OSM dataset, where the paths are so wide that they collide with existing map features.
 It has also identified how many of those areas can in theory be corrected by simple translation of the road vertices, without propagation of collision to other features.
 Here, features are defined as the geometrical components that comprise the OSM map.
 For the purpose of this report, features will refer mainly to roads and building footprints.
 
-The secondary contribution will be an assesment of the geometrical precision of OSM data around the Stockholm area.
+The secondary contribution will be an \emph{assesment of the geometrical precision of OSM data} around the Stockholm area.
 The positional accuracy will be estimated by comparing feature points between the OSM dataset and a reference dataset.
 The positional accuracy will be needed to assess where road collisions occur and whether they can easily be corrected.
 
@@ -553,7 +553,6 @@ This analysis will not be carried out in this project, but could be a good subje
 \end{figure}
 
 % Wednesday:
-% TODO: Bold research questions
 % TODO: Merge 2.1, 2.2
 % TODO: 2.1: Add a sentence about where the question fits into the big picture
 % TODO: 2.1: Add section refereces to implementation and results of the sub-questions

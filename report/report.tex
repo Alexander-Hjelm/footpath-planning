@@ -84,12 +84,6 @@ It has also identified how many of those areas can in theory be corrected by sim
 Here, features are defined as the geometrical components that comprise the OSM map.
 For the purpose of this report, features will refer mainly to roads and building footprints.
 
-The secondary contribution will be an \emph{assesment of the geometrical precision of OSM data} around the Stockholm area.
-The positional accuracy will be estimated by comparing feature points between the OSM dataset and a reference dataset.
-The positional accuracy will be needed to assess where road collisions occur and whether they can easily be corrected.
-
-\section{Evaluation}
-
 The primary study of the rate of collision between roads and other features, will serve to obtain the following three metrics:
 
 \begin{enumerate}
@@ -101,15 +95,22 @@ The primary study of the rate of collision between roads and other features, wil
 The road features will be categorized according to type, so that the rate of collisions between footpaths and other features can be compared to that of other road types.
 OSM mainly makes the distinction between primary, secondary, residential and footpath roads, so this classification will also be used in this report.
 The above features will be calculated for each road type separately by summing over each road feature of a certain type.
-
 Following this, an algorithm will find the exact same metrics with regards to how many road features that can in theory be corrected by simple geometrical translation of their vertices.
 This will also be preseneted in terms of the number of road features, the number of edges and the total length in meters of remaining colliding road.
+
+For the collision study, see sections 1.3.1 for an implementation overview, 4.2 for a detailed walkthrough of the program implementation, and 5.1 for the results.
+
+The secondary contribution will be an \emph{assesment of the geometrical precision of OSM data} around the Stockholm area.
+The positional accuracy will be estimated by comparing feature points between the OSM dataset and a reference dataset.
+The positional accuracy will be needed to assess where road collisions occur and whether they can easily be corrected.
 
 The secondary study about geodata precision will primarily serve to obtain an estimate of the positional accuracy of the OSM dataset, in meters.
 A number of auxillary metrics will be needed to estimate the domain of error on the positional accuracy, namely the feature completeness and shape accuracy of the OSM dataset.
 The completeness of the OSM dataset will be taken as a the number of features are represented in both datasets, as a perentage of the total numer of features in the reference dataset.
 Shape accuracy is a measure of polygon similarity that was obtained by comparing polygon turning function between matching features, feature by feature.
 See section 5.3 for more details about the shape accuracy measure.
+
+For the positional accuracy study, see sections 1.3.2 for an implementation overview, 4.1 for a walkthrough of the program implementation, and 5.2 for the results.
 
 \section{Implementation overview}
 
@@ -404,32 +405,9 @@ Table \ref{table:road-widths} shows the minimum and maximum road widths that wer
 
 \chapter{Results and metrics}
 
-\section{Positional accuracy statistics}
-
-For the secondary study, the average positional accuracy per building was calculated to roughly 2.06 meters, and this will be taken as an estaimate of the positional accuracy of the OSM dataset.
-Table \ref{table:positional-accuracy} shows the estimate in positional accuracy that was obtained from the study.
-Figure \ref{fig:bar-plot-positional-accuracy} shows the positional accuracies measured per building as a frequency diagram.
-
-\begin{table}[H]
-    \begin{tabular}{lllll}
-        $e_{average}$ & $e_{max}$ & $e_{min}$ & $e_{standard deviation}$ \\
-        2.0579... & 9.9878... & 0.0 & 1.2464...
-    \end{tabular}
-    \captionof{table}{The estimated positional accuracy of the OSM dataset: average, max, min and standard deviation}
-    \label{table:positional-accuracy}
-\end{table}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_pos_error_plot}
-    \caption{The average positional accuracies per building as a frequency diagram.}
-    \label{fig:bar-plot-positional-accuracy}
-\end{figure}
-
 \section{Road collision study}
 
 For the primary collision study.
-
 Table \ref{table:road-collision} shows the statistics of the collision study, and the number of roads, number of edges and total edge length that showed intersections with other features before road extrusion, by road category.
 For footpaths in particular, it was shown that 12.05\% of all roads collide with some other feature after extrusion to the minimum width.
 The same was shown to be true for 0.11\% of the road polyline edges and 0.09\% of the total road length.
@@ -470,7 +448,31 @@ The number of road edges and percentage of the total road length that could not 
     \label{table:road-collision-corrected}
 \end{table}
 
-\section{Completeness by building area}
+\section{Positional accuracy study}
+
+For the secondary study, the average positional accuracy per building was calculated to roughly 2.06 meters, and this will be taken as an estaimate of the positional accuracy of the OSM dataset.
+Table \ref{table:positional-accuracy} shows the estimate in positional accuracy that was obtained from the study.
+Figure \ref{fig:bar-plot-positional-accuracy} shows the positional accuracies measured per building as a frequency diagram.
+
+\begin{table}[H]
+    \begin{tabular}{lllll}
+        $e_{average}$ & $e_{max}$ & $e_{min}$ & $e_{standard deviation}$ \\
+        2.0579... & 9.9878... & 0.0 & 1.2464...
+    \end{tabular}
+    \captionof{table}{The estimated positional accuracy of the OSM dataset: average, max, min and standard deviation}
+    \label{table:positional-accuracy}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_pos_error_plot}
+    \caption{The average positional accuracies per building as a frequency diagram.}
+    \label{fig:bar-plot-positional-accuracy}
+\end{figure}
+
+\section{Secondary metrics}
+
+\subsection{Completeness by building area}
 
 Table \ref{table:num-of-buildings} shows the building coverage of the OSM and SLU datasets in terms of the number of buildings and their total area.
 Table \ref{table:num-of-buildings-percent} shows the building coverage of both datasets as perentages.
@@ -496,7 +498,7 @@ The area cover of the OSM dataset in relation to the SLU dataset was estimated t
     \label{table:num-of-buildings-percent}
 \end{table}
 
-\section{Building matching statistics}
+\subsection{Building matching statistics}
 
 Table \ref{table:building-matching} shows how many of the OSM to SLU building matches were found in each category of 1:1, 1:n and 1:0 matches.
 
@@ -510,7 +512,7 @@ Table \ref{table:building-matching} shows how many of the OSM to SLU building ma
     \label{table:building-matching}
 \end{table}
 
-\section{Shape accuracy statistics}
+\subsection{Shape accuracy statistics}
 
 Figure \ref{fig:bar-plot-similarity} shows the shape similarity measured per building as a frequency diagram.
 

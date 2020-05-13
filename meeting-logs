@@ -174,4 +174,30 @@ Todor: Present report and ask for specific references, e-mail
 Next meeting: Wednesday 13th, 13:00, check in if Chris is still available
 Contact examiners and Ann Bengtsson before we do the presentation
 
+Möte med Chris 13/05:
 
+Send email to Jonas Beskow, send a project specification, what week I would like to present, is he available? Sorry that I didn't get around earlier
+Find the old project specification that I sent to Ann and pass it on to Jonas
+Mention in the abstract that the implications for the fields is a scientific contribution. Scientific analysis.
+Turn it into a set of recommendations. How would you take this work and apply it? What are the challenges?
+Potential application: a cheap method of generating cities.
+Main challenge: How to reconstruct a 3D city.
+Inlude more papers to show how my paper integrates with this main challenges (Building footprint, LOD levels, building heights). Footprint extraction already made.
+Fan: A lot of the metrics that I've used apply not only for roads but for buildings as well.
+Update background with main story: How to recontruct cities from footprint data on the cheap.
+Abstract: Is concise but needs shortening (a couple of paragrahs), should contain the main challenge, reconstructing 3D cities.
+Exjobb thesis, format. https://www.kth.se/social/group/examensarbete-vid-cs/page/report-template-2/
+Read through process: https://www.kth.se/social/group/examensarbete-vid-cs/page/working-process/
+Bold main research question: Road network reconstruction
+Merge 2.1, 2.2. Add a sentence about where the question fits into the big picture
+    Add "See sections XX and XX for implementation and results"
+Optional: Strategic images with captions (Vitural city). Sneak in some details about the big pictures
+Reduce long subsection headings
+Rename analysis -> conclusions
+Very first introduction (very very basic, layman).
+    Here is a virtual city
+    Consisting of road network, buildings, details
+    Roads have different types
+    Importing data from online databases
+    What aspect of this am I working
+Have a look at other thesises: How does the abstract and introduction look, how are they structured?

@@ -208,7 +208,7 @@ Whereas OSM is a free service, the SLU map is available to paying customers or f
 
 The SLU dataset is delivered in the SWEREF 99 TM coordinate system (Lantmäteriet, 2019). SWEREF 99 TM is a projected coordinate system and there is no linear transformation to the WGS 48 system, which OSM uses (OSM 19). The coordinate conversions for this paper were obtained using proj: a Linux commandline application for geospatial coordinate conversion.
 
-\section{Specific preprocessing for SLU and OSM geodata}
+\section{Specific geodata preprocessing}
 
 Upon delivery of the OSM dataset, all features that intersect with the user-specified domain are included, with their full geometry.
 The SLU map however, is delivered with building footprints cropped to exactly match the query coordinates, meaning that buildings at the edge of the user-specified domain can have cropped geometries.
@@ -216,7 +216,11 @@ Any building area outside of the query domain will be excluded.
 Since the principles behind what features are delivered and how differ between the datasets, it is neccessary to crop both datasets to ensure that all buildings are complete and have matching candidates in the other set.
 Any features that intersect the edge of the rectagular boundary, in both datasets, were therefore excluded from the study.
 
-\chapter{Implemenation: evaluation of the quality of geodata}
+\chapter{Implementation}
+
+\section{Geodata precision study}
+
+\subsection{Quality criteria}
 
 (Haklay 2010) presents a comprehesive list of 8 accuracy classes when it comes to evaluating the quality of geographic information (van Oorts criteria)
 
@@ -242,17 +246,22 @@ Figure \ref{fig:osm-slu-map} shows two segments of the Stockholm map where the O
     \label{fig:osm-slu-map}
 \end{figure}
 
-\section{The accuracy classes that will not be focused on}
+\subsection{Other accuracy criteria}
 
-The lineage aspect of the OSM data is available through the OSM History Viewer, an online debugging tool that lets anyone freely view the change history of individual fetures in a commit history-like fashion. There is an option for editors to include a personal note with their changesets to include additional details or motivate why a change was made, but there is no guaratee that the data includes any information on the aquisition method used (OSM 2020). The history aspect of the SLU dataset is not freely available online, but the acquistion method is included in the file metadata on a per-object basis. Lantmäteriet uses internal codes to specifify the acquistion method, and these codes can be referred to in the product description the accompanies the map files. As the scope of this project is limited to making a broad comparison of the positional accuracy of the two datasets, only the required positional accuracy as described by the SLU product description will be used.
+Let us briefly go over all of van Oorts accuracy criteria that will not be assessed through this study.
+Let us see how they could be obtained and assessed for both the OSM and SLU maps, staring with the data lineage.
+The lineage aspect of the OSM data is available through the OSM History Viewer, an online debugging tool that lets anyone freely view the change history of individual fetures in a commit history-like fashion.
+There is an option for editors to include a personal note with their changesets to include additional details or motivate why a change was made, but there is no guaratee that the data includes any information on the aquisition method used (OSM 2020).
+The history aspect of the SLU dataset is not freely available online, but the acquistion method is included in the file metadata on a per-object basis.
+Lantmäteriet uses internal codes to specifify the acquistion method, and these codes can be referred to in the product description the accompanies the map files.
+As the scope of this project is limited to making a broad comparison of the positional accuracy of the two datasets, only the required positional accuracy as described by the SLU product description will be used.
 
-The attribute accuracy measure is interesting, as both maps use encoded metadata on a per feature basis, the attribute accuracy of the two datasets could be assessed by doing a simple feature comparison and creating a translation table between the two attribute maps. To the knowledge of the author, this has never been done with specifically these two datasets, at the time of writing.
+The attribute accuracy measure is interesting, as both maps use encoded metadata on a per feature basis, the attribute accuracy of the two datasets could be assessed by doing a simple feature comparison and creating a translation table between the two attribute maps.
+To the knowledge of the author, this has never been done with specifically these two datasets, at the time of writing.
 
-The temporal accuracy will not be assessed as this projects focuses on comparing a single snapshot of the two datasets at the same point in time.
+The temporal accuracy will not be assessed as this projects focuses on comparing a single snapshot of the two datasets at the same point in time, and finally the logical accuracy will not be assessed because the underlying logical relations between features in both maps serve no purpose to this project.
 
-The logical accuracy will not be assessed because the underlying logical relations between features in both maps serve no purpose to this project.
-
-\section{Assesment of dataset completeness}
+\subsection{Assesment of dataset completeness}
 
 (Fan et al., 2014) used the fraction of the total building area in their reference dataset and the OSM dataset to assess the completeness of OSM data.
 The motivation for this is to eliminate semantic differences between both datasets.
@@ -271,7 +280,7 @@ This project will use the building area in the OSM dataset versus that of the SL
     \label{fig:building-match-types}
 \end{figure}
 
-\section{Correspondence by building area}
+\subsection{Correspondence by building area}
 
 (Fan et al., 2014) further discussed how the relative overlap in building area can be used as an estimate of the building correspondence between datasets.
 In this project, relative area overlap was used in order to pair buildings from the two datasets together and create a feature map.
@@ -293,7 +302,7 @@ When calculating the area overlap, it was utilized the fact that multipolygons i
 Any subsequent polygons always represent cutouts or crop-outs in the footprint.
 When calculating the area of a multipolygon building, the area of the first polygon was therefore taken and subtracted with those of the subsequent polygons.
 
-\section{Shape accuracy definition}
+\subsection{Shape accuracy definition}
 
 The building footprint correspondence will be evaluated using a similarity function that depends on the difference between the turning funcitons of matching building footprints in both datasets.
 The turning function was first defined by Arkin et al. (1991), as a method for measuring the similarity of two polygons.
@@ -329,7 +338,7 @@ See figure \ref{fig:turning-function-compare} for a side-by-side comparison of t
     \label{fig:turning-function-compare}
 \end{figure}
 
-\section{Closest point and point proximity}
+\subsection{Closest point and point proximity}
 
 The final problem is that even when building polygons have been matched between the two datasets, they may not have one-to-one vertex relationship.
 Footprints from different datasets may be formed at a different level of detail.
@@ -380,7 +389,7 @@ Any edges in the simplified footprints that coinside with the OMBR from the same
 
 Finally, when two building footprints and their vertices have been mapped, we will use the offset of matching vertices as a measure of positional error. The average and variance in vertex spread will be calculated and used to make an assessment of the geometric precision of the OSM dataset, and this precision will further be used to form an upper boundary on geometrical corrections that can be made to the map once it has been imported into the application.
 
-\chapter{Implementation: collision study}
+\section{Collision study}
 
 The maximum distance between two features was set to 1 times the positional accuracy, since then there will always be ample room to make changes to any features that would collide with the newly moved nodes, and thus we do not need to worry about feature collisions propagating.
 In this implementation, roads of different types were allowed to merge into one another to form common intersections.
@@ -617,7 +626,7 @@ All these cases will create issues when generating the 3D mesh representation of
     \label{fig:collision-cases}
 \end{figure}
 
-\section{Suggested algorithms for correcting feature overlap}
+\section{Suggested algorithms for collision correction}
 
 All collision cases can be solved with relatively simply geometric algorithms. This section will present suggestions on algorithms that will resolve collisions by identifying individual colliding nodes and translating them, after which some degree of smoothing (such as linear interpolation) can be applied to preserve visual features. Cases 1 and 3-5 will be handled, while 2 will be left since case 2 collisions do not inherently cause feature overlap when extruding a 3D road mesh from the way edges. Thus it will me up to the individual developer to decide what to do with Case 2 collisions.
 

@@ -80,7 +80,7 @@ It was found that the average positional error in the OSM dataset was about 2 me
 
 \chapter{Introduction}
 
-\section{Research Question}
+\section{Research question}
 
 This project has dealt with the feasibility of including footpath data when generating 3D representations of OpenStreetMap (OSM) data.
 A key issue in creating 3D representations of geodata is that since individual features will be extruded to give them width, situations may arise where the generated 3D meshes are intersecting.
@@ -121,7 +121,7 @@ See section 5.3 for more details about the shape accuracy measure.
 
 \section{Implementation overview}
 
-\subsection{Assesment of Geodata Precision}
+\subsection{Assesment of geodata precision}
 
 The geometrical precision study has been carried out in a number of steps that are all detailed below.
 First a feature map was found, which mapped individual features between the OSM dataset and a reference dataset.
@@ -140,7 +140,7 @@ In a 3D representation however, it is crucial that each road object has a spacia
 After the width assignment, a program has iterated over all features and calculated how many of them that overlap with any other feature, as well as the total length of the road polylines that is intersecting some other feature.
 The program has then calculated how many of these colliding features that can be corrected by making adjustments that are within the positional accuracy of the OSM data (As obtained by the previous study in this report: Assessment of Geodata Precision).
 
-\section{Problem Constraints}
+\section{Problem constraints}
 
 In this study, when working with OSM geodata, the following assumptions have been made about the dataset to reduce the size of the problem domain:
 
@@ -153,7 +153,7 @@ In this study, when working with OSM geodata, the following assumptions have bee
 
 \chapter{Background}
 
-\section{Background of 3D City Representation}
+\section{Background of 3D city reproduction}
 
 Procedural modeling of road networks is of interest to the fields of urban planning and urban architecture. In recent years there has been an advent of interactive tools that aid urban planners in placing or generating features of an urban plan, particularly roads and road networks. Procedural and AI solutions that aid the arcitect in a form of human-machine symbiosis.
 
@@ -187,14 +187,14 @@ The SLU map conatins only building and property footprints.
 The exact map segments that were extracted were in both cases rectangular boundaries with the following coordinates in WGS84: (N: 59.42, E: 18.15, S: 59.23, W: 17.79).
 Both datasets were collcted on March 18th, 2020.
 
-\section{OSM Data}
+\section{OSM data}
 
 The OSM project is a wiki-like geodatabase based on Volunteered Geographical Information (VGI), meaning anyone can contribute by adding or editing features.
 OSM road data and building footprints are commonly obtained by manually tracing features in commercially available satellite images.
 Such images have a limit on their resolution which puts a theoretical limit on the accuracy of map features compared to their real-world equivalents (Haklay 2010).
 Particularily the high resolution imagery from Bing in 2010 led to an increase in building information in OSM, and the positional error is largely due to the limited resolution in such satellite imagery. (Fan et al, 2014).
 
-\section{SLU Data}
+\section{SLU data}
 
 The SLU map is maintained by The Swedish National Land Survey (Swedish: Lantmäteriet).
 The data is collected by geodetic professionals, by land surveying methods such as GPS or DGNSS positioning, or by reproduction of features from ortophoto or stereo mapping from 3D aerial images.
@@ -216,7 +216,7 @@ Any building area outside of the query domain will be excluded.
 Since the principles behind what features are delivered and how differ between the datasets, it is neccessary to crop both datasets to ensure that all buildings are complete and have matching candidates in the other set.
 Any features that intersect the edge of the rectagular boundary, in both datasets, were therefore excluded from the study.
 
-\chapter{Implemenation: Evaluation of the quality of geodata}
+\chapter{Implemenation: evaluation of the quality of geodata}
 
 (Haklay 2010) presents a comprehesive list of 8 accuracy classes when it comes to evaluating the quality of geographic information (van Oorts criteria)
 
@@ -380,7 +380,7 @@ Any edges in the simplified footprints that coinside with the OMBR from the same
 
 Finally, when two building footprints and their vertices have been mapped, we will use the offset of matching vertices as a measure of positional error. The average and variance in vertex spread will be calculated and used to make an assessment of the geometric precision of the OSM dataset, and this precision will further be used to form an upper boundary on geometrical corrections that can be made to the map once it has been imported into the application.
 
-\chapter{Implementation: Collision study}
+\chapter{Implementation: collision study}
 
 The maximum distance between two features was set to 1 times the positional accuracy, since then there will always be ample room to make changes to any features that would collide with the newly moved nodes, and thus we do not need to worry about feature collisions propagating.
 In this implementation, roads of different types were allowed to merge into one another to form common intersections.
@@ -520,7 +520,7 @@ Figure \ref{fig:bar-plot-similarity} shows the shape similarity measured per bui
     \label{fig:bar-plot-similarity}
 \end{figure}
 
-\chapter{Analysis and Future Work}
+\chapter{Conclusions and future work}
 
 \section{Quality of the OSM dataset}
 

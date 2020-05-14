@@ -174,6 +174,22 @@ Todor: Present report and ask for specific references, e-mail
 Next meeting: Wednesday 13th, 13:00, check in if Chris is still available
 Contact examiners and Ann Bengtsson before we do the presentation
 
+Email från Todor, 11/05:
+
+You can maybe add few more references about procedural modelling and subsequent work. These are two classical texts:
+Parish, Y. I., and Müller, P. (2001) Procedural modeling of cities. In Proceedings of the 28th annual conference on Computer graphics and interactive techniques, SIGGRAPH, 12-17 August 2001, Los Angeles, Calif. pp. 301-308.
+Müller, P., Wonka, P., Haegler, S., Ulmer, A., & Van Gool, L. (2006). Procedural modeling of buildings. In ACM SIGGRAPH 2006 Papers (pp. 614-623).
+
+I really like the works of Carlos Vanegas who describe the relationship between streets, lots and buildings (as fundamental elements of urban form):
+Vanegas, C. A., Aliaga, D. G., Wonka, P., Müller, P., Waddell, P., and Watson, B. (2010) Modelling the appearance and behaviour of urban spaces. Computer Graphics Forum, 29(1), pp. 25-42.
+Vanegas, C. A., Kelly, T., Weber, B., Halatsch, J., Aliaga, D. G. och Müller, P. (2012) Procedural generation of parcels in urban modeling. Computer graphics forum 31(2), pp. 681-690.
+
+5. You can also check few references about 3D- GIS e.g.
+https://www.mdpi.com/2220-9964/8/11/503/htm
+I think the work of Biljacki is also important with LOD (Level of Detail).
+Biljecki, F., Ledoux, H., & Stoter, J. (2016). An improved LOD specification for 3D building models. Computers, Environment and Urban Systems, 59, 25-37.
+Biljecki, F., Ledoux, H., Stoter, J., & Zhao, J. (2014). Formalisation of the level of detail in 3D city modelling. Computers, environment and urban systems, 48, 1-15.
+
 Möte med Chris 13/05:
 
 Send email to Jonas Beskow, send a project specification, what week I would like to present, is he available? Sorry that I didn't get around earlier

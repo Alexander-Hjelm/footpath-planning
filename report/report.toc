@@ -73,4 +73,4 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {6.3}Suggested algorithms for collision correction}{30}{section.6.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.4}Utility in real world applications}{33}{section.6.4}
+\contentsline {section}{\numberline {6.4}Scientific study: Where does this fit in the general Scietific scope of things}{33}{section.6.4}

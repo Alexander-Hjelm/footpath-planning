@@ -41,17 +41,16 @@
 \titlepage
 
 \begin{abstract}
-This project assesses the feasibility of creating a 3D representation of OpenStreetMap (OSM) geodata with the inclusion of pedestrian footpaths, by focusing on OSM road and building data in the Stockholm metropolitan area.
+Modeling a city in 3D has long been a topic of interest in field of computer graphics.
+It is often desirable to recreate real-world cities in 3D applications such as urban design software and video games, and the topic of 3D city reproduction comes with its own set of unique challenges.
+So far there have been a lot of research in modelling of 3D road networks, but these projects have often focused on the road networks designated for cars and public transit, and seldom on pedestrian footpaths.
+This project assesses the feasibility of reconstructing a city from OpenStreetMap (OSM) road and building data, and will focus on the feasibility of including of pedestrian footpaths, by focusing on OSM road and building data in the Stockholm metropolitan area.
 
-An estimate of the positional accuracy of OSM data has been obtained by comparing OSM positional data to a dataset with a known accuracy, which was obtained from the Swedish National Land Survey.
+An estimate of the positional accuracy of OSM data has been obtained by comparing OSM data to a dataset with a known accuracy.
 It was found that the average positional error in the OSM dataset was about 2 meters.
 This estimate of the positional error was then used to assess the integrity of the OSM Stockholm road network, by locating critical points where assigning standard widths to the roads would cause collision with other features, and evaluating how many of those points could be eliminated by making ajustments within the found margin of error.
-
-It was found that extending all roads with widths led to collisions between roughly 12\% of all roads in the dataset, and the length of road that intersected with other features was less than 0.1\% of the total road length.
-Roughly 80\% of these colliding features, and 99\% of the colliding road by length, could be corrected.
 It was found that footpaths were less problematic than other road types (primary, secondary, residential), in terms of feature collisions, and thus should pose no more problems in 3D city reproduction than other road types.
-
-The report concludes with a discussion of the findings of this study, and an assessment of the feasibility of generating city models with pedestrian footpaths in a number of different applications from urban planning tools to videogames.
+The report concludes with a scientific study of the field of 3D city reproduction. It serves to give an overview of the challenges in the field and place the study and findings of this project in a broader scientific context. 
 \end{abstract}
 
 \begin{otherlanguage}{swedish}
@@ -71,6 +70,14 @@ The report concludes with a discussion of the findings of this study, and an ass
 \mainmatter
 
 \chapter{Introduction}
+
+Description of a virtual city and its contents.
+
+Description of different levels of subdivision. What levels of subdivision are we looking at? Picture, ref to Todor's paper.
+
+So far there have been a lot of research in modelling of 3D road networks, but these projects have often focused on the road networks designated for cars and public transit, due to environmental concerns (Todors paper)
+
+Description of the unique character of footpaths vs other types of roads (pictures).
 
 \section{Research question}
 

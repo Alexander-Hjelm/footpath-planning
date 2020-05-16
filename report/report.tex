@@ -97,7 +97,9 @@ Procedural models for city reproduction instead rely on programmatic solutions f
 At the base of this process is the procedural layout of road networks in 3D.
 \textbf{(Müller et al, 2006)}
 
-So far there have been a lot of research in modelling of 3D road networks, but these projects have often focused on the road networks designated for cars and public transit, as a part of the sustainable mobility paradigm and the topic of sustainable cities. Also the rise of investigation into self-propelled cars and carpools. The study of energy efficient mobility is only in its emerging phase. \textbf{(Stojanovski, 2020)}
+So far there have been a lot of research in modelling of 3D road networks, but these projects have often focused on the road networks designated for cars and public transit, as a part of the sustainable mobility paradigm and the topic of sustainable cities.
+Also the rise of investigation into self-propelled cars and carpools.
+The study of energy efficient mobility such as walking and cycling is only in its emerging phase. \textbf{(Stojanovski, 2019)}
 
 Description of the unique character of footpaths vs other types of roads (pictures).
 
@@ -740,6 +742,16 @@ This creates a possible generative space of many different models that can be cr
 For simple presentation in e.g. animation and videogames or even urban planning software, this could very well be enough.
 The problem is that these features will rarely match real life.
 As long as one can be satisified with looking at rough representations of buildings and does not require additional knowledge about minor features.
+
+The fact is that much of the morpological information is not present in the OSM dataset.
+Urban architects often work morpological structures where a single road can be comprised of many different sections with different purposes.
+A single inner-city street for example, often contains sidewalks 
+All of a certain placement and dimension that determines what type of traffic it can serve.
+This type of representation is known as a multimodal structures, due to the possibility of incorporating mulitple modes of transportation.
+But may even describe the building facades and distances between curbline and building lot.
+\textbf{Stojanovski, 2019}
+This type of information could in theory be generated procedurally using shape grammars and some sort of wayfinding to create logical routes for different types of traffic.
+But for urban planners requiring an exact morphological representation of some specification, this complementary data will have to be obtained from another dataset.
 
 \begin{thebibliography}{9}
 

@@ -55,7 +55,7 @@
       <file>biblatex.def</file>
       <file>numeric.bbx</file>
       <file>standard.bbx</file>
-      <file>numeric.cbx</file>
+      <file>verbose.cbx</file>
       <file>biblatex.cfg</file>
       <file>english.lbx</file>
       <file>swedish.lbx</file>
@@ -78,9 +78,6 @@
     </provides>
     <requires type="dynamic">
       <file>report.bcf</file>
-    </requires>
-    <requires type="editable">
-      <file>references.bib</file>
     </requires>
   </external>
 </requests>

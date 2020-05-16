@@ -150,7 +150,7 @@ For the positional accuracy study, see sections 1.3.2 for an implementation over
 
 The geometrical precision study has been carried out in a number of steps that are all detailed below.
 First a feature map was found, which mapped individual features between the OSM dataset and a reference dataset.
-A program then took matching building pairs and extracted matching geometrical points after first simplifying the polygons using the Douglas-Peucker algorithm.
+A program then took matching building pairs and extracted matching geometrical points after first simplifying the polygons using the Douglas-Peucker algorithm \textbf{(Douglas and Peucker, 1973)}.
 Once a set of matching points has been found across the whole dataset, the average distance between them was taken as a measure of the positional accuracy.
 
 Additionally, a number of auxillary calculations were neccessary for this study.
@@ -187,8 +187,7 @@ Urban design practises with conventional two-dimenstional deliverables range fro
 The last decade has seen multiple startups in the area of software that aid urban arcitecture. The software uses procedural models to render a city grid based on real-world locations, or generate new user-specified parameters, and allow for varying degrees of manual editing on grid, road, neighbourhood, city block or individual feature level.
 Some of the most prominent examples are ArcGIS Pro (made by Esri), CityEngine (made by the startup Procedural, bought by ESRI) and Urban Canvas (made by the startup Synthicity, bought by Autodesk, now defunct).
 
-But such tools are as of today not commonly applied in urbanist practises, due to failures in reflecting the unique workspace of arcitects and their design needs. Urban arcitecture is a social factors, stakeholders. Each arcitect is an actor in a continously developing environment, and affecting that environment in a complex manner through their action.
-(Stojanivski, 2020)
+But such tools are as of today not commonly applied in urbanist practises, due to failures in reflecting the unique workspace of arcitects and their design needs. Urban arcitecture is a social factors, stakeholders. Each arcitect is an actor in a continously developing environment, and affecting that environment in a complex manner through their action \textbf{(Stojanovski et al, 2020)}.
 
 In recent years, there have been an advent of tools that extract geodata from OSM and generate 3D representations of real world locations by placing terrain, buildings, roads and other features.
 However, freely available such tools seldom include smaller roads and pedestrian footpaths such as walkways, sidewalks or trails.
@@ -197,9 +196,21 @@ Additionally, the topic is of interest for 3D content creators in for example th
 %TODO: (Parish Müller: Procedural modelin of cities)
 
 \section{Related work}
-When assessing the completeness of geodata, a very common scale is Van Oorts criteria for evaluating the quality of geographical information, which at the time of publication received attention from surveyors and cartographers. (van Oort, 2006) Since then a number of publications have examined slices of geodata from van Oort's criteria. In 2008, (Haklay, 2010) conducted such a study to estimate of the quality of OSM positional geodata in London and England. Since the OSM project started in London it was thought that OSM data in the London metropolitan area would be representative of the highest quality data available, and therefore a good indicator for the whole global OSM dataset. The study was conducted by comparing OSM data to Ordnance Survey datasets. The study showed that the OSM dataset had a rough positional accuracy of 6 meters from the reference dataset. However, at the time of the study, the OSM project had captured roughly 29\% of the area of England, meaning that the data completeness was fairly low.
+When assessing the completeness of geodata, a very common scale is Van Oorts criteria for evaluating the quality of geographical information, which at the time of publication received attention from surveyors and cartographers.
+\textbf{(Van Oort, 2006)} Since then a number of publications have examined slices of geodata from van Oort's criteria.
+In 2008, \textbf{(Haklay, 2010)} conducted such a study to estimate of the quality of OSM positional geodata in London and England.
+Since the OSM project started in London it was thought that OSM data in the London metropolitan area would be representative of the highest quality data available, and therefore a good indicator for the whole global OSM dataset.
+The study was conducted by comparing OSM data to Ordnance Survey datasets.
+The study showed that the OSM dataset had a rough positional accuracy of 6 meters from the reference dataset.
+However, at the time of the study, the OSM project had captured roughly 29\% of the area of England, meaning that the data completeness was fairly low.
 
-The next notable study to assess the quality of OSM data was published by (Kunze, 2012). The study applied different methods to assess the completeness of OSM data in two federal states in Germany, mainly by analysing the area difference between the OSM dataset and an administrative dataset. Finally, a notable study in 2013-2014, conducted by researchers from various universities in Norway and Germany \textbf{(Fan et al, 2014)}, examined the quality and accuracy in building footprint data of the Munich area, at a time and place where the completeness of the OSM dataset was significantly higher (the results of their study showed that the OSM had captured close to 100\% of all building footprints). At the time Munich was one of the most developed cities in OSM. Their study included an insight in the geometrical calculations neccessary to match features and points between two datasets, and how to reliably calculate the metrics needed for the most important and assessible of van Oorts criteria. Their study revealed that although the feature completeness of OSM was high, some architectural details were missing. The results reveal that the positional accuracy of OSM data at the time was about 4 meters.
+The next notable study to assess the quality of OSM data was published by \textbf{(Kunze, 2012)}.
+The study applied different methods to assess the completeness of OSM data in two federal states in Germany, mainly by analysing the area difference between the OSM dataset and an administrative dataset.
+Finally, a notable study in 2013-2014, conducted by researchers from various universities in Norway and Germany \textbf{(Fan et al, 2014)}, examined the quality and accuracy in building footprint data of the Munich area, at a time and place where the completeness of the OSM dataset was significantly higher (the results of their study showed that the OSM had captured close to 100\% of all building footprints).
+At the time Munich was one of the most developed cities in OSM.
+Their study included an insight in the geometrical calculations neccessary to match features and points between two datasets, and how to reliably calculate the metrics needed for the most important and assessible of van Oorts criteria.
+Their study revealed that although the feature completeness of OSM was high, some architectural details were missing.
+The results reveal that the positional accuracy of OSM data at the time was about 4 meters.
 
 \chapter{The geodata used in this project}
 
@@ -246,7 +257,7 @@ Any features that intersect the edge of the rectagular boundary, in both dataset
 
 \subsection{Quality criteria}
 
-(Haklay 2010) presents a comprehesive list of 8 accuracy classes when it comes to evaluating the quality of geographic information (van Oorts criteria)
+\textbf{(Haklay, 2010)} presents a comprehesive list of 8 accuracy classes when it comes to evaluating the quality of geographic information (van Oorts criteria)
 
 \begin{itemize}
   \item Lineage. This is the historical aspect of the dataset, which concerns the collection process and evolution.
@@ -306,7 +317,7 @@ This project will use the building area in the OSM dataset versus that of the SL
 
 \subsection{Correspondence by building area}
 
-(Fan et al., 2014) further discussed how the relative overlap in building area can be used as an estimate of the building correspondence between datasets.
+\textbf{(Fan et al, 2014)} further discussed how the relative overlap in building area can be used as an estimate of the building correspondence between datasets.
 In this project, relative area overlap was used in order to pair buildings from the two datasets together and create a feature map.
 This can only be done in cases where there is not much displacement between OSM building footprints data and the reference data set.
 Figure \ref{fig:osm-slu-map} under Section 5 shows a typical comparison between the OSM and SLU datasets.
@@ -318,7 +329,7 @@ The relative building overlap between the OSM and SLU datasets will be defined a
 \end{center}
 
 The relative overlap may be used to determine building matching relations even when the semantic accuracy is low.
-If a large building is represented by a single footprint in one dataset but by several smaller footprints in the other, (Rutzinger et al, 2009) found that if $S_{RO}(foot_{A}, foot_{B}) < 30\%$ for two buildings $A$ and $B$ from different sets, then $A$ and $B$ are highly likely to be separate, neighbouring buildings and not in fact identical.
+If a large building is represented by a single footprint in one dataset but by several smaller footprints in the other, \textbf{(Rutzinger, Rottensteiner and Pfeifer, 2009)} found that if $S_{RO}(foot_{A}, foot_{B}) < 30\%$ for two buildings $A$ and $B$ from different sets, then $A$ and $B$ are highly likely to be separate, neighbouring buildings and not in fact identical.
 Therefore it will here be assumed that two buildings are matching candidates if their relative area overlap is greater than 30\%.
 If a one-to-many object matching is found, the compound perimeter of the footprints in the many-set will be used when calculating the shape accuracy and finding closest vertices between the polygons.
 
@@ -329,9 +340,9 @@ When calculating the area of a multipolygon building, the area of the first poly
 \subsection{Shape accuracy definition}
 
 The building footprint correspondence will be evaluated using a similarity function that depends on the difference between the turning funcitons of matching building footprints in both datasets.
-The turning function was first defined by Arkin et al. (1991), as a method for measuring the similarity of two polygons.
+The turning function was first defined by \textbf{(Arkin et al, 1991)}, as a method for measuring the similarity of two polygons.
 The Turning function $T_c(l)$ measures the cumulative angle of the polygon's counter-clockwise tangent, as a function of the cumulative normalized length l.
-This project uses the turning function as it is defined by (Fan et al., 2014).
+This project uses the turning function as it is defined by \textbf{(Fan et al, 2014)}.
 See figure \ref{fig:turning-function} for a side-by-side comparison of a polygon and its turning function.
 For a polygon with vertices ${v_1 ... v_n}$ and line segments ${e_1 ... e_n}$ It is defined as follows.
 Fix a starting vertex $v_1$.
@@ -560,15 +571,15 @@ Figure \ref{fig:bar-plot-similarity} shows the shape similarity measured per bui
 
 One could reasonably assume that Stockholm, being one of the more developed cities in one of the most technologically connected country in the world, would be fairly well mapped in OSM.
 Let us take the positional accuracy of the Stockholm area, as obtained by this study, as reprentative of that of major cities in developed countries in the OSM dataset.
-Then the positional accuracy has improved by roughly 3.5 meters since the study by (Haklay, 2010), and by roughly 1.5 meters since the study by (Fan et al, 2014).
+Then the positional accuracy has improved by roughly 3.5 meters since the study by \textbf{(Haklay, 2010)}, and by roughly 1.5 meters since the study by \textbf{(Fan et al, 2014)}.
 This of course assumes that the SLU reference dataset is taken as absolute.
 
-The completeness analysis by building area shows that the OSM Stockholm dataset has high completeness in terms of both building area and counted features, in the same level as the study of Munich by (Fan et al, 2014).
+The completeness analysis by building area shows that the OSM Stockholm dataset has high completeness in terms of both building area and counted features, in the same level as the study of Munich by \textbf{(Fan et al, 2014)}.
 The difference in area cover can partially be explained by small utility buildings that are often not represented in the OSM dataset.
 Particularily the residential areas in downtown, Stockholm, are characteristic in that each city block consists of a street front and an open, communal compound in the middle, inside of which there are usually a number of small utility buildings such as bicycle garages, toolsheds, refuse rooms and such.
 See figure \ref{fig:osm-slu-map-utility-buildings} for an example of an area in stockholm with such characteristics.
 These buildings are likely hard to make out and trace on publicly available satellite image data.
-They are, according to (Fan et al, 2014) occluded by their surroundings due to shadows or forestry.
+They are, according to \textbf{(Fan et al, 2014)} occluded by their surroundings due to shadows or forestry.
 This appears to be a large consensus in the field.
 
 The low semantic accuracy has made analysis hard.
@@ -684,7 +695,7 @@ All collision cases can be solved with relatively simply geometric algorithms. T
 
 \section{Scientific study: Where does this fit in the general Scietific scope of things}
 
-The same methods can be applied to import building footprint data from OSM or some, and the same metrics can be applied to assess the data accuracy. (Fan et al)
+The same methods can be applied to import building footprint data from OSM or some, and the same metrics can be applied to assess the data accuracy. \textbf{(Fan et al, 2014)}
 When we have the fundamental procedure for accuratly importing building footprints without compromising the data integritey, we can proceed with building modeling (Parish Müller, procedural building modeling). Other challenges include infering or guessing building height. () have presented a method for inferring building height from the building footprint alone, with surprising accuracy.
 
 Depending on the level of data we have access to, we can then choose what level of representation we would like for our application (Todor).

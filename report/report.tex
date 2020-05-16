@@ -236,12 +236,13 @@ The data is collected by geodetic professionals, by land surveying methods such 
 Building features in the SLU dataset have a position accuracy requirement of 2 meters.
 The SLU map contains building features and property limits, but no road data.
 The map is updated continously by Lantmäteriet, in conjoncture with the forming or reforming of property.
-Whereas OSM is a free service, the SLU map is available to paying customers or for free to students and researchers.
-(Lantmäteriet, 2019)
+Whereas OSM is a free service, the SLU map is available to paying customers or for free to students and researchers. \footnote{Lantmäteriet. Produktbeskrivning: GSD-Fastighetskartan vektor - Lantmäteriet. Acessed 16-04-2020. https://www.lantmateriet.se/globalassets/kartor-och-geografisk-information/kartor/fastshmi.pdf}
 
 \section{A word on coordinate systems}
 
-The SLU dataset is delivered in the SWEREF 99 TM coordinate system (Lantmäteriet, 2019). SWEREF 99 TM is a projected coordinate system and there is no linear transformation to the WGS 48 system, which OSM uses (OSM 19). The coordinate conversions for this paper were obtained using proj: a Linux commandline application for geospatial coordinate conversion.
+The SLU dataset is delivered in the SWEREF 99 TM coordinate system.
+SWEREF 99 TM is a projected coordinate system and there is no linear transformation to the WGS 48 system, which OSM uses. \footnote{Converting to WGS84 - OpenStreetMap Wiki. Accessed 13-03-2020. https://wiki.openstreetmap.org/wiki/Converting\_to\_WGS84}
+The coordinate conversions for this paper were obtained using proj: a Linux commandline application for geospatial coordinate conversion.
 
 \section{Specific geodata preprocessing}
 
@@ -286,7 +287,7 @@ Figure \ref{fig:osm-slu-map} shows two segments of the Stockholm map where the O
 Let us briefly go over all of van Oorts accuracy criteria that will not be assessed through this study.
 Let us see how they could be obtained and assessed for both the OSM and SLU maps, staring with the data lineage.
 The lineage aspect of the OSM data is available through the OSM History Viewer, an online debugging tool that lets anyone freely view the change history of individual fetures in a commit history-like fashion.
-There is an option for editors to include a personal note with their changesets to include additional details or motivate why a change was made, but there is no guaratee that the data includes any information on the aquisition method used (OSM 2020).
+There is an option for editors to include a personal note with their changesets to include additional details or motivate why a change was made, but there is no guaratee that the data includes any information on the aquisition method used \footnote{OSM History Viewer - OpenStreetMap Wiki. Accessed 20-03-2020. https://wiki.openstreetmap.org/wiki/OSM\_History\_Viewer}
 The history aspect of the SLU dataset is not freely available online, but the acquistion method is included in the file metadata on a per-object basis.
 Lantmäteriet uses internal codes to specifify the acquistion method, and these codes can be referred to in the product description the accompanies the map files.
 As the scope of this project is limited to making a broad comparison of the positional accuracy of the two datasets, only the required positional accuracy as described by the SLU product description will be used.
@@ -431,7 +432,10 @@ In this implementation, roads of different types were allowed to merge into one 
 To facilitate this, it was neccessary to work with a path-by-path representation of the point data.
 When two path share a node with common coordinates, they form an intersection which can be of multiple different types.
 
-The default minimum widths were obtained from (Trafikverket, 20). The standard recommended minimum width for a two-lane road in Sweden is 6.5 meters.
+See the footnote for the publication that the default minimum widths were obtained from. \footnote{Vägars och gators utformning - Trafikverket. Publikation 2020:029. https://trafikverket.ineko.se/Files/sv-SE/71830/\\Ineko.Product.RelatedFiles/2020\_029\_vagar\_och\_gators\_utformning\_krav.pdf}
+The standard recommended minimum width for a two-lane road in Sweden is 6.5 meters.
+
+
 Subsequent visual measurements of a few key locations in the Stockholm area revealed the following minimum way widths:
 Table \ref{table:road-widths} shows the minimum and maximum road widths that were found during these measurements, and that will be used in the collision study.
 
@@ -718,28 +722,11 @@ Haklay, M. (2010). How Good is Volunteered Geographical Information? A Comparati
 \bibitem{kunze-12}
 Kunze, C. (2012). Vergleichsanalyse des Gebäudedatenbestandes aus OpenStreetMap mit amtlichen Datenquellen. Student research project, Technical University of Dresden. http://nbn-resolving.de/urn:nbn:de:bsz:14-qucosa-88141
 
-\bibitem{lantmateriet-19}
-Lantmäteriet. (2019). Produktbeskrivning: GSD-Fastighetskartan vektor. Acessed 16-04-2020.
-https://www.lantmateriet.se/globalassets/kartor-och-geografisk-information/kartor/fastshmi.pdf.
-
-\bibitem{osm-19}
-OSM. (2019). Converting to WGS84 - OpenStreetMap Wiki. Accessed 13-03-2020.
-https://wiki.openstreetmap.org/wiki/Converting\_to\_WGS84.
-
-\bibitem{osm-20}
-OSM. (2020). OSM History Viewer - OpenStreetMap Wiki. Accessed 20-03-2020
-https://wiki.openstreetmap.org/wiki/OSM\_History\_Viewer.
-
 \bibitem{rutzinger-09}
 Rutzinger, M., Rottensteiner, F. and Pfeifer, N. (2009). A Comparison of Evaluation Techniques for Building Extraction From Airborne Laser Scanning. IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing 2(1): 11-20.
 
 \bibitem{stojanovski-20}
 Stojanovski, T. Partanen J., Samuels I., Sanders, P. and Peters C. (2020, forthcoming). City Information Modelling (CIM) and Digitizing Urban Design Practices. Built Environment.
-
-\bibitem{trafikverket-20}
-Trafikverket. (2020). Vägars och gators utformning. Publikation 2020:029. \\
-https://trafikverket.ineko.se/Files/sv-SE/71830/ \\
-Ineko.Product.RelatedFiles/2020\_029\_vagar\_och\_gators\_utformning\_krav.pdf
 
 \bibitem{van-oort-06}
 Van Oort P.A.J. (2006). Spatial Data Quality: From Description to Application. PhD Thesis, Wageningen University.

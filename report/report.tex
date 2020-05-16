@@ -426,6 +426,8 @@ Finally, when two building footprints and their vertices have been mapped, we wi
 
 \section{Collision study}
 
+\subsection{Road widths and properties}
+
 The maximum distance between two features was set to 1 times the positional accuracy, since then there will always be ample room to make changes to any features that would collide with the newly moved nodes, and thus we do not need to worry about feature collisions propagating.
 In this implementation, roads of different types were allowed to merge into one another to form common intersections.
 To facilitate this, it was neccessary to work with a path-by-path representation of the point data.
@@ -433,7 +435,6 @@ When two path share a node with common coordinates, they form an intersection wh
 
 See the footnote for the publication that the default minimum widths were obtained from. \footnote{Vägars och gators utformning - Trafikverket. Publikation 2020:029. https://trafikverket.ineko.se/Files/sv-SE/71830/\\Ineko.Product.RelatedFiles/2020\_029\_vagar\_och\_gators\_utformning\_krav.pdf}
 The standard recommended minimum width for a two-lane road in Sweden is 6.5 meters.
-
 
 Subsequent visual measurements of a few key locations in the Stockholm area revealed the following minimum way widths:
 Table \ref{table:road-widths} shows the minimum and maximum road widths that were found during these measurements, and that will be used in the collision study.
@@ -447,6 +448,27 @@ Table \ref{table:road-widths} shows the minimum and maximum road widths that wer
     \captionof{table}{Standard road widths used for the collision study}
     \label{table:road-widths}
 \end{table}
+
+\subsection{Feature overlap algorithm}
+
+Outline of the feature overlap algorithm (Go over all features)
+Since only road collisions are of interests, all roads were added to a queue and gone over one by one.
+
+The boundary polygon of the buildings are extracted, as well as the polylines of the roads.
+
+To speed up the collision checking process, a geometric hashing solution was developed.
+This way feature collision lookup could be made without comparing a feature to all other available features, but instead from a selection of the closest candidates.
+The hash bucket size was 230 meters and a feature could be in multiple hash buckets.
+
+Special cases: Where two roads intersect though they share a node.
+Then this is a natural connection in the road network and should not be counted as a problematic case of feature overlap.
+Also ignored collisions between tunnels and bridges and other roads since these are of different heights.
+These were identified by looking at feature attributes in OSM.
+Any roads that were represented as polygons or multipolygons instead of plylines were also excluded from the study.
+
+\subsection{Projected edge distance}
+
+Outline of the minimum edge distance algorithm.
 
 \chapter{Results and metrics}
 
@@ -607,7 +629,6 @@ This analysis will not be carried out in this project, but could be a good subje
     % TODO: read Biljecki
     % TODO: read Vanega
 % TODO: Write Collision study implementation section
-    % TODO: Collision study implementation, disposition
     % TODO: Figure detailing the steps in the point-matching algorithm
     % TODO: Edge distance algorithm, outline, algorithm + picture
 

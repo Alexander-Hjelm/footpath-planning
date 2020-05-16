@@ -724,9 +724,15 @@ When we have the fundamental procedure for accuratly importing building footprin
 
 Depending on the level of data we have access to, we can then choose what level of representation we would like for our application (Todor).
 
+Another crucial concept in city modelling is the Level Of Detail (LOD). LOD is a definition of a series of different 3D representation of the same data, at different detail levels.
+The LOD chosen for a particulary application suggests how the data has been aqquired and modelled.
+The CityGML standard divides the LOD representation of 3D models into three classes: A B and C.
+LOD-A models are renderings of the building footprint itself, or building blocks that have been extruded from the footprint to give the building height.
+LOD-B models are building blocks with simplifed roof shapes, and LOD-C models include features such as doors, windows, alcoves, building decor, indoor features or vegetation.
+\textbf{(Biljecki, Ledoux and Stoter, 2016)}
 We may also chose what LOD class(es) to use depending on data availablity and application.
-With the current means of data aquisition being limited to building footprints, using OSM data we can only produce CityGML 2.0 LOD-B-models, that is building blocks with simplifed roof shapes (LOD-A being a rendering of the building footprint itself, or building blocks extruded from the footprint to give the building height). \textbf{(Biljecki, Ledoux and Stoter, 2016)}
-If we wish to aqquire building assets at a LOD-C level of detail, including features such as doors, windows, alcoves, building decor, indoor features or vegetation, we would have to complete the data with other sources, or rely on procedural methods to populate.
+With the current means of data aquisition being limited to building footprints, using OSM data we can only produce CityGML 
+If we wish to aqquire building assets at a LOD-C level, we would have to complete the data with other sources, or rely on procedural methods to populate.
 Such procedural techniques have long been available.
 \textbf{(Mũller et al, 2006)} present how to accomplish this using shape grammar, a method for describing the possible relations between 
 For simple presentation in e.g. animation and videogames or even urban planning software, this could very well be enough.

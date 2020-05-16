@@ -723,12 +723,22 @@ The same methods can be applied to import building footprint data from OSM or so
 When we have the fundamental procedure for accuratly importing building footprints without compromising the data integritey, we can proceed with building modeling. \textbf{(Müller et al, 2006)} Other challenges include infering or guessing building height. () have presented a method for inferring building height from the building footprint alone, with surprising accuracy.
 
 Depending on the level of data we have access to, we can then choose what level of representation we would like for our application (Todor).
-We may also chose what LOD class(es) to use depending on data availablity and application. (***find reference)
+
+We may also chose what LOD class(es) to use depending on data availablity and application.
+With the current means of data aquisition being limited to building footprints, using OSM data we can only produce CityGML 2.0 LOD-B-models, that is building blocks with simplifed roof shapes (LOD-A being a rendering of the building footprint itself, or building blocks extruded from the footprint to give the building height). \textbf{(Biljecki, Ledoux and Stoter, 2016)}
+If we wish to aqquire building assets at a LOD-C level of detail, including features such as doors, windows, alcoves, building decor, indoor features or vegetation, we would have to complete the data with other sources, or rely on procedural methods to populate.
+Such procedural techniques have long been available.
+\textbf{(Mũller et al, 2006)} present how to accomplish this using shape grammar, a method for describing the possible relations between 
+For simple presentation in e.g. animation and videogames or even urban planning software, this could very well be enough.
+As long as one can be satisified with looking at rough representations of buildings and does not require additional knowledge about minor features.
 
 \begin{thebibliography}{9}
 
 \bibitem{arkin-91}
 Arkin, E., Chew, L., Huttenlocher, D., Kedem, K. and Mitchell, J. (1991). An Efficiently Computable Metric for Comparing Polygonal Shapes. IEEE Transaction Pattern Analysis and Machine Intelligence 13. 209-216.
+
+\bibitem{biljecki-14}
+Biljecki, F., Ledoux, H., Stoter, J., Zhao J. (2014): Formalisation of the level of detail in 3D city modelling. Computers, Environment and Urban Systems, vol. 48, pp. 1-15.
 
 \bibitem{douglas-73}
 Douglas, D.H. and Peucker T.K. (1973). Algorithms for the Reduction of the Number of Points Required to Represent a Digitalized Line or Its Caricature. Cartographica: The International Journal for Geographic Information and Geovisualization, 10(2), 112-122.

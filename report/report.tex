@@ -71,7 +71,7 @@ The report concludes with a scientific study of the field of 3D city reproductio
 
 \chapter{Introduction}
 
-Description of the field of city reproduction (Parish Müller, procedural modeling of ciites).
+Description of the field of city reproduction \textbf{(Parish and Müller, 2001)}.
 
 Picture of a virtual city.
 
@@ -83,21 +83,21 @@ Applications:
     Navigating agents or pedestrian flows.
     Using a road network to creates an underlying navmesh
     This process is analytical and relies on the availablity and accurate representation of city maps.
-    (Parish Müller: Procedural modelin of cities)
+    \textbf{(Parish and Müller, 2001)}
 
 Description of different levels of subdivision. What levels of subdivision are we looking at? Picture, ref to Todor's paper.
-Viewpoints can range from modelling individual roads (find reference) and building facades (todor) to looking at entire city parcels and how they connect with each other (find reference).
+Viewpoints can range from modelling individual roads (***find reference) and building facades \textbf{(Stojanovski, 20***)} to looking at entire city parcels and how they connect with each other (***find reference).
 
 Description of procedural modelling of cities
 Importing geodata from online databases and converting it to a 3D city representation.
 It would be labour intensive to recreate these .
 Procedural models for city reproduction instead rely on programmatic solutions for converting map data to 3D road and building models, and composing them to a 3D world that the designer may continue to fine-tweak.
-(Parish Müller, Procedural modeling of buildings)
+\textbf{(Müller et al, 2006)}
 
 At the base of this process is the procedural layout of road networks in 3D.
-(Parish Müller, Procedural modeling of cities)
+\textbf{(Müller et al, 2006)}
 
-So far there have been a lot of research in modelling of 3D road networks, but these projects have often focused on the road networks designated for cars and public transit, due to environmental concerns (Todors paper)
+So far there have been a lot of research in modelling of 3D road networks, but these projects have often focused on the road networks designated for cars and public transit, due to environmental concerns. \textbf{(Stojanovski, 2020)}
 
 Description of the unique character of footpaths vs other types of roads (pictures).
 
@@ -107,7 +107,7 @@ This project assesses the feasibility of reconstructing a city from OpenStreetMa
 
 This project has dealt with the feasibility of including footpath data when generating 3D representations of OpenStreetMap (OSM) data, and preserving the integrity of the 3D road network, avoiding overlap and collision between road meshes.
 The project falls within the broader topic of geodata extraction and modelling, primarily of roads and building parcels.
-Geodata modeling is at the foundation of procedural modelling of real-world cities, since any application which models cities based on geodata will need a robust method of aqquiring and laying out road and building data without compromising the data's integrity. (find reference)
+Geodata modeling is at the foundation of procedural modelling of real-world cities, since any application which models cities based on geodata will need a robust method of aqquiring and laying out road and building data without compromising the data's integrity. (***find reference)
 
 The primary contribution is an \textbf{investigation into the rate of collision between map features in OSM}.
 A program has taken an OSM dataset of the Stockholm area and assigned each road with standard withds according to swedish regulation.
@@ -192,8 +192,7 @@ But such tools are as of today not commonly applied in urbanist practises, due t
 In recent years, there have been an advent of tools that extract geodata from OSM and generate 3D representations of real world locations by placing terrain, buildings, roads and other features.
 However, freely available such tools seldom include smaller roads and pedestrian footpaths such as walkways, sidewalks or trails.
 
-Additionally, the topic is of interest for 3D content creators in for example the fields of video game design or 3D animation. A trend in these fields is using methods of procedural modeling to create large amounts of 3D content quickly and efficiently, while requiring as little hand modeling as possible. Studios who create large worlds are often interested in solutions that generate large road networks without any hand modeling.
-%TODO: (Parish Müller: Procedural modelin of cities)
+Additionally, the topic is of interest for 3D content creators in for example the fields of video game design or 3D animation. A trend in these fields is using methods of procedural modeling to create large amounts of 3D content quickly and efficiently, while requiring as little hand modeling as possible. Studios who create large worlds are often interested in solutions that generate large road networks without any hand modeling. \textbf{(Parish and Müller, 2001)}
 
 \section{Related work}
 When assessing the completeness of geodata, a very common scale is Van Oorts criteria for evaluating the quality of geographical information, which at the time of publication received attention from surveyors and cartographers.
@@ -699,10 +698,10 @@ All collision cases can be solved with relatively simply geometric algorithms. T
 \section{Scientific study: Where does this fit in the general Scietific scope of things}
 
 The same methods can be applied to import building footprint data from OSM or some, and the same metrics can be applied to assess the data accuracy. \textbf{(Fan et al, 2014)}
-When we have the fundamental procedure for accuratly importing building footprints without compromising the data integritey, we can proceed with building modeling (Parish Müller, procedural building modeling). Other challenges include infering or guessing building height. () have presented a method for inferring building height from the building footprint alone, with surprising accuracy.
+When we have the fundamental procedure for accuratly importing building footprints without compromising the data integritey, we can proceed with building modeling. \textbf{(Müller et al, 2006)} Other challenges include infering or guessing building height. () have presented a method for inferring building height from the building footprint alone, with surprising accuracy.
 
 Depending on the level of data we have access to, we can then choose what level of representation we would like for our application (Todor).
-We may also chose what LOD class(es) to use depending on data availablity and application. (find reference)
+We may also chose what LOD class(es) to use depending on data availablity and application. (***find reference)
 
 \begin{thebibliography}{9}
 

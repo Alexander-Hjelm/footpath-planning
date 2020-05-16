@@ -734,8 +734,12 @@ We may also chose what LOD class(es) to use depending on data availablity and ap
 With the current means of data aquisition being limited to building footprints, using OSM data we can only produce CityGML 
 If we wish to aqquire building assets at a LOD-C level, we would have to complete the data with other sources, or rely on procedural methods to populate.
 Such procedural techniques have long been available.
-\textbf{(Mũller et al, 2006)} present how to accomplish this using shape grammar, a method for describing the possible relations between 
+\textbf{(Mũller et al, 2006)} present how to accomplish this using shape grammar: a method for iteratively constructing 3D models based in a hierarchical set of rules.
+By starting with a crude volumetric model of a building and iteratively remodeling it from a set of shape grammars, a procedural model can structure the façade, add texture and add details for windows, doors and ornaments, and so on.
+Shape grammars often work from a databank of 3D models and a set of rules for how these can be pieced together.
+This creates a possible generative space of many different models that can be created from the same data and rule set, with the induction of random fluctuations.
 For simple presentation in e.g. animation and videogames or even urban planning software, this could very well be enough.
+The problem is that these features will rarely match real life.
 As long as one can be satisified with looking at rough representations of buildings and does not require additional knowledge about minor features.
 
 \begin{thebibliography}{9}

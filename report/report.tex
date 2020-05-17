@@ -74,42 +74,28 @@ The report concludes with a scientific study of the field of 3D city reproductio
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_virtual_city}
-    \caption{Real-world cities are complex collections of buildings, blocks and road networks that interconnect them all. Creating 3D virtual cities using methods of procedual generation is an emerging research field that comes with its own set of challenges.}
+    \caption{Real-world cities are complex collections of buildings, blocks and road networks that interconnect them all. Creating 3D virtual cities using methods of procedual generation is an emerging research field that comes with its own set of challenges. This project deals with generating virtual cities from OpenStreetMap data, and the technical challenges therein.}
     \label{fig:virtual-city}
 \end{figure}
 
-Cities consist of complex collections of buildings, blocks, parcels and neighbourhoods which are all interconnected via a street network, where individual streets can serve different types of traffic.
-Virtual city reproduction has a growing number of applications, including visualization, urban planning and entertainment in the form of video games and 3D animation.
+This project assesses the feasibility of reconstructing a city from OpenStreetMap (OSM) road and building data, and will focus on the feasibility of including pedestrian footpaths, by focusing on OSM road and building data in the Stockholm metropolitan area.
+
+Virtual cities has in recent years been a popular research topic in the field of computer visualization.
+The idea of recreating real world cities in 3D applications has a growing number of applications, including visualization and modelling, urban planning and architecture, as well as entertainment in the form of video games and 3D animation.
 Traditionally, modelling virtual cities is a labour-intensive and time-consuming task.
-In recent years there has been major research work into the field of procedural content generation, meaning automatic or semi automatic generation of 3D models
-Such methods can indeed be used in the field of virtual city reproduction to reduce the labour required to reproduce accurate 3D representations of cities.
-But the field of virtual city reproduction comes with its own host of challenges.
+However, in recent years there has been major research work in the field of procedural content generation, meaning automatic or semi automatic generation of 3D models without the direct involvment of a 3D artist.
+Such methods can indeed be used in the field of virtual city reproduction to reduce the labour required to reproduce accurate 3D representations of cities, but the field of procedual city reproduction comes with its own host of challenges.
 Urban environments are typically dense and large, spanning a few to hundreds of square kilometers, and are influenced by variables that are hard to quantify, including land policies, government plans, population changes and transportation infrastructure.
 \textbf{(Vanegas et al, 2010)}.
 
-Applications:
-    Navigating agents or pedestrian flows.
-    Using a road network to creates an underlying navmesh
-    This process is analytical and relies on the availablity and accurate representation of city maps.
-    \textbf{(Parish and Müller, 2001)}
-
-Description of different levels of subdivision. What levels of subdivision are we looking at? Picture, ref to Todor's paper.
-Viewpoints can range from modelling individual roads (***find reference) and building facades \textbf{(Stojanovski, 20***)} to looking at entire city parcels and how they connect with each other (***find reference).
-
-Description of procedural modelling of cities
-Importing geodata from online databases and converting it to a 3D city representation.
-It would be labour intensive to recreate these .
-Procedural models for city reproduction instead rely on programmatic solutions for converting map data to 3D road and building models, and composing them to a 3D world that the designer may continue to fine-tweak through interfaces fo interactive editing.
+Cities consist of complex collections of buildings, blocks, parcels and neighbourhoods which are all interconnected via a street network, where individual streets can serve different types of traffic.
+These features are commonly represented as geodata in map databases, and processed and organized into visualization-ready data by a Geographic Information System (GIS).
+In practise, cities are often made up out of many square kilometers worth of geodata, and it would be highly labour intensive to recreate all the features in 3D.
+Instead, procedural models for city reproduction instead rely on programmatic solutions for converting map data to 3D road and building models, and composing them to a 3D world that the designer may continue to fine-tweak through interfaces fo interactive editing.
+At the very base of this process is the procedural layout of road networks in 3D,
 \textbf{(Müller et al, 2006)}
-
-At the base of this process is the procedural layout of road networks in 3D.
-\textbf{(Müller et al, 2006)}
-
-So far there have been a lot of research in modelling of 3D road networks, but these projects have often focused on the road networks designated for cars and public transit, as a part of the sustainable mobility paradigm and the topic of sustainable cities.
-Also the rise of investigation into self-propelled cars and carpools.
+and so far there have been a lot of research in modelling of 3D road networks, but these projects have often focused on the road networks designated for cars and public transit, as a part of the sustainable mobility paradigm and the topic of sustainable cities, particularily due to the interest in self-propelled cars.
 The study of energy efficient mobility such as walking and cycling is only in its emerging phase. \textbf{(Stojanovski, 2019)}
-
-Description of the unique character of footpaths vs other types of roads (pictures).
 
 \begin{figure}[H]
     \centering
@@ -118,16 +104,22 @@ Description of the unique character of footpaths vs other types of roads (pictur
     \label{fig:residential-footpath-map}
 \end{figure}
 
-Currently, when modeling
-3D GIS datasets without errors are rare. While previously \textbf{(Biljecki et al, 2016)} note that there are coming more and more sophisticated methods for automatically correcting the most common errors.
-Among the most common errors: Missing or invalid geometry, invalid semantics.
-GIS validation har only been a topis of research lately, and many such datasets were usually obtained years ago, and creating error-free datasets was neither possible due to the lack of validation techniques, nor a high priority.
+When it comes to the quality of available data, it turns out that in practise, 3D GIS datasets without errors are rare.
+Among the most common errors are missing or invalid geometry, and invalid semantics.
+However, \textbf{(Biljecki et al, 2016)} note that there are coming more and more sophisticated methods for automatically correcting the most common errors.
+GIS validation and correction is only an emerging field of research.
+and many such datasets were usually obtained years ago, and creating error-free datasets was neither possible due to the lack of validation techniques, nor a high priority.
 
-The idea of gathering geodata from OpenStreetMap (OSM), where the temporal aspect of data accuracy is perhaps mitigated by the crowd contribution nature.
-There have already been a few services (*** Name a few services + links)
-but such services are usually limited in the type of data that they can provide. Usually they focus on obtaining either road networks or buildings separately, and in the case of road networks they usually focus on car road networks (why? Driving games?***), and roads designated for energy efficient mobility are left out.
-
-This project assesses the feasibility of reconstructing a city from OSM road and building data, and will focus on the feasibility of including pedestrian footpaths, by focusing on OSM road and building data in the Stockholm metropolitan area.
+A possible way of mitigating this problem is looking towards gathering geodata from volunteer-based geoservices such as OpenStreetMap (OSM), where the temporal aspect of data accuracy is perhaps more assured by the crowd contribution nature.
+There are already a few such services that use OSM data to generate 3D geodata visualizations for data visualization and video game applications.
+A few prominent examples are Mantle
+\footnote{Mantle homepage. Accessed 17-05-2020. https://www.mantle.tech/}
+and Mapbox
+\footnote{Mapbox homepage. Accessed 17-05-2020. https://www.mapbox.com/}.
+Such services are however usually limited in the accuracy and type of data that they can provide.
+While they can provide both builing footprints and road networks, they usually provide road data with no respect to overlap between features.
+Collision between road meshes in 3D will lead to strange-looking mesh intersections and inaccuracies that modelers often want to avoid.
+In particular, streets and roads designated for energy efficient mobility, such as footpaths, are much more organic and dense in their nature than main streets, and thus the risk of feature collision may be higher.
 
 \section{Research question}
 
@@ -649,7 +641,6 @@ This analysis will not be carried out in this project, but could be a good subje
 \end{figure}
 
 % Sunday
-% TODO: Write introduction section
 % TODO: Write Collision study implementation section
 % TODO: Write Scientific study
 

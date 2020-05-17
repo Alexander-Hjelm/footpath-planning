@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  17 MAY 2020 16:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  17 MAY 2020 18:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1689,55 +1689,55 @@ Package pdftex.def Info: img_map_utility_buildings.png  used on input line 646.
 <img_feature_overlap_cases.png, id=449, 922.1652pt x 1010.3346pt>
 File: img_feature_overlap_cases.png Graphic file (type png)
 <use img_feature_overlap_cases.png>
-Package pdftex.def Info: img_feature_overlap_cases.png  used on input line 703.
+Package pdftex.def Info: img_feature_overlap_cases.png  used on input line 700.
 
 (pdftex.def)             Requested size: 272.68365pt x 298.75528pt.
  [32] [33 <./img_feature_overlap_cases.png>]
 <img_feature_overlap_fix_1.png, id=466, 922.1652pt x 336.7782pt>
 File: img_feature_overlap_fix_1.png Graphic file (type png)
 <use img_feature_overlap_fix_1.png>
-Package pdftex.def Info: img_feature_overlap_fix_1.png  used on input line 721.
+Package pdftex.def Info: img_feature_overlap_fix_1.png  used on input line 718.
 
 (pdftex.def)             Requested size: 369.88673pt x 135.08401pt.
 <img_feature_overlap_fix_2.png, id=467, 461.0826pt x 336.0555pt>
 File: img_feature_overlap_fix_2.png Graphic file (type png)
 <use img_feature_overlap_fix_2.png>
-Package pdftex.def Info: img_feature_overlap_fix_2.png  used on input line 728.
+Package pdftex.def Info: img_feature_overlap_fix_2.png  used on input line 725.
 
 (pdftex.def)             Requested size: 369.9008pt x 269.59854pt.
  [34 <./img_feature_overlap_fix_1.png>]
 <img_feature_overlap_fix_3.png, id=479, 922.1652pt x 336.0555pt>
 File: img_feature_overlap_fix_3.png Graphic file (type png)
 <use img_feature_overlap_fix_3.png>
-Package pdftex.def Info: img_feature_overlap_fix_3.png  used on input line 735.
+Package pdftex.def Info: img_feature_overlap_fix_3.png  used on input line 732.
 
 (pdftex.def)             Requested size: 369.88673pt x 134.79414pt.
 <img_feature_overlap_fix_4.png, id=480, 459.6372pt x 336.7782pt>
 File: img_feature_overlap_fix_4.png Graphic file (type png)
 <use img_feature_overlap_fix_4.png>
-Package pdftex.def Info: img_feature_overlap_fix_4.png  used on input line 742.
+Package pdftex.def Info: img_feature_overlap_fix_4.png  used on input line 739.
 
 (pdftex.def)             Requested size: 369.89145pt x 271.02109pt.
  [35 <./img_feature_overlap_fix_2.png> <./img_feature_overlap_fix_3.png>] [36 <
 ./img_feature_overlap_fix_4.png>] [37]
-Overfull \hbox (7.56215pt too wide) in paragraph at lines 782--787
+Overfull \hbox (7.56215pt too wide) in paragraph at lines 785--790
 []\T1/qtm/m/n/12 The main con-clu-sion is that gen-er-at-ing vir-tual cities pu
 rely from Open-StreetMap
  []
 
 [38]
-Underfull \hbox (badness 10000) in paragraph at lines 809--810
+Underfull \hbox (badness 10000) in paragraph at lines 817--818
 []\T1/qtm/m/n/12 Kunze, C. (2012). Ver-gle-ich-s-anal-yse des Gebäude-datenbe-s
 tandes
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 809--810
+Underfull \hbox (badness 10000) in paragraph at lines 817--818
 \T1/qtm/m/n/12 aus Open-StreetMap mit amtlichen Daten-quellen. Stu-dent re-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 809--810
+Underfull \hbox (badness 10000) in paragraph at lines 817--818
 \T1/qtm/m/n/12 search project, Tech-ni-cal Uni-ver-sity of Dres-den. http://nbn
 -
  []
@@ -1745,11 +1745,11 @@ Underfull \hbox (badness 10000) in paragraph at lines 809--810
 [39
 
 ] [40]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 839.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 839.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 847.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 847.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 839.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 839.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 847.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 847.
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: D93C30CF03C46AEEC69C3C7825704C8E;2728.
 
@@ -1761,10 +1761,10 @@ Package logreq Info: Writing requests to 'report.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 27413 strings out of 492982
- 497089 string characters out of 6134896
- 953346 words of memory out of 5000000
- 30352 multiletter control sequences out of 15000+600000
+ 27417 strings out of 492982
+ 497126 string characters out of 6134896
+ 953356 words of memory out of 5000000
+ 30354 multiletter control sequences out of 15000+600000
  54802 words of font info for 45 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,14n,92p,795b,3450s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1780,10 +1780,10 @@ msfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 type1/public/tex-gyre/qhvr.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qt
 mb.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qtmr.pfb></usr/share/texmf
 /fonts/type1/public/tex-gyre/qtmri.pfb>
-Output written on report.pdf (48 pages, 3977693 bytes).
+Output written on report.pdf (48 pages, 3978426 bytes).
 PDF statistics:
- 607 PDF objects out of 1000 (max. 8388607)
- 509 compressed objects within 6 object streams
- 146 named destinations out of 1000 (max. 500000)
+ 609 PDF objects out of 1000 (max. 8388607)
+ 511 compressed objects within 6 object streams
+ 148 named destinations out of 1000 (max. 500000)
  387 words of extra memory for PDF output out of 10000 (max. 10000000)
 

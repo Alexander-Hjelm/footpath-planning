@@ -750,14 +750,16 @@ All collision cases can be solved with relatively simply geometric algorithms. T
 The same methods can be applied to import building footprint data from OSM or some, and the same metrics can be applied to assess the data accuracy. \textbf{(Fan et al, 2014)}
 When we have the fundamental procedure for accuratly importing building footprints without compromising the data integritey, we can proceed with building modeling. \textbf{(Müller et al, 2006)} Other challenges include infering or guessing building height. () have presented a method for inferring building height from the building footprint alone, with surprising accuracy.
 
-Depending on the level of data we have access to, we can then choose what level of representation we would like for our application (Todor).
+Building elevation. Occasinally buildings in OSM may be tagged, but the norm is that no elevation data is available.
+\textbf{(Biljecki, Ledoux and Stoter, 2017)} presented a method for inferring building height exclusively from the building footprint and surrounding footprints.
+Surprisingly, their model was shown to be accurace within a meter on average.
 
 Another crucial concept in city modelling is the Level Of Detail (LOD). LOD is a definition of a series of different 3D representation of the same data, at different detail levels.
 The LOD chosen for a particulary application suggests how the data has been aqquired and modelled.
 The CityGML standard divides the LOD representation of 3D models into three classes: A B and C.
 LOD-A models are renderings of the building footprint itself, or building blocks that have been extruded from the footprint to give the building height.
 LOD-B models are building blocks with simplifed roof shapes, and LOD-C models include features such as doors, windows, alcoves, building decor, indoor features or vegetation.
-\textbf{(Biljecki, Ledoux and Stoter, 2016)}
+\textbf{(Biljecki et al, 2016)}
 We may also chose what LOD class(es) to use depending on data availablity and application.
 With the current means of data aquisition being limited to building footprints, using OSM data we can only produce CityGML 
 If we wish to aqquire building assets at a LOD-C level, we would have to complete the data with other sources, or rely on procedural methods to populate.
@@ -797,6 +799,8 @@ Biljecki, F., Ledoux, H., Stoter, J., Zhao J. (2014): Formalisation of the level
 \bibitem{biljecki-16}
 Biljecki, F., Ledoux, H., Du, X., Stoter, J., Soon, K., and Khoo, V. (2016). The most common geometric and semantic errors in CityGML datasets. 10.5194/isprs-annals-IV-2-W1-13-2016. 
 
+\bibitem{biljecki-17}
+Biljecki, F., Ledoux, H. and Stoter, J. (2017). Generating 3D city models without elevation data. Computers Environment and Urban Systems. 64. 1-18. 10.1016/j.compenvurbsys.2017.01.001. 
 \bibitem{douglas-73}
 Douglas, D.H. and Peucker T.K. (1973). Algorithms for the Reduction of the Number of Points Required to Represent a Digitalized Line or Its Caricature. Cartographica: The International Journal for Geographic Information and Geovisualization, 10(2), 112-122.
 

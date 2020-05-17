@@ -748,9 +748,13 @@ All collision cases can be solved with relatively simply geometric algorithms. T
 \section{Scientific study: Where does this fit in the general Scietific scope of things}
 
 The same methods can be applied to import building footprint data from OSM or some, and the same metrics can be applied to assess the data accuracy. \textbf{(Fan et al, 2014)}
-When we have the fundamental procedure for accuratly importing building footprints without compromising the data integritey, we can proceed with building modeling. \textbf{(Müller et al, 2006)} Other challenges include infering or guessing building height. () have presented a method for inferring building height from the building footprint alone, with surprising accuracy.
+When we have the fundamental procedure for accuratly importing building footprints without compromising the data integritey, we can proceed with building modeling. \textbf{(Müller et al, 2006)}
 
-Building elevation. Occasinally buildings in OSM may be tagged, but the norm is that no elevation data is available.
+Terrain elevation. Elevation data is available from other sources, but not by OSM.
+\textbf{(Galin et al, 2010)} present a geometrical model for placing a 3d road asset onto a non-flat terrain surface.
+
+Other challenges include infering or guessing building height.
+Occasinally buildings in OSM may be tagged, but the norm is that no elevation data is available.
 \textbf{(Biljecki, Ledoux and Stoter, 2017)} presented a method for inferring building height exclusively from the building footprint and surrounding footprints.
 Surprisingly, their model was shown to be accurace within a meter on average.
 
@@ -806,6 +810,9 @@ Douglas, D.H. and Peucker T.K. (1973). Algorithms for the Reduction of the Numbe
 
 \bibitem{fan-14}
 Fan, H., Zipf, A., Fu, Q. and Neis, P. (2014). Quality assessment for building footprints data on OpenStreetMap. International Journal of Geographical Information Science. 28. 700-719.
+
+\bibitem{galin-10}
+Galin, E., Peytavie, A., Maréchal, N., and Guérin, E. (2010). Procedural Generation of Roads. Computer Graphics Forum. 29. 429 - 438. 10.1111/j.1467-8659.2009.01612.x. 
 
 \bibitem{haklay-10}
 Haklay, M. (2010). How Good is Volunteered Geographical Information? A Comparative Study of OpenStreetMap and Ordnance Survey Datasets. Environment and Planning B: Planning and Design, 37(4), 682–703.

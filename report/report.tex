@@ -642,7 +642,6 @@ This analysis will not be carried out in this project, but could be a good subje
 
 % Monday
 % TODO: Write Collision study implementation section
-% TODO: Write Scientific study
 % TODO: Edge distance algorithm, algorithm
 % Collision study implementation
     % TODO: Figure detailing the steps in the point-matching algorithm
@@ -726,52 +725,71 @@ All collision cases can be solved with relatively simply geometric algorithms. T
     \label{fig:collision-case-5}
 \end{figure}
 
-\section{Scientific study: Where does this fit in the general Scietific scope of things}
+\section{Scientific field study}
 
-The same methods can be applied to import building footprint data from OSM or some, and the same metrics can be applied to assess the data accuracy. \textbf{(Fan et al, 2014)}
-When we have the fundamental procedure for accuratly importing building footprints without compromising the data integritey, we can proceed with building modeling. \textbf{(Müller et al, 2006)}
+We now have a firm idea of the technical feasibility of generating virtual cities from OpenStreetMap-data, including different types of road networks.
+We have however yet to touch upon the importance for road network modelling in the broader context of 3D city reproduction.
+Where exactly in the pipeline of reconstructing a virtual city does this happen, and what are the remaining challenges?
+This will be the goal of this final scientific study: to place everything we have learnt so far in the broader context of GIS and city modeling, and the respective research fields.
 
-Terrain elevation. Elevation data is available from other sources, but not by OSM.
-\textbf{(Galin et al, 2010)} present a geometrical model for placing a 3d road asset onto a non-flat terrain surface.
+As has been mentiond in the introduction to this report, procedural generaion of road networks is a basal requirement for quick and low-effort modeling virtual cities.
+Since the road network ties together the city, and forms the grid that divides the lots, quarters and neighbourhoods, it make sense that we can only continue with the remaining challenges once we can a robust procedure for extracting road geodata and generating the 3D represention of it without compromising the data integrity. 
+The same is true for building modelling.
+It turns out that the same methods that have been used in this project to obtain and qualify road network data can be applied to building footprint data from OSM. \textbf{(Fan et al, 2014)}
+And only when we have such a fundamental procedure for accuratly importing building footprints without compromising the data integritey, we can proceed with the remaining challenges in building modeling. \textbf{(Müller et al, 2006)}
 
-Other challenges include infering or guessing building height.
+Such challenges, which have not been mentioned up until this point, include infering or guessing building height, since OSM does not provide data about building elevation.
 Occasinally buildings in OSM may be tagged, but the norm is that no elevation data is available.
+There are however very sophisticated methods from guessing the building height after looking at reference datasets.
 \textbf{(Biljecki, Ledoux and Stoter, 2017)} presented a method for inferring building height exclusively from the building footprint and surrounding footprints.
 Surprisingly, their model was shown to be accurace within a meter on average.
 
-Another crucial concept in city modelling is the Level Of Detail (LOD). LOD is a definition of a series of different 3D representation of the same data, at different detail levels.
-The LOD chosen for a particulary application suggests how the data has been aqquired and modelled.
-The CityGML standard divides the LOD representation of 3D models into three classes: A B and C.
-LOD-A models are renderings of the building footprint itself, or building blocks that have been extruded from the footprint to give the building height.
-LOD-B models are building blocks with simplifed roof shapes, and LOD-C models include features such as doors, windows, alcoves, building decor, indoor features or vegetation.
-\textbf{(Biljecki et al, 2016)}
-We may also chose what LOD class(es) to use depending on data availablity and application.
-With the current means of data aquisition being limited to building footprints, using OSM data we can only produce CityGML 
-If we wish to aqquire building assets at a LOD-C level, we would have to complete the data with other sources, or rely on procedural methods to populate.
-Such procedural techniques have long been available.
-\textbf{(Mũller et al, 2006)} present how to accomplish this using shape grammar: a method for iteratively constructing 3D models based in a hierarchical set of rules.
-By starting with a crude volumetric model of a building and iteratively remodeling it from a set of shape grammars, a procedural model can structure the façade, add texture and add details for windows, doors and ornaments, and so on.
-Shape grammars often work from a databank of 3D models and a set of rules for how these can be pieced together.
-This creates a possible generative space of many different models that can be created from the same data and rule set, with the induction of random fluctuations.
-For simple presentation in e.g. animation and videogames or even urban planning software, this could very well be enough.
-The problem is that these features will rarely match real life.
-As long as one can be satisified with looking at rough representations of buildings and does not require additional knowledge about minor features.
+Another challenge is that of including terrain elevation when generating a city.
+Even if high resolution terrain elevation data is available from other sources, it is not provided by OSM, and will have to be obtained from a complementary data source.
+Method exist for how to make a city model comform to an underlying terrain, however.
+\textbf{(Galin et al, 2010)} presented such a geometrical model for placing a 3D road asset onto a non-flat terrain surface, in the context of procedurally generated roads.
 
-The fact is that much of the morpological information is not present in the OSM dataset.
-Urban architects often work morpological structures where a single road can be comprised of many different sections with different purposes.
-A single inner-city street for example, often contains sidewalks 
-All of a certain placement and dimension that determines what type of traffic it can serve.
-This type of representation is known as a multimodal structures, due to the possibility of incorporating mulitple modes of transportation.
-But may even describe the building facades and distances between curbline and building lot.
+Another crucial concept in city modelling is the Level Of Detail (LOD) aspect.
+LOD is a definition of a series of different 3D representation of the same data, at different detail levels, and the LOD chosen for a particulary application suggests how the data has been aqquired and modelled.
+The CityGML standard divides the LOD representation of 3D models into three classes: A B and C.
+\begin{enumerate}
+    \item LOD-A models are renderings of the building footprint itself, or rectangular building blocks that have been extruded from the footprint to give the building height.
+    \item LOD-B models are building blocks with simplifed roof shapes.
+    \item LOD-C models are LOD-B models which include features such as doors, windows, alcoves, building decor, indoor features or vegetation.
+\end{enumerate}
+\textbf{(Biljecki et al, 2016)}
+We may chose what LOD class(es) to use depending on data availablity and application.
+It turns out that, with the current means of data aquisition from OSM being limited to building footprints, using OSM data we can only produce LOB-B models at best.
+If we wish to aqquire building assets at a LOD-C level, we would have to complete the data with other sources, or rely on procedural methods to populate our crude city model with additional details and building features that give the model more aestethic depth, but do not neccessarily reflect reality.
+
+Such procedural techniques have long been available.
+\textbf{(Mũller et al, 2006)} present how to accomplish this using Shape Grammar: a method for automatically and iteratively constructing 3D models based in a hierarchical set of rules.
+By starting with a crude volumetric model of a building and iteratively remodeling it from a set of shape grammars, a procedural model can structure the façade, add texture and add details for windows, doors and ornaments, and so on.
+Shape grammars often work from a databank of 3D models and a set of hierarchical rules for how these can be pieced together.
+This creates a possible generative space of many different models that can be created from the same data and rule set, and with the induction of random fluctuations, many different models can be generated from the same dataset and rules.
+For simple presentation in e.g. animation and videogames or even urban planning software, such procedurally generated cities could very well be enough.
+As said however, the big problem is that these features will rarely match real life, such models will be sufficient as long as one can be satisified with looking at rough representations of buildings and does not require additional knowledge about minor features.
+Many studies urban development have been done before that requred detailed knowledge about a city's geometry, e.g. for the purposes of modeling heat development (***find reference) and reducing noise (**find reference).
+
+It even turns out, by looking at such studies, that a lot of research in urban development require detailed morpological information that goes beyond simply knowing the geometry of the city.
+Urban architects often work with morpological structures where a single feature, such as a city neighbourhood, can be examined from many different levels of perspective.
+A neighbourhood can be analysed from the level of its city blocks, individual lots, properties or building limits, building facades or even indoor spaces.
+Simlarily a road network can be analysed by looking at it either at its connectivity by viewing it a a simple 2D graph
+But it might as well be seen as a hierarchical structure where primary roads branch off into sub-streets. 
+The very unfortunate fact is that much of that morpological information is not present in the OSM dataset.
+Furthermore, take the fact that even a single road can be comprised of many different sections with different purposes.
+A single inner-city street for example, often contains sidewalks and lanes reserved for taxis or public transit, all of a certain placement and dimension that determines what type of traffic it can serve.
+This type of representation is known as a multimodal structures, due to the possibility of incorporating mulitple modes of transportation, but it may even describe subtilities like building facades and distances between curbline and building lot.
+OSM, while being an excellent source of city geometry, is simply not a sophisticated enough dataset to cater to all these possible areas of research.
 \textbf{Stojanovski, 2019}
-This type of information could in theory be generated procedurally using shape grammars and some sort of wayfinding to create logical routes for different types of traffic.
+For media applications, such morppological and multimodal information could in theory be generated procedurally, by using shape grammars and some sort of wayfinding to create logical routes for different types of traffic.
 But for urban planners requiring an exact morphological representation of some specification, this complementary data will have to be obtained from another dataset.
 
-The main conclusion is that generating virtual cities purely from OpenStreetMap data is a perfectly feasibile procedure in the media industry, with the inclusion of procedural methods such as shape grammars to generate detail.
-It will be a cheap method that reuires minimum effort in terms of source data collection. And the shape grammar method allows for a great deal of scalability.
+The final conclusion is that generating virtual cities purely from OpenStreetMap data is a perfectly feasibile procedure in the media industry, with the inclusion of procedural methods such as shape grammars to generate neccessary detail.
+This will be a cheap method that reuires minimum effort in terms of source data collection, and the shape grammar method even allows for a great deal of scalability.
 The level of detail of individual models and the composition as a whole can be fitted to the scope of the project and the team size.
-In the area of urban design however, urban planners often require complementary data to build morphological representations of the data that they are working with.
-The feasibility of creating virtual cities that are of use to urban planners will depend mainly on the availablity of that complementary data.
+However, in the area of urban design, urban planners often require complementary data to build morphological representations of the data that they are working with.
+OSM does generally not serve this type of data, so the feasibility of creating virtual cities that are of use to urban planners will not depend upon the accuracy of the OSM dataset, but rather on the availablity of that complementary data elsewhere.
 
 \begin{thebibliography}{9}
 

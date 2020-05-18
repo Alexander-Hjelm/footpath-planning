@@ -501,6 +501,70 @@ Whereas LSD simply measures the distance between the two absolute closest points
 In the Feature Overlap algorithm, using the same notation as in section 4.2.2, PLSD takes $e_a$ to be the current edge of road feature $A$, and $e_b$ to be the current edge of feature $B$ (road or building).
 See Algorithm 2 for a detailed view of the PLSD algorithm.
 
+\begin{algorithm}[H]
+\SetAlgoLined
+\KwResult{A float representing the shortests distance between $A$ and $B$}
+    \textbf{Input:} Line segment $A$: [$\vec{a_1}$, $\vec{a_2}$], Line segment $B$: [$\vec{b_1}$, $\vec{b_2}$]\\
+    // First assume that the points of $A$ and $B$ are ordered so that $\vec{a_1}$ is closer to $\vec{b_1}$ than to $\vec{b_2}$.
+
+    // Check if the line segments $A$ and $B$ intersect, if so, the distance between them is 0.
+    $x_s$ = lineLineIntersection($A$, $B$)\;
+    \If{$x_s$ is not None} {
+        \Return{0}
+    }
+
+    // Get the line-line intersection between the lines spanned by $A$ and $B$. Note that if an intersection exists, it must lie outside of both $A$ and $B$.
+    $x$ = lineLineIntersection($A$, $B$)\;
+
+    // Case 1: No intersection. The lines are parallel.
+    \If{$x$ is None} {
+        \Return{perpendicularLineDistance($A$, $B$)}\;
+    }
+
+    // Get the projections of $\vec{b_1}$ and $\vec{b_2}$ on the line spanned by $A$:
+    $\vec{d_1}$ = linearProjection($\vec{b_1}$, $A$)\;
+    $\vec{d_2}$ = linearProjection($\vec{b_2}$, $A$)\;
+
+    // Case 2: The projection of $B$ onto $A$ is completely disjoint from $A$ with no common points. In this case, no perpendicular distance can be inferred.
+    \If{$\vec{d_1}-\vec{a_1} \cdot \vec{d_1}-\vec{a_2} > 0$ or $\vec{d_2}-\vec{a_1} \cdot \vec{d_2}-\vec{a_2} > 0$} {
+        \Return{None}\;
+    }
+
+    // Case 3: $x$ lies between $\vec{a_1}$ and $\vec{a_2}$.
+    \If{$\vec{x}-\vec{a_1} \cdot \vec{a_2}-\vec{x} > 0$} {
+        // Project the endpoints of $B$ on $A$, to find out which endpoint is closer to the intersection
+        $d_{pl1}$ = pointLineDistance($\vec{b_1}$, $A$)\;
+        $d_{pl2}$ = pointLineDistance($\vec{b_2}$, $A$)\;
+        \eIf{$d_{pl1} < d_{pl2}$} {
+            \Return{$d_{pl1}$}\;
+        } {
+            \Return{$d_{pl2}$}\;
+        }
+    }
+
+    \eIf{|$x$-$\vec{a_1}$| < |$x$-$\vec{a_2}$|} {
+        // Case 4: $x$ is to the left of $\vec{a_1}$
+        $\vec{a}$ = $\vec{a_1}$\;
+        $\vec{b}$ = $\vec{b_1}$\;
+    } {
+        // Case 5: $x$ is to the right of $\vec{a_2}$
+        $\vec{a}$ = $\vec{a_2}$\;
+        $\vec{b}$ = $\vec{b_2}$\;
+    }
+
+    $\vec{p}$ = linearProjection($\vec{b}-\vec{x}$, $\vec{a}-\vec{x}$)\;
+    \eIf{|$\vec{p}$| < |$\vec{a}$-$\vec{x}$|} {
+        $\vec{k}$ = $\vec{d}$\;
+    } {
+        $\vec{k}$ = $\vec{a}-\vec{x}$\;
+    }
+
+    $\theta = \arccos{|\vec{d}|/|\vec{b}-\vec{x}|}$\;
+    \Return{$\tan{\theta} \cdot |\vec{k}|$}
+
+    \caption{Projected Line Segment Distance}
+\end{algorithm}
+
 \chapter{Results and metrics}
 
 \section{Road collision study}

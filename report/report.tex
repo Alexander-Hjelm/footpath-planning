@@ -410,7 +410,7 @@ Any edges in the simplified footprints that coinside with the OMBR from the same
 \SetAlgoLined
 \KwResult{Write here the result }
     \textbf{Input:} PointList\\
-    // Find the point with the maximum distance\;
+    // Find the point with the maximum distance\\
     $d_{max}$ = 0\;
     $index$ = 0\;
     $end$ = length(PointList)\;
@@ -425,13 +425,13 @@ Any edges in the simplified footprints that coinside with the OMBR from the same
 
     ResultList = []\;
     
-    // If max distance is greater than epsilon, recursively simplify\;
+    // If max distance is greater than epsilon, recursively simplify\\
     \eIf{$d_{max}$ $>$ $\epsilon$} {
-        // Recursive call\;
+        // Recursive call\\
         recResults1[] = Douglas-Peucker(PointList[1...$index$], $\epsilon$)\;
         recResults2[] = Douglas-Peucker(PointList[$index$...$end$], $\epsilon$)\;
 
-        // Build the result list\;
+        // Build the result list\\
         ResultList[] = {recResults1[1...length(recResults1) - 1], recResults2[1...length(recResults2)]}\;
     }{
         ResultList[] = {PointList[1], PointList[$end$]}\;
@@ -505,34 +505,35 @@ See Algorithm 2 for a detailed view of the PLSD algorithm.
 \SetAlgoLined
 \KwResult{A float representing the shortests distance between $A$ and $B$}
     \textbf{Input:} Line segment $A$: [$\vec{a_1}$, $\vec{a_2}$], Line segment $B$: [$\vec{b_1}$, $\vec{b_2}$]\\
-    // First assume that the points of $A$ and $B$ are ordered so that $\vec{a_1}$ is closer to $\vec{b_1}$ than to $\vec{b_2}$.
+    // First assume that the points of $A$ and $B$ are ordered so that $\vec{a_1}$ is closer to $\vec{b_1}$ than to $\vec{b_2}$.\\
 
-    // Check if the line segments $A$ and $B$ intersect, if so, the distance between them is 0.
-    $x_s$ = lineLineIntersection($A$, $B$)\;
-    \If{$x_s$ is not None} {
+    // Check if the line segments $A$ and $B$ intersect, if so, the distance between them is 0.\\
+    $\vec{x_s}$ = lineLineIntersection($A$, $B$)\;
+    \If{$\vec{x_s}$ is not None} {
         \Return{0}
     }
 
-    // Get the line-line intersection between the lines spanned by $A$ and $B$. Note that if an intersection exists, it must lie outside of both $A$ and $B$.
-    $x$ = lineLineIntersection($A$, $B$)\;
+    // Get the line-line intersection between the lines spanned by $A$ and $B$. Note that if an intersection exists, it must lie outside of both $A$ and $B$.\\
+    $\vec{x}$ = lineLineIntersection($A$, $B$)\;
 
-    // Case 1: No intersection. The lines are parallel.
-    \If{$x$ is None} {
+    // Case 1: No intersection. The lines are parallel.\\
+    \If{$\vec{x}$ is None} {
         \Return{perpendicularLineDistance($A$, $B$)}\;
     }
 
-    // Get the projections of $\vec{b_1}$ and $\vec{b_2}$ on the line spanned by $A$:
+    // Get the projections of $\vec{b_1}$ and $\vec{b_2}$ on the line spanned by $A$:\\
     $\vec{d_1}$ = linearProjection($\vec{b_1}$, $A$)\;
     $\vec{d_2}$ = linearProjection($\vec{b_2}$, $A$)\;
 
-    // Case 2: The projection of $B$ onto $A$ is completely disjoint from $A$ with no common points. In this case, no perpendicular distance can be inferred.
+    // Case 2: The projection of $B$ onto $A$ is completely disjoint from $A$ with no common points. In this case, no perpendicular distance can be inferred.\\
     \If{$\vec{d_1}-\vec{a_1} \cdot \vec{d_1}-\vec{a_2} > 0$ or $\vec{d_2}-\vec{a_1} \cdot \vec{d_2}-\vec{a_2} > 0$} {
         \Return{None}\;
     }
+    \newpage
 
-    // Case 3: $x$ lies between $\vec{a_1}$ and $\vec{a_2}$.
+    // Case 3: $\vec{x}$ lies between $\vec{a_1}$ and $\vec{a_2}$.\\
     \If{$\vec{x}-\vec{a_1} \cdot \vec{a_2}-\vec{x} > 0$} {
-        // Project the endpoints of $B$ on $A$, to find out which endpoint is closer to the intersection
+        // Project the endpoints of $B$ on $A$, to find out which endpoint is closer to the intersection\\
         $d_{pl1}$ = pointLineDistance($\vec{b_1}$, $A$)\;
         $d_{pl2}$ = pointLineDistance($\vec{b_2}$, $A$)\;
         \eIf{$d_{pl1} < d_{pl2}$} {
@@ -542,12 +543,12 @@ See Algorithm 2 for a detailed view of the PLSD algorithm.
         }
     }
 
-    \eIf{|$x$-$\vec{a_1}$| < |$x$-$\vec{a_2}$|} {
-        // Case 4: $x$ is to the left of $\vec{a_1}$
+    \eIf{|$\vec{x}$-$\vec{a_1}$| < |$\vec{x}$-$\vec{a_2}$|} {
+        // Case 4: $\vec{x}$ is to the left of $\vec{a_1}$\\
         $\vec{a}$ = $\vec{a_1}$\;
         $\vec{b}$ = $\vec{b_1}$\;
     } {
-        // Case 5: $x$ is to the right of $\vec{a_2}$
+        // Case 5: $\vec{x}$ is to the right of $\vec{a_2}$\\
         $\vec{a}$ = $\vec{a_2}$\;
         $\vec{b}$ = $\vec{b_2}$\;
     }

@@ -499,7 +499,7 @@ Here a few special cases are noted:
 The Projected Line Segment Distance (PLSD) algorithm is an extented version of the Line Segment Distance (LSD) algorithm.
 Whereas LSD simply measures the distance between the two absolute closest points on two line segments, PLSD will yield the distance of the shortest vector $v$ between line segments $e_a$ and $e_b$, with the condition that $v$ is perpendicular to the tangent of $e_a$.
 In the Feature Overlap algorithm, using the same notation as in section 4.2.2, PLSD takes $e_a$ to be the current edge of road feature $A$, and $e_b$ to be the current edge of feature $B$ (road or building).
-See Algorithm 2 for a detailed view of the PLSD algorithm.
+See Algorithms 2 and 3 together for a detailed view of the PLSD algorithm.
 
 \begin{algorithm}[H]
 \SetAlgoLined
@@ -513,9 +513,21 @@ See Algorithm 2 for a detailed view of the PLSD algorithm.
         \Return{0}
     }
 
-    // Get the line-line intersection between the lines spanned by $A$ and $B$. Note that if an intersection exists, it must lie outside of both $A$ and $B$.\\
+    // Get the line-line intersection between the lines spanned by $A$ and $B$. If an intersection exists, it must lie outside of both $A$ and $B$.\\
     $\vec{x}$ = lineLineIntersection($A$, $B$)\;
 
+
+    // Now that we have the intersection point, call the helper method to infer the shortest distance between $A$ and $B$.\\
+    \Return{PLSD-Helper($A$, $B$, $\vec{x}$)}\;
+
+    \caption{Projected Line Segment Distance}
+\end{algorithm}
+
+.\\
+
+\begin{algorithm}[H]
+\SetAlgoLined
+    \textbf{Input:} Line segments $A$, $B$, intersection point $\vec{x}$]\\
     // Case 1: No intersection. The lines are parallel.\\
     \If{$\vec{x}$ is None} {
         \Return{perpendicularLineDistance($A$, $B$)}\;
@@ -525,14 +537,13 @@ See Algorithm 2 for a detailed view of the PLSD algorithm.
     $\vec{d_1}$ = linearProjection($\vec{b_1}$, $A$)\;
     $\vec{d_2}$ = linearProjection($\vec{b_2}$, $A$)\;
 
-    // Case 2: The projection of $B$ onto $A$ is completely disjoint from $A$ with no common points. In this case, no perpendicular distance can be inferred.\\
-    \If{$\vec{d_1}-\vec{a_1} \cdot \vec{d_1}-\vec{a_2} > 0$ or $\vec{d_2}-\vec{a_1} \cdot \vec{d_2}-\vec{a_2} > 0$} {
+    // Case 2: The projection of $B$ onto $A$ is completely disjoint from $A$ with no common points. No perpendicular distance can be inferred.\\
+    \If{$(\vec{d_1}-\vec{a_1}) \cdot (\vec{d_1}-\vec{a_2}) > 0$ or $(\vec{d_2}-\vec{a_1}) \cdot (\vec{d_2}-\vec{a_2}) > 0$} {
         \Return{None}\;
     }
-    \newpage
 
     // Case 3: $\vec{x}$ lies between $\vec{a_1}$ and $\vec{a_2}$.\\
-    \If{$\vec{x}-\vec{a_1} \cdot \vec{a_2}-\vec{x} > 0$} {
+    \If{$(\vec{x}-\vec{a_1}) \cdot (\vec{a_2}-\vec{x}) > 0$} {
         // Project the endpoints of $B$ on $A$, to find out which endpoint is closer to the intersection\\
         $d_{pl1}$ = pointLineDistance($\vec{b_1}$, $A$)\;
         $d_{pl2}$ = pointLineDistance($\vec{b_2}$, $A$)\;
@@ -561,10 +572,11 @@ See Algorithm 2 for a detailed view of the PLSD algorithm.
     }
 
     $\theta = \arccos{|\vec{d}|/|\vec{b}-\vec{x}|}$\;
-    \Return{$\tan{\theta} \cdot |\vec{k}|$}
+    \Return{$\tan{\theta} \cdot |\vec{k}|$}\;
 
-    \caption{Projected Line Segment Distance}
+    \caption{PLSD-Helper}
 \end{algorithm}
+
 
 \chapter{Results and metrics}
 

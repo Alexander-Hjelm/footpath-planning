@@ -467,26 +467,38 @@ Table \ref{table:road-widths} shows the minimum and maximum road widths that wer
     \label{table:road-widths}
 \end{table}
 
-\subsection{Feature overlap algorithm}
+\subsection{Feature Overlap algorithm}
 
-Outline of the feature overlap algorithm (Go over all features)
+The algorithm for determining feature overlap will calculate how many features and how many of their edges are intersecting with some other feature or edge.
+It will also calculate the total length of all edge which are overlapping with some other edge.
+
+The algorithm begins by iterating over all road features.
+Let $A$ be the current road feature.
 Since only road collisions are of interests, all roads were added to a queue and gone over one by one.
-
-The boundary polygon of the buildings are extracted, as well as the polylines of the roads.
+The polyline of the current road feature is extracted.
+Then, all other candidate features for collision are iterated over, and their boundary polygons (for buildings) or polylines (for roads) are extracted.
+Let $B$ be the current feature, road or building, that is being compared to $A$.
+The algorithm then iterates over each edge $e_a$ in the polyline of $A$, and each edge $e_b$ in the polyline or polygon of $B$.
+The Projected Line Segment Distance algorithm (See section 4.2.3) is used to determine the shortest distance between $e_a$ and $e_b$, and the smallest distance between any combination of edges $e_a$ and $e_b$ is taken to be the shortest distance between features $A$ and $B$.
+If this distance is smaller than the minimum width of $A$, then $A$ and $B$ are colliding.
 
 To speed up the collision checking process, a geometric hashing solution was developed.
-This way feature collision lookup could be made without comparing a feature to all other available features, but instead from a selection of the closest candidates.
-The hash bucket size was 230 meters and a feature could be in multiple hash buckets.
+In this way, feature collision lookup could be made without comparing a feature to all other available features, but instead from a selection of the closest candidates.
+The hash bucket size was 230 by 230 meters and a feature could be in multiple hash buckets.
 
-Special cases: Where two roads intersect though they share a node.
-Then this is a natural connection in the road network and should not be counted as a problematic case of feature overlap.
-Also ignored collisions between tunnels and bridges and other roads since these are of different heights.
-These were identified by looking at feature attributes in OSM.
-Any roads that were represented as polygons or multipolygons instead of plylines were also excluded from the study.
+Here a few special cases are noted:
+\begin{enumerate}
+    \item If two roads intersect even though they share a node, it is a natural connection in the road network and should not be counted as a problematic case of feature overlap.
+    \item Collisions between tunnels or bridges and other roads were ignored since these are of different heights. Brdiges and tunnels were identified by looking at feature attributes in OSM.
+    \item Any roads that were represented as polygons or multipolygons instead of ploylines were also excluded from the study. These are typically town squares or areas designated for walking.
+\end{enumerate}
 
-\subsection{Projected edge distance}
+\subsection{Projected Line Segment Distance}
 
-Outline of the minimum edge distance algorithm.
+The Projected Line Segment Distance (PLSD) algorithm is an extented version of the Line Segment Distance (LSD) algorithm.
+Whereas LSD simply measures the distance between the two absolute closest points on two line segments, PLSD will yield the distance of the shortest vector $v$ between line segments $e_a$ and $e_b$, with the condition that $v$ is perpendicular to the tangent of $e_a$.
+In the Feature Overlap algorithm, using the same notation as in section 4.2.2, PLSD takes $e_a$ to be the current edge of road feature $A$, and $e_b$ to be the current edge of feature $B$ (road or building).
+See Algorithm 2 for a detailed view of the PLSD algorithm.
 
 \chapter{Results and metrics}
 
@@ -641,7 +653,6 @@ This analysis will not be carried out in this project, but could be a good subje
 \end{figure}
 
 % Monday
-% TODO: Write Collision study implementation section
 % TODO: Edge distance algorithm, algorithm
 % Collision study implementation
     % TODO: Figure detailing the steps in the point-matching algorithm

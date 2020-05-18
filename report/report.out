@@ -22,8 +22,8 @@
 \BOOKMARK [2][-]{subsection.4.1.6}{Closest point and point proximity}{section.4.1}% 22
 \BOOKMARK [1][-]{section.4.2}{Collision study}{chapter.4}% 23
 \BOOKMARK [2][-]{subsection.4.2.1}{Road widths and properties}{section.4.2}% 24
-\BOOKMARK [2][-]{subsection.4.2.2}{Feature overlap algorithm}{section.4.2}% 25
-\BOOKMARK [2][-]{subsection.4.2.3}{Projected edge distance}{section.4.2}% 26
+\BOOKMARK [2][-]{subsection.4.2.2}{Feature Overlap algorithm}{section.4.2}% 25
+\BOOKMARK [2][-]{subsection.4.2.3}{Projected Line Segment Distance}{section.4.2}% 26
 \BOOKMARK [0][-]{chapter.5}{Results and metrics}{}% 27
 \BOOKMARK [1][-]{section.5.1}{Road collision study}{chapter.5}% 28
 \BOOKMARK [1][-]{section.5.2}{Positional accuracy study}{chapter.5}% 29

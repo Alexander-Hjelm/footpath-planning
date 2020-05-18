@@ -53,30 +53,30 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.2.1}Road widths and properties}{23}{subsection.4.2.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.2}Feature overlap algorithm}{23}{subsection.4.2.2}
+\contentsline {subsection}{\numberline {4.2.2}Feature Overlap algorithm}{23}{subsection.4.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.2.3}Projected edge distance}{24}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4.2.3}Projected Line Segment Distance}{25}{subsection.4.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Results and metrics}{25}{chapter.5}
+\contentsline {chapter}{\numberline {5}Results and metrics}{26}{chapter.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Road collision study}{25}{section.5.1}
+\contentsline {section}{\numberline {5.1}Road collision study}{26}{section.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Positional accuracy study}{26}{section.5.2}
+\contentsline {section}{\numberline {5.2}Positional accuracy study}{27}{section.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.3}Secondary metrics}{27}{section.5.3}
+\contentsline {section}{\numberline {5.3}Secondary metrics}{28}{section.5.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3.1}Completeness by building area}{27}{subsection.5.3.1}
+\contentsline {subsection}{\numberline {5.3.1}Completeness by building area}{28}{subsection.5.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3.2}Building matching statistics}{28}{subsection.5.3.2}
+\contentsline {subsection}{\numberline {5.3.2}Building matching statistics}{29}{subsection.5.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {5.3.3}Shape accuracy statistics}{28}{subsection.5.3.3}
+\contentsline {subsection}{\numberline {5.3.3}Shape accuracy statistics}{29}{subsection.5.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Conclusions and future work}{30}{chapter.6}
+\contentsline {chapter}{\numberline {6}Conclusions and future work}{31}{chapter.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.1}Quality of the OSM dataset}{30}{section.6.1}
+\contentsline {section}{\numberline {6.1}Quality of the OSM dataset}{31}{section.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Collision study}{31}{section.6.2}
+\contentsline {section}{\numberline {6.2}Collision study}{32}{section.6.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.3}Suggested algorithms for collision correction}{33}{section.6.3}
+\contentsline {section}{\numberline {6.3}Suggested algorithms for collision correction}{34}{section.6.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.4}Scientific field study}{36}{section.6.4}
+\contentsline {section}{\numberline {6.4}Scientific field study}{37}{section.6.4}

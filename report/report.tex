@@ -406,6 +406,14 @@ See Algorithm 1 for a detailed view.
 In either case The Oriented Minimum Bounding Rectangle (OMBR) is calculated for the two polygons.
 Finally the OMBR for the OSM building footprint is shifted so that its centroid aligns with the centroid of the OMBR of the SLU building footprint.
 Any edges in the simplified footprints that coinside with the OMBR from the same dataset are extracted, and the corresponding points in the original footprints will be matched with each other.
+See figure \ref{fig:vertex-match-algo} for an illustration of the algorithm that detects matching vertices between two similar polygons.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_vertex_match_algo}
+    \caption{An illustration of the matching vertices detection algorithm. Starting from two highly similar polygons, the first step is to obtain both the Douglas-Peucker reduced polygons. The next step is to obtain the OMBRs of the reduced polygons, and for both polygons find the edges that coinside with the edges of the OMBRs. These edges are corresponding, and thus their end vertices form a matching vertex map between the original polygons.}
+    \label{fig:vertex-match-algo}
+\end{figure}
 
 \begin{algorithm}[H]
 \SetAlgoLined

@@ -737,7 +737,6 @@ This analysis will not be carried out in this project, but could be a good subje
 
 % Report, restructuring
 % TODO: Summarize Analysis in Conclusions
-% TODO: Conclusions headlines
 % TODO: Overview at the beginning of each chapter
 
 % After next meeting with Chris
@@ -828,7 +827,7 @@ Let us take the positional accuracy of the Stockholm area, as obtained by this s
 Then the positional accuracy has improved by roughly 3.5 meters since the study by \textbf{(Haklay, 2010)}, and by roughly 1.5 meters since the study by \textbf{(Fan et al, 2014)}.
 This of course assumes that the SLU reference dataset is taken as absolute.
 
-\section{Scientific field study}
+\section{Remaining challenges in city reproduction}
 
 We now have a firm idea of the technical feasibility of generating virtual cities from OpenStreetMap-data, including different types of road networks.
 We have however yet to touch upon the importance for road network modelling in the broader context of 3D city reproduction.
@@ -865,7 +864,9 @@ We may chose what LOD class(es) to use depending on data availablity and applica
 It turns out that, with the current means of data aquisition from OSM being limited to building footprints, using OSM data we can only produce LOB-B models at best.
 If we wish to aqquire building assets at a LOD-C level, we would have to complete the data with other sources, or rely on procedural methods to populate our crude city model with additional details and building features that give the model more aestethic depth, but do not neccessarily reflect reality.
 
-Such procedural techniques have long been available.
+\section{Using procedural methods}
+
+Procedural techniques are, as mentioned, methods for reconstructing or creating 3D automatically, with minimal manual work required. Adding such techniques for content creation into the workflow of city reconstruction will increase the level of detail that is possible, while sacrificing accuracy to the real-world.
 \textbf{(Mũller et al, 2006)} present how to accomplish this using Shape Grammar: a method for automatically and iteratively constructing 3D models based in a hierarchical set of rules.
 By starting with a crude volumetric model of a building and iteratively remodeling it from a set of shape grammars, a procedural model can structure the façade, add texture and add details for windows, doors and ornaments, and so on.
 Shape grammars often work from a databank of 3D models and a set of hierarchical rules for how these can be pieced together.
@@ -877,7 +878,8 @@ Many studies urban development have been done before that requred detailed knowl
 and reducing noise.
 \textbf{(Joon, Seo and Byung, 2011)}
 
-It even turns out, by looking at such studies, that a lot of research in urban development require detailed morpological information that goes beyond simply knowing the geometry of the city.
+\section{Feasibility in the urban planning field}
+By looking at such studies in urban development, one will discover that a lot of research in this field requires detailed morpological information that goes beyond simply knowing the geometry of the city.
 Urban architects often work with morpological structures where a single feature, such as a city neighbourhood, can be examined from many different levels of perspective.
 A neighbourhood can be analysed from the level of its city blocks, individual lots, properties or building limits, building facades or even indoor spaces.
 Simlarily a road network can be analysed by looking at it either at its connectivity by viewing it a a simple 2D graph
@@ -890,6 +892,8 @@ OSM, while being an excellent source of city geometry, is simply not a sophistic
 \textbf{(Stojanovski, 2019)}
 For media applications, such morppological and multimodal information could in theory be generated procedurally, by using shape grammars and some sort of wayfinding to create logical routes for different types of traffic.
 But for urban planners requiring an exact morphological representation of some specification, this complementary data will have to be obtained from another dataset.
+
+\section{Final conclusions}
 
 The final conclusion is that generating virtual cities purely from OpenStreetMap data is a perfectly feasibile procedure in the media industry, with the inclusion of procedural methods such as shape grammars to generate neccessary detail.
 This will be a cheap method that reuires minimum effort in terms of source data collection, and the shape grammar method even allows for a great deal of scalability.

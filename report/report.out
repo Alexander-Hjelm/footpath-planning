@@ -7,32 +7,32 @@
 \BOOKMARK [0][-]{chapter.2}{Background}{}% 7
 \BOOKMARK [1][-]{section.2.1}{Background of 3D city reproduction}{chapter.2}% 8
 \BOOKMARK [1][-]{section.2.2}{Related work}{chapter.2}% 9
-\BOOKMARK [0][-]{chapter.3}{The geodata used in this project}{}% 10
-\BOOKMARK [1][-]{section.3.1}{OSM data}{chapter.3}% 11
-\BOOKMARK [1][-]{section.3.2}{SLU data}{chapter.3}% 12
-\BOOKMARK [1][-]{section.3.3}{A word on coordinate systems}{chapter.3}% 13
-\BOOKMARK [1][-]{section.3.4}{Specific geodata preprocessing}{chapter.3}% 14
-\BOOKMARK [0][-]{chapter.4}{Implementation}{}% 15
-\BOOKMARK [1][-]{section.4.1}{Geodata precision study}{chapter.4}% 16
-\BOOKMARK [2][-]{subsection.4.1.1}{Quality criteria}{section.4.1}% 17
-\BOOKMARK [2][-]{subsection.4.1.2}{Other accuracy criteria}{section.4.1}% 18
-\BOOKMARK [2][-]{subsection.4.1.3}{Assesment of dataset completeness}{section.4.1}% 19
-\BOOKMARK [2][-]{subsection.4.1.4}{Correspondence by building area}{section.4.1}% 20
-\BOOKMARK [2][-]{subsection.4.1.5}{Shape accuracy definition}{section.4.1}% 21
-\BOOKMARK [2][-]{subsection.4.1.6}{Closest point and point proximity}{section.4.1}% 22
-\BOOKMARK [1][-]{section.4.2}{Collision study}{chapter.4}% 23
-\BOOKMARK [2][-]{subsection.4.2.1}{Road widths and properties}{section.4.2}% 24
-\BOOKMARK [2][-]{subsection.4.2.2}{Feature Overlap algorithm}{section.4.2}% 25
-\BOOKMARK [2][-]{subsection.4.2.3}{Projected Line Segment Distance}{section.4.2}% 26
-\BOOKMARK [0][-]{chapter.5}{Results and metrics}{}% 27
-\BOOKMARK [1][-]{section.5.1}{Road collision study}{chapter.5}% 28
-\BOOKMARK [1][-]{section.5.2}{Positional accuracy study}{chapter.5}% 29
-\BOOKMARK [1][-]{section.5.3}{Secondary metrics}{chapter.5}% 30
-\BOOKMARK [2][-]{subsection.5.3.1}{Completeness by building area}{section.5.3}% 31
-\BOOKMARK [2][-]{subsection.5.3.2}{Building matching statistics}{section.5.3}% 32
-\BOOKMARK [2][-]{subsection.5.3.3}{Shape accuracy statistics}{section.5.3}% 33
-\BOOKMARK [0][-]{chapter.6}{Conclusions and future work}{}% 34
-\BOOKMARK [1][-]{section.6.1}{Quality of the OSM dataset}{chapter.6}% 35
-\BOOKMARK [1][-]{section.6.2}{Collision study}{chapter.6}% 36
-\BOOKMARK [1][-]{section.6.3}{Suggested algorithms for collision correction}{chapter.6}% 37
-\BOOKMARK [1][-]{section.6.4}{Scientific field study}{chapter.6}% 38
+\BOOKMARK [0][-]{chapter.3}{Implementation}{}% 10
+\BOOKMARK [1][-]{section.3.1}{Geodata precision study}{chapter.3}% 11
+\BOOKMARK [2][-]{subsection.3.1.1}{Quality criteria}{section.3.1}% 12
+\BOOKMARK [2][-]{subsection.3.1.2}{Other accuracy criteria}{section.3.1}% 13
+\BOOKMARK [2][-]{subsection.3.1.3}{Assesment of dataset completeness}{section.3.1}% 14
+\BOOKMARK [2][-]{subsection.3.1.4}{Correspondence by building area}{section.3.1}% 15
+\BOOKMARK [2][-]{subsection.3.1.5}{Shape accuracy definition}{section.3.1}% 16
+\BOOKMARK [2][-]{subsection.3.1.6}{Closest point and point proximity}{section.3.1}% 17
+\BOOKMARK [1][-]{section.3.2}{Collision study}{chapter.3}% 18
+\BOOKMARK [2][-]{subsection.3.2.1}{Road widths and properties}{section.3.2}% 19
+\BOOKMARK [2][-]{subsection.3.2.2}{Feature Overlap algorithm}{section.3.2}% 20
+\BOOKMARK [2][-]{subsection.3.2.3}{Projected Line Segment Distance}{section.3.2}% 21
+\BOOKMARK [1][-]{section.3.3}{The geodata used in this project}{chapter.3}% 22
+\BOOKMARK [2][-]{subsection.3.3.1}{OSM data}{section.3.3}% 23
+\BOOKMARK [2][-]{subsection.3.3.2}{SLU data}{section.3.3}% 24
+\BOOKMARK [2][-]{subsection.3.3.3}{A word on coordinate systems}{section.3.3}% 25
+\BOOKMARK [2][-]{subsection.3.3.4}{Specific geodata preprocessing}{section.3.3}% 26
+\BOOKMARK [0][-]{chapter.4}{Results and metrics}{}% 27
+\BOOKMARK [1][-]{section.4.1}{Road collision study}{chapter.4}% 28
+\BOOKMARK [1][-]{section.4.2}{Positional accuracy study}{chapter.4}% 29
+\BOOKMARK [1][-]{section.4.3}{Secondary metrics}{chapter.4}% 30
+\BOOKMARK [2][-]{subsection.4.3.1}{Completeness by building area}{section.4.3}% 31
+\BOOKMARK [2][-]{subsection.4.3.2}{Building matching statistics}{section.4.3}% 32
+\BOOKMARK [2][-]{subsection.4.3.3}{Shape accuracy statistics}{section.4.3}% 33
+\BOOKMARK [0][-]{chapter.5}{Conclusions and future work}{}% 34
+\BOOKMARK [1][-]{section.5.1}{Quality of the OSM dataset}{chapter.5}% 35
+\BOOKMARK [1][-]{section.5.2}{Collision study}{chapter.5}% 36
+\BOOKMARK [1][-]{section.5.3}{Suggested algorithms for collision correction}{chapter.5}% 37
+\BOOKMARK [1][-]{section.5.4}{Scientific field study}{chapter.5}% 38

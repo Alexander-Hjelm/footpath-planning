@@ -230,46 +230,6 @@ Their study included an insight in the geometrical calculations neccessary to ma
 Their study revealed that although the feature completeness of OSM was high, some architectural details were missing.
 The results reveal that the positional accuracy of OSM data at the time was about 4 meters.
 
-\chapter{The geodata used in this project}
-
-For the purpose of this project, the OSM road dataset has been sampled around Stockholm metropolitan area.
-To assess and correct path widths and path node locations, the OSM building footprint dataset areound the same area has also been used.
-As a reference dataset, the property map from the Swedish National Land Survey was used in comparison with the OSM map.
-The reference map is provided by the Swedish University of Agricultural Sciences (SLU), and will be referred to in this report as the SLU map or the SLU dataset.
-The SLU map conatins only building and property footprints.
-The exact map segments that were extracted were in both cases rectangular boundaries with the following coordinates in WGS84: (N: 59.42, E: 18.15, S: 59.23, W: 17.79).
-Both datasets were collcted on March 18th, 2020.
-
-\section{OSM data}
-
-The OSM project is a wiki-like geodatabase based on Volunteered Geographical Information (VGI), meaning anyone can contribute by adding or editing features.
-OSM road data and building footprints are commonly obtained by manually tracing features in commercially available satellite images.
-Such images have a limit on their resolution which puts a theoretical limit on the accuracy of map features compared to their real-world equivalents (Haklay 2010).
-Particularily the high resolution imagery from Bing in 2010 led to an increase in building information in OSM, and the positional error is largely due to the limited resolution in such satellite imagery. \textbf{(Fan et al, 2014)}.
-
-\section{SLU data}
-
-The SLU map is maintained by The Swedish National Land Survey (Swedish: Lantmäteriet).
-The data is collected by geodetic professionals, by land surveying methods such as GPS or DGNSS positioning, or by reproduction of features from ortophoto or stereo mapping from 3D aerial images.
-Building features in the SLU dataset have a position accuracy requirement of 2 meters.
-The SLU map contains building features and property limits, but no road data.
-The map is updated continously by Lantmäteriet, in conjoncture with the forming or reforming of property.
-Whereas OSM is a free service, the SLU map is available to paying customers or for free to students and researchers. \footnote{Lantmäteriet. Produktbeskrivning: GSD-Fastighetskartan vektor - Lantmäteriet. Acessed 16-04-2020. https://www.lantmateriet.se/globalassets/kartor-och-geografisk-information/kartor/fastshmi.pdf}
-
-\section{A word on coordinate systems}
-
-The SLU dataset is delivered in the SWEREF 99 TM coordinate system.
-SWEREF 99 TM is a projected coordinate system and there is no linear transformation to the WGS 48 system, which OSM uses. \footnote{Converting to WGS84 - OpenStreetMap Wiki. Accessed 13-03-2020. https://wiki.openstreetmap.org/wiki/Converting\_to\_WGS84}
-The coordinate conversions for this paper were obtained using proj: a Linux commandline application for geospatial coordinate conversion.
-
-\section{Specific geodata preprocessing}
-
-Upon delivery of the OSM dataset, all features that intersect with the user-specified domain are included, with their full geometry.
-The SLU map however, is delivered with building footprints cropped to exactly match the query coordinates, meaning that buildings at the edge of the user-specified domain can have cropped geometries.
-Any building area outside of the query domain will be excluded.
-Since the principles behind what features are delivered and how differ between the datasets, it is neccessary to crop both datasets to ensure that all buildings are complete and have matching candidates in the other set.
-Any features that intersect the edge of the rectagular boundary, in both datasets, were therefore excluded from the study.
-
 \chapter{Implementation}
 
 \section{Geodata precision study}
@@ -586,6 +546,45 @@ See Algorithms 2 and 3 together for a detailed view of the PLSD algorithm.
     \caption{PLSD-Helper}
 \end{algorithm}
 
+\section{The geodata used in this project}
+
+For the purpose of this project, the OSM road dataset has been sampled around Stockholm metropolitan area.
+To assess and correct path widths and path node locations, the OSM building footprint dataset areound the same area has also been used.
+As a reference dataset, the property map from the Swedish National Land Survey was used in comparison with the OSM map.
+The reference map is provided by the Swedish University of Agricultural Sciences (SLU), and will be referred to in this report as the SLU map or the SLU dataset.
+The SLU map conatins only building and property footprints.
+The exact map segments that were extracted were in both cases rectangular boundaries with the following coordinates in WGS84: (N: 59.42, E: 18.15, S: 59.23, W: 17.79).
+Both datasets were collcted on March 18th, 2020.
+
+\subsection{OSM data}
+
+The OSM project is a wiki-like geodatabase based on Volunteered Geographical Information (VGI), meaning anyone can contribute by adding or editing features.
+OSM road data and building footprints are commonly obtained by manually tracing features in commercially available satellite images.
+Such images have a limit on their resolution which puts a theoretical limit on the accuracy of map features compared to their real-world equivalents (Haklay 2010).
+Particularily the high resolution imagery from Bing in 2010 led to an increase in building information in OSM, and the positional error is largely due to the limited resolution in such satellite imagery. \textbf{(Fan et al, 2014)}.
+
+\subsection{SLU data}
+
+The SLU map is maintained by The Swedish National Land Survey (Swedish: Lantmäteriet).
+The data is collected by geodetic professionals, by land surveying methods such as GPS or DGNSS positioning, or by reproduction of features from ortophoto or stereo mapping from 3D aerial images.
+Building features in the SLU dataset have a position accuracy requirement of 2 meters.
+The SLU map contains building features and property limits, but no road data.
+The map is updated continously by Lantmäteriet, in conjoncture with the forming or reforming of property.
+Whereas OSM is a free service, the SLU map is available to paying customers or for free to students and researchers. \footnote{Lantmäteriet. Produktbeskrivning: GSD-Fastighetskartan vektor - Lantmäteriet. Acessed 16-04-2020. https://www.lantmateriet.se/globalassets/kartor-och-geografisk-information/kartor/fastshmi.pdf}
+
+\subsection{A word on coordinate systems}
+
+The SLU dataset is delivered in the SWEREF 99 TM coordinate system.
+SWEREF 99 TM is a projected coordinate system and there is no linear transformation to the WGS 48 system, which OSM uses. \footnote{Converting to WGS84 - OpenStreetMap Wiki. Accessed 13-03-2020. https://wiki.openstreetmap.org/wiki/Converting\_to\_WGS84}
+The coordinate conversions for this paper were obtained using proj: a Linux commandline application for geospatial coordinate conversion.
+
+\subsection{Specific geodata preprocessing}
+
+Upon delivery of the OSM dataset, all features that intersect with the user-specified domain are included, with their full geometry.
+The SLU map however, is delivered with building footprints cropped to exactly match the query coordinates, meaning that buildings at the edge of the user-specified domain can have cropped geometries.
+Any building area outside of the query domain will be excluded.
+Since the principles behind what features are delivered and how differ between the datasets, it is neccessary to crop both datasets to ensure that all buildings are complete and have matching candidates in the other set.
+Any features that intersect the edge of the rectagular boundary, in both datasets, were therefore excluded from the study.
 
 \chapter{Results and metrics}
 

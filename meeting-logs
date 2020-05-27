@@ -217,3 +217,21 @@ Very first introduction (very very basic, layman).
     Importing data from online databases
     What aspect of this am I working
 Have a look at other thesises: How does the abstract and introduction look, how are they structured?
+
+Möte med Chris 27/05:
+
+Improve connectivity between first two paragraphs in the abstract
+How do better footpaths relate to better accuracy?
+Section 3 could go into the background chapter (Not just the data used in this projects, geodata in general) (Describe geodata GIS in general, and why these two datasets were chosen)
+    Reword the headers
+    Move related work
+Move talk about the specific geodata to the implementation
+    Talk also about these specific geodata sources in Implementation
+    Generally about what sources are available in Background
+Move 4.1 -> Evaluation/Methodology (new section?)
+At the beginning of each chapter, give the reader an overview (why am I telling you this, how does it fit in in the report in general?)
+    First I present X and Y, this will be used as part of Z or to define ZZ
+Move Conclusions -> a new part 2 of Results and Metrics, write a new conclusions and future work section. The new Results/Metrics 2.0 should contain the meat of the analysis related to the data.
+    New conclusions and future work, step out and remind the reader of what the broad implications in the field is by the results
+Here's the research questions: (list of 1, 2 sentences), then use the following paragraphs to motivate why the questions are important, specify the subquestions and the metrics
+Email Ann Bengtsson, coordinate opponents, formalities of attending 2 other presentations?

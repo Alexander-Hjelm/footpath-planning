@@ -134,31 +134,11 @@ It has also identified how many of those areas can in theory be corrected by sim
 Here, features are defined as the geometrical components that comprise the OSM map.
 For the purpose of this report, features will refer mainly to roads and building footprints.
 
-The primary study of the rate of collision between roads and other features, will serve to obtain the following three metrics:
-
-\begin{enumerate}
-    \item The number of road features that collide with any other feature (road or building).
-    \item The number of road edges that intersect with any other building polygon or road polyline.
-    \item The total length in meters of these edges will also be calculated as a measure of the total length of road.
-\end{enumerate}
-
-The road features will be categorized according to type, so that the rate of collisions between footpaths and other features can be compared to that of other road types.
-OSM mainly makes the distinction between primary, secondary, residential and footpath roads, so this classification will also be used in this report.
-The above features will be calculated for each road type separately by summing over each road feature of a certain type.
-Following this, an algorithm will find the exact same metrics with regards to how many road features that can in theory be corrected by simple geometrical translation of their vertices.
-This will also be preseneted in terms of the number of road features, the number of edges and the total length in meters of remaining colliding road.
-
 For the collision study, see sections 1.3.1 for an implementation overview, 4.2 for a detailed walkthrough of the program implementation, and 5.1 for the results.
 
 The secondary contribution will be an \textbf{assesment of the geometrical precision of OSM data} around the Stockholm area.
 The positional accuracy will be estimated by comparing feature points between the OSM dataset and a reference dataset.
 The positional accuracy will be needed to assess where road collisions occur and whether they can easily be corrected.
-
-The secondary study about geodata precision will primarily serve to obtain an estimate of the positional accuracy of the OSM dataset, in meters.
-A number of auxillary metrics will be needed to estimate the domain of error on the positional accuracy, namely the feature completeness and shape accuracy of the OSM dataset.
-The completeness of the OSM dataset will be taken as a the number of features are represented in both datasets, as a perentage of the total numer of features in the reference dataset.
-Shape accuracy is a measure of polygon similarity that was obtained by comparing polygon turning function between matching features, feature by feature.
-See section 5.3 for more details about the shape accuracy measure.
 
 For the positional accuracy study, see sections 1.3.2 for an implementation overview, 4.1 for a walkthrough of the program implementation, and 5.2 for the results.
 
@@ -184,6 +164,30 @@ In a 3D representation however, it is crucial that each road object has a spacia
 After the width assignment, a program has iterated over all features and calculated how many of them that overlap with any other feature, as well as the total length of the road polylines that is intersecting some other feature.
 The program has then calculated how many of these colliding features that can be corrected by making adjustments that are within the positional accuracy of the OSM data (As obtained by the previous study in this report: Assessment of Geodata Precision).
 
+\chapter{Methodology and evaluation}
+
+\section{Evaluation metrics}
+
+The primary study of the rate of collision between roads and other features, will serve to obtain the following three metrics:
+
+\begin{enumerate}
+    \item The number of road features that collide with any other feature (road or building).
+    \item The number of road edges that intersect with any other building polygon or road polyline.
+    \item The total length in meters of these edges will also be calculated as a measure of the total length of road.
+\end{enumerate}
+
+The road features will be categorized according to type, so that the rate of collisions between footpaths and other features can be compared to that of other road types.
+OSM mainly makes the distinction between primary, secondary, residential and footpath roads, so this classification will also be used in this report.
+The above features will be calculated for each road type separately by summing over each road feature of a certain type.
+Following this, an algorithm will find the exact same metrics with regards to how many road features that can in theory be corrected by simple geometrical translation of their vertices.
+This will also be preseneted in terms of the number of road features, the number of edges and the total length in meters of remaining colliding road.
+
+The secondary study about geodata precision will primarily serve to obtain an estimate of the positional accuracy of the OSM dataset, in meters.
+A number of auxillary metrics will be needed to estimate the domain of error on the positional accuracy, namely the feature completeness and shape accuracy of the OSM dataset.
+The completeness of the OSM dataset will be taken as a the number of features are represented in both datasets, as a perentage of the total numer of features in the reference dataset.
+Shape accuracy is a measure of polygon similarity that was obtained by comparing polygon turning function between matching features, feature by feature.
+See section 5.3 for more details about the shape accuracy measure.
+
 \section{Problem constraints}
 
 In this study, when working with OSM geodata, the following assumptions have been made about the dataset to reduce the size of the problem domain:
@@ -195,46 +199,7 @@ In this study, when working with OSM geodata, the following assumptions have bee
     \item The road network is assumed to be a 2D simple graph. This means that any overlapping roads, such as tunnels and bridges that cross over street-level roads, will be eliminated from the dataset. Any self-connected nodes will also be eliminated from the dataset.
 \end{enumerate}
 
-\chapter{Background}
-
-\section{Background of 3D city reproduction}
-
-Procedural modeling of road networks is of interest to the fields of urban planning and urban architecture. In recent years there has been an advent of interactive tools that aid urban planners in placing or generating features of an urban plan, particularly roads and road networks. Procedural and AI solutions that aid the arcitect in a form of human-machine symbiosis.
-
-Procedural city-generation models combine architectural elemets, such as streets, lots, buildings, building facades.
-Urban design practises with conventional two-dimenstional deliverables range from delivering neighbourhood designs, urban zoning and building plans, to writing design codes and building ordinances.
-The last decade has seen multiple startups in the area of software that aid urban arcitecture. The software uses procedural models to render a city grid based on real-world locations, or generate new user-specified parameters, and allow for varying degrees of manual editing on grid, road, neighbourhood, city block or individual feature level.
-Some of the most prominent examples are ArcGIS Pro (made by Esri), CityEngine (made by the startup Procedural, bought by ESRI) and Urban Canvas (made by the startup Synthicity, bought by Autodesk, now defunct).
-
-But such tools are as of today not commonly applied in urbanist practises, due to failures in reflecting the unique workspace of arcitects and their design needs. Urban arcitecture is a social factors, stakeholders. Each arcitect is an actor in a continously developing environment, and affecting that environment in a complex manner through their action \textbf{(Stojanovski et al, 2020)}.
-
-In recent years, there have been an advent of tools that extract geodata from OSM and generate 3D representations of real world locations by placing terrain, buildings, roads and other features.
-However, freely available such tools seldom include smaller roads and pedestrian footpaths such as walkways, sidewalks or trails.
-
-Additionally, the topic is of interest for 3D content creators in for example the fields of video game design or 3D animation. A trend in these fields is using methods of procedural modeling to create large amounts of 3D content quickly and efficiently, while requiring as little hand modeling as possible. Studios who create large worlds are often interested in solutions that generate large road networks without any hand modeling. \textbf{(Parish and Müller, 2001)}
-
-\section{Related work}
-When assessing the completeness of geodata, a very common scale is Van Oorts criteria for evaluating the quality of geographical information, which at the time of publication received attention from surveyors and cartographers.
-\textbf{(Van Oort, 2006)} Since then a number of publications have examined slices of geodata from van Oort's criteria.
-In 2008, \textbf{(Haklay, 2010)} conducted such a study to estimate of the quality of OSM positional geodata in London and England.
-Since the OSM project started in London it was thought that OSM data in the London metropolitan area would be representative of the highest quality data available, and therefore a good indicator for the whole global OSM dataset.
-The study was conducted by comparing OSM data to Ordnance Survey datasets.
-The study showed that the OSM dataset had a rough positional accuracy of 6 meters from the reference dataset.
-However, at the time of the study, the OSM project had captured roughly 29\% of the area of England, meaning that the data completeness was fairly low.
-
-The next notable study to assess the quality of OSM data was published by \textbf{(Kunze, 2012)}.
-The study applied different methods to assess the completeness of OSM data in two federal states in Germany, mainly by analysing the area difference between the OSM dataset and an administrative dataset.
-Finally, a notable study in 2013-2014, conducted by researchers from various universities in Norway and Germany \textbf{(Fan et al, 2014)}, examined the quality and accuracy in building footprint data of the Munich area, at a time and place where the completeness of the OSM dataset was significantly higher (the results of their study showed that the OSM had captured close to 100\% of all building footprints).
-At the time Munich was one of the most developed cities in OSM.
-Their study included an insight in the geometrical calculations neccessary to match features and points between two datasets, and how to reliably calculate the metrics needed for the most important and assessible of van Oorts criteria.
-Their study revealed that although the feature completeness of OSM was high, some architectural details were missing.
-The results reveal that the positional accuracy of OSM data at the time was about 4 meters.
-
-\chapter{Implementation}
-
-\section{Geodata precision study}
-
-\subsection{Quality criteria}
+\section{Quality criteria}
 
 \textbf{(Haklay, 2010)} presents a comprehesive list of 8 accuracy classes when it comes to evaluating the quality of geographic information (van Oorts criteria)
 
@@ -274,6 +239,45 @@ The attribute accuracy measure is interesting, as both maps use encoded metadata
 To the knowledge of the author, this has never been done with specifically these two datasets, at the time of writing.
 
 The temporal accuracy will not be assessed as this projects focuses on comparing a single snapshot of the two datasets at the same point in time, and finally the logical accuracy will not be assessed because the underlying logical relations between features in both maps serve no purpose to this project.
+
+\chapter{Background}
+
+\section{Background of 3D city reproduction}
+
+Procedural modeling of road networks is of interest to the fields of urban planning and urban architecture. In recent years there has been an advent of interactive tools that aid urban planners in placing or generating features of an urban plan, particularly roads and road networks. Procedural and AI solutions that aid the arcitect in a form of human-machine symbiosis.
+
+Procedural city-generation models combine architectural elemets, such as streets, lots, buildings, building facades.
+Urban design practises with conventional two-dimenstional deliverables range from delivering neighbourhood designs, urban zoning and building plans, to writing design codes and building ordinances.
+The last decade has seen multiple startups in the area of software that aid urban arcitecture. The software uses procedural models to render a city grid based on real-world locations, or generate new user-specified parameters, and allow for varying degrees of manual editing on grid, road, neighbourhood, city block or individual feature level.
+Some of the most prominent examples are ArcGIS Pro (made by Esri), CityEngine (made by the startup Procedural, bought by ESRI) and Urban Canvas (made by the startup Synthicity, bought by Autodesk, now defunct).
+
+But such tools are as of today not commonly applied in urbanist practises, due to failures in reflecting the unique workspace of arcitects and their design needs. Urban arcitecture is a social factors, stakeholders. Each arcitect is an actor in a continously developing environment, and affecting that environment in a complex manner through their action \textbf{(Stojanovski et al, 2020)}.
+
+In recent years, there have been an advent of tools that extract geodata from OSM and generate 3D representations of real world locations by placing terrain, buildings, roads and other features.
+However, freely available such tools seldom include smaller roads and pedestrian footpaths such as walkways, sidewalks or trails.
+
+Additionally, the topic is of interest for 3D content creators in for example the fields of video game design or 3D animation. A trend in these fields is using methods of procedural modeling to create large amounts of 3D content quickly and efficiently, while requiring as little hand modeling as possible. Studios who create large worlds are often interested in solutions that generate large road networks without any hand modeling. \textbf{(Parish and Müller, 2001)}
+
+\section{Related work}
+When assessing the completeness of geodata, a very common scale is Van Oorts criteria for evaluating the quality of geographical information, which at the time of publication received attention from surveyors and cartographers.
+\textbf{(Van Oort, 2006)} Since then a number of publications have examined slices of geodata from van Oort's criteria.
+In 2008, \textbf{(Haklay, 2010)} conducted such a study to estimate of the quality of OSM positional geodata in London and England.
+Since the OSM project started in London it was thought that OSM data in the London metropolitan area would be representative of the highest quality data available, and therefore a good indicator for the whole global OSM dataset.
+The study was conducted by comparing OSM data to Ordnance Survey datasets.
+The study showed that the OSM dataset had a rough positional accuracy of 6 meters from the reference dataset.
+However, at the time of the study, the OSM project had captured roughly 29\% of the area of England, meaning that the data completeness was fairly low.
+
+The next notable study to assess the quality of OSM data was published by \textbf{(Kunze, 2012)}.
+The study applied different methods to assess the completeness of OSM data in two federal states in Germany, mainly by analysing the area difference between the OSM dataset and an administrative dataset.
+Finally, a notable study in 2013-2014, conducted by researchers from various universities in Norway and Germany \textbf{(Fan et al, 2014)}, examined the quality and accuracy in building footprint data of the Munich area, at a time and place where the completeness of the OSM dataset was significantly higher (the results of their study showed that the OSM had captured close to 100\% of all building footprints).
+At the time Munich was one of the most developed cities in OSM.
+Their study included an insight in the geometrical calculations neccessary to match features and points between two datasets, and how to reliably calculate the metrics needed for the most important and assessible of van Oorts criteria.
+Their study revealed that although the feature completeness of OSM was high, some architectural details were missing.
+The results reveal that the positional accuracy of OSM data at the time was about 4 meters.
+
+\chapter{Implementation}
+
+\section{Geodata precision study}
 
 \subsection{Assesment of dataset completeness}
 

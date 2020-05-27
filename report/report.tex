@@ -139,7 +139,9 @@ For the positional accuracy study, see sections 1.3.2 for an implementation over
 
 \section{Implementation overview}
 
-\subsection{Assesment of geodata precision}
+Programmatic collection of statistics has been neccessary for both the primary and secondary research questions, and this section presents a broad overview of the technical implementation behind the map analysis and data collection processes for both the geodata precision study and the collision study.
+
+\subsection{Geodata precision study}
 
 The geometrical precision study has been carried out in a number of steps that are all detailed below.
 First a feature map was found, which mapped individual features between the OSM dataset and a reference dataset.
@@ -153,7 +155,7 @@ Additionally, the shape accuracy of the OSM dataset has also been calculated and
 
 \subsection{Collision study}
 
-The estimate of the positional error has was used to assess the integrity of the OSM Stockholm road network, by locating critical points where assigning standard widths to the roads would cause collision with other features, and evaluating how many of those points could be eliminated by making ajustments within the found margin of error.
+Once the estimate of the positional error was obtained from the precision study, this estimate was used to assess the integrity of the OSM Stockholm road network, by locating critical points where assigning standard widths to the roads would cause collision with other features, and evaluating how many of those points could be eliminated by making ajustments within the found margin of error.
 For the purpose of the collision study, each road has been assigned a standard width that is in line with Swedish regulations, since in the OSM dataset, roads are represented as simple polylines, lacking width.
 In a 3D representation however, it is crucial that each road object has a spacial width in order to be rendered and seen.
 After the width assignment, a program has iterated over all features and calculated how many of them that overlap with any other feature, as well as the total length of the road polylines that is intersecting some other feature.
@@ -635,7 +637,7 @@ The number of road edges and percentage of the total road length that could not 
 
 \section{Positional accuracy study}
 
-For the secondary study, the average positional accuracy per building was calculated to roughly 2.06 meters, and this will be taken as an estaimate of the positional accuracy of the OSM dataset.
+For the secondary study, the average positional accuracy per building was calculated to roughly 2.06 meters, and this will be taken as an estimate of the positional accuracy of the OSM dataset.
 Table \ref{table:positional-accuracy} shows the estimate in positional accuracy that was obtained from the study.
 Figure \ref{fig:bar-plot-positional-accuracy} shows the positional accuracies measured per building as a frequency diagram.
 
@@ -709,6 +711,13 @@ Figure \ref{fig:bar-plot-similarity} shows the shape similarity measured per bui
 \end{figure}
 
 \chapter{Analysis}
+
+Now that the colliison metrics have been obtained, we are in a good position to draw conclusions about the technical feasibility of 3D city reproduction from OSM data.
+We will begin by looking at the geodata precision study, and use the outcome of that study to assess the quality of the positional accuracy estimate, by looking at the dataset completeness, the low semantic accuracy and the unique characteristics of the Stockholm area.
+Secondly we will look at the collision study.
+We will make the claim that footpaths will not be more problematic than other road types in city reproduction from OSM data, and motivate this with the data obtained in section 6.1.
+We will look at the character of the feature collision cases and identify the most common cases, as well as present geometrical algorithms for how to correct each case automatically.
+For conclusions about the usage of OSM city reproduction in engineering practise and remaining challenges, see section 7.
 
 \section{Quality of the OSM dataset}
 
@@ -819,13 +828,6 @@ All collision cases can be solved with relatively simply geometric algorithms. T
 \end{figure}
 
 \chapter{Conclusions and future work}
-
-\section{Data conclusions}
-
-One could reasonably assume that Stockholm, being one of the more developed cities in one of the most technologically connected country in the world, would be fairly well mapped in OSM.
-Let us take the positional accuracy of the Stockholm area, as obtained by this study, as reprentative of that of major cities in developed countries in the OSM dataset.
-Then the positional accuracy has improved by roughly 3.5 meters since the study by \textbf{(Haklay, 2010)}, and by roughly 1.5 meters since the study by \textbf{(Fan et al, 2014)}.
-This of course assumes that the SLU reference dataset is taken as absolute.
 
 \section{Remaining challenges in city reproduction}
 

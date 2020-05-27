@@ -11,7 +11,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.2}Implementation overview}{5}{section.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.2.1}Assesment of geodata precision}{5}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.1}Geodata precision study}{5}{subsection.1.2.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.2.2}Collision study}{5}{subsection.1.2.2}
 \defcounter {refsection}{0}\relax 
@@ -79,18 +79,16 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {6.1}Quality of the OSM dataset}{33}{section.6.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.2}Collision study}{34}{section.6.2}
+\contentsline {section}{\numberline {6.2}Collision study}{35}{section.6.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {6.3}Suggested algorithms for collision correction}{36}{section.6.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {7}Conclusions and future work}{40}{chapter.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.1}Data conclusions}{40}{section.7.1}
+\contentsline {section}{\numberline {7.1}Remaining challenges in city reproduction}{40}{section.7.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.2}Remaining challenges in city reproduction}{40}{section.7.2}
+\contentsline {section}{\numberline {7.2}Using procedural methods}{42}{section.7.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.3}Using procedural methods}{42}{section.7.3}
+\contentsline {section}{\numberline {7.3}Feasibility in the urban planning field}{42}{section.7.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.4}Feasibility in the urban planning field}{43}{section.7.4}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.5}Final conclusions}{44}{section.7.5}
+\contentsline {section}{\numberline {7.4}Final conclusions}{43}{section.7.4}

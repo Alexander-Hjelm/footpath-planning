@@ -163,9 +163,15 @@ The program has then calculated how many of these colliding features that can be
 
 \chapter{Methodology and evaluation}
 
+In this chapter we will look in details at the evaluation metrics that this project served to obtain, and how they relate to the eventual collision analysis.
+For the geodata precision study specifically, we will look in detail at how geodata is qualifyied in general, by examining van Oorts quality criteria.
+We will also present how van Oorts critera will be used in the context of this project.
+See section 4 for a detailed technical implementation overview that presents how the relevant metrics were obtained during the statistics collection process.
+For the resulting metrics that were obtained, see section 5.
+
 \section{Evaluation metrics}
 
-The primary study of the rate of collision between roads and other features, will serve to obtain the following three metrics:
+The primary study of the rate of collision between roads and other features will serve to obtain the following three metrics:
 
 \begin{enumerate}
     \item The number of road features that collide with any other feature (road or building).
@@ -184,17 +190,6 @@ A number of auxillary metrics will be needed to estimate the domain of error on 
 The completeness of the OSM dataset will be taken as a the number of features are represented in both datasets, as a perentage of the total numer of features in the reference dataset.
 Shape accuracy is a measure of polygon similarity that was obtained by comparing polygon turning function between matching features, feature by feature.
 See section 5.3 for more details about the shape accuracy measure.
-
-\section{Problem constraints}
-
-In this study, when working with OSM geodata, the following assumptions have been made about the dataset to reduce the size of the problem domain:
-
-\begin{enumerate}
-    \item The program will not handle terrain features and altitude. It will be assumed that the road mesh can be projected on a flat 2D surface without feature intersection.
-    \item It will be assumed that the city map consists of only arterial (primary) roads, secondary roads and footpaths.
-    \item It will be assumed that the OSM dataset represents all roads as simple polylines, and building footprints as simple connected polygons. Any other features (such as squares, which are roads represented as polygons) will be omitted from the dataset.
-    \item The road network is assumed to be a 2D simple graph. This means that any overlapping roads, such as tunnels and bridges that cross over street-level roads, will be eliminated from the dataset. Any self-connected nodes will also be eliminated from the dataset.
-\end{enumerate}
 
 \section{Quality criteria}
 
@@ -236,6 +231,17 @@ The attribute accuracy measure is interesting, as both maps use encoded metadata
 To the knowledge of the author, this has never been done with specifically these two datasets, at the time of writing.
 
 The temporal accuracy will not be assessed as this projects focuses on comparing a single snapshot of the two datasets at the same point in time, and finally the logical accuracy will not be assessed because the underlying logical relations between features in both maps serve no purpose to this project.
+
+\section{Problem constraints}
+
+In this study, when working with OSM geodata, the following assumptions have been made about the dataset to reduce the size of the problem domain:
+
+\begin{enumerate}
+    \item The program will not handle terrain features and altitude. It will be assumed that the road mesh can be projected on a flat 2D surface without feature intersection.
+    \item It will be assumed that the city map consists of only arterial (primary) roads, secondary roads and footpaths.
+    \item It will be assumed that the OSM dataset represents all roads as simple polylines, and building footprints as simple connected polygons. Any other features (such as squares, which are roads represented as polygons) will be omitted from the dataset.
+    \item The road network is assumed to be a 2D simple graph. This means that any overlapping roads, such as tunnels and bridges that cross over street-level roads, will be eliminated from the dataset. Any self-connected nodes will also be eliminated from the dataset.
+\end{enumerate}
 
 \chapter{Background}
 

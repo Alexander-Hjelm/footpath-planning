@@ -87,4 +87,10 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {7.1}Data conclusions}{40}{section.7.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {7.2}Scientific field study}{40}{section.7.2}
+\contentsline {section}{\numberline {7.2}Remaining challenges in city reproduction}{40}{section.7.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.3}Using procedural methods}{42}{section.7.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.4}Feasibility in the urban planning field}{43}{section.7.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.5}Final conclusions}{44}{section.7.5}

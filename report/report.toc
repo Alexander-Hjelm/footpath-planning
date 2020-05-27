@@ -75,7 +75,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {5.3.3}Shape accuracy statistics}{31}{subsection.5.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Conclusions and future work}{33}{chapter.6}
+\contentsline {chapter}{\numberline {6}Analysis}{33}{chapter.6}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {6.1}Quality of the OSM dataset}{33}{section.6.1}
 \defcounter {refsection}{0}\relax 
@@ -83,4 +83,8 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {6.3}Suggested algorithms for collision correction}{36}{section.6.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6.4}Scientific field study}{39}{section.6.4}
+\contentsline {chapter}{\numberline {7}Conclusions and future work}{40}{chapter.7}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.1}Data conclusions}{40}{section.7.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.2}Scientific field study}{40}{section.7.2}

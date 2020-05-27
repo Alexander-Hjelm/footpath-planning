@@ -33,8 +33,10 @@
 \BOOKMARK [2][-]{subsection.5.3.1}{Completeness by building area}{section.5.3}% 33
 \BOOKMARK [2][-]{subsection.5.3.2}{Building matching statistics}{section.5.3}% 34
 \BOOKMARK [2][-]{subsection.5.3.3}{Shape accuracy statistics}{section.5.3}% 35
-\BOOKMARK [0][-]{chapter.6}{Conclusions and future work}{}% 36
+\BOOKMARK [0][-]{chapter.6}{Analysis}{}% 36
 \BOOKMARK [1][-]{section.6.1}{Quality of the OSM dataset}{chapter.6}% 37
 \BOOKMARK [1][-]{section.6.2}{Collision study}{chapter.6}% 38
 \BOOKMARK [1][-]{section.6.3}{Suggested algorithms for collision correction}{chapter.6}% 39
-\BOOKMARK [1][-]{section.6.4}{Scientific field study}{chapter.6}% 40
+\BOOKMARK [0][-]{chapter.7}{Conclusions and future work}{}% 40
+\BOOKMARK [1][-]{section.7.1}{Data conclusions}{chapter.7}% 41
+\BOOKMARK [1][-]{section.7.2}{Scientific field study}{chapter.7}% 42

@@ -210,9 +210,8 @@ The results reveal that the positional accuracy of OSM data at the time was abou
 
 \chapter{Methodology and evaluation}
 
-In this chapter we will look in details at the evaluation metrics that this project served to obtain, and how they relate to the eventual collision analysis.
-For the geodata precision study specifically, we will look in detail at how geodata is qualifyied in general, by examining van Oorts quality criteria.
-We will also present how van Oorts critera will be used in the context of this project.
+This chapter will present the evaluation metrics that this project served to obtain, and how they relate to the eventual collision analysis.
+For the geodata precision study specifically, it will examine how geodata is qualifyied in general, by examining van Oorts quality criteria, and how these will be used in this project.
 See section 4 for a detailed technical implementation overview that presents how the relevant metrics were obtained during the statistics collection process.
 For the resulting metrics that were obtained, see section 5.
 
@@ -292,10 +291,10 @@ In this study, when working with OSM geodata, the following assumptions have bee
 
 \chapter{Implementation}
 
-In section 4.1 we will look at the data collection process for the geodata precision study. We will look at how to qualify dataset completeness and building correspondence (how many of the buildings in one dataset that can be found in the other) by collecting the cumulative building areas and looking at what buildings have overlapping areas between the two datasets.
-We will also look at the difinitions and algorithms neccessary for calculating posiitonal accuracy and a measure for shape accuracy.
-In section 4.2 we will look at the data collection process for the collision study. We will look at the how standard road withs were obtained, as well as the algorithm for detemining feature collision that was used.
-In section 4.3 we will discuss briefly the data sources used in this project, why they were chosen and specific issues with the data collection process.
+Section 4.1 will present the data collection process for the geodata precision study. It will present how to qualify dataset completeness and building correspondence (how many of the buildings in one dataset that can be found in the other) by collecting the cumulative building areas and looking at what buildings have overlapping areas between the two datasets.
+The definitions and algorithms neccessary for calculating posiitonal accuracy and a measure for shape accuracy will also be presented.
+Section 4.2 will present at the data collection process for the collision study. It will present how standard road withs were obtained, as well as the algorithm for detemining feature collision that was used.
+Section 4.3 will discuss briefly the data sources used in this project, why they were chosen and specific issues with the data collection process.
 
 \section{Geodata precision study}
 
@@ -434,13 +433,13 @@ See figure \ref{fig:vertex-match-algo} for an illustration of the algorithm that
     \caption{Douglas-Peucker}
 \end{algorithm}
 
-Finally, when two building footprints and their vertices have been mapped, we will use the offset of matching vertices as a measure of positional error. The average and variance in vertex spread will be calculated and used to make an assessment of the geometric precision of the OSM dataset, and this precision will further be used to form an upper boundary on geometrical corrections that can be made to the map once it has been imported into the application.
+Finally, when two building footprints and their vertices have been mapped, the offset of matching vertices will be used as a measure of positional error. The average and variance in vertex spread will be calculated and used to make an assessment of the geometric precision of the OSM dataset, and this precision will further be used to form an upper boundary on geometrical corrections that can be made to the map once it has been imported into the application.
 
 \section{Collision study}
 
 \subsection{Road widths and properties}
 
-The maximum distance between two features was set to 1 times the positional accuracy, since then there will always be ample room to make changes to any features that would collide with the newly moved nodes, and thus we do not need to worry about feature collisions propagating.
+The maximum distance between two features was set to 1 times the positional accuracy, since then there will always be ample room to make changes to any features that would collide with the newly moved nodes, and thus collisions propagating will not be an issue.
 In this implementation, roads of different types were allowed to merge into one another to form common intersections.
 To facilitate this, it was neccessary to work with a path-by-path representation of the point data.
 When two path share a node with common coordinates, they form an intersection which can be of multiple different types.
@@ -614,10 +613,10 @@ Any features that intersect the edge of the rectagular boundary, in both dataset
 
 \section{Results}
 
-Here we present the results of the statistics collections that were made as part of this project.
+Here the results of the statistics collections will be presented.
 First the results of the collision study is presented as how many of the road features of each type display collision with some other feature.
 Then the results of the geodata precision is presented.
-We will present our estimate of the positional accuracy of the OSM dataset, as well as the dataset completeness and statistics about building correspondence and shape accuracy.
+The final estimate of the positional accuracy of the OSM dataset will be presented, as well as the dataset completeness and statistics about building correspondence and shape accuracy.
 
 \subsection{Road collision study}
 
@@ -739,11 +738,14 @@ Figure \ref{fig:bar-plot-similarity} shows the shape similarity measured per bui
 
 \section{Analysis}
 
-Now that the colliison metrics have been obtained, we are in a good position to draw conclusions about the technical feasibility of 3D city reproduction from OSM data.
-We will begin by looking at the geodata precision study, and use the outcome of that study to assess the quality of the positional accuracy estimate, by looking at the dataset completeness, the low semantic accuracy and the unique characteristics of the Stockholm area.
-Secondly we will look at the collision study.
-We will make the claim that footpaths will not be more problematic than other road types in city reproduction from OSM data, and motivate this with the data obtained in section 6.1.
-We will look at the character of the feature collision cases and identify the most common cases, as well as present geometrical algorithms for how to correct each case automatically.
+Now that the colliison metrics have been obtained, conclusions may be drawn about the technical feasibility of 3D city reproduction from OSM data.
+First the geodata precision study will be discussed.
+The outcome of that study will be used to assess the quality of the positional accuracy estimate by looking at the dataset completeness, the low semantic accuracy and the unique characteristics of the Stockholm area.
+Secondly the collision study will be discussed.
+The main outcome is that footpaths will not be more problematic than other road types in city reproduction from OSM data.
+This claim will be motivated with the data obtained in section 6.1.
+Finally, the character of the feature collision cases will be discussed and the most common cases will be identified.
+The chapter will conclude with a presentation of geometrical algorithms for how to correct each case automatically.
 For conclusions about the usage of OSM city reproduction in engineering practise and remaining challenges, see section 7.
 
 \subsection{Quality of the OSM dataset}
@@ -772,7 +774,6 @@ This analysis will not be carried out in this project, but could be a good subje
 \end{figure}
 
 % Onsdag:
-% TODO: Formal tone, never use us, we, me
 % TODO: Delimitations in Introduction, after RQ
 % TODO: Move: 2.1.1: Accuracy criteria that will not be focused on -> Delimitations
 
@@ -802,8 +803,8 @@ The biggest reason for this is thought to be that footpaths in their nature are 
 So narrow in fact that they can be displaced by more than half of their full width (minimum 1 meter) before the limit of half the positional accuracy (1.025 meters) is reached.
 
 Looking closer at the individual collision cases, the next conclusion is that most often it is actually a small part of a road that is colliding, and will need correction.
-We make an exemplifying calculation to support this claim.
-Looking in tables \ref{table:road-collision} and \ref{table:road-collision-corrected}, we note that before road extrusion, 3189 features and 7330 of their edges are intersecting some other feature.
+Now will follow an exemplifying calculation to support this claim.
+Looking in tables \ref{table:road-collision} and \ref{table:road-collision-corrected}, note that before road extrusion, 3189 features and 7330 of their edges are intersecting some other feature.
 This means that for each colliding road, on average 2.3 of its edges will be intersecting some other feature, thus bearing responsibility for the collision.
 In total there are 26473 feautures and 6382579 edges, meaning that each road feature is on average contructed out of 241 edges.
 Thus the percentage of edges colliding per road is on average roughly 0.95\%.
@@ -831,7 +832,7 @@ All these cases will create issues when generating the 3D mesh representation of
 
 \subsection{Suggested algorithms for collision correction}
 
-All collision cases can be solved with relatively simply geometric algorithms. This section will present suggestions on algorithms that will resolve collisions by identifying individual colliding nodes and translating them, after which some degree of smoothing (such as linear interpolation) can be applied to preserve visual features. Cases 1 and 3-5 will be handled, while 2 will be left since case 2 collisions do not inherently cause feature overlap when extruding a 3D road mesh from the way edges. Thus it will me up to the individual developer to decide what to do with Case 2 collisions.
+All collision cases can be solved with relatively simply geometric algorithms. This section will present suggestions on algorithms that will resolve collisions by identifying individual colliding nodes and translating them, after which some degree of smoothing (such as linear interpolation) can be applied to preserve visual features. Cases 1 and 3-5 will be handled, while 2 will be left since case 2 collisions do not inherently cause feature overlap when extruding a 3D road mesh from the way edges. Thus it will be up to the individual developer to decide what to do with Case 2 collisions.
 
 \begin{enumerate}
 \item Case 1 collisions can be solved by translating colliding way points away from the building, along the normal of the nearest surface. Smoothing can then be applied as seen fit.
@@ -870,18 +871,18 @@ All collision cases can be solved with relatively simply geometric algorithms. T
 
 \chapter{Conclusions and future work}
 
-We now have a firm idea of the technical feasibility of generating virtual cities from OpenStreetMap-data, including different types of road networks.
-We have however yet to touch upon the possibilities of road network modelling in the broader context of 3D city reproduction, and what are the remaining challenges for accurate 3D city reproduction?
-What techniques can we use to complement our basic system of importing street and building data and create a rich and living virtual city?
-In this section we will place everything we have learnt so far in the broader context of GIS and city modeling, focusing on the research fields of 3D media and city planning.
+This report has now established a firm idea of the technical feasibility of generating virtual cities from OpenStreetMap-data, including different types of road networks.
+It remains to touch upon the possibilities of road network modelling in the broader context of 3D city reproduction. What are the remaining challenges for accurate 3D city reproduction?
+What techniques can be used to complement the basic system of importing street and building data that is already in place, and create a rich and living virtual city?
+In this section everything we have learnt so far will be placed in the broader context of GIS and city modeling, focusing on the research fields of 3D media and city planning.
 
 \section{Remaining challenges in city reproduction}
 
 As has been mentiond in the introduction to this report, procedural generaion of road networks is a basal requirement for quick and low-effort modeling virtual cities.
-Since the road network ties together the city, and forms the grid that divides the lots, quarters and neighbourhoods, it make sense that we can only continue with the remaining challenges once we can a robust procedure for extracting road geodata and generating the 3D represention of it without compromising the data integrity. 
+Since the road network ties together the city, and forms the grid that divides the lots, quarters and neighbourhoods, it make sense that one can only continue with the remaining challenges once there exists a robust procedure for extracting road geodata and generating the 3D represention of it without compromising the data integrity. 
 The same is true for building modelling.
 It turns out that the same methods that have been used in this project to obtain and qualify road network data can be applied to building footprint data from OSM. \textbf{(Fan et al, 2014)}
-And only when we have such a fundamental procedure for accuratly importing building footprints without compromising the data integritey, we can proceed with the remaining challenges in building modeling. \textbf{(Müller et al, 2006)}
+And only when there exists such a fundamental procedure for accuratly importing building footprints without compromising the data integritey, one can proceed with the remaining challenges in building modeling. \textbf{(Müller et al, 2006)}
 
 Such challenges, which have not been mentioned up until this point, include infering or guessing building height, since OSM does not provide data about building elevation.
 Occasinally buildings in OSM may be tagged, but the norm is that no elevation data is available.
@@ -903,9 +904,9 @@ The CityGML standard divides the LOD representation of 3D models into three clas
     \item LOD-C models are LOD-B models which include features such as doors, windows, alcoves, building decor, indoor features or vegetation.
 \end{enumerate}
 \textbf{(Biljecki et al, 2016)}
-We may chose what LOD class(es) to use depending on data availablity and application.
-It turns out that, with the current means of data aquisition from OSM being limited to building footprints, using OSM data we can only produce LOB-B models at best.
-If we wish to aqquire building assets at a LOD-C level, we would have to complete the data with other sources, or rely on procedural methods to populate our crude city model with additional details and building features that give the model more aestethic depth, but do not neccessarily reflect reality.
+A modeler may chose what LOD class(es) to use depending on data availablity and application.
+It turns out that, with the current means of data aquisition from OSM being limited to building footprints, using OSM data a model can only produce LOB-B models at best.
+If a modeler wishes to aqquire building assets at a LOD-C level, they would have to complete the data with other sources, or rely on procedural methods to populate crude city models with additional details and building features that give the models more aestethic depth, but do not neccessarily reflect reality.
 
 \section{Using procedural methods}
 

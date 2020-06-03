@@ -609,14 +609,16 @@ Any building area outside of the query domain will be excluded.
 Since the principles behind what features are delivered and how differ between the datasets, it is neccessary to crop both datasets to ensure that all buildings are complete and have matching candidates in the other set.
 Any features that intersect the edge of the rectagular boundary, in both datasets, were therefore excluded from the study.
 
-\chapter{Results and metrics}
+\chapter{Evaluation}
+
+\section{Results}
 
 Here we present the results of the statistics collections that were made as part of this project.
 First the results of the collision study is presented as how many of the road features of each type display collision with some other feature.
 Then the results of the geodata precision is presented.
 We will present our estimate of the positional accuracy of the OSM dataset, as well as the dataset completeness and statistics about building correspondence and shape accuracy.
 
-\section{Road collision study}
+\subsection{Road collision study}
 
 For the primary collision study.
 Table \ref{table:road-collision} shows the statistics of the collision study, and the number of roads, number of edges and total edge length that showed intersections with other features before road extrusion, by road category.
@@ -659,7 +661,7 @@ The number of road edges and percentage of the total road length that could not 
     \label{table:road-collision-corrected}
 \end{table}
 
-\section{Positional accuracy study}
+\subsection{Positional accuracy study}
 
 For the secondary study, the average positional accuracy per building was calculated to roughly 2.06 meters, and this will be taken as an estimate of the positional accuracy of the OSM dataset.
 Table \ref{table:positional-accuracy} shows the estimate in positional accuracy that was obtained from the study.
@@ -681,9 +683,9 @@ Figure \ref{fig:bar-plot-positional-accuracy} shows the positional accuracies me
     \label{fig:bar-plot-positional-accuracy}
 \end{figure}
 
-\section{Secondary metrics}
+\subsection{Secondary metrics}
 
-\subsection{Completeness by building area}
+\subsubsection{Completeness by building area}
 
 Table \ref{table:num-of-buildings} shows the building coverage of the OSM and SLU datasets in terms of the number of buildings and their total area.
 Table \ref{table:num-of-buildings-percent} shows the building coverage of both datasets as perentages.
@@ -709,7 +711,7 @@ The area cover of the OSM dataset in relation to the SLU dataset was estimated t
     \label{table:num-of-buildings-percent}
 \end{table}
 
-\subsection{Building correspondence statistics}
+\subsubsection{Building correspondence statistics}
 
 Table \ref{table:building-matching} shows how many of the OSM to SLU building matches were found in each category of 1:1, 1:n and 1:0 matches.
 
@@ -723,7 +725,7 @@ Table \ref{table:building-matching} shows how many of the OSM to SLU building ma
     \label{table:building-matching}
 \end{table}
 
-\subsection{Shape accuracy statistics}
+\subsubsection{Shape accuracy statistics}
 
 Figure \ref{fig:bar-plot-similarity} shows the shape similarity measured per building as a frequency diagram.
 
@@ -734,7 +736,7 @@ Figure \ref{fig:bar-plot-similarity} shows the shape similarity measured per bui
     \label{fig:bar-plot-similarity}
 \end{figure}
 
-\chapter{Analysis}
+\section{Analysis}
 
 Now that the colliison metrics have been obtained, we are in a good position to draw conclusions about the technical feasibility of 3D city reproduction from OSM data.
 We will begin by looking at the geodata precision study, and use the outcome of that study to assess the quality of the positional accuracy estimate, by looking at the dataset completeness, the low semantic accuracy and the unique characteristics of the Stockholm area.
@@ -743,7 +745,7 @@ We will make the claim that footpaths will not be more problematic than other ro
 We will look at the character of the feature collision cases and identify the most common cases, as well as present geometrical algorithms for how to correct each case automatically.
 For conclusions about the usage of OSM city reproduction in engineering practise and remaining challenges, see section 7.
 
-\section{Quality of the OSM dataset}
+\subsection{Quality of the OSM dataset}
 
 The completeness analysis by building area shows that the OSM Stockholm dataset has high completeness in terms of both building area and counted features, in the same level as the study of Munich by \textbf{(Fan et al, 2014)}.
 The difference in area cover can partially be explained by small utility buildings that are often not represented in the OSM dataset.
@@ -770,13 +772,12 @@ This analysis will not be carried out in this project, but could be a good subje
 
 % Onsdag:
 % TODO: Split up introduction, more subsections
-% TODO: Delimitations in Introduction, after RQ
 % TODO: Go over all images, add a line about their origins
-% TODO: Merge: Results and metrics + Analysis -> Evaluation, with result/analysis subsections
 % TODO: Rename: Implementation overview -> Methodology
 % TODO: Background should be the second chapter
 
 % Torsdag:
+% TODO: Delimitations in Introduction, after RQ
 % TODO: Add source of image on page 1
 % TODO: Mention that positional accuracy will be the focus early on
 % TODO: Move: 2.1.1: Accuracy criteria that will not be focused on -> Delimitations
@@ -791,7 +792,7 @@ This analysis will not be carried out in this project, but could be a good subje
 % TODO: Go over report one final time
 % TODO: Swedish abstract
 
-\section{Collision study}
+\subsection{Collision study}
 
 The immediate conclusion of this study is that, in terms of feature collision, footpaths were not significantly worse than other road categories.
 As a result, it can promptly be assumed that city modelling services which already utilize OSM car road data could also use OSM footpath data without a drastic increase in feature collision.
@@ -826,7 +827,7 @@ All these cases will create issues when generating the 3D mesh representation of
     \label{fig:collision-cases}
 \end{figure}
 
-\section{Suggested algorithms for collision correction}
+\subsection{Suggested algorithms for collision correction}
 
 All collision cases can be solved with relatively simply geometric algorithms. This section will present suggestions on algorithms that will resolve collisions by identifying individual colliding nodes and translating them, after which some degree of smoothing (such as linear interpolation) can be applied to preserve visual features. Cases 1 and 3-5 will be handled, while 2 will be left since case 2 collisions do not inherently cause feature overlap when extruding a 3D road mesh from the way edges. Thus it will me up to the individual developer to decide what to do with Case 2 collisions.
 

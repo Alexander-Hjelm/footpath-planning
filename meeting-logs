@@ -235,3 +235,24 @@ Move Conclusions -> a new part 2 of Results and Metrics, write a new conclusions
     New conclusions and future work, step out and remind the reader of what the broad implications in the field is by the results
 Here's the research questions: (list of 1, 2 sentences), then use the following paragraphs to motivate why the questions are important, specify the subquestions and the metrics
 Email Ann Bengtsson, coordinate opponents, formalities of attending 2 other presentations?
+
+Möte med Chris 03/06:
+
+Introduction - more subsections, split it up more coherently
+Delimitations in Introduction - the things we don't go over in this project, after research questions (What other aspects of the research questions have not been focused on)
+Background should be the second section
+Currently content that should go background section - are now in methodology and evaluation
+Section 2 - divide this content to sections 1, 3 and 4
+Change name -> Implementation overview -> Methodology (Summarize the methodlogy here) 
+Rename Results and metrics + Analysis -> Evaluation, with Results/Evaluation submetrics
+Rename Conclusions and future work -> Conclusions
+Look at: http://kth.diva-portal.org/smash/get/diva2:1118706/FULLTEXT01.pdf
+Switch to numerical citations, within full stops
+Add source of image
+Go over all images, Add a line about where the image comes from (OSM road network augmented over city grid)
+Format the research questions as actual questions
+Single umbrella research question
+Mention early on what 2 accuracy criteria will be focused on in the introduction, then epand on this in background
+2.2.1. accuracy criteria that will not be looked at -> Delimitations + background
+Formal tone, never mention us, we, me
+Maila Ann med en pet

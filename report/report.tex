@@ -118,22 +118,26 @@ In particular, streets and roads designated for energy efficient mobility, such 
 
 \section{Research question}
 
-This project has dealt with the feasibility of including footpath data when generating 3D representations of OSM data, and preserving the integrity of the 3D road network, avoiding overlap and collision between road meshes.
-The main contributions are as follows:
+This project has dealt with the feasibility of including footpath data when generating 3D representations of OSM data, and preserving the integrity of the 3D road network, avoiding overlap and collision between road meshes. The main research question is as follows:
+\begin{center}
+    \textbf{Is it technically feasibile to generate a 3D virtual city with footpath road data, with minimal (and preferably no) overlap between 3D features?}
+\end{center}
+
+To investigate this, the problem will specifically be divided into the following two subquestion:
 
 \begin{enumerate}
-    \item The primary contribution is an \textbf{investigation into the rate of collision between map features in OSM}. How many roads of each type will collide with some other map feature once they have been given a geometrical width?
-    \item The secondary contribution will be an \textbf{assesment of the geometrical precision of OSM data}. What is the positional accuracy of OSM map features compared to a reference map?
+    \item The primary subquestion is: \textbf{How many roads of each type will collide with some other map feature, once they have been given a geometrical width?}. This question aims to find the rate of collision between road features in OSM.
+    \item The secondary subquestion is: \textbf{What is the positional accuracy of OSM map features compared to a reference map?}. The positional accuracy will be neccessary to carry out the investigation of the first subquestion: the rate of collisions between roads, since it will determine the maximum tolerance in distance between road points before a collision is certain to have occured.
 \end{enumerate}
 
-For the primary contribution: the collision study, a program has taken an OSM dataset of the Stockholm area and assigned each road with standard withds according to swedish regulation.
+For the primary research question: the collision study, a program has taken an OSM dataset of the Stockholm area and assigned each road with standard withds according to swedish regulation.
 It has then identified critical areas in the OSM dataset, where the paths are so wide that they collide with existing map features.
 It has also identified how many of those areas can in theory be corrected by simple translation of the road vertices, without propagation of collision to other features.
 Here, features are defined as the geometrical components that comprise the OSM map.
 For the purpose of this report, features will refer mainly to roads and building footprints.
 For the collision study, see sections 1.3.1 for an implementation overview, 4.2 for a detailed walkthrough of the program implementation, and 5.1 for the results.
 
-For the secondary contribution: the geodata precision study, the positional accuracy will be estimated by comparing feature points between the OSM dataset and a reference dataset.
+For the secondary research question: the geodata precision study, the positional accuracy will be estimated by comparing feature points between the OSM dataset and a reference dataset.
 The positional accuracy will be needed to assess where road collisions occur and whether they can easily be corrected.
 For the positional accuracy study, see sections 1.3.2 for an implementation overview, 4.1 for a walkthrough of the program implementation, and 5.2 for the results.
 
@@ -771,8 +775,6 @@ This analysis will not be carried out in this project, but could be a good subje
 % TODO: Merge: Results and metrics + Analysis -> Evaluation, with result/analysis subsections
 % TODO: Rename: Implementation overview -> Methodology
 % TODO: Background should be the second chapter
-% TODO: Format the research questions as actual questions
-% TODO: Single umbrella research questions
 
 % Torsdag:
 % TODO: Add source of image on page 1

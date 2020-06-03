@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  3 JUN 2020 14:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  3 JUN 2020 14:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1557,44 +1557,44 @@ Chapter 2.
 [7
 
 ]
-LaTeX Font Info:    Try loading font information for OMS+qtm on input line 203.
-
-LaTeX Font Info:    No file OMSqtm.fd. on input line 203.
-
-
-LaTeX Font Warning: Font shape `OMS/qtm/m/n' undefined
-(Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbullet' on input line 203.
-
-
-Overfull \hbox (5.01688pt too wide) in paragraph at lines 206--207
-[]\T1/qtm/m/n/12 Logical con-sis-tency - This as-sesses the in-ter-nal con-sis-
-tency of the dataset.
- []
-
-[8]
-<img_map_compare.png, id=308, 983.675pt x 889.3225pt>
-File: img_map_compare.png Graphic file (type png)
-<use img_map_compare.png>
-Package pdftex.def Info: img_map_compare.png  used on input line 219.
-(pdftex.def)             Requested size: 330.45251pt x 298.75604pt.
- [9]
-Underfull \hbox (badness 10000) in paragraph at lines 229--229
-[][][]\T1/qtm/m/n/10 OSM His-tory Viewer - Open-StreetMap Wiki. Ac-cessed 20-03
--2020.
- []
-
-[10 <./img_map_compare.png>] [11] [12]
-Chapter 3.
-[13
-
-]
-Overfull \hbox (11.12141pt too wide) in paragraph at lines 263--267
+Overfull \hbox (11.12141pt too wide) in paragraph at lines 181--185
 []\T1/qtm/m/n/12 Procedural city-generation mod-els com-bine ar-chi-tec-tural e
 l-emets, such as streets,
  []
 
-[14] [15]
+[8] [9]
+Chapter 3.
+[10
+
+]
+LaTeX Font Info:    Try loading font information for OMS+qtm on input line 246.
+
+LaTeX Font Info:    No file OMSqtm.fd. on input line 246.
+
+
+LaTeX Font Warning: Font shape `OMS/qtm/m/n' undefined
+(Font)              using `OMS/cmsy/m/n' instead
+(Font)              for symbol `textbullet' on input line 246.
+
+
+Overfull \hbox (5.01688pt too wide) in paragraph at lines 249--250
+[]\T1/qtm/m/n/12 Logical con-sis-tency - This as-sesses the in-ter-nal con-sis-
+tency of the dataset.
+ []
+
+[11]
+<img_map_compare.png, id=322, 983.675pt x 889.3225pt>
+File: img_map_compare.png Graphic file (type png)
+<use img_map_compare.png>
+Package pdftex.def Info: img_map_compare.png  used on input line 262.
+(pdftex.def)             Requested size: 330.45251pt x 298.75604pt.
+ [12]
+Underfull \hbox (badness 10000) in paragraph at lines 272--272
+[][][]\T1/qtm/m/n/10 OSM His-tory Viewer - Open-StreetMap Wiki. Ac-cessed 20-03
+-2020.
+ []
+
+[13 <./img_map_compare.png>] [14] [15]
 Chapter 4.
 [16
 
@@ -1602,17 +1602,17 @@ Chapter 4.
 <img_building_match.png, id=352, 1384.6932pt x 718.3638pt>
 File: img_building_match.png Graphic file (type png)
 <use img_building_match.png>
-Package pdftex.def Info: img_building_match.png  used on input line 315.
+Package pdftex.def Info: img_building_match.png  used on input line 316.
 (pdftex.def)             Requested size: 369.87885pt x 191.88911pt.
  [17 <./img_building_match.png>]
-Overfull \hbox (16.02493pt too wide) in paragraph at lines 333--337
+Overfull \hbox (16.02493pt too wide) in paragraph at lines 334--338
 \T1/qtm/b/n/12 (Rutzinger, Rot-ten-steiner and Pfeifer, 2009) \T1/qtm/m/n/12 fo
 und that if $\OML/cmm/m/it/12 S[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 foot[]; foot
 []\OT1/cmr/m/n/12 ) \OML/cmm/m/it/12 <
  []
 
 
-Overfull \hbox (0.98616pt too wide) in paragraph at lines 344--353
+Overfull \hbox (0.98616pt too wide) in paragraph at lines 345--354
 \T1/qtm/m/n/12 func-tion that de-pends on the dif-fer-ence be-tween the turn-in
 g funci-tons of match-
  []
@@ -1621,30 +1621,30 @@ g funci-tons of match-
 <img_turn_function.png, id=372, 922.1652pt x 336.7782pt>
 File: img_turn_function.png Graphic file (type png)
 <use img_turn_function.png>
-Package pdftex.def Info: img_turn_function.png  used on input line 366.
+Package pdftex.def Info: img_turn_function.png  used on input line 367.
 (pdftex.def)             Requested size: 369.88673pt x 135.08401pt.
  [19]
 <img_turn_function_diff_filled.png, id=381, 1384.6932pt x 718.3638pt>
 File: img_turn_function_diff_filled.png Graphic file (type png)
 <use img_turn_function_diff_filled.png>
 Package pdftex.def Info: img_turn_function_diff_filled.png  used on input line 
-373.
+374.
 (pdftex.def)             Requested size: 369.87885pt x 191.88911pt.
  [20 <./img_turn_function.png> <./img_turn_function_diff_filled.png>]
 <img_vertex_match_algo.png, id=389, 1084.05pt x 1373.13pt>
 File: img_vertex_match_algo.png Graphic file (type png)
 <use img_vertex_match_algo.png>
-Package pdftex.def Info: img_vertex_match_algo.png  used on input line 396.
+Package pdftex.def Info: img_vertex_match_algo.png  used on input line 397.
 (pdftex.def)             Requested size: 235.84514pt x 298.73717pt.
 
 [21] [22 <./img_vertex_match_algo.png>] [23]
-Underfull \hbox (badness 10000) in paragraph at lines 447--447
+Underfull \hbox (badness 10000) in paragraph at lines 448--448
 [][][]\T1/qtm/m/n/10 Vägars och gators ut-formn-ing - Trafikver-ket. Pub-lika-t
 ion 2020:029.
  []
 
 [24] [25]
-Underfull \hbox (badness 10000) in paragraph at lines 518--519
+Underfull \hbox (badness 10000) in paragraph at lines 519--520
 
  []
 
@@ -1653,25 +1653,25 @@ Overfull \vbox (100.74538pt too high) has occurred while \output is active []
 
 
 [27]
-Underfull \hbox (badness 3000) in paragraph at lines 596--596
+Underfull \hbox (badness 3000) in paragraph at lines 597--597
 [][][]\T1/qtm/m/n/10 Lantmäteriet. Pro-duk-tbeskrivn-ing: GSD-Fastighetskartan 
 vek-tor - Lant-mä-teriet.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 596--596
+Underfull \hbox (badness 10000) in paragraph at lines 597--597
 \T1/qtm/m/n/10 Acessed 16-04-2020. https://www.lantmateriet.se/globalassets/kar
 tor-och-geografisk-
  []
 
 [28]
-Underfull \hbox (badness 10000) in paragraph at lines 601--601
+Underfull \hbox (badness 10000) in paragraph at lines 602--602
 [][][]\T1/qtm/m/n/10 Converting to WGS84 - Open-StreetMap Wiki. Ac-cessed 13-03
 -2020.
  []
 
 
-Overfull \hbox (17.11516pt too wide) in paragraph at lines 600--603
+Overfull \hbox (17.11516pt too wide) in paragraph at lines 601--604
 \T1/qtm/m/n/12 The SLU dataset is de-liv-ered in the SWEREF 99 TM co-or-di-nate
  sys-tem. SWEREF
  []
@@ -1679,7 +1679,7 @@ Overfull \hbox (17.11516pt too wide) in paragraph at lines 600--603
 [29]
 Chapter 5.
 
-Overfull \hbox (61.49023pt too wide) in paragraph at lines 632--645
+Overfull \hbox (61.49023pt too wide) in paragraph at lines 633--646
 [][] 
  []
 
@@ -1689,20 +1689,20 @@ Overfull \hbox (61.49023pt too wide) in paragraph at lines 632--645
 <img_pos_error_plot.png, id=465, 692.3466pt x 489.9906pt>
 File: img_pos_error_plot.png Graphic file (type png)
 <use img_pos_error_plot.png>
-Package pdftex.def Info: img_pos_error_plot.png  used on input line 681.
+Package pdftex.def Info: img_pos_error_plot.png  used on input line 682.
 (pdftex.def)             Requested size: 369.87885pt x 261.77228pt.
  [32 <./img_pos_error_plot.png>]
 <img_turning_function_plot.png, id=478, 692.3466pt x 489.9906pt>
 File: img_turning_function_plot.png Graphic file (type png)
 <use img_turning_function_plot.png>
-Package pdftex.def Info: img_turning_function_plot.png  used on input line 734.
+Package pdftex.def Info: img_turning_function_plot.png  used on input line 735.
 
 (pdftex.def)             Requested size: 369.87885pt x 261.77228pt.
  [33] [34 <./img_turning_function_plot.png>]
 <img_map_utility_buildings.png, id=494, 983.675pt x 439.6425pt>
 File: img_map_utility_buildings.png Graphic file (type png)
 <use img_map_utility_buildings.png>
-Package pdftex.def Info: img_map_utility_buildings.png  used on input line 768.
+Package pdftex.def Info: img_map_utility_buildings.png  used on input line 769.
 
 (pdftex.def)             Requested size: 369.88287pt x 165.31499pt.
  [35] [36 <./img_map_utility_buildings.png>]
@@ -1782,7 +1782,7 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1007.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1007.
 
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 4A67629E89E3A58518C93994CF3868D0;2970.
+(rerunfilecheck)             Checksum: 82250A6FAB3CADC48FF2941A6DFDC1D2;2970.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1811,7 +1811,7 @@ msfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 type1/public/tex-gyre/qhvr.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qt
 mb.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qtmr.pfb></usr/share/texmf
 /fonts/type1/public/tex-gyre/qtmri.pfb>
-Output written on report.pdf (57 pages, 4092342 bytes).
+Output written on report.pdf (57 pages, 4092316 bytes).
 PDF statistics:
  698 PDF objects out of 1000 (max. 8388607)
  589 compressed objects within 6 object streams

@@ -95,7 +95,7 @@ The study of energy efficient mobility such as walking and cycling is only in it
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_map_residential_footpath_compare}
-    \caption{Example segments of the Stockholm metropolitan area with highlighted residential streets (left) and footpaths (right). Here can be seen the unique character of footpaths. Walkways in parks appear to grow much more organically, and pavements form rough grid systems with organic branches that bridge over city blocks.}
+    \caption{Example segments of the Stockholm metropolitan area in OpenStreetMap, with highlighted residential streets (left) and footpaths (right). Here can be seen the unique character of footpaths. Walkways in parks appear to grow much more organically, and pavements form rough grid systems with organic branches that bridge over city blocks. The image was generated using GitHub's geojson viewer.}
     \label{fig:residential-footpath-map}
 \end{figure}
 
@@ -313,7 +313,7 @@ This project will use the building area in the OSM dataset versus that of the SL
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_building_match}
-    \caption{Examples of a 1:1 building match (left), where the sought-after building was found both in the OSM (red) and SLU (blue) datasets, and of a 1:n building match (right), where the sought-after building was represented as one polygon in the OSM (red) dataset, but divided into many smaller lots in the SLU (multicolored) dataset.}
+    \caption{Examples of a 1:1 building match (left), where the sought-after building was found both in the OSM (red) and SLU (blue) datasets, and of a 1:n building match (right), where the sought-after building was represented as one polygon in the OSM (red) dataset, but divided into many smaller lots in the SLU (multicolored) dataset. The buildings are examples from the OSM and SLU datasets that were prcessed in this projects, and were taken from the Stockholm area.}
     \label{fig:building-match-types}
 \end{figure}
 
@@ -341,7 +341,7 @@ When calculating the area of a multipolygon building, the area of the first poly
 
 \subsection{Shape accuracy definition}
 
-The building footprint correspondence will be evaluated using a similarity function that depends on the difference between the turning funcitons of matching building footprints in both datasets.
+The building footprint correspondence will be evaluated using a similarity function that depends on the difference between the turning functions of matching building footprints in both datasets.
 The turning function was first defined by \textbf{(Arkin et al, 1991)}, as a method for measuring the similarity of two polygons.
 The Turning function $T_c(l)$ measures the cumulative angle of the polygon's counter-clockwise tangent, as a function of the cumulative normalized length l.
 This project uses the turning function as it is defined by \textbf{(Fan et al, 2014)}.
@@ -364,7 +364,7 @@ See figure \ref{fig:turning-function-compare} for a side-by-side comparison of t
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_turn_function}
-    \caption{An example of the turning function of a polygon. The edges, vertices and angle of the initial step of the turning funciton are marked.}
+    \caption{An example of the turning function of a polygon. The edges, vertices and angle of the initial step of the turning function are marked. The building in the figure was taken from the OSM dataset in the Stockholm area.}
     \label{fig:turning-function}
 \end{figure}
 

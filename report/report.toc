@@ -9,7 +9,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.1}Research question}{4}{section.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.2}Implementation overview}{5}{section.1.2}
+\contentsline {section}{\numberline {1.2}Methodology}{5}{section.1.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.2.1}Geodata precision study}{5}{subsection.1.2.1}
 \defcounter {refsection}{0}\relax 

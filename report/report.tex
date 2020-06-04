@@ -145,41 +145,6 @@ For the secondary research question: the geodata precision study, the positional
 The positional accuracy will be needed to assess where road collisions occur and whether they can easily be corrected.
 For the positional accuracy study, see sections 1.3.2 for an implementation overview, 4.1 for a walkthrough of the program implementation, and 5.2 for the results.
 
-\section{Delimitations}
-
-in this study, when working with osm geodata, the following assumptions have been made about the dataset to reduce the size of the problem domain:
-
-\begin{enumerate}
-    \item the program will not handle terrain features and altitude. it will be assumed that the road mesh can be projected on a flat 2d surface without feature intersection.
-    \item it will be assumed that the city map consists of only arterial (primary) roads, secondary roads and footpaths.
-    \item it will be assumed that the osm dataset represents all roads as simple polylines, and building footprints as simple connected polygons. any other features (such as squares, which are roads represented as polygons) will be omitted from the dataset.
-    \item the road network is assumed to be a 2d simple graph. this means that any overlapping roads, such as tunnels and bridges that cross over street-level roads, will be eliminated from the dataset. any self-connected nodes will also be eliminated from the dataset.
-\end{enumerate}
-
-\section{Methodology}
-
-Programmatic collection of statistics has been neccessary for both the primary and secondary research questions, and this section presents a broad overview of the technical implementation behind the map analysis and data collection processes for both the geodata precision study and the collision study.
-
-\subsection{Geodata precision study}
-
-The geometrical precision study has been carried out in a number of steps that are all detailed below.
-First a feature map was found, which mapped individual features between the OSM dataset and a reference dataset.
-A program then took matching building pairs and extracted matching geometrical points after first simplifying the polygons using the Douglas-Peucker algorithm \textbf{(Douglas and Peucker, 1973)}.
-Once a set of matching points has been found across the whole dataset, the average distance between them was taken as a measure of the positional accuracy.
-
-Additionally, a number of auxillary calculations were neccessary for this study.
-The estimated completeness of the OSM dataset (a measure of how many features are represented in both the OSM dataset and the reference dataset) was calculated as the relative difference in area of all building footprints, between the two datasets.
-The completeness is needed to estimate the error boundary of the positional accuracy.
-Additionally, the shape accuracy of the OSM dataset has also been calculated and graphed as an extra verification of the similarity between the datasets.
-
-\subsection{Collision study}
-
-Once the estimate of the positional error was obtained from the precision study, this estimate was used to assess the integrity of the OSM Stockholm road network, by locating critical points where assigning standard widths to the roads would cause collision with other features, and evaluating how many of those points could be eliminated by making ajustments within the found margin of error.
-For the purpose of the collision study, each road has been assigned a standard width that is in line with Swedish regulations, since in the OSM dataset, roads are represented as simple polylines, lacking width.
-In a 3D representation however, it is crucial that each road object has a spacial width in order to be rendered and seen.
-After the width assignment, a program has iterated over all features and calculated how many of them that overlap with any other feature, as well as the total length of the road polylines that is intersecting some other feature.
-The program has then calculated how many of these colliding features that can be corrected by making adjustments that are within the positional accuracy of the OSM data (As obtained by the previous study in this report: Assessment of Geodata Precision).
-
 \chapter{Background}
 
 This section will dive into the state-of-the-art use of city reconstruction methods within the research field of urban design.
@@ -277,7 +242,16 @@ Figure \ref{fig:osm-slu-map} shows two segments of the Stockholm map where the O
     \label{fig:osm-slu-map}
 \end{figure}
 
-\subsection{Other accuracy criteria}
+\section{Delimitations}
+
+in this study, when working with osm geodata, the following assumptions have been made about the dataset to reduce the size of the problem domain:
+
+\begin{enumerate}
+    \item the program will not handle terrain features and altitude. it will be assumed that the road mesh can be projected on a flat 2d surface without feature intersection.
+    \item it will be assumed that the city map consists of only arterial (primary) roads, secondary roads and footpaths.
+    \item it will be assumed that the osm dataset represents all roads as simple polylines, and building footprints as simple connected polygons. any other features (such as squares, which are roads represented as polygons) will be omitted from the dataset.
+    \item the road network is assumed to be a 2d simple graph. this means that any overlapping roads, such as tunnels and bridges that cross over street-level roads, will be eliminated from the dataset. any self-connected nodes will also be eliminated from the dataset.
+\end{enumerate}
 
 Let us briefly go over all of van Oorts accuracy criteria that will not be assessed through this study.
 Let us see how they could be obtained and assessed for both the OSM and SLU maps, staring with the data lineage.
@@ -291,6 +265,30 @@ The attribute accuracy measure is interesting, as both maps use encoded metadata
 To the knowledge of the author, this has never been done with specifically these two datasets, at the time of writing.
 
 The temporal accuracy will not be assessed as this projects focuses on comparing a single snapshot of the two datasets at the same point in time, and finally the logical accuracy will not be assessed because the underlying logical relations between features in both maps serve no purpose to this project.
+
+\section{Implementation overview}
+
+Programmatic collection of statistics has been neccessary for both the primary and secondary research questions, and this section presents a broad overview of the technical implementation behind the map analysis and data collection processes for both the geodata precision study and the collision study.
+
+\subsection{Geodata precision study}
+
+The geometrical precision study has been carried out in a number of steps that are all detailed below.
+First a feature map was found, which mapped individual features between the OSM dataset and a reference dataset.
+A program then took matching building pairs and extracted matching geometrical points after first simplifying the polygons using the Douglas-Peucker algorithm \textbf{(Douglas and Peucker, 1973)}.
+Once a set of matching points has been found across the whole dataset, the average distance between them was taken as a measure of the positional accuracy.
+
+Additionally, a number of auxillary calculations were neccessary for this study.
+The estimated completeness of the OSM dataset (a measure of how many features are represented in both the OSM dataset and the reference dataset) was calculated as the relative difference in area of all building footprints, between the two datasets.
+The completeness is needed to estimate the error boundary of the positional accuracy.
+Additionally, the shape accuracy of the OSM dataset has also been calculated and graphed as an extra verification of the similarity between the datasets.
+
+\subsection{Collision study}
+
+Once the estimate of the positional error was obtained from the precision study, this estimate was used to assess the integrity of the OSM Stockholm road network, by locating critical points where assigning standard widths to the roads would cause collision with other features, and evaluating how many of those points could be eliminated by making ajustments within the found margin of error.
+For the purpose of the collision study, each road has been assigned a standard width that is in line with Swedish regulations, since in the OSM dataset, roads are represented as simple polylines, lacking width.
+In a 3D representation however, it is crucial that each road object has a spacial width in order to be rendered and seen.
+After the width assignment, a program has iterated over all features and calculated how many of them that overlap with any other feature, as well as the total length of the road polylines that is intersecting some other feature.
+The program has then calculated how many of these colliding features that can be corrected by making adjustments that are within the positional accuracy of the OSM data (As obtained by the previous study in this report: Assessment of Geodata Precision).
 
 \chapter{Implementation}
 
@@ -777,7 +775,6 @@ This analysis will not be carried out in this project, but could be a good subje
 \end{figure}
 
 % Torsdag:
-% TODO: Move: 2.1.1: Accuracy criteria that will not be focused on -> Delimitations
 % TODO: Move content from chapters 1, 3 and 4 to Background
 % TODO: Mention that positional accuracy will be the focus early on
 

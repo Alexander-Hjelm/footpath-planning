@@ -141,6 +141,17 @@ For the secondary research question: the geodata precision study, the positional
 The positional accuracy will be needed to assess where road collisions occur and whether they can easily be corrected.
 For the positional accuracy study, see sections 1.3.2 for an implementation overview, 4.1 for a walkthrough of the program implementation, and 5.2 for the results.
 
+\section{Delimitations}
+
+in this study, when working with osm geodata, the following assumptions have been made about the dataset to reduce the size of the problem domain:
+
+\begin{enumerate}
+    \item the program will not handle terrain features and altitude. it will be assumed that the road mesh can be projected on a flat 2d surface without feature intersection.
+    \item it will be assumed that the city map consists of only arterial (primary) roads, secondary roads and footpaths.
+    \item it will be assumed that the osm dataset represents all roads as simple polylines, and building footprints as simple connected polygons. any other features (such as squares, which are roads represented as polygons) will be omitted from the dataset.
+    \item the road network is assumed to be a 2d simple graph. this means that any overlapping roads, such as tunnels and bridges that cross over street-level roads, will be eliminated from the dataset. any self-connected nodes will also be eliminated from the dataset.
+\end{enumerate}
+
 \section{Methodology}
 
 Programmatic collection of statistics has been neccessary for both the primary and secondary research questions, and this section presents a broad overview of the technical implementation behind the map analysis and data collection processes for both the geodata precision study and the collision study.
@@ -277,17 +288,6 @@ The attribute accuracy measure is interesting, as both maps use encoded metadata
 To the knowledge of the author, this has never been done with specifically these two datasets, at the time of writing.
 
 The temporal accuracy will not be assessed as this projects focuses on comparing a single snapshot of the two datasets at the same point in time, and finally the logical accuracy will not be assessed because the underlying logical relations between features in both maps serve no purpose to this project.
-
-\section{Problem constraints}
-
-In this study, when working with OSM geodata, the following assumptions have been made about the dataset to reduce the size of the problem domain:
-
-\begin{enumerate}
-    \item The program will not handle terrain features and altitude. It will be assumed that the road mesh can be projected on a flat 2D surface without feature intersection.
-    \item It will be assumed that the city map consists of only arterial (primary) roads, secondary roads and footpaths.
-    \item It will be assumed that the OSM dataset represents all roads as simple polylines, and building footprints as simple connected polygons. Any other features (such as squares, which are roads represented as polygons) will be omitted from the dataset.
-    \item The road network is assumed to be a 2D simple graph. This means that any overlapping roads, such as tunnels and bridges that cross over street-level roads, will be eliminated from the dataset. Any self-connected nodes will also be eliminated from the dataset.
-\end{enumerate}
 
 \chapter{Implementation}
 

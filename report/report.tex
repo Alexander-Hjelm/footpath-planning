@@ -169,9 +169,10 @@ The temporal accuracy will not be assessed as this projects focuses on comparing
 
 \chapter{Background}
 
-This section will dive into the state-of-the-art use of city reconstruction methods within the research field of urban design.
-This chapter will present the motivations for the digitization of urban planning, as well as the most common programs and tools in this area, which are after all not very commonly used in the practise of urban design due to the failure in being able to reflect the unique workspace of urban designers.
-The final section will present a brief history of the field of OpenStreetMap data qualification, and present the research papers whose methods are at the foundation of this project.
+This chapter will dive into the state-of-the-art use of city reconstruction methods within the research field of urban design.
+This chapter will present the motivations for the digitization of urban planning, as well as a brief history of the field of OpenStreetMap data qualification, and present the research papers whose methods are at the foundation of this project.
+Furthermore, it will present the evaluation metrics that this project served to obtain, and how they relate to the eventual collision analysis.
+For the geodata precision study specifically, it will examine how geodata is qualifyied in general, by examining van Oorts quality criteria, and how these will be used in this project.
 
 \section{Overview of virtual cities}
 
@@ -222,13 +223,6 @@ Their study included an insight in the geometrical calculations neccessary to ma
 Their study revealed that although the feature completeness of OSM was high, some architectural details were missing.
 The results reveal that the positional accuracy of OSM data at the time was about 4 meters.
 
-\chapter{Methodology and evaluation}
-
-This chapter will present the evaluation metrics that this project served to obtain, and how they relate to the eventual collision analysis.
-For the geodata precision study specifically, it will examine how geodata is qualifyied in general, by examining van Oorts quality criteria, and how these will be used in this project.
-See section 4 for a detailed technical implementation overview that presents how the relevant metrics were obtained during the statistics collection process.
-For the resulting metrics that were obtained, see section 5.
-
 \section{Evaluation metrics}
 
 The primary study of the rate of collision between roads and other features will serve to obtain the following three metrics:
@@ -251,7 +245,7 @@ The completeness of the OSM dataset will be taken as a the number of features ar
 Shape accuracy is a measure of polygon similarity that was obtained by comparing polygon turning function between matching features, feature by feature.
 See section 5.3 for more details about the shape accuracy measure.
 
-\section{Quality criteria}
+\subsection{Quality criteria}
 
 \textbf{(Haklay, 2010)} presents in a comprehesive manner the list of van Oort's 8 accuracy classes for evaluating the quality of geographic information:
 
@@ -277,6 +271,14 @@ Figure \ref{fig:osm-slu-map} shows two segments of the Stockholm map where the O
     \label{fig:osm-slu-map}
 \end{figure}
 
+\chapter{Implementation}
+
+This chapter will provide a technical overview of the data collection process and the algorithms used for the purpose of this study, starting with a brief overview in section 4.1.
+Section 4.2 will present the data collection process for the geodata precision study. It will present how to qualify dataset completeness and building correspondence (how many of the buildings in one dataset that can be found in the other) by collecting the cumulative building areas and looking at what buildings have overlapping areas between the two datasets.
+The definitions and algorithms neccessary for calculating posiitonal accuracy and a measure for shape accuracy will also be presented.
+Section 4.3 will present at the data collection process for the collision study. It will present how standard road withs were obtained, as well as the algorithm for detemining feature collision that was used.
+Section 4.4 will discuss briefly the data sources used in this project, why they were chosen and specific issues with the data collection process.
+
 \section{Implementation overview}
 
 Programmatic collection of statistics has been neccessary for both the primary and secondary research questions, and this section presents a broad overview of the technical implementation behind the map analysis and data collection processes for both the geodata precision study and the collision study.
@@ -301,12 +303,6 @@ In a 3D representation however, it is crucial that each road object has a spacia
 After the width assignment, a program has iterated over all features and calculated how many of them that overlap with any other feature, as well as the total length of the road polylines that is intersecting some other feature.
 The program has then calculated how many of these colliding features that can be corrected by making adjustments that are within the positional accuracy of the OSM data (As obtained by the previous study in this report: Assessment of Geodata Precision).
 
-\chapter{Implementation}
-
-Section 4.1 will present the data collection process for the geodata precision study. It will present how to qualify dataset completeness and building correspondence (how many of the buildings in one dataset that can be found in the other) by collecting the cumulative building areas and looking at what buildings have overlapping areas between the two datasets.
-The definitions and algorithms neccessary for calculating posiitonal accuracy and a measure for shape accuracy will also be presented.
-Section 4.2 will present at the data collection process for the collision study. It will present how standard road withs were obtained, as well as the algorithm for detemining feature collision that was used.
-Section 4.3 will discuss briefly the data sources used in this project, why they were chosen and specific issues with the data collection process.
 
 \section{Geodata precision study}
 
@@ -790,9 +786,7 @@ This analysis will not be carried out in this project, but could be a good subje
     \label{fig:osm-slu-map-utility-buildings}
 \end{figure}
 
-% TODO: Move some of the text from method and evaluation to background
 % TODO: Read over the sample report to see what they have in the background section
-% TODO: Move the rest of the "method and evaluation" text  into the implementation and evaluations section, perhaps creating a new subsection in the implementation section called "Method"
 
 % After Chris approves
 % TODO: Update section references

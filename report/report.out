@@ -7,19 +7,17 @@
 \BOOKMARK [1][-]{section.2.1}{Overview of virtual cities}{chapter.2}% 7
 \BOOKMARK [1][-]{section.2.2}{3D city reproduction as a research field}{chapter.2}% 8
 \BOOKMARK [1][-]{section.2.3}{Previous work in qualifying OpenStreetMap data}{chapter.2}% 9
-\BOOKMARK [0][-]{chapter.3}{Methodology and evaluation}{}% 10
-\BOOKMARK [1][-]{section.3.1}{Evaluation metrics}{chapter.3}% 11
-\BOOKMARK [1][-]{section.3.2}{Quality criteria}{chapter.3}% 12
-\BOOKMARK [1][-]{section.3.3}{Implementation overview}{chapter.3}% 13
-\BOOKMARK [0][-]{chapter.4}{Implementation}{}% 14
-\BOOKMARK [1][-]{section.4.1}{Geodata precision study}{chapter.4}% 15
-\BOOKMARK [1][-]{section.4.2}{Collision study}{chapter.4}% 16
-\BOOKMARK [1][-]{section.4.3}{The geodata used in this project}{chapter.4}% 17
-\BOOKMARK [0][-]{chapter.5}{Evaluation}{}% 18
-\BOOKMARK [1][-]{section.5.1}{Results}{chapter.5}% 19
-\BOOKMARK [1][-]{section.5.2}{Analysis}{chapter.5}% 20
-\BOOKMARK [0][-]{chapter.6}{Conclusions and future work}{}% 21
-\BOOKMARK [1][-]{section.6.1}{Remaining challenges in city reproduction}{chapter.6}% 22
-\BOOKMARK [1][-]{section.6.2}{Using procedural methods}{chapter.6}% 23
-\BOOKMARK [1][-]{section.6.3}{Feasibility in the urban planning field}{chapter.6}% 24
-\BOOKMARK [1][-]{section.6.4}{Final conclusions}{chapter.6}% 25
+\BOOKMARK [1][-]{section.2.4}{Evaluation metrics}{chapter.2}% 10
+\BOOKMARK [0][-]{chapter.3}{Implementation}{}% 11
+\BOOKMARK [1][-]{section.3.1}{Implementation overview}{chapter.3}% 12
+\BOOKMARK [1][-]{section.3.2}{Geodata precision study}{chapter.3}% 13
+\BOOKMARK [1][-]{section.3.3}{Collision study}{chapter.3}% 14
+\BOOKMARK [1][-]{section.3.4}{The geodata used in this project}{chapter.3}% 15
+\BOOKMARK [0][-]{chapter.4}{Evaluation}{}% 16
+\BOOKMARK [1][-]{section.4.1}{Results}{chapter.4}% 17
+\BOOKMARK [1][-]{section.4.2}{Analysis}{chapter.4}% 18
+\BOOKMARK [0][-]{chapter.5}{Conclusions and future work}{}% 19
+\BOOKMARK [1][-]{section.5.1}{Remaining challenges in city reproduction}{chapter.5}% 20
+\BOOKMARK [1][-]{section.5.2}{Using procedural methods}{chapter.5}% 21
+\BOOKMARK [1][-]{section.5.3}{Feasibility in the urban planning field}{chapter.5}% 22
+\BOOKMARK [1][-]{section.5.4}{Final conclusions}{chapter.5}% 23

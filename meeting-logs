@@ -256,3 +256,22 @@ Mention early on what 2 accuracy criteria will be focused on in the introduction
 2.2.1. accuracy criteria that will not be looked at -> Delimitations + background
 Formal tone, never mention us, we, me
 Maila Ann med en pet
+
+Email from Chris 05/06:
+
+Hi Alexander,
+
+I'm looking at the version here:
+https://github.com/Alexander-Hjelm/footpath-planning/blob/master/report/report.pdf
+I'm not sure it has changed since we last met, so please double check.
+
+But the background section still seems very short - I think you were going to move
+some of the text from the 'method and evaluation' section in there and the rest
+of that text into the implementation and evaluation sections (perhaps either
+relabelling the implementation section to 'method' or else create a method
+subsection within the implementation section). Also, the delimitations should
+be a subsection in the introduction section.
+
+Best,
+Chris
+

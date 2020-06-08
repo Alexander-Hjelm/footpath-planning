@@ -138,6 +138,35 @@ For the secondary research question: the geodata precision study, the positional
 The positional accuracy will be needed to assess where road collisions occur and whether they can easily be corrected.
 For the positional accuracy study, see sections 1.3.2 for an implementation overview, 4.1 for a walkthrough of the program implementation, and 5.2 for the results.
 
+\section{Delimitations}
+
+In this study, when working with OSM geodata, the following assumptions have been made about the OSM dataset to reduce the size of the problem domain:
+
+\begin{enumerate}
+    \item the program will not handle terrain features and altitude. it will be assumed that the road mesh can be projected on a flat 2d surface without feature intersection.
+    \item it will be assumed that the city map consists of only arterial (primary) roads, secondary roads and footpaths.
+    \item it will be assumed that the osm dataset represents all roads as simple polylines, and building footprints as simple connected polygons. any other features (such as squares, which are roads represented as polygons) will be omitted from the dataset.
+    \item the road network is assumed to be a 2d simple graph. this means that any overlapping roads, such as tunnels and bridges that cross over street-level roads, will be eliminated from the dataset. any self-connected nodes will also be eliminated from the dataset.
+\end{enumerate}
+
+This study will not consider the lineage aspect of the geodata.
+Lineage is defined by (\textbf{Van Oort, 2006}) as the historical aspect of the dataset: how it has been obtained, with what instruments and how it has evolved between the moment it was obtained and the moment it was queried.
+The entire OSM dataset is under constant modification by volonteers, so it is expected that the accuracy will improve over time. Previous studies highlight how the posiitonal accuracy in similar-sized cities have improved over several years (\textbf{Fan et al, 2014}, \textbf{Haklay, 2010}).
+The historical aspect of the OSM dataset is available through the OSM History Viewer
+\footnote{OSM History Viewer - OpenStreetMap Wiki. Accessed 20-03-2020. https://wiki.openstreetmap.org/wiki/OSM\_History\_Viewer}
+, an online debugging tool that lets anyone freely view the change history of individual fetures in a commit history-like fashion.
+There is an option for editors to include a personal note with their changesets to include additional details or motivate why a change was made, but there is no guaratee that the data includes any information on the aquisition method used.
+
+Another aspect of geodata precision is attribute accuracy, which will neither be considered in this study.
+Attributes are small flags of metadata that are included with geodata features, letting the user know for example the type of a road, how many files it has, if the base is asphalt or gravel, or how many stories a building has.
+Attribute accurcay is the meausere of how complete attribute information is in a dataset.
+How much attribute data is missing and how much of it does not comform with reality?
+In general, attribute accuracy is hard to quantify, but might be interesting, as both the OSM map and the referece map used in this project use encoded metadata on a per feature basis.
+The attribute accuracy of the two datasets could in theory be assessed by doing a simple feature comparison and creating a translation table between the two attribute maps.
+To the knowledge of the author, this has never been done with specifically these two datasets, at the time of writing.
+
+The temporal accuracy will not be assessed as this projects focuses on comparing a single snapshot of the two datasets at the same point in time, and finally the logical accuracy will not be assessed because the underlying logical relations between features in both maps serve no purpose to this project.
+
 \chapter{Background}
 
 This section will dive into the state-of-the-art use of city reconstruction methods within the research field of urban design.
@@ -247,30 +276,6 @@ Figure \ref{fig:osm-slu-map} shows two segments of the Stockholm map where the O
     \caption{Example segments of the Stockholm metropolitan area with unsystematic errors in precision. The SLU building dataset (blue) in superimposed on the OSM dataset (dark gray). The top picture is centered on a city block which shows a semantic mismatching between the two datasets. The whole block consists of only two buildings in the OSM dataset, but is divided into 15 smaller building lots in the SLU dataset. The bottom picture shows 4 smaller buildings whose the positional accuracy is low, due to the buildings being incorrectly scaled, skewed and rotated.}
     \label{fig:osm-slu-map}
 \end{figure}
-
-\section{Delimitations}
-
-in this study, when working with osm geodata, the following assumptions have been made about the dataset to reduce the size of the problem domain:
-
-\begin{enumerate}
-    \item the program will not handle terrain features and altitude. it will be assumed that the road mesh can be projected on a flat 2d surface without feature intersection.
-    \item it will be assumed that the city map consists of only arterial (primary) roads, secondary roads and footpaths.
-    \item it will be assumed that the osm dataset represents all roads as simple polylines, and building footprints as simple connected polygons. any other features (such as squares, which are roads represented as polygons) will be omitted from the dataset.
-    \item the road network is assumed to be a 2d simple graph. this means that any overlapping roads, such as tunnels and bridges that cross over street-level roads, will be eliminated from the dataset. any self-connected nodes will also be eliminated from the dataset.
-\end{enumerate}
-
-Let us briefly go over all of van Oorts accuracy criteria that will not be assessed through this study.
-Let us see how they could be obtained and assessed for both the OSM and SLU maps, staring with the data lineage.
-The lineage aspect of the OSM data is available through the OSM History Viewer, an online debugging tool that lets anyone freely view the change history of individual fetures in a commit history-like fashion.
-There is an option for editors to include a personal note with their changesets to include additional details or motivate why a change was made, but there is no guaratee that the data includes any information on the aquisition method used \footnote{OSM History Viewer - OpenStreetMap Wiki. Accessed 20-03-2020. https://wiki.openstreetmap.org/wiki/OSM\_History\_Viewer}
-The history aspect of the SLU dataset is not freely available online, but the acquistion method is included in the file metadata on a per-object basis.
-Lantmäteriet uses internal codes to specifify the acquistion method, and these codes can be referred to in the product description the accompanies the map files.
-As the scope of this project is limited to making a broad comparison of the positional accuracy of the two datasets, only the required positional accuracy as described by the SLU product description will be used.
-
-The attribute accuracy measure is interesting, as both maps use encoded metadata on a per feature basis, the attribute accuracy of the two datasets could be assessed by doing a simple feature comparison and creating a translation table between the two attribute maps.
-To the knowledge of the author, this has never been done with specifically these two datasets, at the time of writing.
-
-The temporal accuracy will not be assessed as this projects focuses on comparing a single snapshot of the two datasets at the same point in time, and finally the logical accuracy will not be assessed because the underlying logical relations between features in both maps serve no purpose to this project.
 
 \section{Implementation overview}
 
@@ -595,12 +600,17 @@ The driving force behind the availablity of VGI is, according to \textbf{(Fan et
 
 \subsection{SLU data}
 
-The SLU map is maintained by The Swedish National Land Survey (Swedish: Lantmäteriet).
+The SLU map is maintained by The Swedish National Land Survey (Swedish: Lantmäteriet)
+\footnote{Lantmäteriet. Produktbeskrivning: GSD-Fastighetskartan vektor - Lantmäteriet. Acessed 16-04-2020. https://www.lantmateriet.se/globalassets/kartor-och-geografisk-information/kartor/fastshmi.pdf}.
 The data is collected by geodetic professionals, by land surveying methods such as GPS or DGNSS positioning, or by reproduction of features from ortophoto or stereo mapping from 3D aerial images.
 Building features in the SLU dataset have a position accuracy requirement of 2 meters.
 The SLU map contains building features and property limits, but no road data.
 The map is updated continously by Lantmäteriet, in conjoncture with the forming or reforming of property.
-Whereas OSM is a free service, the SLU map is available to paying customers or for free to students and researchers. \footnote{Lantmäteriet. Produktbeskrivning: GSD-Fastighetskartan vektor - Lantmäteriet. Acessed 16-04-2020. https://www.lantmateriet.se/globalassets/kartor-och-geografisk-information/kartor/fastshmi.pdf}
+Whereas OSM is a free service, the SLU map is available to paying customers or for free to students and researchers.
+
+The history aspect of the SLU dataset is not freely available online, but the acquistion method is included in the file metadata on a per-object basis.
+Lantmäteriet uses internal codes to specifify the acquistion method, and these codes can be referred to in the product description the accompanies the map files.
+As the scope of this project is limited to making a broad comparison of the positional accuracy of the two datasets, only the required positional accuracy as described by the SLU product description will be used.
 
 \subsection{A word on coordinate systems}
 
@@ -781,7 +791,6 @@ This analysis will not be carried out in this project, but could be a good subje
 \end{figure}
 
 % TODO: Move some of the text from method and evaluation to background
-% TODO: Delimitations should be a subsection in the introduction section
 % TODO: Read over the sample report to see what they have in the background section
 % TODO: Move the rest of the "method and evaluation" text  into the implementation and evaluations section, perhaps creating a new subsection in the implementation section called "Method"
 

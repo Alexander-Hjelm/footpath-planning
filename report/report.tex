@@ -109,7 +109,7 @@ A few prominent examples are Mantle
 and Mapbox
 \footnote{Mapbox homepage. Accessed 17-05-2020. https://www.mapbox.com/}.
 Such services are however usually limited in the accuracy and type of data that they can provide.
-While they can provide both builing footprints and road networks, they usually provide road data with no respect to overlap between features.
+While they can provide both building footprints and road networks, they usually provide road data with no respect to overlap between features.
 Collision between road meshes in 3D will lead to strange-looking mesh intersections and inaccuracies that modelers often want to avoid.
 In particular, streets and roads designated for energy efficient mobility, such as footpaths, are much more organic and dense in their nature than main streets, and thus the risk of feature collision may be higher.
 
@@ -226,6 +226,23 @@ At the time Munich was one of the most developed cities in OSM.
 Their study included an insight in the geometrical calculations neccessary to match features and points between two datasets, and how to reliably calculate the metrics needed for the most important and assessible of van Oorts criteria.
 Their study revealed that although the feature completeness of OSM was high, some architectural details were missing.
 The results reveal that the positional accuracy of OSM data at the time was about 4 meters.
+
+\section{Procedural models for city reproduction}
+
+\section{Methods for geodata qualification}
+
+\section{Level of detail}
+
+Another crucial concept in city modelling is the Level Of Detail (LOD) aspect.
+\textbf{(Biljecki et al, 2016)} provide an extensive overview of the concept of LOD in GIS mapping.
+They provide the GityGML definition of LOD as a series of different 3D representation of the same data, at different detail levels, and the LOD chosen for a particulary application suggests how the data has been aqquired and modelled.
+The CityGML standard divides the LOD representation of 3D models into three classes: A B and C.
+\begin{enumerate}
+    \item LOD-A models are renderings of the building footprint itself, or rectangular building blocks that have been extruded from the footprint to give the building height.
+    \item LOD-B models are building blocks with simplifed roof shapes.
+    \item LOD-C models are LOD-B models which include features such as doors, windows, alcoves, building decor, indoor features or vegetation.
+\end{enumerate}
+A modeler may chose what LOD class(es) to use depending on data availablity and application.
 
 \section{Evaluation metrics}
 
@@ -898,16 +915,8 @@ Even if high resolution terrain elevation data is available from other sources, 
 Method exist for how to make a city model comform to an underlying terrain, however.
 \textbf{(Galin et al, 2010)} presented such a geometrical model for placing a 3D road asset onto a non-flat terrain surface, in the context of procedurally generated roads.
 
-Another crucial concept in city modelling is the Level Of Detail (LOD) aspect.
-\textbf{(Biljecki et al, 2016)} provide an extensive overview of the concept of LOD in GIS mapping.
-They provide the GityGML definition of LOD as a series of different 3D representation of the same data, at different detail levels, and the LOD chosen for a particulary application suggests how the data has been aqquired and modelled.
-The CityGML standard divides the LOD representation of 3D models into three classes: A B and C.
-\begin{enumerate}
-    \item LOD-A models are renderings of the building footprint itself, or rectangular building blocks that have been extruded from the footprint to give the building height.
-    \item LOD-B models are building blocks with simplifed roof shapes.
-    \item LOD-C models are LOD-B models which include features such as doors, windows, alcoves, building decor, indoor features or vegetation.
-\end{enumerate}
-A modeler may chose what LOD class(es) to use depending on data availablity and application.
+Yet another challenge lies in producing highly detailed 3D models of buildings at a consistent rate.
+Recall the concept of Level of Detail, as presented by \textbf{(Biljecki et al, 2016)} in section *** of this report.
 It turns out that, with the current means of data aquisition from OSM being limited to building footprints, using OSM data a model can only produce LOB-B models at best.
 If a modeler wishes to aqquire building assets at a LOD-C level, they would have to complete the data with other sources, or rely on procedural methods to populate crude city models with additional details and building features that give the models more aestethic depth, but do not neccessarily reflect reality.
 

@@ -242,8 +242,32 @@ This creates a possible generative space of many different models that can be cr
 
 \subsection{Methods for geodata qualification}
 
+\textbf{(Fan et al, 2014)} used the fraction of the total building area in their reference dataset and the OSM dataset to assess the completeness of OSM data.
+The motivation for this is to eliminate semantic differences between both datasets.
+A very common example of a semantic error when comparing geographic data is that a large building in one dataset may be segmented into several smaller ones in the other, that is to say a building in one set is represented as an aggreation of mutliple buildings in the other set.
+This makes a complete one-to-one object mapping impossible.
+Since it is impossible to find a one-to-one feature map for building footprints, using building area as an estimator for completeness is much better than i.e. using the number of buildings or other objects in each dataset.
+
+\textbf{(Fan et al, 2014)} further discussed how the relative overlap in building area can be used as an estimate of the building correspondence between datasets.
+This can only be done in cases where there is not much displacement between OSM building footprints data and the reference data set.
+The relative building overlap between the OSM and SLU datasets will be defined as folows, given the footprints of any building in the OSM set ($foot_{OSM}$) and the SLU set ($foot_{SLU}$):
+\begin{center}
+    $S_{RO}(foot_{OSM}, foot_{SLU}) = \frac{A_{Overlap}}{min(A_{foot_{OSM}}, A_{foot_{SLU}}))}$
+\end{center}
+
+The relative overlap may be used to determine building matching relations even when the semantic accuracy is low.
+If a large building is represented by a single footprint in one dataset but by several smaller footprints in the other,
+\textbf{(Rutzinger, Rottensteiner and Pfeifer, 2009)}
+found that if $S_{RO}(foot_{A}, foot_{B}) < 30\%$ for two buildings $A$ and $B$ from different sets, then $A$ and $B$ are highly likely to be separate, neighbouring buildings and not in fact identical.
+
+%TODO: DP, describe the algorithm with reference to DP and Fan
+Douglas-Peucker algorithm for polygon reduction. The full procedure for matching points will be presented in section ***.
+
+%TODO: Turning function for shape accuracy, find source.
+The building footprint correspondence will be evaluated using a similarity function that depends on the difference between the turning functions of matching building footprints in both datasets.
+The turning function was first defined by \textbf{(Arkin et al, 1991)}, as a method for measuring the similarity of two polygons.
+
 %TODO: Read Fan et al and look for references
-%TODO: Read thorugh implementation, see if we can move anything here
 
 \subsection{Level of detail}
 
@@ -340,20 +364,14 @@ In a 3D representation however, it is crucial that each road object has a spacia
 After the width assignment, a program has iterated over all features and calculated how many of them that overlap with any other feature, as well as the total length of the road polylines that is intersecting some other feature.
 The program has then calculated how many of these colliding features that can be corrected by making adjustments that are within the positional accuracy of the OSM data (As obtained by the previous study in this report: Assessment of Geodata Precision).
 
-
 \section{Geodata precision study}
 
-\subsection{Assesment of dataset completeness}
+\subsection{Dataset completeness and correspondence}
 
-\textbf{(Fan et al, 2014)} used the fraction of the total building area in their reference dataset and the OSM dataset to assess the completeness of OSM data.
+In the same way as the study by \textbf{(Fan et al, 2014)}, this project will use the building area in the OSM dataset versus that of the SLU dataset to determine the completeness of OSM building data in the Stockholm area, which will then be used as an argument for how accurate the building correspondence and point proximity measures can be.
 The motivation for this is to eliminate semantic differences between both datasets.
-A very common example of a semantic error when comparing geographic data is that a large building in one dataset may be segmented into several smaller ones in the other, that is to say a building in one set is represented as an aggreation of mutliple buildings in the other set.
-This makes a complete one-to-one object mapping impossible.
-Rather, buildings have to be identified as 1:1 (one to one), 1:n (one to many) or 1:0 (one to none) cases, depending on if a building is fully represented in the other dataset, represented as an aggregation of smaller plots, or not found at all.
+Buildings were identified as 1:1 (one to one), 1:n (one to many) or 1:0 (one to none) cases, depending on if a building is fully represented in the other dataset, represented as an aggregation of smaller plots, or not found at all.
 Figure \ref{fig:building-match-types} shows examples of two buildings that were found in the OSM and SLU datasets as 1:1 and 1:n matches respectively.
-
-Since it is impossible to find a one-to-one feature map for building footprints, using building area as an estimator for completeness is much better than i.e. using the number of buildings or other objects in each dataset.
-This project will use the building area in the OSM dataset versus that of the SLU dataset to determine the completeness of OSM building data in the Stockholm area, which will then be used as an argument for how accurate the building correspondence and point proximity measures can be.
 
 \begin{figure}[H]
     \centering
@@ -362,21 +380,12 @@ This project will use the building area in the OSM dataset versus that of the SL
     \label{fig:building-match-types}
 \end{figure}
 
-\subsection{Correspondence by building area}
-
-\textbf{(Fan et al, 2014)} further discussed how the relative overlap in building area can be used as an estimate of the building correspondence between datasets.
+I accordance with \textbf{Fan et al, 2014}, 
 In this project, relative area overlap was used in order to pair buildings from the two datasets together and create a feature map.
-This can only be done in cases where there is not much displacement between OSM building footprints data and the reference data set.
+
 Figure \ref{fig:osm-slu-map} under Section 5 shows a typical comparison between the OSM and SLU datasets.
-By eyesight it was determined that the displacement of features is small.
 
-The relative building overlap between the OSM and SLU datasets will be defined as folows, given the footprints of any building in the OSM set ($foot_{OSM}$) and the SLU set ($foot_{SLU}$):
-\begin{center}
-    $S_{RO}(foot_{OSM}, foot_{SLU}) = \frac{A_{Overlap}}{min(A_{foot_{OSM}}, A_{foot_{SLU}}))}$
-\end{center}
-
-The relative overlap may be used to determine building matching relations even when the semantic accuracy is low.
-If a large building is represented by a single footprint in one dataset but by several smaller footprints in the other, \textbf{(Rutzinger, Rottensteiner and Pfeifer, 2009)} found that if $S_{RO}(foot_{A}, foot_{B}) < 30\%$ for two buildings $A$ and $B$ from different sets, then $A$ and $B$ are highly likely to be separate, neighbouring buildings and not in fact identical.
+\textbf{(Rutzinger, Rottensteiner and Pfeifer, 2009)}, 30% area overlap
 Therefore it will here be assumed that two buildings are matching candidates if their relative area overlap is greater than 30\%.
 If a one-to-many object matching is found, the compound perimeter of the footprints in the many-set will be used when calculating the shape accuracy and finding closest vertices between the polygons.
 
@@ -386,8 +395,6 @@ When calculating the area of a multipolygon building, the area of the first poly
 
 \subsection{Shape accuracy definition}
 
-The building footprint correspondence will be evaluated using a similarity function that depends on the difference between the turning functions of matching building footprints in both datasets.
-The turning function was first defined by \textbf{(Arkin et al, 1991)}, as a method for measuring the similarity of two polygons.
 The Turning function $T_c(l)$ measures the cumulative angle of the polygon's counter-clockwise tangent, as a function of the cumulative normalized length l.
 This project uses the turning function as it is defined by \textbf{(Fan et al, 2014)}.
 See figure \ref{fig:turning-function} for a side-by-side comparison of a polygon and its turning function.

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  8 JUN 2020 14:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  9 JUN 2020 14:53
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1524,13 +1524,15 @@ Package babel Info: Redefining swedish shorthand "~
 ] (./report.toc [5
 
 
-])
+] [6])
 \tf@toc=\write7
 \openout7 = `report.toc'.
 
- [6]
+ [7] [8
+
+]
 Chapter 1.
-<img_virtual_city.png, id=152, 1445.4pt x 821.0675pt>
+<img_virtual_city.png, id=272, 1445.4pt x 821.0675pt>
 File: img_virtual_city.png Graphic file (type png)
 <use img_virtual_city.png>
 Package pdftex.def Info: img_virtual_city.png  used on input line 71.
@@ -1552,16 +1554,15 @@ Overfull \hbox (7.49016pt too wide) in paragraph at lines 78--79
 
 [1
 
-
  <./img_virtual_city.png>]
-<img_map_residential_footpath_compare.png, id=162, 985.6825pt x 479.7925pt>
+<img_map_residential_footpath_compare.png, id=281, 985.6825pt x 479.7925pt>
 File: img_map_residential_footpath_compare.png Graphic file (type png)
 <use img_map_residential_footpath_compare.png>
 Package pdftex.def Info: img_map_residential_footpath_compare.png  used on inpu
 t line 91.
 (pdftex.def)             Requested size: 369.88571pt x 180.04619pt.
  [2] [3 <./img_map_residential_footpath_compare.png>] [4] [5]
-Underfull \hbox (badness 10000) in paragraph at lines 156--156
+Underfull \hbox (badness 10000) in paragraph at lines 160--160
 [][][]\T1/qtm/m/n/10 OSM His-tory Viewer - Open-StreetMap Wiki. Ac-cessed 20-03
 -2020.
  []
@@ -1571,88 +1572,88 @@ Chapter 2.
 [8
 
 ]
-Overfull \hbox (11.12141pt too wide) in paragraph at lines 196--201
+Overfull \hbox (11.12141pt too wide) in paragraph at lines 200--205
 []\T1/qtm/m/n/12 Procedural city-generation mod-els com-bine ar-chi-tec-tural e
 l-emets, such as streets,
  []
 
 [9]
-Overfull \hbox (21.85143pt too wide) in paragraph at lines 208--208
+Overfull \hbox (21.85143pt too wide) in paragraph at lines 212--212
 |[]\T1/qhv/b/n/17.28 Previous work in qual-i-fy-ing Open-StreetMap
  []
 
 [10] [11]
-LaTeX Font Info:    Try loading font information for OMS+qtm on input line 253.
+LaTeX Font Info:    Try loading font information for OMS+qtm on input line 257.
 
-LaTeX Font Info:    No file OMSqtm.fd. on input line 253.
+LaTeX Font Info:    No file OMSqtm.fd. on input line 257.
 
 
 LaTeX Font Warning: Font shape `OMS/qtm/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
-(Font)              for symbol `textbullet' on input line 253.
+(Font)              for symbol `textbullet' on input line 257.
 
 
-Overfull \hbox (5.01688pt too wide) in paragraph at lines 256--257
+Overfull \hbox (5.01688pt too wide) in paragraph at lines 260--261
 []\T1/qtm/m/n/12 Logical con-sis-tency - This as-sesses the in-ter-nal con-sis-
 tency of the dataset.
  []
 
 [12]
-<img_map_compare.png, id=229, 983.675pt x 889.3225pt>
+<img_map_compare.png, id=348, 983.675pt x 889.3225pt>
 File: img_map_compare.png Graphic file (type png)
 <use img_map_compare.png>
-Package pdftex.def Info: img_map_compare.png  used on input line 269.
+Package pdftex.def Info: img_map_compare.png  used on input line 273.
 (pdftex.def)             Requested size: 330.45251pt x 298.75604pt.
  [13] [14 <./img_map_compare.png>]
 Chapter 3.
 [15
 
 ] [16]
-<img_building_match.png, id=252, 1384.6932pt x 718.3638pt>
+<img_building_match.png, id=368, 1384.6932pt x 718.3638pt>
 File: img_building_match.png Graphic file (type png)
 <use img_building_match.png>
-Package pdftex.def Info: img_building_match.png  used on input line 323.
+Package pdftex.def Info: img_building_match.png  used on input line 327.
 (pdftex.def)             Requested size: 369.87885pt x 191.88911pt.
  [17]
-Overfull \hbox (16.02493pt too wide) in paragraph at lines 341--345
+Overfull \hbox (16.02493pt too wide) in paragraph at lines 345--349
 \T1/qtm/b/n/12 (Rutzinger, Rot-ten-steiner and Pfeifer, 2009) \T1/qtm/m/n/12 fo
 und that if $\OML/cmm/m/it/12 S[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 foot[]; foot
 []\OT1/cmr/m/n/12 ) \OML/cmm/m/it/12 <
  []
 
 [18 <./img_building_match.png>]
-Overfull \hbox (0.98616pt too wide) in paragraph at lines 352--361
+Overfull \hbox (0.98616pt too wide) in paragraph at lines 356--365
 \T1/qtm/m/n/12 func-tion that de-pends on the dif-fer-ence be-tween the turn-in
 g func-tions of match-
  []
 
 [19]
-<img_turn_function.png, id=281, 922.1652pt x 336.7782pt>
+<img_turn_function.png, id=394, 922.1652pt x 336.7782pt>
 File: img_turn_function.png Graphic file (type png)
 <use img_turn_function.png>
-Package pdftex.def Info: img_turn_function.png  used on input line 374.
+Package pdftex.def Info: img_turn_function.png  used on input line 378.
 (pdftex.def)             Requested size: 369.88673pt x 135.08401pt.
-<img_turn_function_diff_filled.png, id=282, 1384.6932pt x 718.3638pt>
+<img_turn_function_diff_filled.png, id=395, 1384.6932pt x 718.3638pt>
 File: img_turn_function_diff_filled.png Graphic file (type png)
 <use img_turn_function_diff_filled.png>
 Package pdftex.def Info: img_turn_function_diff_filled.png  used on input line 
-381.
+385.
 (pdftex.def)             Requested size: 369.87885pt x 191.88911pt.
  [20 <./img_turn_function.png>] [21 <./img_turn_function_diff_filled.png>]
-<img_vertex_match_algo.png, id=296, 1084.05pt x 1373.13pt>
+<img_vertex_match_algo.png, id=408, 1084.05pt x 1373.13pt>
 File: img_vertex_match_algo.png Graphic file (type png)
 <use img_vertex_match_algo.png>
-Package pdftex.def Info: img_vertex_match_algo.png  used on input line 404.
+Package pdftex.def Info: img_vertex_match_algo.png  used on input line 408.
 (pdftex.def)             Requested size: 235.84514pt x 298.73717pt.
 
 [22 <./img_vertex_match_algo.png>] [23]
-Underfull \hbox (badness 10000) in paragraph at lines 455--455
+Underfull \hbox (badness 10000) in paragraph at lines 459--459
 [][][]\T1/qtm/m/n/10 Vägars och gators ut-formn-ing - Trafikver-ket. Pub-lika-t
 ion 2020:029.
  []
 
 [24] [25]
-Underfull \hbox (badness 10000) in paragraph at lines 526--527
+Underfull \hbox (badness 10000) in paragraph at lines 530--531
 
  []
 
@@ -1661,25 +1662,25 @@ Overfull \vbox (100.74538pt too high) has occurred while \output is active []
 
 
 [27]
-Underfull \hbox (badness 3000) in paragraph at lines 600--600
+Underfull \hbox (badness 3000) in paragraph at lines 604--604
 [][][]\T1/qtm/m/n/10 Lantmäteriet. Pro-duk-tbeskrivn-ing: GSD-Fastighetskartan 
 vek-tor - Lant-mä-teriet.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 600--600
+Underfull \hbox (badness 10000) in paragraph at lines 604--604
 \T1/qtm/m/n/10 Acessed 16-04-2020. https://www.lantmateriet.se/globalassets/kar
 tor-och-geografisk-
  []
 
 [28]
-Underfull \hbox (badness 10000) in paragraph at lines 614--614
+Underfull \hbox (badness 10000) in paragraph at lines 618--618
 [][][]\T1/qtm/m/n/10 Converting to WGS84 - Open-StreetMap Wiki. Ac-cessed 13-03
 -2020.
  []
 
 
-Overfull \hbox (17.11516pt too wide) in paragraph at lines 613--616
+Overfull \hbox (17.11516pt too wide) in paragraph at lines 617--620
 \T1/qtm/m/n/12 The SLU dataset is de-liv-ered in the SWEREF 99 TM co-or-di-nate
  sys-tem. SWEREF
  []
@@ -1687,63 +1688,63 @@ Overfull \hbox (17.11516pt too wide) in paragraph at lines 613--616
 [29] [30]
 Chapter 4.
 
-Overfull \hbox (61.49023pt too wide) in paragraph at lines 645--658
+Overfull \hbox (61.49023pt too wide) in paragraph at lines 649--662
 [][] 
  []
 
 [31
 
 ] [32]
-<img_pos_error_plot.png, id=381, 692.3466pt x 489.9906pt>
+<img_pos_error_plot.png, id=484, 692.3466pt x 489.9906pt>
 File: img_pos_error_plot.png Graphic file (type png)
 <use img_pos_error_plot.png>
-Package pdftex.def Info: img_pos_error_plot.png  used on input line 694.
+Package pdftex.def Info: img_pos_error_plot.png  used on input line 698.
 (pdftex.def)             Requested size: 369.87885pt x 261.77228pt.
  [33 <./img_pos_error_plot.png>]
-<img_turning_function_plot.png, id=395, 692.3466pt x 489.9906pt>
+<img_turning_function_plot.png, id=497, 692.3466pt x 489.9906pt>
 File: img_turning_function_plot.png Graphic file (type png)
 <use img_turning_function_plot.png>
-Package pdftex.def Info: img_turning_function_plot.png  used on input line 747.
+Package pdftex.def Info: img_turning_function_plot.png  used on input line 751.
 
 (pdftex.def)             Requested size: 369.87885pt x 261.77228pt.
  [34] [35 <./img_turning_function_plot.png>]
-<img_map_utility_buildings.png, id=411, 983.675pt x 439.6425pt>
+<img_map_utility_buildings.png, id=514, 983.675pt x 439.6425pt>
 File: img_map_utility_buildings.png Graphic file (type png)
 <use img_map_utility_buildings.png>
-Package pdftex.def Info: img_map_utility_buildings.png  used on input line 784.
+Package pdftex.def Info: img_map_utility_buildings.png  used on input line 788.
 
 (pdftex.def)             Requested size: 369.88287pt x 165.31499pt.
  [36] [37 <./img_map_utility_buildings.png>]
-<img_feature_overlap_cases.png, id=429, 922.1652pt x 1010.3346pt>
+<img_feature_overlap_cases.png, id=528, 922.1652pt x 1010.3346pt>
 File: img_feature_overlap_cases.png Graphic file (type png)
 <use img_feature_overlap_cases.png>
-Package pdftex.def Info: img_feature_overlap_cases.png  used on input line 827.
+Package pdftex.def Info: img_feature_overlap_cases.png  used on input line 835.
 
 (pdftex.def)             Requested size: 272.68365pt x 298.75528pt.
  [38] [39 <./img_feature_overlap_cases.png>]
-<img_feature_overlap_fix_1.png, id=447, 922.1652pt x 336.7782pt>
+<img_feature_overlap_fix_1.png, id=545, 922.1652pt x 336.7782pt>
 File: img_feature_overlap_fix_1.png Graphic file (type png)
 <use img_feature_overlap_fix_1.png>
-Package pdftex.def Info: img_feature_overlap_fix_1.png  used on input line 845.
+Package pdftex.def Info: img_feature_overlap_fix_1.png  used on input line 853.
 
 (pdftex.def)             Requested size: 369.88673pt x 135.08401pt.
-<img_feature_overlap_fix_2.png, id=448, 461.0826pt x 336.0555pt>
+<img_feature_overlap_fix_2.png, id=546, 461.0826pt x 336.0555pt>
 File: img_feature_overlap_fix_2.png Graphic file (type png)
 <use img_feature_overlap_fix_2.png>
-Package pdftex.def Info: img_feature_overlap_fix_2.png  used on input line 852.
+Package pdftex.def Info: img_feature_overlap_fix_2.png  used on input line 860.
 
 (pdftex.def)             Requested size: 369.9008pt x 269.59854pt.
  [40 <./img_feature_overlap_fix_1.png>]
-<img_feature_overlap_fix_3.png, id=460, 922.1652pt x 336.0555pt>
+<img_feature_overlap_fix_3.png, id=559, 922.1652pt x 336.0555pt>
 File: img_feature_overlap_fix_3.png Graphic file (type png)
 <use img_feature_overlap_fix_3.png>
-Package pdftex.def Info: img_feature_overlap_fix_3.png  used on input line 859.
+Package pdftex.def Info: img_feature_overlap_fix_3.png  used on input line 867.
 
 (pdftex.def)             Requested size: 369.88673pt x 134.79414pt.
-<img_feature_overlap_fix_4.png, id=461, 459.6372pt x 336.7782pt>
+<img_feature_overlap_fix_4.png, id=560, 459.6372pt x 336.7782pt>
 File: img_feature_overlap_fix_4.png Graphic file (type png)
 <use img_feature_overlap_fix_4.png>
-Package pdftex.def Info: img_feature_overlap_fix_4.png  used on input line 866.
+Package pdftex.def Info: img_feature_overlap_fix_4.png  used on input line 874.
 
 (pdftex.def)             Requested size: 369.89145pt x 271.02109pt.
  [41 <./img_feature_overlap_fix_2.png> <./img_feature_overlap_fix_3.png>] [42 <
@@ -1752,13 +1753,13 @@ Chapter 5.
 [43
 
 ]
-Overfull \hbox (0.3469pt too wide) in paragraph at lines 904--905
+Overfull \hbox (0.3469pt too wide) in paragraph at lines 912--913
 []\T1/qtm/m/n/12 LOD-C mod-els are LOD-B mod-els which in-clude fea-tures such 
 as doors,
  []
 
 [44] [45]
-Overfull \hbox (4.89815pt too wide) in paragraph at lines 940--945
+Overfull \hbox (4.89815pt too wide) in paragraph at lines 948--953
 \T1/qtm/m/n/12 The fi-nal con-clu-sion is that gen-er-at-ing vir-tual cities pu
 rely from Open-StreetMap
  []
@@ -1766,31 +1767,31 @@ rely from Open-StreetMap
 [46] [47] [48
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 975--976
+Underfull \hbox (badness 10000) in paragraph at lines 983--984
 []\T1/qtm/m/n/12 Kunze, C. (2012). Ver-gle-ich-s-anal-yse des Gebäude-datenbe-
  []
 
 
-Underfull \hbox (badness 7925) in paragraph at lines 975--976
+Underfull \hbox (badness 7925) in paragraph at lines 983--984
 \T1/qtm/m/n/12 standes aus Open-StreetMap mit amtlichen Daten-quellen. Stu-dent
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 975--976
+Underfull \hbox (badness 10000) in paragraph at lines 983--984
 \T1/qtm/m/n/12 re-search project, Tech-ni-cal Uni-ver-sity of Dres-den. http://
 nbn-
  []
 
 [49] [50]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1008.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1008.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1016.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1016.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1008.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1008.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1016.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1016.
 
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 7C0A1638CA852333D0B10CB24DE4A653;1553.
+(rerunfilecheck)             Checksum: 6B99894801DA9A316E7BED2B9D6274AB;3287.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1800,13 +1801,13 @@ Package logreq Info: Writing requests to 'report.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 27448 strings out of 492982
- 497494 string characters out of 6134896
+ 27474 strings out of 492982
+ 497939 string characters out of 6134896
  957240 words of memory out of 5000000
- 30351 multiletter control sequences out of 15000+600000
+ 30373 multiletter control sequences out of 15000+600000
  54802 words of font info for 45 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 62i,14n,92p,795b,1990s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 62i,14n,92p,795b,3450s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/tex-gyre/q-ec.enc}</usr/share/texlive/texmf
 -dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/
@@ -1819,10 +1820,10 @@ msfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 type1/public/tex-gyre/qhvr.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qt
 mb.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qtmr.pfb></usr/share/texmf
 /fonts/type1/public/tex-gyre/qtmri.pfb>
-Output written on report.pdf (56 pages, 4091643 bytes).
+Output written on report.pdf (58 pages, 4095258 bytes).
 PDF statistics:
- 619 PDF objects out of 1000 (max. 8388607)
- 511 compressed objects within 6 object streams
- 181 named destinations out of 1000 (max. 500000)
- 272 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 718 PDF objects out of 1000 (max. 8388607)
+ 607 compressed objects within 7 object streams
+ 185 named destinations out of 1000 (max. 500000)
+ 448 words of extra memory for PDF output out of 10000 (max. 10000000)
 

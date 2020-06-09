@@ -209,7 +209,7 @@ Finally, wen it comes to the fields of video game design or 3D animation, tools 
 In their study of procedurally generated buildings, \textbf{(Parish and Müller, 2001)} claim that there is a widespread trend in these fields to use methods of procedural modeling to create large amounts of 3D content quickly and efficiently, while requiring as little hand modeling as possible.
 Studios who create large worlds are often interested in solutions that generate large road networks without any hand modeling.
 
-\section{Previous work}
+\section{Related work}
 
 \subsection{OpenStreetMap data qualification}
 
@@ -231,7 +231,19 @@ The results reveal that the positional accuracy of OSM data at the time was abou
 
 \subsection{Procedural models for city reproduction}
 
+Procedural techniques are, as mentioned, methods for reconstructing or creating 3D automatically, with minimal manual work required. Adding such techniques for content creation into the workflow of city reconstruction will increase the level of detail that is possible, while sacrificing accuracy to the real-world.
+\textbf{(Mũller et al, 2006)} present how to accomplish this using Shape Grammar: a method for automatically and iteratively constructing 3D models based in a hierarchical set of rules.
+
+By starting with a crude volumetric model of a building and iteratively remodeling it from a set of shape grammars, a procedural model can structure the façade, add texture and add details for windows, doors and ornaments, and so on.
+Shape grammars often work from a databank of 3D models and a set of hierarchical rules for how these can be pieced together.
+This creates a possible generative space of many different models that can be created from the same data and rule set, and with the induction of random fluctuations, many different models can be generated from the same dataset and rules.
+
+%TODO: Mention a variety of procedural methods from different sources, start by reading Müller et al and look for more references
+
 \subsection{Methods for geodata qualification}
+
+%TODO: Read Fan et al and look for references
+%TODO: Read thorugh implementation, see if we can move anything here
 
 \subsection{Level of detail}
 
@@ -245,6 +257,8 @@ The CityGML standard divides the LOD representation of 3D models into three clas
     \item LOD-C models are LOD-B models which include features such as doors, windows, alcoves, building decor, indoor features or vegetation.
 \end{enumerate}
 A modeler may chose what LOD class(es) to use depending on data availablity and application.
+
+%TODO: Summarize both sources by Biljecki
 
 \section{Evaluation metrics}
 
@@ -924,11 +938,6 @@ If a modeler wishes to aqquire building assets at a LOD-C level, they would have
 
 \section{Using procedural methods}
 
-Procedural techniques are, as mentioned, methods for reconstructing or creating 3D automatically, with minimal manual work required. Adding such techniques for content creation into the workflow of city reconstruction will increase the level of detail that is possible, while sacrificing accuracy to the real-world.
-\textbf{(Mũller et al, 2006)} present how to accomplish this using Shape Grammar: a method for automatically and iteratively constructing 3D models based in a hierarchical set of rules.
-By starting with a crude volumetric model of a building and iteratively remodeling it from a set of shape grammars, a procedural model can structure the façade, add texture and add details for windows, doors and ornaments, and so on.
-Shape grammars often work from a databank of 3D models and a set of hierarchical rules for how these can be pieced together.
-This creates a possible generative space of many different models that can be created from the same data and rule set, and with the induction of random fluctuations, many different models can be generated from the same dataset and rules.
 For simple presentation in e.g. animation and videogames or even urban planning software, such procedurally generated cities could very well be enough.
 As said however, the big problem is that these features will rarely match real life, such models will be sufficient as long as one can be satisified with looking at rough representations of buildings and does not require additional knowledge about minor features.
 Many studies urban development have been done before that requred detailed knowledge about a city's geometry, e.g. for the purposes of modeling heat development

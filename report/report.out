@@ -11,38 +11,39 @@
 \BOOKMARK [1][-]{section.2.3}{Related work}{chapter.2}% 11
 \BOOKMARK [2][-]{subsection.2.3.1}{OpenStreetMap data qualification}{section.2.3}% 12
 \BOOKMARK [2][-]{subsection.2.3.2}{Procedural models for city reproduction}{section.2.3}% 13
-\BOOKMARK [2][-]{subsection.2.3.3}{Methods for geodata qualification}{section.2.3}% 14
-\BOOKMARK [2][-]{subsection.2.3.4}{Level of detail}{section.2.3}% 15
-\BOOKMARK [1][-]{section.2.4}{Evaluation metrics}{chapter.2}% 16
-\BOOKMARK [2][-]{subsection.2.4.1}{Quality criteria}{section.2.4}% 17
-\BOOKMARK [0][-]{chapter.3}{Implementation}{}% 18
-\BOOKMARK [1][-]{section.3.1}{Implementation overview}{chapter.3}% 19
-\BOOKMARK [2][-]{subsection.3.1.1}{Geodata precision study}{section.3.1}% 20
-\BOOKMARK [2][-]{subsection.3.1.2}{Collision study}{section.3.1}% 21
-\BOOKMARK [1][-]{section.3.2}{Geodata precision study}{chapter.3}% 22
-\BOOKMARK [2][-]{subsection.3.2.1}{Dataset completeness and correspondence}{section.3.2}% 23
-\BOOKMARK [2][-]{subsection.3.2.2}{Shape accuracy definition}{section.3.2}% 24
-\BOOKMARK [2][-]{subsection.3.2.3}{Closest point and point proximity}{section.3.2}% 25
-\BOOKMARK [1][-]{section.3.3}{Collision study}{chapter.3}% 26
-\BOOKMARK [2][-]{subsection.3.3.1}{Road widths and properties}{section.3.3}% 27
-\BOOKMARK [2][-]{subsection.3.3.2}{Feature Overlap algorithm}{section.3.3}% 28
-\BOOKMARK [2][-]{subsection.3.3.3}{Projected Line Segment Distance}{section.3.3}% 29
-\BOOKMARK [1][-]{section.3.4}{The geodata used in this project}{chapter.3}% 30
-\BOOKMARK [2][-]{subsection.3.4.1}{OSM data}{section.3.4}% 31
-\BOOKMARK [2][-]{subsection.3.4.2}{SLU data}{section.3.4}% 32
-\BOOKMARK [2][-]{subsection.3.4.3}{A word on coordinate systems}{section.3.4}% 33
-\BOOKMARK [2][-]{subsection.3.4.4}{Specific geodata preprocessing}{section.3.4}% 34
-\BOOKMARK [0][-]{chapter.4}{Evaluation}{}% 35
-\BOOKMARK [1][-]{section.4.1}{Results}{chapter.4}% 36
-\BOOKMARK [2][-]{subsection.4.1.1}{Road collision study}{section.4.1}% 37
-\BOOKMARK [2][-]{subsection.4.1.2}{Positional accuracy study}{section.4.1}% 38
-\BOOKMARK [2][-]{subsection.4.1.3}{Secondary metrics}{section.4.1}% 39
-\BOOKMARK [1][-]{section.4.2}{Analysis}{chapter.4}% 40
-\BOOKMARK [2][-]{subsection.4.2.1}{Quality of the OSM dataset}{section.4.2}% 41
-\BOOKMARK [2][-]{subsection.4.2.2}{Collision study}{section.4.2}% 42
-\BOOKMARK [2][-]{subsection.4.2.3}{Suggested algorithms for collision correction}{section.4.2}% 43
-\BOOKMARK [0][-]{chapter.5}{Conclusions and future work}{}% 44
-\BOOKMARK [1][-]{section.5.1}{Remaining challenges in city reproduction}{chapter.5}% 45
-\BOOKMARK [1][-]{section.5.2}{Using procedural methods}{chapter.5}% 46
-\BOOKMARK [1][-]{section.5.3}{Feasibility in the urban planning field}{chapter.5}% 47
-\BOOKMARK [1][-]{section.5.4}{Final conclusions}{chapter.5}% 48
+\BOOKMARK [2][-]{subsection.2.3.3}{Space syntax}{section.2.3}% 14
+\BOOKMARK [2][-]{subsection.2.3.4}{Methods for geodata qualification}{section.2.3}% 15
+\BOOKMARK [2][-]{subsection.2.3.5}{Level of detail}{section.2.3}% 16
+\BOOKMARK [1][-]{section.2.4}{Evaluation metrics}{chapter.2}% 17
+\BOOKMARK [2][-]{subsection.2.4.1}{Quality criteria}{section.2.4}% 18
+\BOOKMARK [0][-]{chapter.3}{Implementation}{}% 19
+\BOOKMARK [1][-]{section.3.1}{Implementation overview}{chapter.3}% 20
+\BOOKMARK [2][-]{subsection.3.1.1}{Geodata precision study}{section.3.1}% 21
+\BOOKMARK [2][-]{subsection.3.1.2}{Collision study}{section.3.1}% 22
+\BOOKMARK [1][-]{section.3.2}{Geodata precision study}{chapter.3}% 23
+\BOOKMARK [2][-]{subsection.3.2.1}{Dataset completeness and correspondence}{section.3.2}% 24
+\BOOKMARK [2][-]{subsection.3.2.2}{Shape accuracy definition}{section.3.2}% 25
+\BOOKMARK [2][-]{subsection.3.2.3}{Closest point and point proximity}{section.3.2}% 26
+\BOOKMARK [1][-]{section.3.3}{Collision study}{chapter.3}% 27
+\BOOKMARK [2][-]{subsection.3.3.1}{Road widths and properties}{section.3.3}% 28
+\BOOKMARK [2][-]{subsection.3.3.2}{Feature Overlap algorithm}{section.3.3}% 29
+\BOOKMARK [2][-]{subsection.3.3.3}{Projected Line Segment Distance}{section.3.3}% 30
+\BOOKMARK [1][-]{section.3.4}{The geodata used in this project}{chapter.3}% 31
+\BOOKMARK [2][-]{subsection.3.4.1}{OSM data}{section.3.4}% 32
+\BOOKMARK [2][-]{subsection.3.4.2}{SLU data}{section.3.4}% 33
+\BOOKMARK [2][-]{subsection.3.4.3}{A word on coordinate systems}{section.3.4}% 34
+\BOOKMARK [2][-]{subsection.3.4.4}{Specific geodata preprocessing}{section.3.4}% 35
+\BOOKMARK [0][-]{chapter.4}{Evaluation}{}% 36
+\BOOKMARK [1][-]{section.4.1}{Results}{chapter.4}% 37
+\BOOKMARK [2][-]{subsection.4.1.1}{Road collision study}{section.4.1}% 38
+\BOOKMARK [2][-]{subsection.4.1.2}{Positional accuracy study}{section.4.1}% 39
+\BOOKMARK [2][-]{subsection.4.1.3}{Secondary metrics}{section.4.1}% 40
+\BOOKMARK [1][-]{section.4.2}{Analysis}{chapter.4}% 41
+\BOOKMARK [2][-]{subsection.4.2.1}{Quality of the OSM dataset}{section.4.2}% 42
+\BOOKMARK [2][-]{subsection.4.2.2}{Collision study}{section.4.2}% 43
+\BOOKMARK [2][-]{subsection.4.2.3}{Suggested algorithms for collision correction}{section.4.2}% 44
+\BOOKMARK [0][-]{chapter.5}{Conclusions and future work}{}% 45
+\BOOKMARK [1][-]{section.5.1}{Remaining challenges in city reproduction}{chapter.5}% 46
+\BOOKMARK [1][-]{section.5.2}{Using procedural methods}{chapter.5}% 47
+\BOOKMARK [1][-]{section.5.3}{Feasibility in the urban planning field}{chapter.5}% 48
+\BOOKMARK [1][-]{section.5.4}{Final conclusions}{chapter.5}% 49

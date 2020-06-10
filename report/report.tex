@@ -282,9 +282,14 @@ and used by \textbf{Fan et al, 2014} to obtain a measure of the shape accuracy o
 
 \subsection{Level of detail}
 
-Another crucial concept in city modelling is the Level Of Detail (LOD) aspect.
-\textbf{(Biljecki, Ledoux and Stoter, 2016 (1))} provide an extensive overview of the concept of LOD in GIS mapping.
-They provide the GityGML definition of LOD as a series of different 3D representation of the same data, at different detail levels, and the LOD chosen for a particulary application suggests how the data has been aqquired and modelled.
+Another crucial concept in city modelling and GIS mapping is the Level Of Detail (LOD) aspect.
+The LOD defines a number of possible different representation of the same GIS data, that vary in the amount of detail in its presentation.
+A modeler can choose to present the same data (e.g. building, roads, or decorative models) at different detail levels, depending on the use and application.
+Furthermore, the LOD chosen for a particulary application also suggests how the data has been aqquired and modelled.
+It turns out however, in practise, that the terminology and use of LOD is still ambigous and the definitions vary greatly between practitioners, standards and institutions, despite its usefulness.
+\textbf{(Biljecki et al, 2014)}
+
+\textbf{(Biljecki, Ledoux and Stoter, 2016 (1))} provide the GityGML definition of LOD.
 The CityGML standard divides the LOD representation of 3D models into three classes: A B and C.
 \begin{enumerate}
     \item LOD-A models are renderings of the building footprint itself, or rectangular building blocks that have been extruded from the footprint to give the building height.
@@ -292,10 +297,6 @@ The CityGML standard divides the LOD representation of 3D models into three clas
     \item LOD-C models are LOD-B models which include features such as doors, windows, alcoves, building decor, indoor features or vegetation.
 \end{enumerate}
 A modeler may chose what LOD class(es) to use depending on data availablity and application.
-
-%TODO: Summarize both sources by Biljecki
-\textbf{Biljecki, Ledoux and Stoter, 2016 (1)}
-\textbf{Biljecki et al, 2014}
 
 \section{Evaluation metrics}
 

@@ -280,7 +280,8 @@ When assessing the positional accuracy between the points of two building footpr
 The two buildings might have been modeled at different levels of detail, or vertex clusters may be found at different parts of the polygon in the two datasets.
 
 The OSM data precision study by \textbf{(Fan et al, 2014)} used the Douglas-Peucker algorithm, first defined by \textbf{(Douglas and Peucker, 1973)}, to reduce both building polygons to a simliar vertex count, and then proceed with locating the most likely matching vertices in the polygons. The full procedure for matching points will be presented in section 3.2.3 of this report.
-The study by \textbf{(Fan et al, 2014)} also obtained a measure of the shape accuracy of building footprints.
+The study by \textbf{(Fan et al, 2014)} also obtained a measure of the \textbf{shape accuracy} of building footprints.
+While the positional accuracy accounts for the error between individual points in a polygon, the shape accuracy is a measure of how similar two polygons at a higher level of observation, regardless of relative scaling and rotation of the two polygons.
 The shape accuracy between two matching buildings was quantified by using a similarity function that depends on the difference between the turning functions of matching building footprints in both datasets.
 The turning function was first defined by \textbf{(Arkin et al, 1991)}, as a method for measuring the similarity of two polygons, and measures the cumulative angle of a single polygon's counter-clockwise tangent, as a function of the cumulative normalized length l.
 The turning function effectively steps over the tangent of a polygon continously for a full cycle, and logs the total turning angle by adding together the angle of each turn.

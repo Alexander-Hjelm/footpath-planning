@@ -278,7 +278,8 @@ Once the building correspondence has been found and a matching building set has 
 When assessing the positional accuracy between the points of two building footprint polygons, first one must find a matching set of vertices between any pair of matching buildings, which is not always trivial since the vertex counts of the two buildings may not be the same.
 The two buildings might have been modeled at different levels of detail, or vertex clusters may be found at different parts of the polygon in the two datasets.
 
-The OSM data precision study by \textbf{(Fan et al, 2014)} used the Douglas-Peucker algorithm, first defined by \textbf{(Douglas and Peucker, 1973)}, to reduce both building polygons to a simliar vertex count, and then proceed with locating the most likely matching vertices in the polygons. The full procedure for matching points will be presented in section 3.2.3 of this report.
+The OSM data precision study by \textbf{(Fan et al, 2014)} used the Douglas-Peucker algorithm, first defined by \textbf{(Douglas and Peucker, 1973)}, to reduce both building polygons to a simliar vertex count, and then proceed with locating the most likely matching vertices in the polygons.
+The full procedure for matching points will be presented in section 3.2.3 of this report.
 The study by \textbf{(Fan et al, 2014)} also obtained a measure of the \textbf{shape accuracy} of building footprints.
 While the positional accuracy accounts for the error between individual points in a polygon, the shape accuracy is a measure of how similar two polygons at a higher level of observation, regardless of relative scaling and rotation of the two polygons.
 The shape accuracy between two matching buildings was quantified by using a similarity function that depends on the difference between the turning functions of matching building footprints in both datasets.
@@ -286,6 +287,7 @@ The turning function was first defined by \textbf{(Arkin et al, 1991)}, as a met
 The turning function effectively steps over the tangent of a polygon continously for a full cycle, and logs the total turning angle by adding together the angle of each turn.
 It includes consideration of wether the individual turns are clockwise or counter-clockwise, and is invariant to rotation and scaling of the polygon.
 Once the turning functions of two similar polygons have been obtained, the integral between them is taken as a measure of shape accuracy.
+The full procedure for calculating shape accuracy will be presented in section 3.2.3 of this report.
 
 \subsection{Level of detail}
 

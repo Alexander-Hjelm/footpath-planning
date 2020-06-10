@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  10 JUN 2020 14:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  10 JUN 2020 14:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1578,26 +1578,20 @@ l-emets, such as streets,
  []
 
 [9] [10] [11]
-Overfull \hbox (16.02493pt too wide) in paragraph at lines 262--266
+Overfull \hbox (16.02493pt too wide) in paragraph at lines 263--267
 \T1/qtm/b/n/12 (Rutzinger, Rot-ten-steiner and Pfeifer, 2009) \T1/qtm/m/n/12 fo
 und that if $\OML/cmm/m/it/12 S[]\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 foot[]; foot
 []\OT1/cmr/m/n/12 ) \OML/cmm/m/it/12 <
  []
 
 
-Overfull \hbox (8.81418pt too wide) in paragraph at lines 268--269
+Overfull \hbox (8.81418pt too wide) in paragraph at lines 269--273
 []\T1/qtm/m/n/12 Douglas-Peucker al-go-rithm for poly-gon re-duc-tion. The full
  pro-ce-dure for match-
  []
 
-
-Overfull \hbox (0.98616pt too wide) in paragraph at lines 271--273
-\T1/qtm/m/n/12 func-tion that de-pends on the dif-fer-ence be-tween the turn-in
-g func-tions of match-
- []
-
 [12]
-Overfull \hbox (0.3469pt too wide) in paragraph at lines 285--286
+Overfull \hbox (0.3469pt too wide) in paragraph at lines 283--284
 []\T1/qtm/m/n/12 LOD-C mod-els are LOD-B mod-els which in-clude fea-tures such 
 as doors,
  []
@@ -1612,19 +1606,18 @@ LaTeX Font Warning: Font shape `OMS/qtm/m/n' undefined
 (Font)              using `OMS/cmsy/m/n' instead
 (Font)              for symbol `textbullet' on input line 318.
 
-
+[14]
 Overfull \hbox (5.01688pt too wide) in paragraph at lines 321--322
 []\T1/qtm/m/n/12 Logical con-sis-tency - This as-sesses the in-ter-nal con-sis-
 tency of the dataset.
  []
 
-[14]
 <img_map_compare.png, id=378, 983.675pt x 889.3225pt>
 File: img_map_compare.png Graphic file (type png)
 <use img_map_compare.png>
 Package pdftex.def Info: img_map_compare.png  used on input line 334.
 (pdftex.def)             Requested size: 330.45251pt x 298.75604pt.
- [15] [16 <./img_map_compare.png>]
+[15] [16 <./img_map_compare.png>]
 Chapter 3.
 [17
 
@@ -1725,33 +1718,33 @@ Package pdftex.def Info: img_map_utility_buildings.png  used on input line 835.
 <img_feature_overlap_cases.png, id=555, 922.1652pt x 1010.3346pt>
 File: img_feature_overlap_cases.png Graphic file (type png)
 <use img_feature_overlap_cases.png>
-Package pdftex.def Info: img_feature_overlap_cases.png  used on input line 878.
+Package pdftex.def Info: img_feature_overlap_cases.png  used on input line 876.
 
 (pdftex.def)             Requested size: 272.68365pt x 298.75528pt.
  [40] [41 <./img_feature_overlap_cases.png>]
 <img_feature_overlap_fix_1.png, id=573, 922.1652pt x 336.7782pt>
 File: img_feature_overlap_fix_1.png Graphic file (type png)
 <use img_feature_overlap_fix_1.png>
-Package pdftex.def Info: img_feature_overlap_fix_1.png  used on input line 896.
+Package pdftex.def Info: img_feature_overlap_fix_1.png  used on input line 894.
 
 (pdftex.def)             Requested size: 369.88673pt x 135.08401pt.
 <img_feature_overlap_fix_2.png, id=574, 461.0826pt x 336.0555pt>
 File: img_feature_overlap_fix_2.png Graphic file (type png)
 <use img_feature_overlap_fix_2.png>
-Package pdftex.def Info: img_feature_overlap_fix_2.png  used on input line 903.
+Package pdftex.def Info: img_feature_overlap_fix_2.png  used on input line 901.
 
 (pdftex.def)             Requested size: 369.9008pt x 269.59854pt.
  [42 <./img_feature_overlap_fix_1.png>]
 <img_feature_overlap_fix_3.png, id=586, 922.1652pt x 336.0555pt>
 File: img_feature_overlap_fix_3.png Graphic file (type png)
 <use img_feature_overlap_fix_3.png>
-Package pdftex.def Info: img_feature_overlap_fix_3.png  used on input line 910.
+Package pdftex.def Info: img_feature_overlap_fix_3.png  used on input line 908.
 
 (pdftex.def)             Requested size: 369.88673pt x 134.79414pt.
 <img_feature_overlap_fix_4.png, id=587, 459.6372pt x 336.7782pt>
 File: img_feature_overlap_fix_4.png Graphic file (type png)
 <use img_feature_overlap_fix_4.png>
-Package pdftex.def Info: img_feature_overlap_fix_4.png  used on input line 917.
+Package pdftex.def Info: img_feature_overlap_fix_4.png  used on input line 915.
 
 (pdftex.def)             Requested size: 369.89145pt x 271.02109pt.
  [43 <./img_feature_overlap_fix_2.png> <./img_feature_overlap_fix_3.png>] [44 <
@@ -1760,13 +1753,13 @@ Chapter 5.
 [45
 
 ]
-Overfull \hbox (13.55733pt too wide) in paragraph at lines 955--961
+Overfull \hbox (13.55733pt too wide) in paragraph at lines 953--959
 \T1/qtm/m/n/12 pur-poses of mod-el-ing heat de-vel-op-ment (\T1/qtm/b/n/12 (Nak
 ata-Osaki, Souza and Ro-drigues,
  []
 
 [46]
-Overfull \hbox (4.89815pt too wide) in paragraph at lines 978--983
+Overfull \hbox (4.89815pt too wide) in paragraph at lines 976--981
 \T1/qtm/m/n/12 The fi-nal con-clu-sion is that gen-er-at-ing vir-tual cities pu
 rely from Open-StreetMap
  []
@@ -1774,18 +1767,18 @@ rely from Open-StreetMap
 [47] [48] [49
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 1016--1017
+Underfull \hbox (badness 10000) in paragraph at lines 1019--1020
 []\T1/qtm/m/n/12 Kunze, C. (2012). Ver-gle-ich-s-anal-yse des Gebäude-datenbe-
  []
 
 
-Underfull \hbox (badness 7925) in paragraph at lines 1016--1017
+Underfull \hbox (badness 7925) in paragraph at lines 1019--1020
 \T1/qtm/m/n/12 standes aus Open-StreetMap mit amtlichen Daten-quellen. Stu-dent
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1016--1017
+Underfull \hbox (badness 10000) in paragraph at lines 1019--1020
 \T1/qtm/m/n/12 re-search project, Tech-ni-cal Uni-ver-sity of Dres-den. http://
 nbn-
  []
@@ -1808,10 +1801,10 @@ Package logreq Info: Writing requests to 'report.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 27489 strings out of 492982
- 498120 string characters out of 6134896
- 957260 words of memory out of 5000000
- 30380 multiletter control sequences out of 15000+600000
+ 27491 strings out of 492982
+ 498144 string characters out of 6134896
+ 957265 words of memory out of 5000000
+ 30381 multiletter control sequences out of 15000+600000
  54802 words of font info for 45 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,14n,92p,795b,3450s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1827,10 +1820,10 @@ msfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 type1/public/tex-gyre/qhvr.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qt
 mb.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qtmr.pfb></usr/share/texmf
 /fonts/type1/public/tex-gyre/qtmri.pfb>
-Output written on report.pdf (59 pages, 4097372 bytes).
+Output written on report.pdf (59 pages, 4097757 bytes).
 PDF statistics:
- 743 PDF objects out of 1000 (max. 8388607)
- 631 compressed objects within 7 object streams
- 193 named destinations out of 1000 (max. 500000)
+ 744 PDF objects out of 1000 (max. 8388607)
+ 632 compressed objects within 7 object streams
+ 194 named destinations out of 1000 (max. 500000)
  472 words of extra memory for PDF output out of 10000 (max. 10000000)
 

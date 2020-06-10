@@ -270,16 +270,22 @@ The relative building overlap between the OSM and SLU datasets will be defined a
     $S_{RO}(foot_{OSM}, foot_{SLU}) = \frac{A_{Overlap}}{min(A_{foot_{OSM}}, A_{foot_{SLU}}))}$
 \end{center}
 
-The relative overlap may be used to determine building matching relations even when the semantic accuracy is low.
+The relative overlap may also be used to determine building matching relations even when the semantic accuracy is low.
 If a large building is represented by a single footprint in one dataset but by several smaller footprints in the other,
 \textbf{(Rutzinger, Rottensteiner and Pfeifer, 2009)}
 found that if $S_{RO}(foot_{A}, foot_{B}) < 30\%$ for two buildings $A$ and $B$ from different sets, then $A$ and $B$ are highly likely to be separate, neighbouring buildings and not in fact identical.
 
-%TODO: summarize these (DP with reference to DP and Fan)
-Douglas-Peucker algorithm for polygon reduction. The full procedure for matching points will be presented in section ***.
-The building footprint correspondence will be evaluated using a similarity function that depends on the difference between the turning functions of matching building footprints in both datasets.
-The turning function was first defined by \textbf{(Arkin et al, 1991)}, as a method for measuring the similarity of two polygons.
-and used by \textbf{(Fan et al, 2014)} to obtain a measure of the shape accuracy of building footprints.
+Once the building correspondence has been found and a matching building set has been established, where any building in one dataset points to one or more (or no) buildings in the other, the challenge becomes evaluating the similarity of mathcing buildings.
+When assessing the positional accuracy between the points of two building footprint polygons, first one must find a matching set of vertices between any pair of matching buildings, which is not always trivial since the vertex counts of the two buildings may not be the same.
+The two buildings might have been modeled at different levels of detail, or vertex clusters may be found at different parts of the polygon in the two datasets.
+
+The OSM data precision study by \textbf{(Fan et al, 2014)} used the Douglas-Peucker algorithm, first defined by \textbf{(Douglas and Peucker, 1973)}, to reduce both building polygons to a simliar vertex count, and then proceed with locating the most likely matching vertices in the polygons. The full procedure for matching points will be presented in section 3.2.3 of this report.
+The study by \textbf{(Fan et al, 2014)} also obtained a measure of the shape accuracy of building footprints.
+The shape accuracy between two matching buildings was quantified by using a similarity function that depends on the difference between the turning functions of matching building footprints in both datasets.
+The turning function was first defined by \textbf{(Arkin et al, 1991)}, as a method for measuring the similarity of two polygons, and measures the cumulative angle of a single polygon's counter-clockwise tangent, as a function of the cumulative normalized length l.
+The turning function effectively steps over the tangent of a polygon continously for a full cycle, and logs the total turning angle by adding together the angle of each turn.
+It includes consideration of wether the individual turns are clockwise or counter-clockwise, and is invariant to rotation and scaling of the polygon.
+Once the turning functions of two similar polygons have been obtained, the integral between them is taken as a measure of shape accuracy.
 
 \subsection{Level of detail}
 

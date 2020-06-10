@@ -205,7 +205,7 @@ However, freely available such tools seldom include smaller roads and pedestrian
 
 Even as such tools are well available, \textbf{(Stojanovski et al, 2020)} notes that they are as of today not commonly applied in urbanist practises, due to failures in reflecting the unique workspace of arcitects and their design needs. Urban arcitecture is a social factors, stakeholders. Each arcitect is an actor in a continously developing environment, and affecting that environment in a complex manner through their action.
 
-Finally, wen it comes to the fields of video game design or 3D animation, tools for city reproduction is undoubtedly of use to 3D content creators.
+Finally, when it comes to the fields of video game design or 3D animation, tools for city reproduction is undoubtedly of use to 3D content creators.
 In their study of procedurally generated buildings, \textbf{(Parish and Müller, 2001)} claim that there is a widespread trend in these fields to use methods of procedural modeling to create large amounts of 3D content quickly and efficiently, while requiring as little hand modeling as possible.
 Studios who create large worlds are often interested in solutions that generate large road networks without any hand modeling.
 
@@ -237,15 +237,22 @@ The results reveal that the positional accuracy of OSM data at the time was abou
 Procedural techniques are, as mentioned, methods for reconstructing or creating 3D automatically, with minimal manual work required.
 Adding such techniques for content creation into the workflow of city reconstruction will increase the level of detail that is possible, while sacrificing accuracy to the real-world.
 \textbf{(Müller et al, 2006)} present how to accomplish this using Shape Grammar: a method developed by \textbf{Stiny, 1975}, for automatically and iteratively constructing 3D models based in a hierarchical set of rules.
-By starting with a crude volumetric model of a building and iteratively remodeling it from a set of shape grammars, a procedural model can structure the façade, add texture and add details for windows, doors and ornaments, and so on.
+Shape grammar was originally developed from a method known as L-systems: a system for model description which was originally used to generate plants for 3D animation \textbf{Parish and Müller, 2001}.
+Shape grammar works by starting with a crude volumetric model of a building and iteratively remodeling it from a set of shape grammars, a procedural model can structure the façade, add texture and add details for windows, doors and ornaments, and so on.
 Shape grammars often work from a databank of 3D models and a set of hierarchical rules for how these can be pieced together.
 This creates a possible generative space of many different models that can be created from the same data and rule set, and with the induction of random fluctuations, many different models can be generated from the same dataset and rules.
 
-%TODO: Sumarize these
-Space syntax, developed by \textbf{Hillier, 1997}. Analytical method that relies on the existence of (p_Par01.pdf, SITM_Introduction.pdf)
+\subsection{Space syntax}
 
-Wayfinding
-\textbf{(Peponis, Zimring and Choi, 1990)}. (p_Par01.pdf, Peponis...pdf)
+Space syntax, developed by \textbf{Hillier, 1997}, is a set of theories that analyze complex, large-scale spaces such as cities, and tries to explain human behavior from a spatial point of view. The central idea is that spatial structures sucha as building patterns both reflect and create the patterns for human interaction with their surroundings.
+Dividing spacial structures into different levels of observation, and identifying different units of space and the pattern in which they connect to each other.
+Space syntax is an analytical method that relies on the availablity of city maps. Has since been developed into an extensive research fields on its own.
+Space syntax is commonly used in the analysis of procedural generation models of urban environments
+\textbf{Parish and Müller, 2001},
+and has been widelry used in the analysis of pedestrian flows and wayfinding
+\textbf{(Peponis, Zimring and Choi, 1990)}.
+The idea of using space syntax to divide spatial structures into different levels of observation is frequently used in the research field of urban design and planning, to gain an understanding how space is utilized and connected at different levels of usage (one can for example analyze a city on an interior-by-interior basis, or use city blocks and streets as the least unit of space)
+\textbf{(Stojanovski et al, 2020)}.
 
 \subsection{Methods for geodata qualification}
 

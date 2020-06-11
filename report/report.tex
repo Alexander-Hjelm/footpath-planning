@@ -264,17 +264,16 @@ Furthermore, the idea of using space syntax to divide spatial structures into di
 
 \subsection{Methods for geodata qualification}
 
-\textbf{(Fan et al, 2014)} used the fraction of the total building area in their reference dataset and the OSM dataset to assess the completeness of OSM data.
-The motivation for this is to eliminate semantic differences between both datasets.
-A very common example of a semantic error when comparing geographic data is that a large building in one dataset may be segmented into several smaller ones in the other, that is to say a building in one set is represented as an aggreation of mutliple buildings in the other set.
-This makes a complete one-to-one object mapping impossible.
-Since it is impossible to find a one-to-one feature map for building footprints, using building area as an estimator for completeness is much better than i.e. using the number of buildings or other objects in each dataset.
+To assess the completeness of their OSM data, the study by \textbf{(Fan et al, 2014)} used the fraction of the total building area in the reference dataset and the OSM dataset.
+The motivation for this is to eliminate semantic differences between both datasets, such as the fact that a large building in one dataset may be segmented into several smaller ones in the other.
+That is to say a building in one set is represented as an aggregation of multiple buildings in the other set.
+This makes a complete one-to-one object mapping impossible, and since it is impossible to find a one-to-one feature map for building footprints, the idea is that using building area as an estimator for completeness is much better than i.e. using the number of buildings or other objects in each dataset.
 
 \textbf{(Fan et al, 2014)} further discussed how the relative overlap in building area can be used as an estimate of the building correspondence between datasets.
 This can only be done in cases where there is not much displacement between OSM building footprints data and the reference data set.
-The relative building overlap between the OSM and SLU datasets will be defined as folows, given the footprints of any building in the OSM set ($foot_{OSM}$) and the SLU set ($foot_{SLU}$):
+The relative building overlap between the OSM and the reference datasets is defined as follows, given the footprints of any building in the OSM set ($foot_{OSM}$) and the reference set ($foot_{REF}$):
 \begin{center}
-    $S_{RO}(foot_{OSM}, foot_{SLU}) = \frac{A_{Overlap}}{min(A_{foot_{OSM}}, A_{foot_{SLU}}))}$
+    $S_{RO}(foot_{OSM}, foot_{REF}) = \frac{A_{Overlap}}{min(A_{foot_{OSM}}, A_{foot_{REF}}))}$
 \end{center}
 
 The relative overlap may also be used to determine building matching relations even when the semantic accuracy is low.
@@ -282,12 +281,12 @@ If a large building is represented by a single footprint in one dataset but by s
 \textbf{(Rutzinger, Rottensteiner and Pfeifer, 2009)}
 found that if $S_{RO}(foot_{A}, foot_{B}) < 30\%$ for two buildings $A$ and $B$ from different sets, then $A$ and $B$ are highly likely to be separate, neighbouring buildings and not in fact identical.
 
-Once the building correspondence has been found and a matching building set has been established, where any building in one dataset points to one or more (or no) buildings in the other, the challenge becomes evaluating the similarity of mathcing buildings.
+Once the building correspondence has been found and a matching building set has been established, where any building in one dataset points to one or more (or no) buildings in the other, the challenge becomes evaluating the similarity of individual matching pairs of buildings.
 When assessing the positional accuracy between the points of two building footprint polygons, first one must find a matching set of vertices between any pair of matching buildings, which is not always trivial since the vertex counts of the two buildings may not be the same.
 The two buildings might have been modeled at different levels of detail, or vertex clusters may be found at different parts of the polygon in the two datasets.
-
 The OSM data precision study by \textbf{(Fan et al, 2014)} used the Douglas-Peucker algorithm, first defined by \textbf{(Douglas and Peucker, 1973)}, to reduce both building polygons to a simliar vertex count, and then proceed with locating the most likely matching vertices in the polygons.
 The full procedure for matching points will be presented in section 3.2.3 of this report.
+
 The study by \textbf{(Fan et al, 2014)} also obtained a measure of the \textbf{shape accuracy} of building footprints.
 While the positional accuracy accounts for the error between individual points in a polygon, the shape accuracy is a measure of how similar two polygons at a higher level of observation, regardless of relative scaling and rotation of the two polygons.
 The shape accuracy between two matching buildings was quantified by using a similarity function that depends on the difference between the turning functions of matching building footprints in both datasets.
@@ -295,7 +294,7 @@ The turning function was first defined by \textbf{(Arkin et al, 1991)}, as a met
 The turning function effectively steps over the tangent of a polygon continously for a full cycle, and logs the total turning angle by adding together the angle of each turn.
 It includes consideration of wether the individual turns are clockwise or counter-clockwise, and is invariant to rotation and scaling of the polygon.
 Once the turning functions of two similar polygons have been obtained, the integral between them is taken as a measure of shape accuracy.
-The full procedure for calculating shape accuracy will be presented in section 3.2.3 of this report.
+The full procedure for calculating shape accuracy will be presented in section 3.2.2 of this report.
 
 \subsection{Level of detail}
 

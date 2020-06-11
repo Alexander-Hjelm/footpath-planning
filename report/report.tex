@@ -334,11 +334,10 @@ The secondary study about geodata precision will primarily serve to obtain an es
 A number of auxillary metrics will be needed to estimate the domain of error on the positional accuracy, namely the feature completeness and shape accuracy of the OSM dataset.
 The completeness of the OSM dataset will be taken as a the number of features are represented in both datasets, as a perentage of the total numer of features in the reference dataset.
 Shape accuracy is a measure of polygon similarity that was obtained by comparing polygon turning function between matching features, feature by feature.
-See section 5.3 for more details about the shape accuracy measure.
 
 \subsection{Quality criteria}
 
-\textbf{(Haklay, 2010)} presents in a comprehesive manner the list of van Oort's 8 accuracy classes for evaluating the quality of geographic information:
+\textbf{(Haklay, 2010)} presents the list of van Oort's 8 accuracy classes for evaluating the quality of geographic information:
 
 \begin{itemize}
   \item Lineage. This is the historical aspect of the dataset, which concerns the collection process and evolution.
@@ -351,14 +350,14 @@ See section 5.3 for more details about the shape accuracy measure.
   \item Temporal quality - This assesses the validity of the dataset in relation to real-world changes over time.
 \end{itemize}
 
-Other than for the purpose of mentioning various sources or error, this project will focus exclusively on the Positional accuracy, Completeness and Semantic accuracy classes.
-The comparison of the OSM and SLU maps will focus on these accuracy classes to determine the error tolerance when manipulating features in the 3D map presentation and the road network generating phase.
-Figure \ref{fig:osm-slu-map} shows two segments of the Stockholm map where the OSM and SLU datasets show lower semantic and positional accuracy respectively.
+Other than for the purpose of assessing various sources or error, this project will focus exclusively on the positional accuracy, completeness and semantic accuracy classes.
+The comparison of the OSM and reference maps will focus on these accuracy classes to determine the error tolerance when manipulating features in the 3D map presentation and the road network generating phase.
+Figure \ref{fig:osm-slu-map} shows two segments of the Stockholm map where the OSM and reference datasets show lower semantic and positional accuracy respectively.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_map_compare}
-    \caption{Example segments of the Stockholm metropolitan area with unsystematic errors in precision. The SLU building dataset (blue) in superimposed on the OSM dataset (dark gray). The top picture is centered on a city block which shows a semantic mismatching between the two datasets. The whole block consists of only two buildings in the OSM dataset, but is divided into 15 smaller building lots in the SLU dataset. The bottom picture shows 4 smaller buildings whose the positional accuracy is low, due to the buildings being incorrectly scaled, skewed and rotated.}
+    \caption{Example segments of the Stockholm metropolitan area with unsystematic errors in precision. The reference building dataset (SLU, blue) in superimposed on the OSM dataset (dark gray). The top picture is centered on a city block which shows a semantic mismatching between the two datasets. The whole block consists of only two buildings in the OSM dataset, but is divided into 15 smaller building lots in the SLU dataset. The bottom picture shows 4 smaller buildings whose the positional accuracy is low, due to the buildings being incorrectly scaled, skewed and rotated.}
     \label{fig:osm-slu-map}
 \end{figure}
 

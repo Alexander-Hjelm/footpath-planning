@@ -134,16 +134,16 @@ To investigate this, the problem will specifically be divided into the following
     \item The secondary subquestion is: \textbf{What is the positional accuracy of OSM map features compared to a reference map?}. The positional accuracy will be neccessary to carry out the investigation of the first subquestion: the rate of collisions between roads, since it will determine the maximum tolerance in distance between road points before a collision is certain to have occured.
 \end{enumerate}
 
-For the primary research question: the collision study, a program has taken an OSM dataset of the Stockholm area and assigned each road with standard withds according to swedish regulation.
+For the primary research question: the collision study, a program has taken a slice of the OSM dataset in the Stockholm area and assigned each road with standard withds according to swedish regulation.
 It has then identified critical areas in the OSM dataset, where the paths are so wide that they collide with existing map features.
 It has also identified how many of those areas can in theory be corrected by simple translation of the road vertices, without propagation of collision to other features.
 Here, features are defined as the geometrical components that comprise the OSM map.
 For the purpose of this report, features will refer mainly to roads and building footprints.
-For the collision study, see sections 1.3.1 for an implementation overview, 4.2 for a detailed walkthrough of the program implementation, and 5.1 for the results.
+For the collision study, see sections 3.1.2 for an implementation overview, 3.3 for a detailed walkthrough of the program implementation, and 4.1.1 for the results.
 
 For the secondary research question: the geodata precision study, the positional accuracy will be estimated by comparing feature points between the OSM dataset and a reference dataset.
 The positional accuracy will be needed to assess where road collisions occur and whether they can easily be corrected.
-For the positional accuracy study, see sections 1.3.2 for an implementation overview, 4.1 for a walkthrough of the program implementation, and 5.2 for the results.
+For the positional accuracy study, see sections 3.1.1 for an implementation overview, 3.2 for a walkthrough of the program implementation, and 4.1.2 for the results.
 
 \section{Delimitations}
 

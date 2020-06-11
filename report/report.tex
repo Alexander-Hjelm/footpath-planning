@@ -396,8 +396,7 @@ Finally, the program calculated how many of these colliding features that can be
 
 \subsection{Dataset completeness and correspondence}
 
-In the same way as the study by \textbf{(Fan et al, 2014)}, this project will use the building area in the OSM dataset versus that of the SLU dataset to determine the completeness of OSM building data in the Stockholm area, which will then be used as an argument for how accurate the building correspondence and point proximity measures can be.
-The motivation for this is to eliminate semantic differences between both datasets.
+In the same way as the study by \textbf{(Fan et al, 2014)}, this project will use the building area in the OSM dataset versus that of the SLU dataset to determine the completeness of the OSM building data in the Stockholm area, which will then be used as an argument for how accurate the building correspondence and point proximity measures can be.
 Buildings were identified as 1:1 (one to one), 1:n (one to many) or 1:0 (one to none) cases, depending on if a building is fully represented in the other dataset, represented as an aggregation of smaller plots, or not found at all.
 Figure \ref{fig:building-match-types} shows examples of two buildings that were found in the OSM and SLU datasets as 1:1 and 1:n matches respectively.
 
@@ -408,22 +407,15 @@ Figure \ref{fig:building-match-types} shows examples of two buildings that were 
     \label{fig:building-match-types}
 \end{figure}
 
-I accordance with \textbf{(Fan et al, 2014)}, 
-In this project, relative area overlap was used in order to pair buildings from the two datasets together and create a feature map.
-
-Figure \ref{fig:osm-slu-map} under Section 5 shows a typical comparison between the OSM and SLU datasets.
-
+To evaluate feature correspondence, relative area overlap was used as a measure of which buildings from either dataset corresponded with each other.
+In this was a feature map could be generated where any building in either dataset points to one, many or no buildings in the other dataset.
 \textbf{(Rutzinger, Rottensteiner and Pfeifer, 2009)} determined in their study of geodata comparison that if two building footprints share an area overlap of at least 30\%, then they can be safely assumed to point to each other in a matching set of buildings.
 Therefore it will here be assumed that two buildings are matching candidates if their relative area overlap is greater than 30\%.
-If a one-to-many object matching is found, the compound perimeter of the footprints in the many-set will be used when calculating the shape accuracy and finding closest vertices between the polygons.
-
-When calculating the area overlap, it was utilized the fact that multipolygons in geojson are represented with the main, bounding polygon first.
-Any subsequent polygons always represent cutouts or crop-outs in the footprint.
-When calculating the area of a multipolygon building, the area of the first polygon was therefore taken and subtracted with those of the subsequent polygons.
+Finally, if a one-to-many object matching is found, the compound perimeter of the footprints in the many-set will be used when calculating the shape accuracy and finding closest vertices between the polygons.
 
 \subsection{Shape accuracy definition}
 
-The Turning function $T_c(l)$ measures the cumulative angle of the polygon's counter-clockwise tangent, as a function of the cumulative normalized length l.
+The Turning function $T_c(l)$ measures the cumulative angle of the polygon's counter-clockwise tangent, as a function of the cumulative normalized length $l$.
 This project uses the turning function as it is defined by \textbf{(Fan et al, 2014)}.
 See figure \ref{fig:turning-function} for a side-by-side comparison of a polygon and its turning function.
 For a polygon with vertices ${v_1 ... v_n}$ and line segments ${e_1 ... e_n}$ It is defined as follows.
@@ -433,7 +425,7 @@ For any $i$ such that $i>1$ and $n<i$, the tangent angle at $v_i$ is recursively
 \begin{center}
     $\theta_{i, i-1} = \theta_{n,1} + \sum^{i}_{k=1} \theta_{k, k-1}$
 \end{center}
-The turning function has some nice geometric properties, in that it is invariant to both rotation and scaling of the polygon. The function contains no information of the orientation of the polygon, only of the relative angle between successive line segments, thus it does not change under roation. It also measures only the normalized cumulative length, which does not change under scaling.
+The turning function has some nice geometric properties, in that it is invariant to both rotation and scaling of the polygon. The function contains no information of the orientation of the polygon, only of the relative angle between successive line segments, thus it does not change under rotation. It also measures only the normalized cumulative length, which does not change under scaling.
 The similarity of two polygons A and B in terms of their turning function is defined as their distance of their cumulative turning functions:
 \begin{center}
     $S_{T}(A, B) = 1 - (\int^{1}_{0} T_{C,A}(l) - T_{C,B}(l) dl)^{1/2}$.
@@ -457,16 +449,15 @@ See figure \ref{fig:turning-function-compare} for a side-by-side comparison of t
 
 \subsection{Closest point and point proximity}
 
-The final problem is that even when building polygons have been matched between the two datasets, they may not have one-to-one vertex relationship.
-Footprints from different datasets may be formed at a different level of detail.
-Problems that arise are e.g. that the vertex counts are dissimilar, or that vertex clusters may be found at different parts of the polygon in the two datasets.
+The final problem is that even when building polygons have been matched between the two datasets, they may not have one-to-one vertex relationship, since footprints from different datasets may be formed at a different level of detail.
+Possible problems are that the vertex counts could be dissimilar, or that vertex clusters may be found at different parts of the two polygons.
 To avoid this effect, key points are extracted using the Douglas-Peucker algorithm \textbf{(Douglas and Peucker, 1973)}, to create a simplifed footprint with less points that still retain information about the rough features of the detailed footprint.
 The idea behind Douglas-Peucker is to recursively divide a polyline.
 It initially marks only the start and end points $(v_0, v_n)$ to be kept, and finds the point $v_i$ in between whose distance is the greatest to the line segment between $v_0$ and $v_n$.
 It then recursively refines the line segments $(v_0, v_i)$ and $(v_i, v_n)$, and proceeds to do so until a line segment $(v_j, v_k)$ is found, where every point in between $v_j$ and $v_k$ have a distance to the line segment $(v_j, v_k)$ that is smaller than some resolution $\epsilon$.
 Then $v_j$ are added to the simplified polyline, and all nodes in between them are discarded.
 See Algorithm 1 for a detailed view.
-In either case The Oriented Minimum Bounding Rectangle (OMBR) is calculated for the two polygons.
+Following this, the Oriented Minimum Bounding Rectangles (OMBR) are calculated for both the simplifed polygons.
 Finally the OMBR for the OSM building footprint is shifted so that its centroid aligns with the centroid of the OMBR of the SLU building footprint.
 Any edges in the simplified footprints that coinside with the OMBR from the same dataset are extracted, and the corresponding points in the original footprints will be matched with each other.
 See figure \ref{fig:vertex-match-algo} for an illustration of the algorithm that detects matching vertices between two similar polygons.
@@ -513,7 +504,8 @@ See figure \ref{fig:vertex-match-algo} for an illustration of the algorithm that
     \caption{Douglas-Peucker}
 \end{algorithm}
 
-Finally, when two building footprints and their vertices have been mapped, the offset of matching vertices will be used as a measure of positional error. The average and variance in vertex spread will be calculated and used to make an assessment of the geometric precision of the OSM dataset, and this precision will further be used to form an upper boundary on geometrical corrections that can be made to the map once it has been imported into the application.
+Finally, when two building footprints and their vertices have been mapped, the average offset of matching vertices will be used as a measure of positional error.
+The average and variance in vertex spread will be calculated and used to make an assessment of the geometric precision of the OSM dataset, and this precision will further be used to form an upper boundary on geometrical corrections that can be made in the collision study.
 
 \section{Collision study}
 

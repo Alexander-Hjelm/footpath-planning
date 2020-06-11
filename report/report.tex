@@ -102,22 +102,23 @@ Urban environments are typically dense and large, spanning a few to hundreds of 
 
 When it comes to the quality of available data, it turns out that in practise, geodata databases without errors are rare.
 Among the most common errors are missing data or invalid geometry.
-In the case of rendering road networks and buildings, intersection between features can lead to rendering artifacts.
-This is why ideally one would like to import road data with minimal feature overlap.
-There are however coming more and more sophisticated methods for automatically correcting the most common errors.
-Geodata validation and correction is only an emerging field of research, and many such datasets were usually obtained years ago, and creating error-free datasets was neither possible due to the lack of validation techniques, nor a high priority
+Geodata validation and correction is only an emerging field of research, and many such datasets were usually obtained years ago, and creating error-free datasets was neither possible due to the lack of validation techniques, nor a high priority.
+Luckily there are coming more and more sophisticated methods for automatically correcting the most common errors
 \textbf{(Biljecki et al, 2016 (2))}.
 
-A possible way of mitigating this problem is looking towards gathering geodata from volunteer-based geoservices such as OSM, where the temporal aspect of data accuracy is perhaps more assured by the crowd contribution nature.
-There are already a few such services that use OSM data to generate 3D geodata visualizations for data visualization and video game applications.
+Specifically in the case of rendering road networks and buildings, a common issue is overlap between the 3D models of the features, which can lead to strange-looking mesh intersections and inaccuracies that modelers often want to avoid.
+In particular, the risk of feature collision may be higher between streets and roads designated for energy efficient mobility, such as footpaths, since they are much more organic and dense in their nature than main streets.
+Thus, it is often in the designer's best interest to have a procedure for importing road data that results in minimal feature overlap, while still retaining accuracy to the real world.
+A possible way of mitigating this problem is looking towards gathering geodata from volunteer-based geoservices such as OSM.
+The OSM project is a freely available wiki-like geodatabase based on Volunteered Geographical Information (VGI), meaning anyone can contribute by adding or editing features.
+The OSM world dataset is being consistently updated by volonteers from all over the world, and the main idea is that by using OSM geodata for city reproduction, the temporal aspect of data accuracy would in theory be more assured by the crowd contribution nature.
+There are already a few such services that use OSM data to generate 3D geodata visualizations for media and video game applications.
 A few prominent examples are Mantle
 \footnote{Mantle homepage. Accessed 17-05-2020. https://www.mantle.tech/}
 and Mapbox
 \footnote{Mapbox homepage. Accessed 17-05-2020. https://www.mapbox.com/}.
 Such services are however usually limited in the accuracy and type of data that they can provide.
 While they can provide both building footprints and road networks, they usually provide road data with no respect to overlap between features.
-Collision between road meshes in 3D will lead to strange-looking mesh intersections and inaccuracies that modelers often want to avoid.
-In particular, streets and roads designated for energy efficient mobility, such as footpaths, are much more organic and dense in their nature than main streets, and thus the risk of feature collision may be higher.
 
 \section{Research question}
 
@@ -663,12 +664,11 @@ Both datasets were collcted on March 18th, 2020.
 
 \subsection{OSM data}
 
-The OSM project is a wiki-like geodatabase based on Volunteered Geographical Information (VGI), meaning anyone can contribute by adding or editing features.
+The OSM project is a wiki-like geodatabase based on Volunteered Geographical Information (VGI).
 OSM road data and building footprints are commonly obtained by manually tracing features in commercially available satellite images.
 Such images have a limit on their resolution which puts a theoretical limit on the accuracy of map features compared to their real-world equivalents
 The driving force behind the availablity of VGI is, according to \textbf{(Goetz and Zipf, 2012)}, the availablity of high resolution satellite imagery to private individuals.
 They claim that particularily the imagery from Bing Maps, which launched in 2010, led to an increase in building information in OSM, and the positional error is largely due to the limited resolution in such satellite imagery.
-
 
 \subsection{SLU data}
 

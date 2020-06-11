@@ -66,6 +66,22 @@ Haha, He-Man! There is no possible way that you feeble-brained barbarian and you
 
 \chapter{Introduction}
 
+This project assesses the feasibility of reconstructing a city from OpenStreetMap (OSM) road and building data, and will focus on the feasibility of including pedestrian footpaths, by focusing on OSM road and building data in the Stockholm metropolitan area.
+
+\section{Introduction to virtual cities}
+
+Virtual cities has since long been a popular research topic in the field of computer visualization.
+The idea of recreating real world cities in 3D applications has a growing number of applications, including visualization and modelling, urban planning and architecture, as well as media and entertainment in the form of video games and 3D animation.
+Traditionally, modelling virtual cities is a labour-intensive and time-consuming task due to the need for manual modeling, texturing and design and placement of individual model in the large 3D scene.
+This type of tasks is commonly done by professional 3D graphical artists and designers.
+However, in recent years there has been major research work in the field of procedural content generation, meaning automatic or semi automatic generation of 3D models without the direct involvment of a 3D artist.
+
+Procedural methods for 3D city generation commonly rely on the availablity of spatial \textbf{geodata}, which serves as the initial input to the procedure of model generation and placement.
+Geodata can contain any form of map features, from terrain to road networks and buildings, but should ideally be easily retrievable in a format that the procedural model can easily work with, e.g. as a list of polygons with world coordinates.
+Such methods are indeed used in the field of virtual city reproduction to reduce the labour required to create accurate 3D representations of cities, but the field of procedual city reproduction comes with its own host of challenges.
+Urban environments are typically dense and large, spanning a few to hundreds of square kilometers, and are influenced by variables that are hard to quantify, including land policies, government plans, population changes and transportation infrastructure, making it non-trivial to produce 3D city representations with both high accuracy and high detail, while simultaneuosly having high utility in the intended field of study.
+\textbf{(Vanegas et al, 2010)}.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_virtual_city}
@@ -74,17 +90,6 @@ Haha, He-Man! There is no possible way that you feeble-brained barbarian and you
 \end{figure}
 
 \footnotetext{Image source: Downtown Boston 3D City Model in Infraworks 360, available via: https://gallery.autodesk.com/civilinfrastructure/projects/490/downtown-boston-3d-city-model-in-infraworks-360}
-
-This project assesses the feasibility of reconstructing a city from OpenStreetMap (OSM) road and building data, and will focus on the feasibility of including pedestrian footpaths, by focusing on OSM road and building data in the Stockholm metropolitan area.
-
-\section{Introduction to virtual cities}
-
-Virtual cities has in recent years been a popular research topic in the field of computer visualization, according to \textbf{(Vanegas et al, 2010)}.
-The idea of recreating real world cities in 3D applications has a growing number of applications, including visualization and modelling, urban planning and architecture, as well as entertainment in the form of video games and 3D animation.
-Traditionally, modelling virtual cities is a labour-intensive and time-consuming task.
-However, in recent years there has been major research work in the field of procedural content generation, meaning automatic or semi automatic generation of 3D models without the direct involvment of a 3D artist.
-Such methods can indeed be used in the field of virtual city reproduction to reduce the labour required to reproduce accurate 3D representations of cities, but the field of procedual city reproduction comes with its own host of challenges.
-Urban environments are typically dense and large, spanning a few to hundreds of square kilometers, and are influenced by variables that are hard to quantify, including land policies, government plans, population changes and transportation infrastructure.
 
 \begin{figure}[H]
     \centering
@@ -96,10 +101,12 @@ Urban environments are typically dense and large, spanning a few to hundreds of 
 \section{Accuracy limitations in 3D city reproduction}
 
 When it comes to the quality of available data, it turns out that in practise, geodata databases without errors are rare.
-Among the most common errors are missing or invalid geometry, and invalid semantics.
-However, \textbf{(Biljecki et al, 2016 (2))} note that there are coming more and more sophisticated methods for automatically correcting the most common errors.
-Geodata validation and correction is only an emerging field of research.
-and many such datasets were usually obtained years ago, and creating error-free datasets was neither possible due to the lack of validation techniques, nor a high priority.
+Among the most common errors are missing data or invalid geometry.
+In the case of rendering road networks and buildings, intersection between features can lead to rendering artifacts.
+This is why ideally one would like to import road data with minimal feature overlap.
+There are however coming more and more sophisticated methods for automatically correcting the most common errors.
+Geodata validation and correction is only an emerging field of research, and many such datasets were usually obtained years ago, and creating error-free datasets was neither possible due to the lack of validation techniques, nor a high priority
+\textbf{(Biljecki et al, 2016 (2))}.
 
 A possible way of mitigating this problem is looking towards gathering geodata from volunteer-based geoservices such as OSM, where the temporal aspect of data accuracy is perhaps more assured by the crowd contribution nature.
 There are already a few such services that use OSM data to generate 3D geodata visualizations for data visualization and video game applications.

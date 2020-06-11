@@ -823,21 +823,17 @@ For conclusions about the usage of OSM city reproduction in engineering practise
 
 \subsection{Quality of the OSM dataset}
 
-The completeness analysis by building area shows that the OSM Stockholm dataset has high completeness in terms of both building area and counted features, in the same level as the study of Munich by \textbf{(Fan et al, 2014)}.
-The difference in area cover can partially be explained by small utility buildings that are often not represented in the OSM dataset.
+The building completeness analysis shows that the OSM Stockholm dataset has high completeness in terms of both building area and counted features. It even shows that the building completeness is around the same level as the study of Munich by \textbf{(Fan et al, 2014)}.
+In the particular case of Stockholm, the small difference in area cover that can be seen could partially be explained by the large number of small utility buildings that are often not represented in the OSM dataset.
 Particularily the residential areas in downtown, Stockholm, are characteristic in that each city block consists of a street front and an open, communal compound in the middle, inside of which there are usually a number of small utility buildings such as bicycle garages, toolsheds, refuse rooms and such.
 See figure \ref{fig:osm-slu-map-utility-buildings} for an example of an area in stockholm with such characteristics.
-These buildings are likely hard to make out and trace on publicly available satellite image data.
-They are, according to \textbf{(Fan et al, 2014)} occluded by their surroundings due to shadows or forestry.
-This appears to be a large consensus in the field.
+These buildings are likely hard to make out and trace on publicly available satellite image data, most likely due to occlusion by their surroundings due to shadows or forestry.
 
-The low semantic accuracy has made analysis hard.
-The available SLU dataset from Lantmäteriet uses a plot-based subdivision of buildings, whereas OSM uses a subdivision that more closely resembles the actual building footprint as seen from above.
-In many cases whole city blocks are represented as single buildings, which means that many less meaningful feature matches can be found.
+When it comes to evaluating semantic accuracy, this study found that the available SLU dataset from Lantmäteriet uses a plot-based subdivision of buildings, whereas OSM uses a subdivision that more closely resembles the actual building footprint as seen from above.
+In many cases even whole city blocks are represented as single buildings in OSM, which means that there are less meaning to the 1:n feature matches can be found.
 As seen in table \ref{table:building-matching}, about 80\% of all OSM features were found to have a 1:1 mapping to the SLU dataset, but upon further visual comparison it can be seen that many of the 1:n matches are found in a very specified area, namely the residential areas in downtown, Stockholm.
 This is problematic since this typical area with the same level of accessibility was likely measured with the same measuring technique, and the unsystematic positional error will likely be similar in these areas.
-The question is wether it comforms well to the positional error in the rest of the dataset or not.
-This analysis will not be carried out in this project, but could be a good subject for a future master's thesis project.
+The question is wether it comforms well to the positional error in the rest of the dataset or not, though this analysis will not be carried out in this project, but could be a good subject for a future master's thesis project.
 
 \begin{figure}[H]
     \centering

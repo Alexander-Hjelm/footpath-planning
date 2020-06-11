@@ -852,24 +852,23 @@ The question is wether it comforms well to the positional error in the rest of t
 
 The immediate conclusion of this study is that, in terms of feature collision, footpaths were not significantly worse than other road categories.
 As a result, it can promptly be assumed that city modelling services which already utilize OSM car road data could also use OSM footpath data without a drastic increase in feature collision.
-The biggest reason for this is thought to be that footpaths in their nature are narrow.
-So narrow in fact that they can be displaced by more than half of their full width (minimum 1 meter) before the limit of half the positional accuracy (1.025 meters) is reached.
+The biggest reason for this is thought to be that footpaths in their nature are narrow, and so narrow in fact that they can be displaced by more than half of their full width (minimum 1 meter) before the limit of half the positional accuracy (1.025 meters) is reached.
 
-Looking closer at the individual collision cases, the next conclusion is that most often it is actually a small part of a road that is colliding, and will need correction.
+Looking closer at the individual collision cases, the next conclusion is that most often it is actually a small part of a road that is responsible for the collision, and will need correction.
 Now will follow an exemplifying calculation to support this claim.
-Looking in tables \ref{table:road-collision} and \ref{table:road-collision-corrected}, note that before road extrusion, 3189 features and 7330 of their edges are intersecting some other feature.
+Looking in tables \ref{table:road-collision} and \ref{table:road-collision-corrected}, note that before road extrusion, 3189 features and 7330 of their edges were intersecting some other feature.
 This means that for each colliding road, on average 2.3 of its edges will be intersecting some other feature, thus bearing responsibility for the collision.
 In total there are 26473 feautures and 6382579 edges, meaning that each road feature is on average contructed out of 241 edges.
 Thus the percentage of edges colliding per road is on average roughly 0.95\%.
 A similar calculation for the number of features that could not be corrected by translation yields that the number of colliding edges per feature is on average 1.2, and that the percentage of colliding edges per feature is 0.49\%.
 Visual inspection of the cases where roads collide with other features has supported this.
 
-After visual inspection of the cases where features collide, it was determined that all collision occurences can be almost exclusively classified into one of five categories.
+After visual inspection, it was determined that all collision occurences can be almost exclusively classified into one of five categories.
 These categories are explained in the list below, and each case is exemplified in figure \ref{fig:collision-cases}.
 All these cases will create issues when generating the 3D mesh representation of the city.
 
 \begin{enumerate}
-\item Case 1: A building lies in paralel with a road, and the distance between the two is smaller than the minimum width of the road.
+\item Case 1: A building lies in parallel with a road, and the distance between the two is smaller than the minimum width of the road.
 \item Case 2: A road shares a node with a building.
 \item Case 3: A road is intersecting with certain building features.
 \item Case 4: Two roads have a minimum distance that is smaller than the sum of the minimum widths of both roads. 

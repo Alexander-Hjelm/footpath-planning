@@ -152,16 +152,16 @@ For the positional accuracy study, see sections 3.1.1 for an implementation over
 In this study, when working with OSM geodata, the following assumptions have been made about the OSM dataset to reduce the size of the problem domain:
 
 \begin{enumerate}
-    \item the program will not handle terrain features and altitude. it will be assumed that the road mesh can be projected on a flat 2d surface without feature intersection.
-    \item it will be assumed that the city map consists of only arterial (primary) roads, secondary roads and footpaths.
-    \item it will be assumed that the osm dataset represents all roads as simple polylines, and building footprints as simple connected polygons. any other features (such as squares, which are roads represented as polygons) will be omitted from the dataset.
-    \item the road network is assumed to be a 2d simple graph. this means that any overlapping roads, such as tunnels and bridges that cross over street-level roads, will be eliminated from the dataset. any self-connected nodes will also be eliminated from the dataset.
+    \item The program will not handle terrain features and altitude. It will be assumed that the road mesh can be projected on a flat 2d surface without feature intersection.
+    \item It will be assumed that the city map consists of only arterial (primary) roads, secondary roads, residential roads and footpaths.
+    \item It will be assumed that the OSM dataset represents all roads as simple polylines, and building footprints as simple connected polygons. Any other features (such as squares, which are roads represented as polygons) will be omitted from the dataset.
+    \item The road network is assumed to be a 2D simple graph. This means that any overlapping roads, such as tunnels and bridges that cross over street-level roads, will be eliminated from the dataset. Any self-connected nodes will also be eliminated from the dataset.
 \end{enumerate}
 
 \subsection{Delimitations of accuracy classes}
 
 This study will not consider the lineage aspect of the geodata.
-Lineage is defined by \textbf{(Van Oort, 2006)} as the historical aspect of the dataset: how it has been obtained, with what instruments and how it has evolved between the moment it was obtained and the moment it was queried.
+Lineage is defined by \textbf{(Van Oort, 2006)} as the historical aspect of the dataset: how it has been obtained, with what instruments and how it has evolved between the moment it was obtained and the moment it was retrieved.
 The entire OSM dataset is under constant modification by volonteers, so it is expected that the accuracy will improve over time. Previous studies highlight how the posiitonal accuracy in similar-sized cities have improved over several years (\textbf{Fan et al, 2014}, \textbf{Haklay, 2010}).
 The historical aspect of the OSM dataset is available through the OSM History Viewer
 \footnote{OSM History Viewer - OpenStreetMap Wiki. Accessed 20-03-2020. https://wiki.openstreetmap.org/wiki/OSM\_History\_Viewer}
@@ -169,14 +169,14 @@ The historical aspect of the OSM dataset is available through the OSM History Vi
 There is an option for editors to include a personal note with their changesets to include additional details or motivate why a change was made, but there is no guaratee that the data includes any information on the aquisition method used.
 
 Another aspect of geodata precision is attribute accuracy, which will neither be considered in this study.
-Attributes are small flags of metadata that are included with geodata features, letting the user know for example the type of a road, how many files it has, if the base is asphalt or gravel, or how many stories a building has.
-Attribute accurcay is the meausere of how complete attribute information is in a dataset.
+Attributes are small flags of metadata that are included with geodata features, letting the user know for example the type of a road, how many lanes it has, if the base is asphalt or gravel, or how many stories a building has.
+Attribute accuracy is the meausere of how complete attribute information is in a dataset.
 How much attribute data is missing and how much of it does not comform with reality?
-In general, attribute accuracy is hard to quantify, but might be interesting, as both the OSM map and the referece map used in this project use encoded metadata on a per feature basis.
+In general, attribute accuracy is hard to quantify.
+In this case howere, it might be interesting to compare attributes between the OSM map and the referece map that was used in this project, as both use encoded metadata on a per feature basis, and matching features can be easily identified.
+See section 3.4.2 for an overview of the reference dataset that was used in this study.
 The attribute accuracy of the two datasets could in theory be assessed by doing a simple feature comparison and creating a translation table between the two attribute maps.
 To the knowledge of the author, this has never been done with specifically these two datasets, at the time of writing.
-
-The temporal accuracy will not be assessed as this projects focuses on comparing a single snapshot of the two datasets at the same point in time, and finally the logical accuracy will not be assessed because the underlying logical relations between features in both maps serve no purpose to this project.
 
 \chapter{Background}
 

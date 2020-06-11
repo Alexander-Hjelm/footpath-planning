@@ -930,13 +930,13 @@ In this section everything we have learnt so far will be placed in the broader c
 
 \section{Remaining challenges in city reproduction}
 
-As has been mentiond in the introduction to this report, procedural generaion of road networks is a basal requirement for quick and low-effort modeling virtual cities.
+As has been mentioned in the introduction to this report, procedural generaion of road networks is a basal requirement for quick and low-effort modeling virtual cities.
 Since the road network ties together the city, and forms the grid that divides the lots, quarters and neighbourhoods, it make sense that one can only continue with the remaining challenges once there exists a robust procedure for extracting road geodata and generating the 3D represention of it without compromising the data integrity. 
 The same is true for building modelling.
 As \textbf{(Fan et al, 2014)} notes, it turns out that the same methods that have been used in this project to obtain and qualify road network data can be applied to building footprint data from OSM. 
-And only when there exists such a fundamental procedure for accuratly importing building footprints without compromising the data integritey, one can proceed with the remaining challenges in building modeling.
+Only when there exists such a fundamental procedure for accuratly importing building footprints without compromising the data integritey, one can proceed with the remaining challenges in building modeling.
 
-Such challenges, which have not been mentioned up until this point, include infering or guessing building height, since OSM does not provide data about building elevation.
+Such challenges, which have not been mentioned, include for example infering or guessing building height, since OSM does not provide data about building elevation.
 Occasinally buildings in OSM may be tagged, but the norm is that no elevation data is available.
 There are however very sophisticated methods from guessing the building height after looking at reference datasets.
 \textbf{(Biljecki, Ledoux and Stoter, 2017)} presented a method for inferring building height exclusively from the building footprint and surrounding footprints.
@@ -948,31 +948,30 @@ Method exist for how to make a city model comform to an underlying terrain, howe
 \textbf{(Galin et al, 2010)} presented such a geometrical model for placing a 3D road asset onto a non-flat terrain surface, in the context of procedurally generated roads.
 
 Yet another challenge lies in producing highly detailed 3D models of buildings at a consistent rate.
-Recall the concept of Level of Detail, as presented by \textbf{(Biljecki, Ledoux and Stoter, 2016 (1))} in section *** of this report.
+Recall the concept of Level of Detail, as presented by \textbf{(Biljecki, Ledoux and Stoter, 2016 (1))} in section 2.3.5 of this report.
 It turns out that, with the current means of data aquisition from OSM being limited to building footprints, using OSM data a model can only produce LOB-B models at best.
 If a modeler wishes to aqquire building assets at a LOD-C level, they would have to complete the data with other sources, or rely on procedural methods to populate crude city models with additional details and building features that give the models more aestethic depth, but do not neccessarily reflect reality.
 
-\section{Using procedural methods}
+\section{Feasibility in the urban planning field}
 
 For simple presentation in e.g. animation and videogames or even urban planning software, such procedurally generated cities could very well be enough.
-As said however, the big problem is that these features will rarely match real life, such models will be sufficient as long as one can be satisified with looking at rough representations of buildings and does not require additional knowledge about minor features.
-Many studies urban development have been done before that requred detailed knowledge about a city's geometry, e.g. for the purposes of modeling heat development
+As said however, the big problem is that these features will rarely match real life.
+Such models will be sufficient as long as one can be satisified with looking at rough representations of buildings and does not require additional knowledge about minor features.
+However, many studies in urban development have been done before that requred detailed knowledge about a city's geometry, e.g. for the purposes of modeling heat development
 \textbf{(Nakata-Osaki, Souza and Rodrigues, 2018)}
-and reducing noise
+or reducing noise
 \textbf{(Joon, Seo and Byung, 2011)}.
 
-\section{Feasibility in the urban planning field}
 By looking at such studies in urban development, one will discover that a lot of research in this field requires detailed morpological information that goes beyond simply knowing the geometry of the city.
 Urban architects often work with morpological structures where a single feature, such as a city neighbourhood, can be examined from many different levels of perspective.
 A neighbourhood can be analysed from the level of its city blocks, individual lots, properties or building limits, building facades or even indoor spaces.
-Simlarily a road network can be analysed by looking at it either at its connectivity by viewing it a a simple 2D graph
-But it might as well be seen as a hierarchical structure where primary roads branch off into sub-streets. 
+Simlarily a road network can be analysed by looking at it either at its connectivity by viewing it a a simple 2D graph, but it might as well be seen as a hierarchical structure where primary roads branch off into sub-streets. 
 The very unfortunate fact is that much of that morpological information is not present in the OSM dataset.
 Furthermore, take the fact that even a single road can be comprised of many different sections with different purposes.
 A single inner-city street for example, often contains sidewalks and lanes reserved for taxis or public transit, all of a certain placement and dimension that determines what type of traffic it can serve.
 According to \textbf{(Stojanovski, 2019)}, this type of representation is known as a multimodal structures, due to the possibility of incorporating mulitple modes of transportation, but it may even describe subtilities like building facades and distances between curbline and building lot.
 OSM, while being an excellent source of city geometry, is simply not a sophisticated enough dataset to cater to all these possible areas of research.
-For media applications, such morppological and multimodal information could in theory be generated procedurally, by using shape grammars and some sort of wayfinding to create logical routes for different types of traffic.
+For media applications, such morphological and multimodal information could in theory be generated procedurally, by using shape grammars and some sort of wayfinding to create logical routes for different types of traffic.
 But for urban planners requiring an exact morphological representation of some specification, this complementary data will have to be obtained from another dataset.
 
 \section{Final conclusions}

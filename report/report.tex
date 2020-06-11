@@ -180,9 +180,9 @@ To the knowledge of the author, this has never been done with specifically these
 
 \chapter{Background}
 
-This chapter will dive into the state-of-the-art use of city reconstruction methods within the research field of urban design.
-This chapter will present the motivations for the digitization of urban planning, as well as a brief history of the field of OpenStreetMap data qualification, and present the research papers whose methods are at the foundation of this project.
-Furthermore, it will present the evaluation metrics that this project served to obtain, and how they relate to the eventual collision analysis.
+This chapter will dive into the state-of-the-art use of city reconstruction methods within the research fields of visualization and urban design.
+This chapter will present the motivations for the digitization of urban planning, as well as a brief history of the field of OpenStreetMap data qualification, and furthermore present the research papers whose methods are at the foundation of this project.
+Lastly, it will present the evaluation metrics that this project served to obtain, and how they relate to the eventual collision analysis.
 For the geodata precision study specifically, it will examine how geodata is qualifyied in general, by examining van Oorts quality criteria, and how these will be used in this project.
 
 \section{Overview of virtual cities}
@@ -190,27 +190,26 @@ For the geodata precision study specifically, it will examine how geodata is qua
 In their analysis of prodedural city generation models, \textbf{(Müller et al, 2006)} provide an overview of the process of recreating virtual 3D citites from their real life conterparts.
 They present cities as complex collections of \textbf{buildings}, \textbf{blocks}, \textbf{parcels} and \textbf{neighbourhoods} which are all interconnected via a \textbf{street} network, where individual streets can serve different types of traffic.
 These features are commonly represented as \textbf{geodata} in map databases, and processed and organized into visualization-ready data by a \textbf{Geographic Information System (GIS)}.
-In practise, cities are often made up out of many square kilometers worth of geodata, and it would be highly labour intensive to recreate all the features in 3D.
+In practise, cities are often made up out of many square kilometers worth of geodata, and it would be highly labour intensive to manually recreate all these features in 3D.
 Instead, \textbf{procedural models} for city reproduction instead rely on programmatic solutions for converting map data to 3D road and building models, and composing them to a 3D world that the designer may continue to fine-tweak through interfaces fo interactive editing.
-At the very base of this process is the procedural layout of road networks in 3D, and so far there have been a lot of research in modelling of 3D road networks.
+At the very base of this process is the procedural layout of road networks in 3D, and so far there has been a lot of research in modelling of 3D road networks.
 \textbf{(Stojanovski, 2019)} however claims that these projects have often focused on the road networks designated for cars and public transit, as a part of the sustainable mobility paradigm and the topic of sustainable cities, particularily due to the interest in self-propelled cars.
 The study of energy efficient mobility such as walking and cycling is only in its emerging phase.
 
 \section{3D city reproduction as a research field}
 
-The project falls within the broader topic of geodata extraction and modelling, primarily of roads and building parcels.
+This project falls within the broader topic of geodata extraction and modelling, primarily of roads and building parcels.
 Geodata modeling is at the foundation of procedural modelling of real-world cities (according to \textbf{(Müller et al, 2006)}), since any application which models cities based on geodata will need a robust method of aqquiring and laying out road and building data without compromising the data's integrity.
-Procedural modeling of road networks is of interest to the fields of urban planning and urban architecture.
 In recent years there has been an advent of interactive tools that aid urban planners in placing or generating features of an urban plan, particularly roads and road networks.
-Procedural and AI solutions that aid the arcitect in a form of human-machine symbiosis.
+Such tools use procedural and AI solutions to move the burden of labour from the human designer to the software that the designer uses.
 
-Procedural city-generation models combine architectural elemets, such as streets, lots, buildings, building facades.
-Urban design practises with conventional two-dimenstional deliverables range from delivering neighbourhood designs, urban zoning and building plans, to writing design codes and building ordinances.
-The last decade has seen multiple startups in the area of software that aid urban arcitecture. The software uses procedural models to render a city grid based on real-world locations, or generate new user-specified parameters, and allow for varying degrees of manual editing on grid, road, neighbourhood, city block or individual feature level.
+The last decade has seen multiple startups in the area of procedural software for urban arcitecture.
+Such software uses procedural models to render a city grid based on real-world locations, or generate new grids and features based on user-specified parameters, and allow for varying degrees of manual editing on grid, road, neighbourhood, city block or individual feature level.
 Some of the most prominent examples are ArcGIS Pro (made by Esri), CityEngine (made by the startup Procedural, bought by ESRI) and Urban Canvas (made by the startup Synthicity, bought by Autodesk, now defunct).
-However, freely available such tools seldom include smaller roads and pedestrian footpaths such as walkways, sidewalks or trails.
 
-Even as such tools are well available, \textbf{(Stojanovski et al, 2020)} notes that they are as of today not commonly applied in urbanist practises, due to failures in reflecting the unique workspace of arcitects and their design needs. Urban arcitecture is a social factors, stakeholders. Each arcitect is an actor in a continously developing environment, and affecting that environment in a complex manner through their action.
+Even as such tools are well available, \textbf{(Stojanovski et al, 2020)} notes that they are as of today not commonly applied in urbanist practises, due to failures in reflecting the unique workspace of arcitects and their design needs.
+Urban arcitecture is a field that not only accounts for spatial data, but also captures many social factors and the individual wills of the many stakeholders.
+Each arcitect is an actor in a continously developing environment, and even the archtiect themselves is affecting that environment in a complex manner through their actions.
 
 Finally, when it comes to the fields of video game design or 3D animation, tools for city reproduction is undoubtedly of use to 3D content creators.
 In their study of procedurally generated buildings, \textbf{(Parish and Müller, 2001)} claim that there is a widespread trend in these fields to use methods of procedural modeling to create large amounts of 3D content quickly and efficiently, while requiring as little hand modeling as possible.

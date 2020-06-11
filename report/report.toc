@@ -103,8 +103,6 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {5.1}Remaining challenges in city reproduction}{45}{section.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Using procedural methods}{46}{section.5.2}
+\contentsline {section}{\numberline {5.2}Feasibility in the urban planning field}{46}{section.5.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.3}Feasibility in the urban planning field}{47}{section.5.3}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.4}Final conclusions}{48}{section.5.4}
+\contentsline {section}{\numberline {5.3}Final conclusions}{48}{section.5.3}

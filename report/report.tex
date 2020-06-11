@@ -219,46 +219,47 @@ Studios who create large worlds are often interested in solutions that generate 
 
 \subsection{OpenStreetMap data qualification}
 
-When assessing the completeness of geodata, a very common scale is Van Oorts criteria for evaluating the quality of geographical information, which at the time of publication received attention from surveyors and cartographers \textbf{(Van Oort, 2006)}.
-Since then a number of publications have examined slices of geodata from van Oort's criteria.
+When assessing the completeness of geodata, a very common scale is Van Oorts criteria for evaluating the quality of geographical information.
+At the time of publication this method of evaluation received much attention from surveyors and cartographers \textbf{(Van Oort, 2006)}, and since then a number of publications have examined slices of geodata by using van Oort's criteria.
 In 2008, \textbf{(Haklay, 2010)} conducted such a study to estimate of the quality of OSM positional geodata in London and England.
 Since the OSM project started in London it was thought that OSM data in the London metropolitan area would be representative of the highest quality data available, and therefore a good indicator for the whole global OSM dataset.
-The study was conducted by comparing OSM data to Ordnance Survey datasets.
-The study showed that the OSM dataset had a rough positional accuracy of 6 meters from the reference dataset.
+The study was conducted by comparing OSM data to Ordnance Survey datasets, and it showed that the OSM dataset had a rough positional accuracy of 6 meters from the reference dataset.
 However, at the time of the study, the OSM project had captured roughly 29\% of the area of England, meaning that the data completeness was fairly low.
 
-The next notable study to assess the quality of OSM data was published by \textbf{(Kunze, 2012)}.
+The next major study to assess the quality of OSM data was published by \textbf{(Kunze, 2012)}.
 The study applied different methods to assess the completeness of OSM data in two federal states in Germany, mainly by analysing the area difference between the OSM dataset and an administrative dataset.
+Other notable studies about OSM data accuracy were made around the same time in Germany by \textbf{(Zielstra and Zipf, 2010)} and \textbf{(Neis et al, 2012)}, as well as in France by \textbf{(Girres and Touya, 2010)}.
 
-Other notable studies about OSM data accuracy were made around the same time by in Germany by \textbf{(Zielstra and Zipf, 2010)} and \textbf{(Neis et al, 2012)}, as well as in France by \textbf{(Girres and Touya, 2010)}.
-
-Finally, a notable study in 2013-2014, conducted by researchers from various universities in Norway and Germany \textbf{(Fan et al, 2014)}, examined the quality and accuracy in building footprint data of the Munich area, at a time and place where the completeness of the OSM dataset was significantly higher (the results of their study showed that the OSM had captured close to 100\% of all building footprints).
-At the time Munich was one of the most developed cities in OSM.
-Their study included an insight in the geometrical calculations neccessary to match features and points between two datasets, and how to reliably calculate the metrics needed for the most important and assessible of van Oorts criteria.
-Their study revealed that although the feature completeness of OSM was high, some architectural details were missing.
-The results reveal that the positional accuracy of OSM data at the time was about 4 meters.
+Finally, a major study in 2013-2014, conducted by researchers from various universities in Norway and Germany \textbf{(Fan et al, 2014)}, examined the quality and accuracy in building footprint data of the Munich area, at a time and place where the completeness of the OSM dataset was significantly higher than the study by \textbf{(Haklay, 2010)} (the results of their study showed that the OSM had captured close to 100\% of all building footprints).
+At the time Munich was one of the most developed cities in OSM, but although feature completeness of the OSM dataset was high, some architectural details were missing.
+This new study included an insight in the geometrical calculations neccessary to match features and points between two datasets, and how to reliably calculate the metrics needed for the most important and assessible of van Oorts criteria.
+The results reveal that the positional accuracy of OSM data at the time was about 4 meters
 
 \subsection{Procedural models for city reproduction}
 
 Procedural techniques are, as mentioned, methods for reconstructing or creating 3D automatically, with minimal manual work required.
-Adding such techniques for content creation into the workflow of city reconstruction will increase the level of detail that is possible, while sacrificing accuracy to the real-world.
-\textbf{(Müller et al, 2006)} present how to accomplish this using Shape Grammar: a method developed by \textbf{(Stiny, 1975)}, for automatically and iteratively constructing 3D models based in a hierarchical set of rules.
-Shape grammar was originally developed from a method known as L-systems: a system for model description which was originally used to generate plants for 3D animation \textbf{(Parish and Müller, 2001)}.
-Shape grammar works by starting with a crude volumetric model of a building and iteratively remodeling it from a set of shape grammars, a procedural model can structure the façade, add texture and add details for windows, doors and ornaments, and so on.
+Adding such techniques for content creation into the workflow of city reconstruction will increase the level of detail that is possible to generate quickly and efficiently, while sacrificing accuracy to the real-world.
+This is because most commercially available procedural city reproduction models uses methods to guess what the finer detail might look like when map data of the desired level of detail is not available.
+
+\textbf{(Müller et al, 2006)} present how this is accomplished using Shape Grammar: a method developed by \textbf{(Stiny, 1975)}, for automatically and iteratively constructing 3D models based in a hierarchical set of rules.
+Shape grammar was originally developed from a method known as L-systems: a system for hierarchical model description which was originally used to generate plants for 3D animation \textbf{(Parish and Müller, 2001)}.
+Shape grammar works by starting with a crude volumetric model of a building and iteratively remodeling it from a set of shape grammars.
 Shape grammars often work from a databank of 3D models and a set of hierarchical rules for how these can be pieced together.
 This creates a possible generative space of many different models that can be created from the same data and rule set, and with the induction of random fluctuations, many different models can be generated from the same dataset and rules.
+Using this procedure, a procedural model can structure the façade of a building, add texture and add details for windows, doors and ornaments, and so on.
+The maximum accuracy that can be obtained in these finer details is largely dependent on the availablity of such data, and as most commercially available GIS data only focuses on crude building footprints and road placement, the model will often have to make guesses about the finer detail, which sacrifices accuracy to the real world.
 
 \subsection{Space syntax}
 
 Space syntax, developed by \textbf{(Hillier, 1997)}, is a set of theories that analyze complex, large-scale spaces such as cities, and tries to explain human behavior from a spatial point of view.
-The central idea is that spatial structures sucha as building patterns both reflect and create the patterns for human interaction with their surroundings.
-Dividing spacial structures into different levels of observation, and identifying different units of space and the pattern in which they connect to each other.
-Space syntax is an analytical method that relies on the availablity of city maps. Has since been developed into an extensive research fields on its own.
-Space syntax is commonly used in the analysis of procedural generation models of urban environments
-\textbf{(Parish and Müller, 2001)},
-and has been widelry used in the analysis of pedestrian flows and wayfinding
+It is commonly used in the analysis of procedural generation models of urban environments.
+The central idea is that spatial structures such as building patterns both reflect and create the patterns for human interaction with their surroundings.
+A common theme in space syntax is the division of spacial structures into different levels of observation, and identifying different units of space and the pattern in which they connect to each other.
+Space syntax is an analytical method that relies on the availablity of city maps, which has since its invention been developed into an extensive research fields on its own
+\textbf{(Parish and Müller, 2001)}.
+It has also been widely used in the analysis of pedestrian flows and wayfinding
 \textbf{(Peponis, Zimring and Choi, 1990)}.
-The idea of using space syntax to divide spatial structures into different levels of observation is frequently used in the research field of urban design and planning, to gain an understanding how space is utilized and connected at different levels of usage (one can for example analyze a city on an interior-by-interior basis, or use city blocks and streets as the least unit of space)
+Furthermore, the idea of using space syntax to divide spatial structures into different levels of observation is frequently used in the research field of urban design and urban planning, to gain an understanding how space is utilized and connected at different levels of usage (one can for example analyze a city on an interior-by-interior basis, or use city blocks and streets as the least unit of space)
 \textbf{(Stojanovski et al, 2020)}.
 
 \subsection{Methods for geodata qualification}

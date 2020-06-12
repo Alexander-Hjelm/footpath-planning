@@ -42,19 +42,31 @@
 
 \begin{abstract}
 Modeling cities in 3D has long been a topic of interest in field of computer graphics.
-It is often desirable to recreate real-world cities in 3D applications such as urban design software and video games, and the topic of 3D city reproduction comes with its own set of unique challenges.
-So far there have been a lot of research in modelling of 3D road networks, but these projects have often focused on the road networks designated for cars and public transit, and seldom on pedestrian footpaths.
+It is often desirable to recreate real-world cities in 3D applications such as urban design software and video games, and the topic of 3D city reproduction comes with its own set of unique challenges, at the base of which lies procedual rendering of 3D road networks.
+So far there have been a lot of research in modelling of road networks, but these projects have often focused on the road networks designated for cars and public transit, and seldom on pedestrian footpaths.
 
 This project assesses the feasibility of reconstructing a city from OpenStreetMap (OSM) road and building data, and will focus on the feasibility of including pedestrian footpaths, by examining how common it is that these footpaths collide with other map features.
 In the collision detection process, the margin of error has been taken as the positional error in the OSM dataset, which has been obtained by comparing OSM data to a dataset with a known accuracy.
 
 It was found that footpaths were less problematic than other road types (primary, secondary, residential), in terms of feature collisions, and thus should pose no more problems in 3D city reproduction than other road types.
-The report concludes with a scientific study of the field of 3D city reproduction. It serves to give an overview of the challenges in the field and place the study and findings of this project in a broader scientific context. 
+The report concludes with a study of the remaining challenges in 3D city reproduction.
+    
 \end{abstract}
 
 \begin{otherlanguage}{swedish}
 \begin{abstract}
-Haha, He-Man! There is no possible way that you feeble-brained barbarian and your furball mount can foil my plan this time. With the ancient power at my command I shall doom this kingdom to crumble in meager ashes and.. Oh shit, he has run off with the crystal skull hasn't he? Damn you He-Man!!!
+Modellering av städer i 3D har länge varit ett ämne av intresse inom datorgrafik.
+Ofta vill man återskapa verkliga städer i 3D-miljöer som till exempel mjukvara för stadsplanering eller datorspel.
+Avbildning av städer i 3D är ett ämne som kommer med många unika utmaningar, bland vilka en central utmaning är procedurell rendrering av vägnät.
+Tidigare har det bedrivits mycket forskning inom detta område, men många projekt har valt att fokusera på de delar av vägnätet som används av bilar och kollektivtraffik, och sällan gångvägar.
+
+Det här projektet har undersökt hur genomförbart det är att återskapa en stad utifrån data från OpenStreetMap (OSM), och kommer särskilt fokusera på hur genomförbart det är att inkludera gångvägar i en sådan modell.
+Studien har undersökt hur vanligt det är att gångvägar kolliderar kolliderar med andra kartdetaljer såsom byggnader och andra vägar.
+I denna process har felmarginalen för OSM-datamängden tagits fram genom att jämföra datamängen med en referenskarta med känd felmarginal.
+OSM-datamängdens felmarginal har använts som felmarginal i kollisionsstudien.
+
+Studien fann att gångvägar är mindre problematiska än andra vägtyper beträffande hur många vägar som kolliderar, och således borde inte gångvägar vara svårare att inkludera i en 3D-miljö än andra vägtyper.
+Rapporten avslutas med en studie över kvarvarande utmaningar inom området återskapande av städer i 3D.
 
 \end{abstract}
 \end{otherlanguage}

@@ -46,7 +46,7 @@ It is often desirable to recreate real-world cities in 3D applications such as u
 So far there have been a lot of research in modelling of road networks, but these projects have often focused on the road networks designated for cars and public transit, and seldom on pedestrian footpaths.
 
 This project assesses the feasibility of reconstructing a city from OpenStreetMap (OSM) road and building data, and will focus on the feasibility of including pedestrian footpaths, by examining how common it is that these footpaths collide with other map features.
-In the collision detection process, the margin of error has been taken as the positional error in the OSM dataset, which has been obtained by comparing OSM data to a dataset with a known accuracy.
+In the collision detection process, the margin of error has been taken as the positional error in the OSM dataset, which has been obtained by comparing OSM data to the Swedish University of Agricultural Sciences (SLU) building datset with known accuracy.
 
 It was found that footpaths were less problematic than other road types (primary, secondary, residential), in terms of feature collisions, and thus should pose no more problems in 3D city reproduction than other road types.
 The report concludes with a study of the remaining challenges in 3D city reproduction.
@@ -153,7 +153,7 @@ Here, features are defined as the geometrical components that comprise the OSM m
 For the purpose of this report, features will refer mainly to roads and building footprints.
 For the collision study, see sections 3.1.2 for an implementation overview, 3.3 for a detailed walkthrough of the program implementation, and 4.1.1 for the results.
 
-For the secondary research question: the geodata precision study, the positional accuracy will be estimated by comparing feature points between the OSM dataset and a reference dataset.
+For the secondary research question: the geodata precision study, the positional accuracy will be estimated by comparing feature points between the OSM building dataset and the Swedish University of Agricultural Sciences (SLU) building datset with known accuracy.
 The positional accuracy will be needed to assess where road collisions occur and whether they can easily be corrected.
 For the positional accuracy study, see sections 3.1.1 for an implementation overview, 3.2 for a walkthrough of the program implementation, and 4.1.2 for the results.
 
@@ -668,7 +668,7 @@ They claim that particularily the imagery from Bing Maps, which launched in 2010
 
 \subsection{SLU data}
 
-The SLU map is maintained by The Swedish National Land Survey (Swedish: Lantmäteriet)
+The SLU map is maintained and published by The Swedish National Land Survey (Swedish: Lantmäteriet)
 \footnote{Lantmäteriet. Produktbeskrivning: GSD-Fastighetskartan vektor - Lantmäteriet. Acessed 16-04-2020. https://www.lantmateriet.se/globalassets/kartor-och-geografisk-information/kartor/fastshmi.pdf}.
 The data is collected by geodetic professionals, by using land surveying methods such as GPS or DGNSS positioning, or by reproduction of features from ortophoto or stereo mapping from 3D aerial images.
 Building features in the SLU dataset have a position accuracy requirement of 2 meters.
@@ -855,7 +855,6 @@ The question is wether it comforms well to the positional error in the rest of t
 \end{figure}
 
 % NOW-NOW:
-% TODO: Introduce the name SLU + Lantmäteriet in introduction and abstract
 % TODO: Make clear that a footpath is a type of road. Even sidewalks that run along main roads are classified as roads in OSM.
 % TODO: Abstract: Reduce first paragraph (background)
 % TODO: Use overlap instead of collision outside of technical contexts

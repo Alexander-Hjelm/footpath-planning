@@ -49,7 +49,7 @@ To examine this, a slice of the OSM dataset in the Stockholm area has been taken
 It was found that footpaths were less problematic than other road types (primary, secondary, residential), in terms of feature collisions, and thus should pose no more problems in 3D city reproduction than other road types.
 
 As a part of this study, the positional accuracy of the OSM dataset was calculated by comparing points of OSM building footprints to those in the Swedish University of Agricultural Sciences (SLU) building datset, whose accuracy is known. The positional accuracy determines the maximum tolerance in distance between points before it is certain that a road overlaps with another road or building.
-    
+
 \end{abstract}
 
 \begin{otherlanguage}{swedish}
@@ -92,6 +92,12 @@ Geodata can contain any form of map features, from terrain to road networks and 
 Such methods are indeed used in the field of virtual city reproduction to reduce the labour required to create accurate 3D representations of cities, but the field of procedual city reproduction comes with its own host of challenges.
 Urban environments are typically dense and large, spanning a few to hundreds of square kilometers, and are influenced by variables that are hard to quantify, including land policies, government plans, population changes and transportation infrastructure, making it non-trivial to produce 3D city representations with both high accuracy and high detail, while simultaneuosly having high utility in the intended field of study.
 \textbf{(Vanegas et al, 2010)}.
+
+This project will strive to determine the feasibility of procuderally reconstructing a city road network from OSM data by using such models as have been mentioned in this section, focusing on pedestrian footpaths.
+\textbf{Footpaths} include any form of path that is designated for pedestrians, including sidewalks, walkways and trails.
+OSM commonly divides city road networks into any of the following 4 categories: arterial (primary) roads, secondary roads, residential roads and footpaths.
+For the purpose of this report, a \textbf{road} will be any road whose primary use is human travel, either via a vehicle or by foot.
+Note that by this definition even sidewalks are classifed as roads, even though they commonly run in connection to larger roads (which are usually reserved for motor vehicles), and thus may not always be thought of as roads in plain language.
 
 \begin{figure}[H]
     \centering
@@ -152,7 +158,7 @@ Here, features are defined as the geometrical components that comprise the OSM m
 For the purpose of this report, features will refer mainly to roads and building footprints.
 For the collision study, see sections 3.1.2 for an implementation overview, 3.3 for a detailed walkthrough of the program implementation, and 4.1.1 for the results.
 
-For the secondary research question: the geodata precision study, the positional accuracy will be estimated by comparing feature points between the OSM building dataset and the Swedish University of Agricultural Sciences (SLU) building datset with known accuracy.
+For the secondary research question: the geodata precision study, the positional accuracy will be estimated by comparing feature points between the OSM building dataset and the Swedish University of Agricultural Sciences (SLU) building datset with known accuracy. See section 3.4.2 for an overview of the SLU dataset and how it is obtained.
 The positional accuracy will be needed to assess where road collisions occur and whether they can easily be corrected.
 For the positional accuracy study, see sections 3.1.1 for an implementation overview, 3.2 for a walkthrough of the program implementation, and 4.1.2 for the results.
 
@@ -853,11 +859,8 @@ The question is wether it comforms well to the positional error in the rest of t
     \label{fig:osm-slu-map-utility-buildings}
 \end{figure}
 
-% NOW-NOW:
-% TODO: Make clear that a footpath is a type of road. Even sidewalks that run along main roads are classified as roads in OSM.
-% TODO: Use overlap instead of collision outside of technical contexts
-
 % NOW:
+% TODO: Use overlap instead of collision outside of technical contexts
 % TODO: Introduce concepts: Collision, overlap, error
 % TODO: Come up with a sentence that explains why errors could cause overlap. Repeat it in Introduction, research question and the abstract
 % TODO: The word footpath does not appear anywhere in the TOC

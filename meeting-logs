@@ -304,3 +304,52 @@ to the your thesis/work.
 
 Best,
 Chris
+
+Email from Chris 15/06:
+
+Hi Alexander,
+
+Thanks for the ping: The table of contents and structure is looking good to me!
+But I think you should do another iteration to improve the overall clarity,
+focussing on the core concepts and terms. It's not bad at the moment, but just
+to make it easier to read at the beginning (since I think a reader not already familiar
+with it may grapple with a few aspects and have to read more deeply to try to figure
+them out).
+
+1) The concepts of collisions, errors and overlaps. I think you need to get the whole
+concept across in a clearer and more consistent way, starting in the abstract. Try and
+come up with a sentence that is as short as possible and explains why overlaps might
+arise in two datasets. You should repeat this a couple of times throughout the work: it
+should be in the abstract, introduction and 1.3 research question. You can go into detail
+about it in the introduction section and there, a clear comparison image with an
+example of accurate versus inaccurate data would make the case very clear quickly.
+Overlap is a more understandable term early on than collision, so I'd be inclined to use
+that, perhaps 'overlap due to errors' would help to explain it. Collisions could be saved
+for later as a more technical term.
+
+2) Roads versus footpaths. I think your definition of 'road' includes 'footpaths' too. But I find
+this confusing, since a footpath (or specifically, sidewalk) is usually something that runs
+alongside a road. I'd advise you use different terms for road and footpath - if you do want to
+consider a footpath as a type of road, you shuold make it clear early on.
+It would also be good to reflect that a bit in the table of contents: although the thesis is
+mainly about footpaths, that word doesn't appear in any of the section or subsection
+headings in the implementation or evaluation sections.
+
+3) Revisit the title of the report. Fans of OSM might not be happy to hear an assessment
+that OSM quality is not good.
+
+4) Same for the abstract. Reduce the first paragraph, which is really background.
+Then provide more detail about what specifically was done and how it was evaluated.
+"In the collision detection process..." - this sentence is a bit enigmatic, and could be
+rephrased to tell us a bit more about what was compared and how. Also, perhaps include
+the name of the dataset with known accuracy.
+
+The results sentence look fine, although it would be good to mention the implications.
+However, I think the contirbution of your work would look better if you also include the
+method that you use to compare the datasets. That could also be a contirubtion. Could
+it be used in future? What are it limitations, benefits, etc?
+
+When are you thinking of sending it to Jonas? I think you just need to clarify it a bit more
+before you send and I can't see it taking too long.
+
+Chris

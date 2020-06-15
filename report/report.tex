@@ -45,10 +45,10 @@ Modeling cities in 3D has long been a topic of interest in field of computer gra
 It is often desirable to recreate real-world cities in 3D applications such as urban design software and video games, and the topic of 3D city reproduction comes with its own set of unique challenges, at the base of which lies procedual rendering of 3D road networks.
 
 This project assesses the feasibility of reconstructing a city from OpenStreetMap (OSM) road and building data, and will focus on the feasibility of including pedestrian footpaths, by examining how common it is that these footpaths collide with other map features.
-In the collision detection process, the margin of error has been taken as the positional error in the OSM dataset, which has been obtained by comparing OSM data to the Swedish University of Agricultural Sciences (SLU) building datset with known accuracy.
-
+To examine this, a slice of the OSM dataset in the Stockholm area has been taken, and each road has been assigned with standard withds according to swedish regulation, after which a geometrical algorithm was applied to all road pairs to obtain the average amount of road overlap.
 It was found that footpaths were less problematic than other road types (primary, secondary, residential), in terms of feature collisions, and thus should pose no more problems in 3D city reproduction than other road types.
-The report concludes with a study of the remaining challenges in 3D city reproduction.
+
+As a part of this study, the positional accuracy of the OSM dataset was calculated by comparing points of OSM building footprints to those in the Swedish University of Agricultural Sciences (SLU) building datset, whose accuracy is known. The positional accuracy determines the maximum tolerance in distance between points before it is certain that a road overlaps with another road or building.
     
 \end{abstract}
 
@@ -861,7 +861,6 @@ The question is wether it comforms well to the positional error in the rest of t
 % TODO: Introduce concepts: Collision, overlap, error
 % TODO: Come up with a sentence that explains why errors could cause overlap. Repeat it in Introduction, research question and the abstract
 % TODO: The word footpath does not appear anywhere in the TOC
-% TODO: Abstract: Provide more detail about what was done and how it was evaluated - rephrase "In the collision detection process"
 
 % LATER:
 % TODO: Image with road collision (Accurate data vs inaccurate data)

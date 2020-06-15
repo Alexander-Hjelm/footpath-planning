@@ -93,12 +93,6 @@ Such methods are indeed used in the field of virtual city reproduction to reduce
 Urban environments are typically dense and large, spanning a few to hundreds of square kilometers, and are influenced by variables that are hard to quantify, including land policies, government plans, population changes and transportation infrastructure, making it non-trivial to produce 3D city representations with both high accuracy and high detail, while simultaneuosly having high utility in the intended field of study.
 \textbf{(Vanegas et al, 2010)}.
 
-This project will strive to determine the feasibility of procuderally reconstructing a city road network from OSM data by using such models as have been mentioned in this section, focusing on pedestrian footpaths.
-\textbf{Footpaths} include any form of path that is designated for pedestrians, including sidewalks, walkways and trails.
-OSM commonly divides city road networks into any of the following 4 categories: arterial (primary) roads, secondary roads, residential roads and footpaths.
-For the purpose of this report, a \textbf{road} will be any road whose primary use is human travel, either via a vehicle or by foot.
-Note that by this definition even sidewalks are classifed as roads, even though they commonly run in connection to larger roads (which are usually reserved for motor vehicles), and thus may not always be thought of as roads in plain language.
-
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_virtual_city}
@@ -107,6 +101,14 @@ Note that by this definition even sidewalks are classifed as roads, even though 
 \end{figure}
 
 \footnotetext{Image source: Downtown Boston 3D City Model in Infraworks 360, available via: https://gallery.autodesk.com/civilinfrastructure/projects/490/downtown-boston-3d-city-model-in-infraworks-360}
+
+\section{Footpath definition}
+
+This project will strive to determine the feasibility of procuderally reconstructing a city road network from OSM data by using such models as have been mentioned in this section, focusing on pedestrian footpaths.
+\textbf{Footpaths} include any form of path that is designated for pedestrians, including sidewalks, walkways and trails.
+OSM commonly divides city road networks into any of the following 4 categories: arterial (primary) roads, secondary roads, residential roads and footpaths.
+For the purpose of this report, a \textbf{road} will be any road whose primary use is human travel, either via a vehicle or by foot.
+Note that by this definition even sidewalks are classifed as roads, even though they commonly run in connection to larger roads (which are usually reserved for motor vehicles), and thus may not always be thought of as roads in plain language.
 
 \begin{figure}[H]
     \centering
@@ -708,7 +710,7 @@ First the results of the collision study is presented as how many of the road fe
 Then the results of the geodata precision is presented.
 The final estimate of the positional accuracy of the OSM dataset will be presented, as well as the dataset completeness and statistics about building correspondence and shape accuracy.
 
-\subsection{Road collision study}
+\subsection{Road overlap study}
 
 For the primary collision study.
 Table \ref{table:road-collision} shows the statistics of the collision study, and the number of roads, number of edges and total edge length that showed intersections with other features, by road category.
@@ -862,10 +864,9 @@ The question is wether it comforms well to the positional error in the rest of t
 % NOW:
 % TODO: Use overlap instead of collision outside of technical contexts
 % TODO: Introduce concepts: Collision, overlap, error
-% TODO: Come up with a sentence that explains why errors could cause overlap. Repeat it in Introduction, research question and the abstract
-% TODO: The word footpath does not appear anywhere in the TOC
 
 % LATER:
+% TODO: Come up with a sentence that explains why errors could cause overlap. Repeat it in Introduction, research question and the abstract
 % TODO: Image with road collision (Accurate data vs inaccurate data)
 % TODO: Swedish abstract
 
@@ -873,7 +874,7 @@ The question is wether it comforms well to the positional error in the rest of t
 % TODO: New thesis name
 % TODO: Spell check
 
-\subsection{Collision study}
+\subsection{Footpath overlap study}
 
 The immediate conclusion of this study is that, in terms of feature collision, footpaths were not significantly worse than other road categories.
 As a result, it can promptly be assumed that city modelling services which already utilize OSM car road data could also use OSM footpath data without a drastic increase in feature collision.
@@ -907,7 +908,7 @@ All these cases will create issues when generating the 3D mesh representation of
     \label{fig:collision-cases}
 \end{figure}
 
-\subsection{Suggested algorithms for collision correction}
+\subsection{Suggested algorithms for overlap correction}
 
 All collision cases can be solved with relatively simply geometric algorithms. This section will present suggestions on algorithms that will resolve collisions by identifying individual colliding nodes and translating them, after which some degree of smoothing (such as linear interpolation) can be applied to preserve visual features. Cases 1 and 3-5 will be handled, while 2 will be left since case 2 collisions do not inherently cause feature overlap when extruding a 3D road mesh from the way edges. Thus it will be up to the individual developer to decide what to do with Case 2 collisions.
 
@@ -952,6 +953,10 @@ This report has now established a firm idea of the technical feasibility of gene
 It remains to touch upon the possibilities of road network modelling in the broader context of 3D city reproduction. What are the remaining challenges for accurate 3D city reproduction?
 What techniques can be used to complement the basic system of importing street and building data that is already in place, and create a rich and living virtual city?
 In this section everything we have learnt so far will be placed in the broader context of GIS and city modeling, focusing on the research fields of 3D media and city planning.
+
+\section{Feasibility of exporting footpaths}
+
+% TODO: Write this section
 
 \section{Remaining challenges in city reproduction}
 

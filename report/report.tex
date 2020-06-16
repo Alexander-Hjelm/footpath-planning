@@ -48,7 +48,10 @@ This project assesses the feasibility of reconstructing a city from OpenStreetMa
 To examine this, a slice of the OSM dataset in the Stockholm area has been taken, and each road has been assigned with standard withds according to swedish regulation, after which a geometrical algorithm was applied to all road pairs to obtain the average amount of road overlap.
 It was found that footpaths were less problematic than other road types (primary, secondary, residential), in terms of feature collisions, and thus should pose no more problems in 3D city reproduction than other road types.
 
-As a part of this study, the positional accuracy of the OSM dataset was calculated by comparing points of OSM building footprints to those in the Swedish University of Agricultural Sciences (SLU) building datset, whose accuracy is known. The positional accuracy determines the maximum tolerance in distance between points before it is certain that a road overlaps with another road or building.
+As a part of this study, the positional accuracy of the OSM dataset was calculated.
+Any geodataset has a limit on its positional accuracy, that is determined by the theoretical precision of the measuring methods.
+For the case of the OSM data used in this project, the accuracy was obtained by comparing coordinate points of OSM building footprints to those in the Swedish University of Agricultural Sciences (SLU) building datset, whose accuracy is known.
+The positional accuracy determines the maximum tolerance in distance between points before it is certain that a road overlaps with another road or building.
 
 \end{abstract}
 
@@ -57,15 +60,17 @@ As a part of this study, the positional accuracy of the OSM dataset was calculat
 Modellering av städer i 3D har länge varit ett ämne av intresse inom datorgrafik.
 Ofta vill man återskapa verkliga städer i 3D-miljöer som till exempel mjukvara för stadsplanering eller datorspel.
 Avbildning av städer i 3D är ett ämne som kommer med många unika utmaningar, bland vilka en central utmaning är procedurell rendrering av vägnät.
-Tidigare har det bedrivits mycket forskning inom detta område, men många projekt har valt att fokusera på de delar av vägnätet som används av bilar och kollektivtraffik, och sällan gångvägar.
 
 Det här projektet har undersökt hur genomförbart det är att återskapa en stad utifrån data från OpenStreetMap (OSM), och kommer särskilt fokusera på hur genomförbart det är att inkludera gångvägar i en sådan modell.
-Studien har undersökt hur vanligt det är att gångvägar kolliderar kolliderar med andra kartdetaljer såsom byggnader och andra vägar.
-I denna process har felmarginalen för OSM-datamängden tagits fram genom att jämföra datamängen med en referenskarta med känd felmarginal.
-OSM-datamängdens felmarginal har använts som felmarginal i kollisionsstudien.
-
+Studien har undersökt hur vanligt det är att gångvägar överlappar med andra kartdetaljer såsom byggnader och andra vägar.
+I denna undersökning har en delmängd av OSM-datamängden över Stockholm tagits, och varje väg har givits en standardbredd enligt svenska bestämmelser.
+Sedan har en geometrisk algoritm tagit alla möjliga vägpar och beräknat hur stor mängd av vägarna som skulle överlappa med andra kartdetaljer.
 Studien fann att gångvägar är mindre problematiska än andra vägtyper beträffande hur många vägar som kolliderar, och således borde inte gångvägar vara svårare att inkludera i en 3D-miljö än andra vägtyper.
-Rapporten avslutas med en studie över kvarvarande utmaningar inom området återskapande av städer i 3D.
+
+I studien har felmarginalen för OSM-datamängden också tagits fram.
+Varje geodatamängd har en gräns på hur väl den stämmer överrens med verkligheten, som bestäms av vilka mätmedoter som har använts i datans insamling.
+I detta projekt uppskattades felmarginalen genom att jämföra byggnaders koordinatpunkter i datamängen med de från en referenskarta från Svenska Lantbruksuniversitetet (SLU) med känd felmarginal.
+Felmarginalen bestämmer toleransen mellan två punkter som kan tillåtas innan man är säker på att en väg börjar överlappa med en annan väg eller en byggnad.
 
 \end{abstract}
 \end{otherlanguage}
@@ -866,9 +871,7 @@ The question is wether it comforms well to the positional error in the rest of t
     \label{fig:osm-slu-map-utility-buildings}
 \end{figure}
 
-
 % After Chris approves
-% TODO: Swedish abstract
 % TODO: New thesis name
 % TODO: Spell check
 

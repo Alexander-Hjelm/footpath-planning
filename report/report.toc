@@ -15,9 +15,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {1.4}Research question}{6}{section.1.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.5}Delimitations}{7}{section.1.5}
+\contentsline {section}{\numberline {1.5}Delimitations}{8}{section.1.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {1.5.1}Delimitations of the OSM map data}{7}{subsection.1.5.1}
+\contentsline {subsection}{\numberline {1.5.1}Delimitations of the OSM map data}{8}{subsection.1.5.1}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.5.2}Delimitations of accuracy classes}{8}{subsection.1.5.2}
 \defcounter {refsection}{0}\relax 

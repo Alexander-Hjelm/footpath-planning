@@ -41,10 +41,9 @@
 \titlepage
 
 \begin{abstract}
-Modeling cities in 3D has long been a topic of interest in field of computer graphics.
-It is often desirable to recreate real-world cities in 3D applications such as urban design software and video games, and the topic of 3D city reproduction comes with its own set of unique challenges, at the base of which lies procedual rendering of 3D road networks.
+This project assesses the feasibility of reconstructing virtual cities from OpenStreetMap (OSM) road and building data, and will focus on the feasibility of including pedestrian footpaths, by examining how common it is that these footpaths overlap with other map features.
+Feature overlap is a type of geomerty error that arises to inaccuracies in the source data, which results in 3D models overlapping, which can in turn lead to strange-looking mesh intersections and artifacts in the final city model
 
-This project assesses the feasibility of reconstructing a city from OpenStreetMap (OSM) road and building data, and will focus on the feasibility of including pedestrian footpaths, by examining how common it is that these footpaths collide with other map features.
 To examine this, a slice of the OSM dataset in the Stockholm area has been taken, and each road has been assigned with standard withds according to swedish regulation, after which a geometrical algorithm was applied to all road pairs to obtain the average amount of road overlap.
 It was found that footpaths were less problematic than other road types (primary, secondary, residential), in terms of feature collisions, and thus should pose no more problems in 3D city reproduction than other road types.
 
@@ -57,12 +56,11 @@ The positional accuracy determines the maximum tolerance in distance between poi
 
 \begin{otherlanguage}{swedish}
 \begin{abstract}
-Modellering av städer i 3D har länge varit ett ämne av intresse inom datorgrafik.
-Ofta vill man återskapa verkliga städer i 3D-miljöer som till exempel mjukvara för stadsplanering eller datorspel.
-Avbildning av städer i 3D är ett ämne som kommer med många unika utmaningar, bland vilka en central utmaning är procedurell rendrering av vägnät.
-
-Det här projektet har undersökt hur genomförbart det är att återskapa en stad utifrån data från OpenStreetMap (OSM), och kommer särskilt fokusera på hur genomförbart det är att inkludera gångvägar i en sådan modell.
+Det här projektet har undersökt hur genomförbart det är att återskapa virtuella städer utifrån data från OpenStreetMap (OSM), och kommer särskilt fokusera på hur genomförbart det är att inkludera gångvägar i en sådan modell.
 Studien har undersökt hur vanligt det är att gångvägar överlappar med andra kartdetaljer såsom byggnader och andra vägar.
+Överlappning är en typ av fel i 3D-geometrin som uppstår på grund av osäkerhet i källdatan, vilket resulterar i att 3D-modeller överlappar med varandra.
+Detta kan leda till besvärliga skärningar och artifakter i den färdiga stadsmodellen.
+
 I denna undersökning har en delmängd av OSM-datamängden över Stockholm tagits, och varje väg har givits en standardbredd enligt svenska bestämmelser.
 Sedan har en geometrisk algoritm tagit alla möjliga vägpar och beräknat hur stor mängd av vägarna som skulle överlappa med andra kartdetaljer.
 Studien fann att gångvägar är mindre problematiska än andra vägtyper beträffande hur många vägar som kolliderar, och således borde inte gångvägar vara svårare att inkludera i en 3D-miljö än andra vägtyper.
@@ -131,9 +129,8 @@ Luckily there are coming more and more sophisticated methods for automatically c
 \textbf{(Biljecki et al, 2016 (2))}.
 
 % TODO: Use overlap instead of collision outside of technical contexts
-% TODO: Come up with a sentence that explains why errors could cause overlap. Repeat it in Introduction, research question and the abstract
 
-Specifically in the case of rendering road networks and buildings, a common issue is that the 3D models being generated from road and building data migh overlap with each other, which can lead to strange-looking mesh intersections and inaccuracies that modelers often want to avoid.
+Specifically in the case of rendering road networks and buildings, a common issue is that the 3D models being generated from road and building data might overlap with each other, which can lead to strange-looking mesh intersections and inaccuracies that modelers often want to avoid.
 Such feature overlap is a type of geomerty error that arises due to inaccuracies in the source data, often due to limited precision in the measuring methods used to obtain the data.
 For the purpose of this project, the terms \textbf{feature overlap} and \textbf{feature collision} will be used synonymously, referring to the amount of features that show overlap with each other in the dataset, or the total feature area that show overlap in the same way.
 See figure \ref{fig:img_road_error_cases} for a few visual examples of what feature overlap could look like in the final 3D city model.
@@ -165,7 +162,8 @@ This project has dealt with the feasibility of including footpath data when gene
     \textbf{Is it technically feasibile to generate a 3D virtual city with footpath road data, with minimal (and preferably no) overlap between 3D features?}
 \end{center}
 
-To investigate this, the problem will specifically be divided into the following two subquestion:
+Again, note that feature overlap is defined here as geomerty errors due to inaccuracies in the source data, which results in 3D models overlapping, which can in turn lead to strange-looking mesh intersections.
+To investigate the feasibility of generating a 3D virtual city with minimal footpath overlap, the main research question will specifically be divided into the following two subquestion:
 
 \begin{enumerate}
     \item The primary subquestion is: \textbf{How many roads of each type will collide with some other map feature, once they have been given a geometrical width?} This question aims to find the rate of collision between road features in OSM, and investigate the nature of the most common types of collisions and how they can be corrected.
@@ -881,7 +879,6 @@ The question is wether it comforms well to the positional error in the rest of t
 \end{figure}
 
 % After Chris approves
-% TODO: New thesis name
 % TODO: Spell check
 
 \subsection{Footpath overlap study}

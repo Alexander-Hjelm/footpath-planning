@@ -135,6 +135,13 @@ Luckily there are coming more and more sophisticated methods for automatically c
 % TODO: Come up with a sentence that explains why errors could cause overlap. Repeat it in Introduction, research question and the abstract
 % TODO: Image with road collision (Accurate data vs inaccurate data)
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_road_error_cases}
+    \caption{Example segments of a 3D reconstruciton of the Stockholm road map, with clearly visible geometric errors. The road overlap is marked with red boundaries. The segments show firstly a healthy intersection with main car roads, sidewalks and pedestrian crossings (top left), secondly a city segment where roads have been placed so they overlap with existing buildings due to insufficient data precision (top right), thirdly a similar case where roads overlap with each other (bottom left) and lastly an intersection where the road geomerty twists and self-intersects in strange ways due to invalid source data. This last case will not be examined in this project.}
+    \label{fig:residential-footpath-map}
+\end{figure}
+
 Specifically in the case of rendering road networks and buildings, a common issue is overlap between the 3D models of the features, which can lead to strange-looking mesh intersections and inaccuracies that modelers often want to avoid.
 In particular, the risk of feature collision may be higher between streets and roads designated for energy efficient mobility, such as footpaths, since they are much more organic and dense in their nature than main streets.
 Thus, it is often in the designer's best interest to have a procedure for importing road data that results in minimal feature overlap, while still retaining accuracy to the real world.

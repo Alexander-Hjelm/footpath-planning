@@ -101,8 +101,8 @@ public class GameManager : MonoBehaviour
                 Vector3 transformed = RoadMesh.TransformPointToMeshSpace(new Vector2(position.longitude, position.latitude));
                 // Add node to path
                 plotFootprint.AddVertex(transformed);
-                print(position.longitude + ", " + position.latitude);
-                print(transformed.x + ", " + transformed.z);
+                //print(position.longitude + ", " + position.latitude);
+                //print(transformed.x + ", " + transformed.z);
             }
             plotFootprintList.Add(plotFootprint);
         }

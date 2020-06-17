@@ -130,17 +130,19 @@ It is important to note that OSM does commonly not include a defition of the wid
 \section{Accuracy limitations in 3D city reproduction}
 
 When it comes to the quality of available data, it turns out that in practise, geodata databases without errors are rare.
-Among the most common errors are missing data or invalid geometry.
 Geodata validation and correction is only an emerging field of research, and many such datasets were usually obtained years ago, and creating error-free datasets was neither possible due to the lack of validation techniques, nor a high priority.
 Luckily there are coming more and more sophisticated methods for automatically correcting the most common errors
 \textbf{(Biljecki et al, 2016 (2))}.
 
+% TODO: Introduce the idea of positional error due to low accuracy in this section
+\textbf{(Fan et al, 2014)}.
+
 Specifically in the case of rendering road networks and buildings, a common issue is that the 3D models being generated from road and building data might overlap with each other, which can lead to strange-looking mesh intersections and inaccuracies that modelers often want to avoid.
-Such feature overlap is a type of geomerty error that arises due to inaccuracies in the source data, often due to limited precision in the measuring methods used to obtain the data.
+In this project it was hypothised that the risk of feature overlap may be higher between streets and roads designated for energy efficient mobility, such as footpaths, since they are much more organic and dense in their nature than main streets.
+\textbf{Feature overlap} is a type of geomerty error that arises due to inaccuracies in the source data, often due to limited precision in the measuring methods used to obtain the data.
 For the purpose of this project, the terms \textbf{feature overlap} and \textbf{feature collision} will be used synonymously, referring to the amount of features that show overlap with each other in the dataset, or the total feature area that show overlap in the same way.
 See figure \ref{fig:img_road_error_cases} for a few visual examples of what feature overlap could look like in the final 3D city model.
 
-% TODO: Introduce the idea of positional error due to low accuracy in this section
 % TODO: The idea is to use road width and point coordinates as variables when making adjustments against errors.
 
 \begin{figure}[H]
@@ -150,8 +152,7 @@ See figure \ref{fig:img_road_error_cases} for a few visual examples of what feat
     \label{fig:img_road_error_cases}
 \end{figure}
 
-In this project it was hypothised that the risk of feature overlap may be higher between streets and roads designated for energy efficient mobility, such as footpaths, since they are much more organic and dense in their nature than main streets.
-Thus, it is often in the designer's best interest to have a procedure for importing road data that results in minimal feature overlap, while still retaining accuracy to the real world.
+To limit visual quirks such as mesh self intersection, it is often in the designer's best interest to have a stable procedure for importing road data that results in minimal feature overlap, while still retaining accuracy to the real world.
 A possible way of mitigating this problem is looking towards gathering geodata from volunteer-based geoservices such as OSM.
 The OSM project is a freely available wiki-like geodatabase based on Volunteered Geographical Information (VGI), meaning anyone can contribute by adding or editing features.
 The OSM world dataset is being consistently updated by volonteers from all over the world, and the main idea is that by using OSM geodata for city reproduction, the temporal aspect of data accuracy would in theory be more assured by the crowd contribution nature.
@@ -185,6 +186,8 @@ Here, features are defined as the geometrical components that comprise the OSM m
 For the purpose of this report, features will refer mainly to roads and building footprints.
 For the overlap study, see sections 3.1.2 for an implementation overview, 3.3 for a detailed walkthrough of the program implementation, and 4.1.1 for the results.
 
+%TODO: Include a note here about the challenges of identifying what buildings belong together and then finding what vertices belong together.
+
 For the secondary research question: the geodata precision study, the positional accuracy will be estimated by comparing feature points between the OSM building dataset and the Swedish University of Agricultural Sciences (SLU) building datset with known accuracy. See section 3.4.2 for an overview of the SLU dataset and how it is obtained.
 The positional accuracy will be needed to assess where road overlap occurs and whether the collisions can easily be corrected.
 For the positional accuracy study, see sections 3.1.1 for an implementation overview, 3.2 for a walkthrough of the program implementation, and 4.1.2 for the results.
@@ -206,18 +209,18 @@ In this study, when working with OSM geodata, the following assumptions have bee
 
 This study will not consider the lineage aspect of the geodata.
 Lineage is defined by \textbf{(Van Oort, 2006)} as the historical aspect of the dataset: how it has been obtained, with what instruments and how it has evolved between the moment it was obtained and the moment it was retrieved.
-The entire OSM dataset is under constant modification by volonteers, so it is expected that the accuracy will improve over time. Previous studies highlight how the posiitonal accuracy in similar-sized cities have improved over several years (\textbf{Fan et al, 2014}, \textbf{Haklay, 2010}).
+The entire OSM dataset is under constant modification by volonteers, so it is expected that the accuracy will improve over time. Previous studies highlight how the posiitonal accuracy in similar-sized cities have improved over the course of several years (\textbf{Fan et al, 2014}, \textbf{Haklay, 2010}).
 The historical aspect of the OSM dataset is available through the OSM History Viewer
 \footnote{OSM History Viewer - OpenStreetMap Wiki. Accessed 20-03-2020. https://wiki.openstreetmap.org/wiki/OSM\_History\_Viewer}
 , an online debugging tool that lets anyone freely view the change history of individual fetures in a commit history-like fashion.
 There is an option for editors to include a personal note with their changesets to include additional details or motivate why a change was made, but there is no guaratee that the data includes any information on the aquisition method used.
 
 Another aspect of geodata precision is attribute accuracy, which will neither be considered in this study.
-Attributes are small flags of metadata that are included with geodata features, letting the user know for example the type of a road, how many lanes it has, if the base is asphalt or gravel, or how many stories a building has.
+Attributes are small flags of metadata that are included with geodata features, letting the user know additional details about a feature that is not reflected in the map, e.g. how many lanes a road has, if the base is asphalt or gravel, or how many stories a building has.
 Attribute accuracy is the meausere of how complete attribute information is in a dataset.
 How much attribute data is missing and how much of it does not comform with reality?
 In general, attribute accuracy is hard to quantify.
-In this case howere, it might be interesting to compare attributes between the OSM map and the referece map that was used in this project, as both use encoded metadata on a per feature basis, and matching features can be easily identified.
+In this case however, it might be interesting to compare attributes between the OSM map and the SLU referece map that was used in this project, as both use encoded metadata on a per feature basis, and matching features can be easily identified.
 See section 3.4.2 for an overview of the reference dataset that was used in this study.
 The attribute accuracy of the two datasets could in theory be assessed by doing a simple feature comparison and creating a translation table between the two attribute maps.
 To the knowledge of the author, this has never been done with specifically these two datasets, at the time of writing.

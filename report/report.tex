@@ -131,19 +131,21 @@ Luckily there are coming more and more sophisticated methods for automatically c
 \textbf{(Biljecki et al, 2016 (2))}.
 
 % TODO: Use overlap instead of collision outside of technical contexts
-% TODO: Introduce concepts: Collision, overlap, error
 % TODO: Come up with a sentence that explains why errors could cause overlap. Repeat it in Introduction, research question and the abstract
-% TODO: Image with road collision (Accurate data vs inaccurate data)
+
+Specifically in the case of rendering road networks and buildings, a common issue is that the 3D models being generated from road and building data migh overlap with each other, which can lead to strange-looking mesh intersections and inaccuracies that modelers often want to avoid.
+Such feature overlap is a type of geomerty error that arises due to inaccuracies in the source data, often due to limited precision in the measuring methods used to obtain the data.
+For the purpose of this project, the terms \textbf{feature overlap} and \textbf{feature collision} will be used synonymously, referring to the amount of features that show overlap with each other in the dataset, or the total feature area that show overlap in the same way.
+See figure \ref{fig:img_road_error_cases} for a few visual examples of what feature overlap could look like in the final 3D city model.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_road_error_cases}
     \caption{Example segments of a 3D reconstruciton of the Stockholm road map, with clearly visible geometric errors. The road overlap is marked with red boundaries. The segments show firstly a healthy intersection with main car roads, sidewalks and pedestrian crossings (top left), secondly a city segment where roads have been placed so they overlap with existing buildings due to insufficient data precision (top right), thirdly a similar case where roads overlap with each other (bottom left) and lastly an intersection where the road geomerty twists and self-intersects in strange ways due to invalid source data. This last case will not be examined in this project.}
-    \label{fig:residential-footpath-map}
+    \label{fig:img_road_error_cases}
 \end{figure}
 
-Specifically in the case of rendering road networks and buildings, a common issue is overlap between the 3D models of the features, which can lead to strange-looking mesh intersections and inaccuracies that modelers often want to avoid.
-In particular, the risk of feature collision may be higher between streets and roads designated for energy efficient mobility, such as footpaths, since they are much more organic and dense in their nature than main streets.
+In this project it was hypothised that the risk of feature collision may be higher between streets and roads designated for energy efficient mobility, such as footpaths, since they are much more organic and dense in their nature than main streets.
 Thus, it is often in the designer's best interest to have a procedure for importing road data that results in minimal feature overlap, while still retaining accuracy to the real world.
 A possible way of mitigating this problem is looking towards gathering geodata from volunteer-based geoservices such as OSM.
 The OSM project is a freely available wiki-like geodatabase based on Volunteered Geographical Information (VGI), meaning anyone can contribute by adding or editing features.

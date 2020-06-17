@@ -15,7 +15,7 @@ public class CameraNavigation : MonoBehaviour
 
     private void Awake()
     {
-        transform.position = new Vector3(5f, 6.3f, -7.6f);
+        transform.position = new Vector3(5f, 4f, -7.6f);
         transform.rotation = Quaternion.LookRotation(Vector3.down, Vector3.forward);
         _moveTarget = transform.position;
         _instance = this;

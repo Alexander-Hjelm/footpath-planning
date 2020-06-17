@@ -783,10 +783,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e707b0a8afc68e355b1a628af503c430, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 0.3
-  _zoomSpeed: 0.25
-  _snapSpeed: 6
-  _minZoomLevel: 1
+  _moveSpeed: 0.1
+  _zoomSpeed: 0.04
+  _snapSpeed: 100000
+  _minZoomLevel: 0
   _maxZoomLevel: 10
 --- !u!1 &1300408274
 GameObject:

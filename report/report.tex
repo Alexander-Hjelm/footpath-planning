@@ -113,6 +113,9 @@ OSM commonly divides city road networks into any of the following 4 categories: 
 For the purpose of this report, a \textbf{road} will be any road whose primary use is human travel, either via a vehicle or by foot.
 Note that by this definition even sidewalks are classifed as roads, even though they commonly run in connection to larger roads (which are usually reserved for motor vehicles), and thus may not always be thought of as roads in plain language.
 
+In the 3D city model, each road will be represented by a polyline and a fixed \textbf{road width}. The width, or thickness, of a road at a certain point will be defined as the width of the perpendicular road cross section at that point, which is in its entirety usable by the intended types of traffic.
+It is important to note that OSM does commonly not include a defition of the width of any road. An optional tag exists that lets users specify the average path width of a road, but this tag is rarely used in practise.
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_map_residential_footpath_compare}

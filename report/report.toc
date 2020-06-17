@@ -49,7 +49,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.1.1}Geodata precision study}{22}{subsection.3.1.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.1.2}Collision study}{22}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.2}Overlap study}{22}{subsection.3.1.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.2}Geodata precision study}{23}{section.3.2}
 \defcounter {refsection}{0}\relax 
@@ -59,7 +59,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.2.3}Closest point and point proximity}{25}{subsection.3.2.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}Collision study}{29}{section.3.3}
+\contentsline {section}{\numberline {3.3}Overlap study}{29}{section.3.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.3.1}Road widths and properties}{29}{subsection.3.3.1}
 \defcounter {refsection}{0}\relax 

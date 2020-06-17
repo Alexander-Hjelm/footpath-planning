@@ -20,12 +20,12 @@
 \BOOKMARK [0][-]{chapter.3}{Implementation}{}% 20
 \BOOKMARK [1][-]{section.3.1}{Implementation overview}{chapter.3}% 21
 \BOOKMARK [2][-]{subsection.3.1.1}{Geodata precision study}{section.3.1}% 22
-\BOOKMARK [2][-]{subsection.3.1.2}{Collision study}{section.3.1}% 23
+\BOOKMARK [2][-]{subsection.3.1.2}{Overlap study}{section.3.1}% 23
 \BOOKMARK [1][-]{section.3.2}{Geodata precision study}{chapter.3}% 24
 \BOOKMARK [2][-]{subsection.3.2.1}{Dataset completeness and correspondence}{section.3.2}% 25
 \BOOKMARK [2][-]{subsection.3.2.2}{Shape accuracy definition}{section.3.2}% 26
 \BOOKMARK [2][-]{subsection.3.2.3}{Closest point and point proximity}{section.3.2}% 27
-\BOOKMARK [1][-]{section.3.3}{Collision study}{chapter.3}% 28
+\BOOKMARK [1][-]{section.3.3}{Overlap study}{chapter.3}% 28
 \BOOKMARK [2][-]{subsection.3.3.1}{Road widths and properties}{section.3.3}% 29
 \BOOKMARK [2][-]{subsection.3.3.2}{Feature Overlap algorithm}{section.3.3}% 30
 \BOOKMARK [2][-]{subsection.3.3.3}{Projected Line Segment Distance}{section.3.3}% 31

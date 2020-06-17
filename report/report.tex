@@ -42,13 +42,13 @@
 
 \begin{abstract}
 This project assesses the feasibility of reconstructing virtual cities from OpenStreetMap (OSM) road and building data, and will focus on the feasibility of including pedestrian footpaths, by examining how common it is that these footpaths overlap with other map features.
-Feature overlap is a type of geomerty error that arises to inaccuracies in the source data, which results in 3D models overlapping, which can in turn lead to strange-looking mesh intersections and artifacts in the final city model
+Feature overlap is a type of geomerty error that arises to inaccuracies in the source data, which results in 3D models overlapping, which can in turn lead to strange-looking mesh intersections and artifacts in the final city model.
 
-To examine this, a slice of the OSM dataset in the Stockholm area has been taken, and each road has been assigned with standard withds according to swedish regulation, after which a geometrical algorithm was applied to all road pairs to obtain the average amount of road overlap.
+In this study, a slice of the OSM dataset in the Stockholm area has been taken, and each road has been assigned with standard withds according to swedish regulation, after which a geometrical algorithm was applied to all road pairs to obtain the average amount of road overlap.
 It was found that footpaths were less problematic than other road types (primary, secondary, residential), in terms of feature overlap, and thus should pose no more problems in 3D city reproduction than other road types.
 
 As a part of this study, the positional accuracy of the OSM dataset was calculated.
-Any geodataset has a limit on its positional accuracy, that is determined by the theoretical precision of the measuring methods.
+Any geodataset has a limit on its positional accuracy, which is determined by the theoretical precision of the measuring methods.
 For the case of the OSM data used in this project, the accuracy was obtained by comparing coordinate points of OSM building footprints to those in the Swedish University of Agricultural Sciences (SLU) building datset, whose accuracy is known.
 The positional accuracy determines the maximum tolerance in distance between points before it is certain that a road overlaps with another road or building.
 
@@ -86,14 +86,18 @@ This project assesses the feasibility of reconstructing a city from OpenStreetMa
 
 Virtual cities has since long been a popular research topic in the field of computer visualization.
 The idea of recreating real world cities in 3D applications has a growing number of applications, including visualization and modelling, urban planning and architecture, as well as media and entertainment in the form of video games and 3D animation.
-Traditionally, modelling virtual cities is a labour-intensive and time-consuming task due to the need for manual modeling, texturing and design and placement of individual model in the large 3D scene.
+Traditionally, modelling virtual cities is a labour-intensive and time-consuming task due to the need for manual modeling, texturing and design and placement of individual models in the large 3D scene.
 This type of tasks is commonly done by professional 3D graphical artists and designers.
 However, in recent years there has been major research work in the field of procedural content generation, meaning automatic or semi automatic generation of 3D models without the direct involvment of a 3D artist.
+\textbf{Procedural models} typically involve a machine which algorithmically composes together or alters human-generated 3D assets.
+Sometimes a degree of computer-generated randomness is induced into the generative algoritm in order to create a larger and less predictable generative space of 3D models that can be created from the same algorithm.
 
-Procedural methods for 3D city generation commonly rely on the availablity of spatial \textbf{geodata}, which serves as the initial input to the procedure of model generation and placement.
-Geodata can contain any form of map features, from terrain to road networks and buildings, but should ideally be easily retrievable in a format that the procedural model can easily work with, e.g. as a list of polygons with world coordinates.
-Such methods are indeed used in the field of virtual city reproduction to reduce the labour required to create accurate 3D representations of cities, but the field of procedual city reproduction comes with its own host of challenges.
-Urban environments are typically dense and large, spanning a few to hundreds of square kilometers, and are influenced by variables that are hard to quantify, including land policies, government plans, population changes and transportation infrastructure, making it non-trivial to produce 3D city representations with both high accuracy and high detail, while simultaneuosly having high utility in the intended field of study.
+Various procedural methods are indeed used in the field of virtual city reproduction to reduce the labour required to create accurate 3D representations of cities.
+These models rely on the availablity of spatial \textbf{geodata}, which serves as the initial input to the procedure of model generation and placement.
+Geodata can contain any form of map features, from terrain to road networks and buildings, but should ideally be easily retrievable in a format that the procedural model can easily work with, e.g. as a list of polygons with points as world coordinates.
+
+The field of procedual city reproduction comes with its own host of challenges however.
+In practise, urban environments are typically dense and large, spanning a few to hundreds of square kilometers, and are influenced by variables that are hard to quantify, including land policies, government plans, population changes and transportation infrastructure, making it non-trivial to produce 3D city representations with both high accuracy and high detail, while simultaneuosly having high utility in the intended field of study.
 \textbf{(Vanegas et al, 2010)}.
 
 \begin{figure}[H]
@@ -107,7 +111,7 @@ Urban environments are typically dense and large, spanning a few to hundreds of 
 
 \section{Footpath definition}
 
-This project will strive to determine the feasibility of procuderally reconstructing a city road network from OSM data by using such models as have been mentioned in this section, focusing on pedestrian footpaths.
+This project will strive to determine the feasibility of procedurally reconstructing a city road network from OSM data by using such models as have been mentioned in this section, focusing on the feasibility of including pedestrian footpaths.
 \textbf{Footpaths} include any form of path that is designated for pedestrians, including sidewalks, walkways and trails.
 OSM commonly divides city road networks into any of the following 4 categories: arterial (primary) roads, secondary roads, residential roads and footpaths.
 For the purpose of this report, a \textbf{road} will be any road whose primary use is human travel, either via a vehicle or by foot.

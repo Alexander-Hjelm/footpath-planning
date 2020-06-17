@@ -7,8 +7,8 @@ using UnityEditor;
 public class BuildingMesh : MonoBehaviour
 {
     private List<GameObject> _rendererGOs = new List<GameObject>();
-    private static float _buildingHeight = 0.2f;
-    private static float _buildingHeightVariation = 0.1f;
+    private static float _buildingHeight = 0.1f;
+    private static float _buildingHeightVariation = 0.06f;
 
     private void OnDestroy()
     {

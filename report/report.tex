@@ -585,9 +585,9 @@ Table \ref{table:road-widths} shows the minimum and maximum road widths that wil
     \label{table:road-widths}
 \end{table}
 
-\subsection{Feature Overlap algorithm}
+\subsection{Feature overlap detection algorithm}
 
-The algorithm for determining feature overlap will calculate how many features and how many of their edges are intersecting with some other feature or edge.
+The algorithm for detecting feature overlap will calculate how many features and how many of their edges are intersecting with some other feature or edge.
 It will also calculate the total length of all edge which are overlapping with some other edge.
 
 The algorithm begins by iterating over all road features.
@@ -982,9 +982,17 @@ It remains to touch upon the possibilities of road network modelling in the broa
 What techniques can be used to complement the basic system of importing street and building data that is already in place, and create a rich and living virtual city?
 In this section everything we have learnt so far will be placed in the broader context of GIS and city modeling, focusing on the research fields of 3D media and city planning.
 
-\section{Feasibility of exporting footpaths}
+\section{Feasibility of importing footpaths}
 
-% TODO: Write this section
+As has already been established in the analysis of the footpath overlap study, primary conclusion of the footpath overlap study is that, in terms of feature overlap, footpaths were not significantly worse than other road categories.
+Thus it can very well be assumed that city modelling software could use the same routine for importing OSM car roads as well as OSM footpaths, without a drastic increase in feature overlap.
+If it is desired to obtain a map will signifcantly less overlap than what OSM can provide due to limitations on positional accuracy, the designer could build upon their existing procedure and add algorithms for overlap detection and correction.
+Such a procedure could for example utilize the method for overlap detection that was presented in section 3.3.2 of this report, as well as some of the methods for overlap correction that were suggested in section 4.2.3.
+Such a procedure would work for all types of roads, including footpaths, without any special treatment of footpath data in particular.
+
+It was found in the feature overlap study that the individual cases of overlap could be classified into types, where all collisions of the same type could in theory be corrected by the same algoritm.
+Note however that since this study focused exclusively on the Stockholm area, and the feature collisions detected in Stockholm could be of types that are characteristic to Stockholm in particular.
+There could very well be additional types of collisions that are exclusive to cities with other unique city grid aestethics, which would not have been considered by this particular project.
 
 \section{Remaining challenges in city reproduction}
 

@@ -228,116 +228,122 @@ To the knowledge of the author, this has never been done with specifically these
 \chapter{Background}
 
 This chapter will dive into the state-of-the-art use of city reconstruction methods within the research fields of visualization and urban design.
-This chapter will present the motivations for the digitization of urban planning, as well as a brief history of the field of OpenStreetMap data qualification, and furthermore present the research papers whose methods are at the foundation of this project.
+This chapter will present the motivations behind digitization of urban planning, as well as a brief history of the research field of OpenStreetMap data qualification, and furthermore present the research papers whose methods are at the foundation of this project.
 Lastly, it will present the evaluation metrics that this project served to obtain, and how they relate to the overlap analysis.
-For the geodata precision study specifically, it will examine how geodata is qualifyied in general, by examining van Oorts quality criteria, and how these will be used in this project.
+For the geodata precision study specifically, this chapter will examine how geodata is qualifyed in general, by examining van Oorts quality criteria, and how these will be used in this project.
 
 \section{Overview of virtual cities}
 
 In their analysis of prodedural city generation models, \textbf{(Müller et al, 2006)} provide an overview of the process of recreating virtual 3D citites from their real life conterparts.
 They present cities as complex collections of \textbf{buildings}, \textbf{blocks}, \textbf{parcels} and \textbf{neighbourhoods} which are all interconnected via a \textbf{street} network, where individual streets can serve different types of traffic.
 These features are commonly represented as \textbf{geodata} in map databases, and processed and organized into visualization-ready data by a \textbf{Geographic Information System (GIS)}.
+In commercially available geodata, roads are most often defined as polylines: arrays of global coordinate points that come in the same order as they would normally be visited by a person travelling along the road. Buildings in turn are most often defined by their \textbf{building footprints}, a single polygon with global coordinates as vertices, which defines the extents of the building as seen on the map from above.
 In practise, cities are often made up out of many square kilometers worth of geodata, and it would be highly labour intensive to manually recreate all these features in 3D.
 Instead, \textbf{procedural models} for city reproduction instead rely on programmatic solutions for converting map data to 3D road and building models, and composing them to a 3D world that the designer may continue to fine-tweak through interfaces fo interactive editing.
-At the very base of this process is the procedural layout of road networks in 3D, and so far there has been a lot of research in modelling of 3D road networks.
-\textbf{(Stojanovski, 2019)} however claims that these projects have often focused on the road networks designated for cars and public transit, as a part of the sustainable mobility paradigm and the topic of sustainable cities, particularily due to the interest in self-propelled cars.
+
+The \textbf{road network} is what ties the city together as a whole, and forms the grid that divides the lots, quarters and neighbourhoods, giving the city grid its unqigue aestethic character and defining possible building arrangements.
+Thus, for any procedural city reproduction model it will be neccessary to have a robust procedure for extracting road geodata and generating the 3D represention of it without compromising the data integrity. 
+So far there has been a lot of research into this area, but \textbf{(Stojanovski, 2019)} claims that most of these projects have often focused on the road networks designated for cars and public transit, as a part of the sustainable mobility paradigm and the topic of sustainable cities, particularily due to the interest in self-propelled cars.
 The study of energy efficient mobility such as walking and cycling is only in its emerging phase.
 
 \section{3D city reproduction as a research field}
 
 This project falls within the broader topic of geodata extraction and modelling, primarily of roads and building parcels.
-Geodata modeling is at the foundation of procedural modelling of real-world cities (according to \textbf{(Müller et al, 2006)}), since any application which models cities based on geodata will need a robust method of aqquiring and laying out road and building data without compromising the data's integrity.
+Geodata modeling is at the foundation of procedural modelling of real-world cities, since any software which models cities based on geodata will need a robust method of aqquiring and laying out road and building data without compromising the data integrity.
 In recent years there has been an advent of interactive tools that aid urban planners in placing or generating features of an urban plan, particularly roads and road networks.
-Such tools use procedural and AI solutions to move the burden of labour from the human designer to the software that the designer uses.
+Such tools use procedural methods and AI solutions to move the burden of labour from the human designer to the software that the designer uses
+\textbf{(Müller et al, 2006)}.
 
 The last decade has seen multiple startups in the area of procedural software for urban arcitecture.
 Such software uses procedural models to render a city grid based on real-world locations, or generate new grids and features based on user-specified parameters, and allow for varying degrees of manual editing on grid, road, neighbourhood, city block or individual feature level.
-Some of the most prominent examples are ArcGIS Pro (made by Esri), CityEngine (made by the startup Procedural, bought by ESRI) and Urban Canvas (made by the startup Synthicity, bought by Autodesk, now defunct).
+Some of the most prominent examples are ArcGIS Pro (made by Esri), CityEngine (made by the startup Procedural, bought by ESRI) and Urban Canvas (made by the startup Synthicity, bought by Autodesk, now defunct) \textbf{(Stojanovski et al, 2019)}.
 
-Even as such tools are well available, \textbf{(Stojanovski et al, 2020)} notes that they are as of today not commonly applied in urbanist practises, due to failures in reflecting the unique workspace of arcitects and their design needs.
+Even as such tools are well available, \textbf{(Stojanovski et al, 2020)} note that they are as of today not commonly applied in urbanist practises, due to failures in reflecting the unique workspace of arcitects and their design needs.
 Urban arcitecture is a field that not only accounts for spatial data, but also captures many social factors and the individual wills of the many stakeholders.
 Each arcitect is an actor in a continously developing environment, and even the archtiect themselves is affecting that environment in a complex manner through their actions.
 
 Finally, when it comes to the fields of video game design or 3D animation, tools for city reproduction is undoubtedly of use to 3D content creators.
 In their study of procedurally generated buildings, \textbf{(Parish and Müller, 2001)} claim that there is a widespread trend in these fields to use methods of procedural modeling to create large amounts of 3D content quickly and efficiently, while requiring as little hand modeling as possible.
-Studios who create large worlds are often interested in solutions that generate large road networks without any hand modeling.
+Studios who create large worlds are often interested in solutions that generate large road networks with minimal hand modeling and hand editing.
 
 \section{Related work}
 
 \subsection{OpenStreetMap data qualification}
 
 When assessing the completeness of geodata, a very common scale is Van Oorts criteria for evaluating the quality of geographical information.
-At the time of publication this method of evaluation received much attention from surveyors and cartographers \textbf{(Van Oort, 2006)}, and since then a number of publications have examined slices of geodata by using van Oort's criteria.
+At the time of publication, this method of evaluation received much attention from surveyors and cartographers \textbf{(Van Oort, 2006)}, and since then a number of publications have examined slices of geodata by using van Oort's criteria.
 In 2008, \textbf{(Haklay, 2010)} conducted such a study to estimate of the quality of OSM positional geodata in London and England.
 Since the OSM project started in London it was thought that OSM data in the London metropolitan area would be representative of the highest quality data available, and therefore a good indicator for the whole global OSM dataset.
 The study was conducted by comparing OSM data to Ordnance Survey datasets, and it showed that the OSM dataset had a rough positional accuracy of 6 meters from the reference dataset.
-However, at the time of the study, the OSM project had captured roughly 29\% of the area of England, meaning that the data completeness was fairly low.
+However, at the time of the study, the OSM project had only captured roughly 29\% of the area of England, meaning that the data completeness was fairly low, and thus the uncertanity was relatively high.
 
 The next major study to assess the quality of OSM data was published by \textbf{(Kunze, 2012)}.
 The study applied different methods to assess the completeness of OSM data in two federal states in Germany, mainly by analysing the area difference between the OSM dataset and an administrative dataset.
 Other notable studies about OSM data accuracy were made around the same time in Germany by \textbf{(Zielstra and Zipf, 2010)} and \textbf{(Neis et al, 2012)}, as well as in France by \textbf{(Girres and Touya, 2010)}.
 
 Finally, a major study in 2013-2014, conducted by researchers from various universities in Norway and Germany \textbf{(Fan et al, 2014)}, examined the quality and accuracy in building footprint data of the Munich area, at a time and place where the completeness of the OSM dataset was significantly higher than the study by \textbf{(Haklay, 2010)} (the results of their study showed that the OSM had captured close to 100\% of all building footprints).
-At the time Munich was one of the most developed cities in OSM, but although feature completeness of the OSM dataset was high, some architectural details were missing.
 This new study included an insight in the geometrical calculations neccessary to match features and points between two datasets, and how to reliably calculate the metrics needed for the most important and assessible of van Oorts criteria.
-The results reveal that the positional accuracy of OSM data at the time was about 4 meters
+The results of this study revealed that the positional accuracy of the OSM Munich data at the time was about 4 meters
 
 \subsection{Procedural models for city reproduction}
 
-Procedural techniques are, as mentioned, methods for reconstructing or creating 3D automatically, with minimal manual work required.
+Procedural techniques are, as previously mentioned, methods for reconstructing or creating 3D automatically, with minimal manual work required.
 Adding such techniques for content creation into the workflow of city reconstruction will increase the level of detail that is possible to generate quickly and efficiently, while sacrificing accuracy to the real-world.
-This is because most commercially available procedural city reproduction models uses methods to guess what the finer detail might look like when map data of the desired level of detail is not available.
+This is because most commercially available procedural city reproduction models use methods to guess what the finer detail might look like when map data of the desired level of detail is not available.
 
-\textbf{(Müller et al, 2006)} present how this is accomplished using Shape Grammar: a method developed by \textbf{(Stiny, 1975)}, for automatically and iteratively constructing 3D models based in a hierarchical set of rules.
+\textbf{(Müller et al, 2006)} present how procedural model generaiton is accomplished using Shape Grammar: a method developed by \textbf{(Stiny, 1975)} for automatically and iteratively constructing 3D models based in a hierarchical set of rules.
 Shape grammar was originally developed from a method known as L-systems: a system for hierarchical model description which was originally used to generate plants for 3D animation \textbf{(Parish and Müller, 2001)}.
 Shape grammar works by starting with a crude volumetric model of a building and iteratively remodeling it from a set of shape grammars.
 Shape grammars often work from a databank of 3D models and a set of hierarchical rules for how these can be pieced together.
 This creates a possible generative space of many different models that can be created from the same data and rule set, and with the induction of random fluctuations, many different models can be generated from the same dataset and rules.
-Using this procedure, a procedural model can structure the façade of a building, add texture and add details for windows, doors and ornaments, and so on.
-The maximum accuracy that can be obtained in these finer details is largely dependent on the availablity of such data, and as most commercially available GIS data only focuses on crude building footprints and road placement, the model will often have to make guesses about the finer detail, which sacrifices accuracy to the real world.
+Using this procedure, a procedural model can structure the façade of a building, add texture and add minor detail models such as windows, doors and ornaments, and so on.
+The maximum accuracy that can be obtained in these finer details is largely dependent on the availablity of such data, and as most commercially available GIS data only serve crude building footprints and road placement, the model will often have to make guesses about the finer detail, which sacrifices accuracy to the real world.
 
 \subsection{Space syntax}
 
 Space syntax, developed by \textbf{(Hillier, 1997)}, is a set of theories that analyze complex, large-scale spaces such as cities, and tries to explain human behavior from a spatial point of view.
 It is commonly used in the analysis of procedural generation models of urban environments.
 The central idea is that spatial structures such as building patterns both reflect and create the patterns for human interaction with their surroundings.
-A common theme in space syntax is the division of spacial structures into different levels of observation, and identifying different units of space and the pattern in which they connect to each other.
+A common theme in space syntax is the division of spacial structures into different levels of observation, and then identifying different units of space and the pattern in which they connect to each other.
 Space syntax is an analytical method that relies on the availablity of city maps, which has since its invention been developed into an extensive research fields on its own
 \textbf{(Parish and Müller, 2001)}.
 It has also been widely used in the analysis of pedestrian flows and wayfinding
 \textbf{(Peponis, Zimring and Choi, 1990)}.
-Furthermore, the idea of using space syntax to divide spatial structures into different levels of observation is frequently used in the research field of urban design and urban planning, to gain an understanding how space is utilized and connected at different levels of usage (one can for example analyze a city on an interior-by-interior basis, or use city blocks and streets as the least unit of space)
+Furthermore, the idea of using space syntax to divide spatial structures into different levels of observation is frequently used in the research field of urban design and urban planning, to gain an understanding how space is utilized and connected at different levels of usage.
+One can for example analyze a city on an interior-by-interior basis, or use city blocks and streets as the least unit of space, depending on the goal of the study.
 \textbf{(Stojanovski et al, 2020)}.
 
 \subsection{Methods for geodata qualification}
 
 To assess the completeness of their OSM data, the study by \textbf{(Fan et al, 2014)} used the fraction of the total building area in the reference dataset and the OSM dataset.
-The motivation for this is to eliminate semantic differences between both datasets, such as the fact that a large building in one dataset may be segmented into several smaller ones in the other.
-That is to say a building in one set is represented as an aggregation of multiple buildings in the other set.
-This makes a complete one-to-one object mapping impossible, and since it is impossible to find a one-to-one feature map for building footprints, the idea is that using building area as an estimator for completeness is much better than i.e. using the number of buildings or other objects in each dataset.
+The motivation for this was to eliminate semantic error, which is a type of systematic error due to differences in how data is presented in both datasets.
+The most common such difference is the fact that a large building in one dataset may be segmented into several smaller ones in the other.
+Because of this, a building in one set might be represented as an aggregation of multiple buildings in the other set (see figure \ref{fig:building-match-types} for a visual example).
+This makes it impossible to find a complete one-to-one building footprint mapping between the two datasets, and thus the idea is that using building area as an estimator for completeness will be less sensitive to semantic errors than using the number of buildings or other objects in each dataset.
 
-\textbf{(Fan et al, 2014)} further discussed how the relative overlap in building area can be used as an estimate of the building correspondence between datasets.
-This can only be done in cases where there is not much displacement between OSM building footprints data and the reference data set.
+\textbf{(Fan et al, 2014)} further discussed how the relative overlap in building area can be used as an estimate of the \textbf{building correspondence} between datasets.
+Building correspondence is a term that refers to how well it can be judged which building footprints between two datasets that correspond to the same building in real life.
+Using the relative area overlap between buildings to find which footprints represent the same building can only be done in cases where there is not much displacement between OSM building footprints data and the reference data set.
 The relative building overlap between the OSM and the reference datasets is defined as follows, given the footprints of any building in the OSM set ($foot_{OSM}$) and the reference set ($foot_{REF}$):
 \begin{center}
     $S_{RO}(foot_{OSM}, foot_{REF}) = \frac{A_{Overlap}}{min(A_{foot_{OSM}}, A_{foot_{REF}}))}$
 \end{center}
 
-The relative overlap may also be used to determine building matching relations even when the semantic accuracy is low.
+The relative overlap may also be used to determine what building footprints match with each other even when the semantic accuracy is low.
 If a large building is represented by a single footprint in one dataset but by several smaller footprints in the other,
 \textbf{(Rutzinger, Rottensteiner and Pfeifer, 2009)}
 found that if $S_{RO}(foot_{A}, foot_{B}) < 30\%$ for two buildings $A$ and $B$ from different sets, then $A$ and $B$ are highly likely to be separate, neighbouring buildings and not in fact identical.
 
-Once the building correspondence has been found and a matching building set has been established, where any building in one dataset points to one or more (or no) buildings in the other, the challenge becomes evaluating the similarity of individual matching pairs of buildings.
-When assessing the positional accuracy between the points of two building footprint polygons, first one must find a matching set of vertices between any pair of matching buildings, which is not always trivial since the vertex counts of the two buildings may not be the same.
+Once the building correspondence has been found and a building footprint mapping has been established (where any building in one dataset points to one, more or no buildings in the other dataset) the next challenge is evaluating how similar two matching building footprints are.
+When assessing the positional accuracy between the points of two building footprint polygons, first one must find a matching set of vertices between a pair of matching buildings, which is not always trivial since the vertex counts of the two buildings may not be the same.
 The two buildings might have been modeled at different levels of detail, or vertex clusters may be found at different parts of the polygon in the two datasets.
-The OSM data precision study by \textbf{(Fan et al, 2014)} used the Douglas-Peucker algorithm, first defined by \textbf{(Douglas and Peucker, 1973)}, to reduce both building polygons to a simliar vertex count, and then proceed with locating the most likely matching vertices in the polygons.
+To adress this problwm, the OSM data precision study by \textbf{(Fan et al, 2014)} used the Douglas-Peucker algorithm, first defined by \textbf{(Douglas and Peucker, 1973)}, to reduce both building polygons to a simliar vertex count, and then proceed with locating the most likely matching vertices in the polygons.
 The full procedure for matching points will be presented in section 3.2.3 of this report.
 
 The study by \textbf{(Fan et al, 2014)} also obtained a measure of the \textbf{shape accuracy} of building footprints.
 While the positional accuracy accounts for the error between individual points in a polygon, the shape accuracy is a measure of how similar two polygons at a higher level of observation, regardless of relative scaling and rotation of the two polygons.
 The shape accuracy between two matching buildings was quantified by using a similarity function that depends on the difference between the turning functions of matching building footprints in both datasets.
-The turning function was first defined by \textbf{(Arkin et al, 1991)}, as a method for measuring the similarity of two polygons, and measures the cumulative angle of a single polygon's counter-clockwise tangent, as a function of the cumulative normalized length l.
+The turning function was first defined by \textbf{(Arkin et al, 1991)}, as a method for measuring the similarity of two polygons, and measures the cumulative angle of a single polygon's counter-clockwise tangent, as a function of the cumulative normalized length when travelling along the edge of the polygon.
 The turning function effectively steps over the tangent of a polygon continously for a full cycle, and logs the total turning angle by adding together the angle of each turn.
 It includes consideration of wether the individual turns are clockwise or counter-clockwise, and is invariant to rotation and scaling of the polygon.
 Once the turning functions of two similar polygons have been obtained, the integral between them is taken as a measure of shape accuracy.
@@ -363,7 +369,7 @@ A modeler may chose which of these LOD class(es) to use depending on data availa
 
 \section{Evaluation metrics}
 
-The primary study of the rate of overlap between roads and other features will serve to obtain the following three metrics:
+The feature overlap study of this project will serve to obtain the following three metrics:
 
 \begin{enumerate}
     \item The number of road features that collide with any other feature (road or building).
@@ -379,8 +385,8 @@ This will also be preseneted in terms of the number of road features, the number
 
 The secondary study about geodata precision will primarily serve to obtain an estimate of the positional accuracy of the OSM dataset, in meters.
 A number of auxillary metrics will be needed to estimate the domain of error on the positional accuracy, namely the feature completeness and shape accuracy of the OSM dataset.
-The completeness of the OSM dataset will be taken as a the number of features are represented in both datasets, as a perentage of the total numer of features in the reference dataset.
-Shape accuracy is a measure of polygon similarity that was obtained by comparing polygon turning function between matching features, feature by feature.
+The completeness of the OSM dataset will be taken as a the number of features that are represented in both datasets, as a perentage of the total numer of features in the reference dataset.
+Shape accuracy (the measure of polygon similarity) was obtained by comparing polygon turning function between matching features, feature by feature.
 
 \subsection{Quality criteria}
 

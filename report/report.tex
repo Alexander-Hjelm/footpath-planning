@@ -135,15 +135,17 @@ Luckily there are coming more and more sophisticated methods for automatically c
 \textbf{(Biljecki et al, 2016 (2))}.
 
 % TODO: Introduce the idea of positional error due to low accuracy in this section
+
 \textbf{(Fan et al, 2014)}.
 
 Specifically in the case of rendering road networks and buildings, a common issue is that the 3D models being generated from road and building data might overlap with each other, which can lead to strange-looking mesh intersections and inaccuracies that modelers often want to avoid.
-In this project it was hypothised that the risk of feature overlap may be higher between streets and roads designated for energy efficient mobility, such as footpaths, since they are much more organic and dense in their nature than main streets.
 \textbf{Feature overlap} is a type of geomerty error that arises due to inaccuracies in the source data, often due to limited precision in the measuring methods used to obtain the data.
+In this project it was hypothised that the risk of feature overlap may be higher between streets and roads designated for energy efficient mobility, such as footpaths, since they are much more organic and dense in their nature than main streets.
+It was also hypothised that one can use the individual road widths and road vertex coordinates as variables when making adjustments against overlap errors.
+By first detecting critical locations where feature overlap occurs and subsequently correcting this overlap by adjusting the road width and individual vertex positions within the margin of the positional accuracy, this project examined wether or not it was possible to obtain a slightly altered map with little to no overlap between footpaths and other features.
+
 For the purpose of this project, the terms \textbf{feature overlap} and \textbf{feature collision} will be used synonymously, referring to the amount of features that show overlap with each other in the dataset, or the total feature area that show overlap in the same way.
 See figure \ref{fig:img_road_error_cases} for a few visual examples of what feature overlap could look like in the final 3D city model.
-
-% TODO: The idea is to use road width and point coordinates as variables when making adjustments against errors.
 
 \begin{figure}[H]
     \centering
@@ -166,7 +168,10 @@ While they can provide both building footprints and road networks, they usually 
 
 \section{Research question}
 
-This project has dealt with the feasibility of including footpath data when generating 3D representations of OSM data, and preserving the integrity of the 3D road network, avoiding overlap and collision between road meshes. The main research question is as follows:
+This project has dealt with the feasibility of including footpath data when generating 3D representations of OSM data, and preserving the integrity of the 3D road network, avoiding overlap and collision between road meshes.
+It was hypothised that most road overlap can be corrected by first detecting critical locations where feature overlap occurs, and subsequently adjust the footpath road widths and individual vertex positions within the margin of the OSM positional accuracy, in order to obtain a slightly altered map with little to no overlap between footpaths and other features.
+
+The main research question is as follows:
 \begin{center}
     \textbf{Is it technically feasibile to generate a 3D virtual city with footpath road data, with minimal (and preferably no) overlap between 3D features?}
 \end{center}

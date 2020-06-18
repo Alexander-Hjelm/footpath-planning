@@ -134,12 +134,13 @@ Geodata validation and correction is only an emerging field of research, and man
 Luckily there are coming more and more sophisticated methods for automatically correcting the most common errors
 \textbf{(Biljecki et al, 2016 (2))}.
 
-% TODO: Introduce the idea of positional error due to low accuracy in this section
-
+Early on, at the stage of importing geodata into a procedural city reproduction model, the most critical source of error is the \textbf{positional accuracy} that the data provider can ensure.
+Every geodata service has an upper limit on the positional accuracy of their data, which depends primarily on the method of data acquistion that was used.
+Different instruments, such as GPS measurements or satellite image stereoscoping, have theoretical upper limits on their precision, which propagate through the data collection and preservation process as a source of positional error
 \textbf{(Fan et al, 2014)}.
-
-Specifically in the case of rendering road networks and buildings, a common issue is that the 3D models being generated from road and building data might overlap with each other, which can lead to strange-looking mesh intersections and inaccuracies that modelers often want to avoid.
+Specifically in the case of rendering road networks and buildings, a common issue that stems from low positional accuracy is that the 3D models being generated from road and building data might overlap with each other, which can lead to strange-looking mesh intersections and inaccuracies that modelers often want to avoid.
 \textbf{Feature overlap} is a type of geomerty error that arises due to inaccuracies in the source data, often due to limited precision in the measuring methods used to obtain the data.
+
 In this project it was hypothised that the risk of feature overlap may be higher between streets and roads designated for energy efficient mobility, such as footpaths, since they are much more organic and dense in their nature than main streets.
 It was also hypothised that one can use the individual road widths and road vertex coordinates as variables when making adjustments against overlap errors.
 By first detecting critical locations where feature overlap occurs and subsequently correcting this overlap by adjusting the road width and individual vertex positions within the margin of the positional accuracy, this project examined wether or not it was possible to obtain a slightly altered map with little to no overlap between footpaths and other features.

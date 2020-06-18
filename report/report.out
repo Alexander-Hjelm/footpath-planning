@@ -42,7 +42,7 @@
 \BOOKMARK [1][-]{section.4.2}{Analysis}{chapter.4}% 42
 \BOOKMARK [2][-]{subsection.4.2.1}{Quality of the OSM dataset}{section.4.2}% 43
 \BOOKMARK [2][-]{subsection.4.2.2}{Footpath overlap study}{section.4.2}% 44
-\BOOKMARK [2][-]{subsection.4.2.3}{Suggested algorithms for overlap correction}{section.4.2}% 45
+\BOOKMARK [2][-]{subsection.4.2.3}{Suggested algorithms for footpath overlap correction}{section.4.2}% 45
 \BOOKMARK [0][-]{chapter.5}{Conclusions and future work}{}% 46
 \BOOKMARK [1][-]{section.5.1}{Feasibility of exporting footpaths}{chapter.5}% 47
 \BOOKMARK [1][-]{section.5.2}{Remaining challenges in city reproduction}{chapter.5}% 48

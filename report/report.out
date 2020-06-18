@@ -27,7 +27,7 @@
 \BOOKMARK [2][-]{subsection.3.2.3}{Closest point and point proximity}{section.3.2}% 27
 \BOOKMARK [1][-]{section.3.3}{Overlap study}{chapter.3}% 28
 \BOOKMARK [2][-]{subsection.3.3.1}{Road widths and properties}{section.3.3}% 29
-\BOOKMARK [2][-]{subsection.3.3.2}{Feature Overlap algorithm}{section.3.3}% 30
+\BOOKMARK [2][-]{subsection.3.3.2}{Feature overlap detection algorithm}{section.3.3}% 30
 \BOOKMARK [2][-]{subsection.3.3.3}{Projected Line Segment Distance}{section.3.3}% 31
 \BOOKMARK [1][-]{section.3.4}{The geodata used in this project}{chapter.3}% 32
 \BOOKMARK [2][-]{subsection.3.4.1}{OSM data}{section.3.4}% 33
@@ -44,7 +44,7 @@
 \BOOKMARK [2][-]{subsection.4.2.2}{Footpath overlap study}{section.4.2}% 44
 \BOOKMARK [2][-]{subsection.4.2.3}{Suggested algorithms for footpath overlap correction}{section.4.2}% 45
 \BOOKMARK [0][-]{chapter.5}{Conclusions and future work}{}% 46
-\BOOKMARK [1][-]{section.5.1}{Feasibility of exporting footpaths}{chapter.5}% 47
+\BOOKMARK [1][-]{section.5.1}{Feasibility of importing footpaths}{chapter.5}% 47
 \BOOKMARK [1][-]{section.5.2}{Remaining challenges in city reproduction}{chapter.5}% 48
 \BOOKMARK [1][-]{section.5.3}{Feasibility in the urban planning field}{chapter.5}% 49
 \BOOKMARK [1][-]{section.5.4}{Final conclusions}{chapter.5}% 50

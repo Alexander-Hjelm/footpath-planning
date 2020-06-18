@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  18 JUN 2020 20:17
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  18 JUN 2020 21:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1730,40 +1730,40 @@ Package pdftex.def Info: img_feature_overlap_fix_4.png  used on input line 973.
 Chapter 5.
 [49
 
-] [50]
-Overfull \hbox (4.89815pt too wide) in paragraph at lines 1037--1042
+] [50] [51]
+Overfull \hbox (4.89815pt too wide) in paragraph at lines 1045--1050
 \T1/qtm/m/n/12 The fi-nal con-clu-sion is that gen-er-at-ing vir-tual cities pu
 rely from Open-StreetMap
  []
 
-[51] [52] [53
+[52] [53] [54
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 1083--1084
+Underfull \hbox (badness 10000) in paragraph at lines 1091--1092
 []\T1/qtm/m/n/12 Kunze, C. (2012). Ver-gle-ich-s-anal-yse des Gebäude-datenbe-
  []
 
 
-Underfull \hbox (badness 7925) in paragraph at lines 1083--1084
+Underfull \hbox (badness 7925) in paragraph at lines 1091--1092
 \T1/qtm/m/n/12 standes aus Open-StreetMap mit amtlichen Daten-quellen. Stu-dent
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1083--1084
+Underfull \hbox (badness 10000) in paragraph at lines 1091--1092
 \T1/qtm/m/n/12 re-search project, Tech-ni-cal Uni-ver-sity of Dres-den. http://
 nbn-
  []
 
-[54] [55]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1128.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1128.
+[55] [56]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1136.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1136.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1128.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1128.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1136.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1136.
 
 Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 3AA211F94ABC3F3166C7B98AFE36EF13;3659.
+(rerunfilecheck)             Checksum: 29DEC59B61A79FD6DB88413CF1BE69E5;3669.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
@@ -1773,8 +1773,8 @@ Package logreq Info: Writing requests to 'report.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 27511 strings out of 492982
- 498459 string characters out of 6134896
+ 27512 strings out of 492982
+ 498466 string characters out of 6134896
  957942 words of memory out of 5000000
  30390 multiletter control sequences out of 15000+600000
  54802 words of font info for 45 fonts, out of 8000000 for 9000
@@ -1792,10 +1792,10 @@ msfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 type1/public/tex-gyre/qhvr.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qt
 mb.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qtmr.pfb></usr/share/texmf
 /fonts/type1/public/tex-gyre/qtmri.pfb>
-Output written on report.pdf (63 pages, 5579275 bytes).
+Output written on report.pdf (64 pages, 5581060 bytes).
 PDF statistics:
- 779 PDF objects out of 1000 (max. 8388607)
- 661 compressed objects within 7 object streams
- 204 named destinations out of 1000 (max. 500000)
+ 784 PDF objects out of 1000 (max. 8388607)
+ 665 compressed objects within 7 object streams
+ 205 named destinations out of 1000 (max. 500000)
  493 words of extra memory for PDF output out of 10000 (max. 10000000)
 

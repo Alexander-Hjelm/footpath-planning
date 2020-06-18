@@ -63,7 +63,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.3.1}Road widths and properties}{30}{subsection.3.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.3.2}Feature Overlap algorithm}{30}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3.3.2}Feature overlap detection algorithm}{30}{subsection.3.3.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.3.3}Projected Line Segment Distance}{31}{subsection.3.3.3}
 \defcounter {refsection}{0}\relax 
@@ -103,9 +103,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {5}Conclusions and future work}{49}{chapter.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Feasibility of exporting footpaths}{49}{section.5.1}
+\contentsline {section}{\numberline {5.1}Feasibility of importing footpaths}{49}{section.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Remaining challenges in city reproduction}{49}{section.5.2}
+\contentsline {section}{\numberline {5.2}Remaining challenges in city reproduction}{50}{section.5.2}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {5.3}Feasibility in the urban planning field}{51}{section.5.3}
 \defcounter {refsection}{0}\relax 

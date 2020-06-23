@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  18 JUN 2020 21:11
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  23 JUN 2020 16:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1696,33 +1696,33 @@ Package pdftex.def Info: img_map_utility_buildings.png  used on input line 897.
 <img_feature_overlap_cases.png, id=586, 922.1652pt x 1010.3346pt>
 File: img_feature_overlap_cases.png Graphic file (type png)
 <use img_feature_overlap_cases.png>
-Package pdftex.def Info: img_feature_overlap_cases.png  used on input line 934.
+Package pdftex.def Info: img_feature_overlap_cases.png  used on input line 942.
 
 (pdftex.def)             Requested size: 272.68365pt x 298.75528pt.
  [44] [45 <./img_feature_overlap_cases.png>]
 <img_feature_overlap_fix_1.png, id=603, 922.1652pt x 336.7782pt>
 File: img_feature_overlap_fix_1.png Graphic file (type png)
 <use img_feature_overlap_fix_1.png>
-Package pdftex.def Info: img_feature_overlap_fix_1.png  used on input line 952.
+Package pdftex.def Info: img_feature_overlap_fix_1.png  used on input line 960.
 
 (pdftex.def)             Requested size: 369.88673pt x 135.08401pt.
 <img_feature_overlap_fix_2.png, id=604, 461.0826pt x 336.0555pt>
 File: img_feature_overlap_fix_2.png Graphic file (type png)
 <use img_feature_overlap_fix_2.png>
-Package pdftex.def Info: img_feature_overlap_fix_2.png  used on input line 959.
+Package pdftex.def Info: img_feature_overlap_fix_2.png  used on input line 967.
 
 (pdftex.def)             Requested size: 369.9008pt x 269.59854pt.
  [46 <./img_feature_overlap_fix_1.png>]
 <img_feature_overlap_fix_3.png, id=616, 922.1652pt x 336.0555pt>
 File: img_feature_overlap_fix_3.png Graphic file (type png)
 <use img_feature_overlap_fix_3.png>
-Package pdftex.def Info: img_feature_overlap_fix_3.png  used on input line 966.
+Package pdftex.def Info: img_feature_overlap_fix_3.png  used on input line 974.
 
 (pdftex.def)             Requested size: 369.88673pt x 134.79414pt.
 <img_feature_overlap_fix_4.png, id=617, 459.6372pt x 336.7782pt>
 File: img_feature_overlap_fix_4.png Graphic file (type png)
 <use img_feature_overlap_fix_4.png>
-Package pdftex.def Info: img_feature_overlap_fix_4.png  used on input line 973.
+Package pdftex.def Info: img_feature_overlap_fix_4.png  used on input line 981.
 
 (pdftex.def)             Requested size: 369.89145pt x 271.02109pt.
  [47 <./img_feature_overlap_fix_2.png> <./img_feature_overlap_fix_3.png>] [48 <
@@ -1731,7 +1731,7 @@ Chapter 5.
 [49
 
 ] [50] [51]
-Overfull \hbox (4.89815pt too wide) in paragraph at lines 1045--1050
+Overfull \hbox (4.89815pt too wide) in paragraph at lines 1053--1058
 \T1/qtm/m/n/12 The fi-nal con-clu-sion is that gen-er-at-ing vir-tual cities pu
 rely from Open-StreetMap
  []
@@ -1739,34 +1739,37 @@ rely from Open-StreetMap
 [52] [53] [54
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 1091--1092
+Underfull \hbox (badness 10000) in paragraph at lines 1099--1100
 []\T1/qtm/m/n/12 Kunze, C. (2012). Ver-gle-ich-s-anal-yse des Gebäude-datenbe-
  []
 
 
-Underfull \hbox (badness 7925) in paragraph at lines 1091--1092
+Underfull \hbox (badness 7925) in paragraph at lines 1099--1100
 \T1/qtm/m/n/12 standes aus Open-StreetMap mit amtlichen Daten-quellen. Stu-dent
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1091--1092
+Underfull \hbox (badness 10000) in paragraph at lines 1099--1100
 \T1/qtm/m/n/12 re-search project, Tech-ni-cal Uni-ver-sity of Dres-den. http://
 nbn-
  []
 
 [55] [56]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1136.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1136.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1144.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1144.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1136.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1136.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1144.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1144.
 
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: 29DEC59B61A79FD6DB88413CF1BE69E5;3669.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
 Package logreq Info: Writing requests to 'report.run.xml'.
 \openout1 = `report.run.xml'.
@@ -1792,7 +1795,7 @@ msfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 type1/public/tex-gyre/qhvr.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qt
 mb.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qtmr.pfb></usr/share/texmf
 /fonts/type1/public/tex-gyre/qtmri.pfb>
-Output written on report.pdf (64 pages, 5581060 bytes).
+Output written on report.pdf (64 pages, 5490575 bytes).
 PDF statistics:
  784 PDF objects out of 1000 (max. 8388607)
  665 compressed objects within 7 object streams

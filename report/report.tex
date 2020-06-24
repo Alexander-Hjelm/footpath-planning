@@ -41,16 +41,15 @@
 \titlepage
 
 \begin{abstract}
-This project assesses the feasibility of reconstructing virtual cities from OpenStreetMap (OSM) road and building data, and will focus on the feasibility of including pedestrian footpaths, by examining how common it is that these footpaths overlap with other map features.
-Feature overlap is a type of geomerty error that arises to inaccuracies in the source data, which results in 3D models overlapping, which can in turn lead to strange-looking mesh intersections and artifacts in the final city model.
+This project assesses the feasibility of reconstructing virtual cities from OpenStreetMap (OSM) road and building data, and will focus on the feasibility of including pedestrian footpaths.
+It will be examined how common it is that footpaths overlap with other map features.
+Feature overlap is a type of geomerty error that arises to inaccuracies in the source data, which can lead to strange-looking mesh intersections and artifacts in the final city model.
+In this study, a slice of the OSM dataset in the Stockholm area has been taken, and a geometrical algorithm was applied to all road pairs to obtain the average amount of road overlap.
+It was found that footpaths were less problematic than car roads in terms of feature overlap, and thus footpaths should pose no more problems in 3D city reproduction than car roads.
 
-In this study, a slice of the OSM dataset in the Stockholm area has been taken, and each road has been assigned with standard withds according to swedish regulation, after which a geometrical algorithm was applied to all road pairs to obtain the average amount of road overlap.
-It was found that footpaths were less problematic than other road types (primary, secondary, residential), in terms of feature overlap, and thus should pose no more problems in 3D city reproduction than other road types.
-
-As a part of this study, the positional accuracy of the OSM dataset was calculated.
+As a secondary study, the positional accuracy of the OSM dataset was calculated, since the positional accuracy determines the maximum tolerance in distance between points before it is certain that a road overlaps with another road or building.
 Any geodataset has a limit on its positional accuracy, which is determined by the theoretical precision of the measuring methods.
-For the case of the OSM data used in this project, the accuracy was obtained by comparing coordinate points of OSM building footprints to those in the Swedish University of Agricultural Sciences (SLU) building datset, whose accuracy is known.
-The positional accuracy determines the maximum tolerance in distance between points before it is certain that a road overlaps with another road or building.
+In this project, the accuracy was obtained by comparing coordinate points of OSM building footprints to those in the Swedish University of Agricultural Sciences (SLU) building datset, whose accuracy is known.
 
 \end{abstract}
 

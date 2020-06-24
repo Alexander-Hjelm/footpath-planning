@@ -366,53 +366,6 @@ The CityGML standard divides the LOD representation of 3D models into three clas
 \end{enumerate}
 A modeler may chose which of these LOD class(es) to use depending on data availablity and application.
 
-\section{Evaluation metrics}
-
-The feature overlap study of this project will serve to obtain the following three metrics:
-
-\begin{enumerate}
-    \item The number of road features that collide with any other feature (road or building).
-    \item The number of road edges that intersect with any other building polygon or road polyline.
-    \item The total length in meters of these edges will also be calculated as a measure of the total length of road.
-\end{enumerate}
-
-The road features will be categorized according to type, so that the rate of overlap between footpaths and other features can be compared to that of other road types.
-OSM mainly makes the distinction between primary, secondary, residential and footpath roads, so this classification will also be used in this report.
-The above features will be calculated for each road type separately by summing over each road feature of a certain type.
-Following this, an algorithm will find the exact same metrics with regards to how many road features that can in theory be corrected by simple geometrical translation of their vertices.
-This will also be preseneted in terms of the number of road features, the number of edges and the total length in meters of remaining colliding road.
-
-The secondary study about geodata precision will primarily serve to obtain an estimate of the positional accuracy of the OSM dataset, in meters.
-A number of auxillary metrics will be needed to estimate the domain of error on the positional accuracy, namely the feature completeness and shape accuracy of the OSM dataset.
-The completeness of the OSM dataset will be taken as a the number of features that are represented in both datasets, as a perentage of the total numer of features in the reference dataset.
-Shape accuracy (the measure of polygon similarity) was obtained by comparing polygon turning function between matching features, feature by feature.
-
-\subsection{Quality criteria}
-
-\textbf{(Haklay, 2010)} presents the list of van Oort's 8 accuracy classes for evaluating the quality of geographic information:
-
-\begin{itemize}
-  \item Lineage. This is the historical aspect of the dataset, which concerns the collection process and evolution.
-  \item Positional accuracy. This relates the coordinate value of an object in the database to the actual location of the ground in the real world.
-  \item Attibute accuracy. In a geographical database, objects are commonly tagged with meta-information. This class assesses how correct those values are.
-  \item Logical consistency - This assesses the internal consistency of the dataset. For every dataset there may be internal rules and relationships that objects and features must follow, and this class assesses the degree to which these are adhered to.
-  \item Completeness - This assesses the lack of data in a dataset, and the coverage of real-world objects. Objects or features may be missing from a dataset, which reduces its quality.
-  \item Semantic accuracy - This links the way in which an object or feature is recorded and represented to how it should be interpreted.
-  \item Usage, purpose and constraints - This concerns the validity of the dataset in relation to its purpose and how it is used.
-  \item Temporal quality - This assesses the validity of the dataset in relation to real-world changes over time.
-\end{itemize}
-
-Other than for the purpose of assessing various sources or error, this project will focus exclusively on the positional accuracy, completeness and semantic accuracy classes.
-The comparison of the OSM and reference maps will focus on these accuracy classes to determine the error tolerance when manipulating features in the 3D map presentation and the road network generating phase.
-Figure \ref{fig:osm-slu-map} shows two segments of the Stockholm map where the OSM and reference datasets show lower semantic and positional accuracy respectively.
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_map_compare}
-    \caption{Example segments of the Stockholm metropolitan area with unsystematic errors in precision. The reference building dataset (SLU, blue) in superimposed on the OSM dataset (dark gray). The top picture is centered on a city block which shows a semantic mismatching between the two datasets. The whole block consists of only two buildings in the OSM dataset, but is divided into 15 smaller building lots in the SLU dataset. The bottom picture shows 4 smaller buildings whose the positional accuracy is low, due to the buildings being incorrectly scaled, skewed and rotated.}
-    \label{fig:osm-slu-map}
-\end{figure}
-
 \chapter{Method}
 
 This chapter will provide a technical overview of the data collection process and the algorithms used for the purpose of this study, starting with a brief overview in section 3.1.
@@ -734,6 +687,54 @@ Any building area outside of the query domain will be excluded.
 Since the principles behind what features are delivered and how differ between the datasets, it is neccessary to crop both datasets to ensure that all buildings are complete and have matching candidates in the other set.
 Any features that intersect the edge of the rectagular boundary, in both datasets, were therefore excluded from the study.
 
+\section{Evaluation metrics}
+
+The feature overlap study of this project will serve to obtain the following three metrics:
+
+\begin{enumerate}
+    \item The number of road features that collide with any other feature (road or building).
+    \item The number of road edges that intersect with any other building polygon or road polyline.
+    \item The total length in meters of these edges will also be calculated as a measure of the total length of road.
+\end{enumerate}
+
+The road features will be categorized according to type, so that the rate of overlap between footpaths and other features can be compared to that of other road types.
+OSM mainly makes the distinction between primary, secondary, residential and footpath roads, so this classification will also be used in this report.
+The above features will be calculated for each road type separately by summing over each road feature of a certain type.
+Following this, an algorithm will find the exact same metrics with regards to how many road features that can in theory be corrected by simple geometrical translation of their vertices.
+This will also be preseneted in terms of the number of road features, the number of edges and the total length in meters of remaining colliding road.
+
+The secondary study about geodata precision will primarily serve to obtain an estimate of the positional accuracy of the OSM dataset, in meters.
+A number of auxillary metrics will be needed to estimate the domain of error on the positional accuracy, namely the feature completeness and shape accuracy of the OSM dataset.
+The completeness of the OSM dataset will be taken as a the number of features that are represented in both datasets, as a perentage of the total numer of features in the reference dataset.
+Shape accuracy (the measure of polygon similarity) was obtained by comparing polygon turning function between matching features, feature by feature.
+
+\subsection{Quality criteria}
+
+\textbf{(Haklay, 2010)} presents the list of van Oort's 8 accuracy classes for evaluating the quality of geographic information:
+
+\begin{itemize}
+  \item Lineage. This is the historical aspect of the dataset, which concerns the collection process and evolution.
+  \item Positional accuracy. This relates the coordinate value of an object in the database to the actual location of the ground in the real world.
+  \item Attibute accuracy. In a geographical database, objects are commonly tagged with meta-information. This class assesses how correct those values are.
+  \item Logical consistency - This assesses the internal consistency of the dataset. For every dataset there may be internal rules and relationships that objects and features must follow, and this class assesses the degree to which these are adhered to.
+  \item Completeness - This assesses the lack of data in a dataset, and the coverage of real-world objects. Objects or features may be missing from a dataset, which reduces its quality.
+  \item Semantic accuracy - This links the way in which an object or feature is recorded and represented to how it should be interpreted.
+  \item Usage, purpose and constraints - This concerns the validity of the dataset in relation to its purpose and how it is used.
+  \item Temporal quality - This assesses the validity of the dataset in relation to real-world changes over time.
+\end{itemize}
+
+Other than for the purpose of assessing various sources or error, this project will focus exclusively on the positional accuracy, completeness and semantic accuracy classes.
+The comparison of the OSM and reference maps will focus on these accuracy classes to determine the error tolerance when manipulating features in the 3D map presentation and the road network generating phase.
+Figure \ref{fig:osm-slu-map} shows two segments of the Stockholm map where the OSM and reference datasets show lower semantic and positional accuracy respectively.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth,height=0.5\textheight,keepaspectratio]{img_map_compare}
+    \caption{Example segments of the Stockholm metropolitan area with unsystematic errors in precision. The reference building dataset (SLU, blue) in superimposed on the OSM dataset (dark gray). The top picture is centered on a city block which shows a semantic mismatching between the two datasets. The whole block consists of only two buildings in the OSM dataset, but is divided into 15 smaller building lots in the SLU dataset. The bottom picture shows 4 smaller buildings whose the positional accuracy is low, due to the buildings being incorrectly scaled, skewed and rotated.}
+    \label{fig:osm-slu-map}
+\end{figure}
+
+
 \chapter{Evaluation}
 
 \section{Results}
@@ -893,8 +894,6 @@ The question is wether it comforms well to the positional error in the rest of t
     \caption{A map segment which shows an area with many small utility buildings that are represented in the SLU dataset but not in the OSM dataset.}
     \label{fig:osm-slu-map-utility-buildings}
 \end{figure}
-
-% TODO: New structure: Background, problem/question, implementation/method, evaluation, results, implications
 
 % With internet
 % TODO: Restructure research subquestions according to Chris's suggestions (see meeting log)

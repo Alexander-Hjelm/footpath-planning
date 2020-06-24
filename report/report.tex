@@ -185,11 +185,11 @@ It has then identified critical areas in the OSM dataset, where the paths are so
 It has also identified how many of those areas can in theory be corrected by simple translation of the road vertices, without propagation of collision to other features.
 Here, features are defined as the geometrical components that comprise the OSM map.
 For the purpose of this report, features will refer mainly to roads and building footprints.
-For the overlap study, see sections 3.1.2 for an implementation overview, 3.3 for a detailed walkthrough of the program implementation, and 4.1.1 for the results.
+For the overlap study, see sections 3.1.2 for a method overview, 3.3 for a detailed walkthrough of the method, and 4.1.1 for the results.
 
 For the secondary research question: the geodata precision study, the positional accuracy will be estimated by comparing feature points between the OSM building dataset and the Swedish University of Agricultural Sciences (SLU) building datset with known accuracy. See section 3.4.2 for an overview of the SLU dataset and how it is obtained.
 The positional accuracy will be needed to assess where road overlap occurs and whether the collisions can easily be corrected.
-For the positional accuracy study, see sections 3.1.1 for an implementation overview, 3.2 for a walkthrough of the program implementation, and 4.1.2 for the results.
+For the positional accuracy study, see sections 3.1.1 for a method overview, 3.2 for a walkthrough of the method, and 4.1.2 for the results.
 
 \section{Delimitations}
 
@@ -413,7 +413,7 @@ Figure \ref{fig:osm-slu-map} shows two segments of the Stockholm map where the O
     \label{fig:osm-slu-map}
 \end{figure}
 
-\chapter{Implementation}
+\chapter{Method}
 
 This chapter will provide a technical overview of the data collection process and the algorithms used for the purpose of this study, starting with a brief overview in section 3.1.
 Section 3.2 will present the data collection process for the geodata precision study. It will present how to qualify dataset completeness and building correspondence (how many of the buildings in one dataset that can be found in the other) by collecting the cumulative building areas and looking at what buildings have overlapping areas between the two datasets.
@@ -421,9 +421,9 @@ The definitions and algorithms neccessary for calculating posiitonal accuracy an
 Section 3.3 will present at the data collection process for the overlap study. It will present how standard road withs were obtained, as well as the algorithm for detemining feature collision that was used.
 Section 3.4 will discuss briefly the data sources used in this project, why they were chosen and specific issues with the data collection process.
 
-\section{Implementation overview}
+\section{Method overview}
 
-Programmatic collection of statistics has been neccessary for both the primary and secondary research questions, and this section presents a broad overview of the technical implementation behind the map analysis and data collection processes for both the geodata precision study and the overlap study.
+Programmatic collection of statistics has been neccessary for both the primary and secondary research questions, and this section presents a broad overview of the technical details behind the map analysis and data collection processes for both the geodata precision study and the overlap study.
 
 \subsection{Geodata precision study}
 

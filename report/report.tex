@@ -42,7 +42,7 @@
 
 \begin{abstract}
 This project assesses the feasibility of reconstructing virtual cities from OpenStreetMap (OSM) road and building data, and will focus on the feasibility of including pedestrian footpaths.
-It will be examined how common it is that footpaths overlap with other map features.
+It will be examined how common it is that footpaths overlap with other map features such as roads and buildings.
 Feature overlap is a type of geomerty error that arises to inaccuracies in the source data, which can lead to strange-looking mesh intersections and artifacts in the final city model.
 In this study, a slice of the OSM dataset in the Stockholm area has been taken, and a geometrical algorithm was applied to all road pairs to obtain the average amount of road overlap.
 It was found that footpaths were less problematic than car roads in terms of feature overlap, and thus footpaths should pose no more problems in 3D city reproduction than car roads.
@@ -57,17 +57,13 @@ In this project, the accuracy was obtained by comparing coordinate points of OSM
 \begin{abstract}
 Det här projektet har undersökt hur genomförbart det är att återskapa virtuella städer utifrån data från OpenStreetMap (OSM), och kommer särskilt fokusera på hur genomförbart det är att inkludera gångvägar i en sådan modell.
 Studien har undersökt hur vanligt det är att gångvägar överlappar med andra kartdetaljer såsom byggnader och andra vägar.
-Överlappning är en typ av fel i 3D-geometrin som uppstår på grund av osäkerhet i källdatan, vilket resulterar i att 3D-modeller överlappar med varandra.
-Detta kan leda till besvärliga skärningar och artifakter i den färdiga stadsmodellen.
+Överlappning är en typ av fel i 3D-geometrin som uppstår på grund av osäkerhet i källdatan, vilket kan leda till besvärliga skärningar och artifakter i den färdiga stadsmodellen.
+I denna undersökning har en delmängd av OSM-datamängden över Stockholm tagits, och en geometrisk algoritm tagit alla möjliga vägpar och beräknat hur stor mängd av vägarna som skulle överlappa med andra kartdetaljer.
+Studien fann att gångvägar är mindre problematiska än bilvägar beträffande hur många vägar som kolliderar, och således borde inte gångvägar vara svårare att inkludera i en 3D-miljö än bilvägar.
 
-I denna undersökning har en delmängd av OSM-datamängden över Stockholm tagits, och varje väg har givits en standardbredd enligt svenska bestämmelser.
-Sedan har en geometrisk algoritm tagit alla möjliga vägpar och beräknat hur stor mängd av vägarna som skulle överlappa med andra kartdetaljer.
-Studien fann att gångvägar är mindre problematiska än andra vägtyper beträffande hur många vägar som kolliderar, och således borde inte gångvägar vara svårare att inkludera i en 3D-miljö än andra vägtyper.
-
-I studien har felmarginalen för OSM-datamängden också tagits fram.
+Som en andra del av studien har felmarginalen för OSM-datamängden också tagits fram, eftersom felmarginalen bestämmer toleransen mellan två punkter som kan tillåtas innan man är säker på att en väg börjar överlappa med en annan väg eller en byggnad.
 Varje geodatamängd har en gräns på hur väl den stämmer överrens med verkligheten, som bestäms av vilka mätmedoter som har använts i datans insamling.
 I detta projekt uppskattades felmarginalen genom att jämföra byggnaders koordinatpunkter i datamängen med de från en referenskarta från Svenska Lantbruksuniversitetet (SLU) med känd felmarginal.
-Felmarginalen bestämmer toleransen mellan två punkter som kan tillåtas innan man är säker på att en väg börjar överlappa med en annan väg eller en byggnad.
 
 \end{abstract}
 \end{otherlanguage}

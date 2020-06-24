@@ -356,4 +356,34 @@ Chris
 
 Email from Chris 23/06:
 
+Hi Alexander,
+
+The concepts are better explained in the abstract now, so that is clearer. But the structure
+is strange and seems out of order (i.e. the third paragraph).
+Could you list it this way: background, problem/question, implementation/method,
+evaluation, results, implications. It becomes clearer when you look at your research question
+sections i.e. that there are two questions, but it's not clear in the abstract.
+Also, watch out for typos ('withds' -> 'widths').
+
+Otherwise, the updated descriptions (footpath and collisions) look good.
+Figure 1.3 is excellent.
+
+I also suggest you restructure the research question section a bit where the subquestions
+are mentioned: for the subquestions, I'd suggest that you separate the research
+subquestion text from the accompanying descriptive text and in each case attach the
+paragraph of text i.e.
+
+Subquestion 1
+<space>
+Merge all info about subqusstion 1 -> "This question aims..." + "For the primary research question..."
+
+Subquestion 2
+<space>
+Merge all info about subquestion 2 -> "The positional accuracy... " + "For the secondary research question..."
+
+When you do the above, feel free to send to your examiner. I can't remember: Have you contacted them yet
+to arrange a presentation?
+
+Best,
+Chris
 

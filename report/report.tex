@@ -173,20 +173,27 @@ The main research question is as follows:
 \end{center}
 
 Again, note that feature overlap is defined here as geomerty errors due to inaccuracies in the source data, which results in 3D models overlapping, which can in turn lead to strange-looking mesh intersections.
-To investigate the feasibility of generating a 3D virtual city with minimal footpath overlap, the main research question will specifically be divided into the following two subquestion:
+To investigate the feasibility of generating a 3D virtual city with minimal footpath overlap, the main research question will specifically be divided into two subquestions. The primary subquestion is:
 
-\begin{enumerate}
-    \item The primary subquestion is: \textbf{How many roads of each type will collide with some other map feature, once they have been given a geometrical width?} This question aims to find the rate of collision between road features in OSM, and investigate the nature of the most common types of collisions and how they can be corrected.
-    \item The secondary subquestion is: \textbf{What is the positional accuracy of OSM map features compared to a reference map?}. The positional accuracy will be neccessary to carry out the investigation of the first subquestion: the rate of collisions between roads, since it will determine the maximum tolerance in distance between road points before a collision is certain to have occured.
-\end{enumerate}
+\begin{center}
+    \textbf{How many roads of each type will collide with some other map feature, once they have been given a geometrical width?}
+\end{center}
 
-For the primary research question: the road overlap study, a program has taken a slice of the OSM dataset in the Stockholm area and assigned each road with standard withds according to swedish regulation.
+This question aims to find the rate of collision between road features in OSM, and investigate the nature of the most common types of collisions and how they can be corrected.
+For the road overlap study, a program has taken a slice of the OSM dataset in the Stockholm area and assigned each road with standard withds according to swedish regulation.
 It has then identified critical areas in the OSM dataset, where the paths are so wide that they collide with existing map features.
 It has also identified how many of those areas can in theory be corrected by simple translation of the road vertices, without propagation of collision to other features.
 Here, features are defined as the geometrical components that comprise the OSM map.
 For the purpose of this report, features will refer mainly to roads and building footprints.
 For the overlap study, see sections 3.1.2 for a method overview, 3.3 for a detailed walkthrough of the method, and 4.1.1 for the results.
 
+The secondary subquestion is:
+
+\begin{center}
+    \textbf{What is the positional accuracy of OSM map features compared to a reference map?}.
+\end{center}
+
+The positional accuracy will be neccessary to carry out the investigation of the first subquestion: the rate of collisions between roads, since it will determine the maximum tolerance in distance between road points before a collision is certain to have occured.
 For the secondary research question: the geodata precision study, the positional accuracy will be estimated by comparing feature points between the OSM building dataset and the Swedish University of Agricultural Sciences (SLU) building datset with known accuracy. See section 3.4.2 for an overview of the SLU dataset and how it is obtained.
 The positional accuracy will be needed to assess where road overlap occurs and whether the collisions can easily be corrected.
 For the positional accuracy study, see sections 3.1.1 for a method overview, 3.2 for a walkthrough of the method, and 4.1.2 for the results.

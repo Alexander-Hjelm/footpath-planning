@@ -1,0 +1,11 @@
+Presentation to report:
+    Clarify why I did the collision study the way I did
+        Distance less than the accuracy to preserve the logical consistency to the map + aestetic characteristics, both between features and in the map as a whole
+
+Which might be why some of these services have not gained the traction they have hoped for (bankrupcy)
+
+Urban planning: Research projects have a case-by-case nature, need to implement datastructures and fit data to your own model
+
+Root of this projects: ESAL does crowd simulation by the nature of the indnstry means car roads are at the focus (ecological, self driving cars + games)
+
+

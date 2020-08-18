@@ -12,3 +12,8 @@ Constraint: Building are assumes to be coherent to their footprints along the z 
 
 Remove maximum estimate, add notes about the minimum footpath estimate, and that it was towards the maximum and not minimum. No recommendation exists from STA
 
+DP: Vertexes represent building features, parts of buildings
+
+Make clear that the accuracy estimate methods are based on the Fan paper
+
+Shape accuracy: invariant to linear transformations of the polygon, so will ignore any linear errors of the dataset as a whole and only focus on the unsystematic ones due to measuring precision

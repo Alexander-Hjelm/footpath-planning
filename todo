@@ -17,6 +17,3 @@ Constraint: Building are assumes to be coherent to their footprints along the z 
 
 6)
 Remove maximum estimate, add notes about the minimum footpath estimate, and that it was towards the maximum and not minimum. No recommendation exists from STA
-
-8)
-Shape accuracy: invariant to linear transformations of the polygon, so will ignore any linear errors of the dataset as a whole and only focus on the unsystematic ones due to measuring precision

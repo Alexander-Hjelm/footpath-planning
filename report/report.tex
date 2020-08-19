@@ -425,8 +425,8 @@ Finally, if a one-to-many object matching is found, the compound perimeter of th
 
 \subsection{Shape accuracy definition}
 
-The Turning function $T_c(l)$ measures the cumulative angle of the polygon's counter-clockwise tangent, as a function of the cumulative normalized length $l$.
-This project uses the turning function as it is defined by \textbf{(Fan et al, 2014)}.
+This project will additionally calculation the shape accuracy measure, as it is defined by \textbf{(Fan et al, 2014)}, for building polygons over the entire OSM dataset.
+Their definition of shape accuracy uses the turning function $T_c(l)$, which measures the cumulative angle of the polygon's counter-clockwise tangent, as a function of the cumulative normalized length $l$.
 See figure \ref{fig:turning-function} for a side-by-side comparison of a polygon and its turning function.
 For a polygon with vertices ${v_1 ... v_n}$ and line segments ${e_1 ... e_n}$ It is defined as follows.
 Fix a starting vertex $v_1$.
@@ -435,13 +435,18 @@ For any $i$ such that $i>1$ and $n<i$, the tangent angle at $v_i$ is recursively
 \begin{center}
     $\theta_{i, i-1} = \theta_{n,1} + \sum^{i}_{k=1} \theta_{k, k-1}$
 \end{center}
-The turning function has some nice geometric properties, in that it is invariant to both rotation and scaling of the polygon. The function contains no information of the orientation of the polygon, only of the relative angle between successive line segments, thus it does not change under rotation. It also measures only the normalized cumulative length, which does not change under scaling.
+
 The similarity of two polygons A and B in terms of their turning function is defined as their distance of their cumulative turning functions:
 \begin{center}
     $S_{T}(A, B) = 1 - (\int^{1}_{0} T_{C,A}(l) - T_{C,B}(l) dl)^{1/2}$.
 \end{center}
 The value range will be $(0 < S_{T} < 1)$, where $S_{T}(A,B) = 1$ if the polygons are identical. 
 See figure \ref{fig:turning-function-compare} for a side-by-side comparison of two similar polygons and their turning functions.
+
+The turning function has some nice geometric properties, in that it is invariant to any linear transformation of the polygon.
+The function contains no information of the orientation of the polygon, only of the relative angle between successive line segments, thus it does not change under rotation.
+It also measures only the normalized cumulative length, which does not change under scaling.
+Because of this, the shape accuracy measure will ignore any systematic, linear errors that are present in the entire dataset, and will only focus on the unsystematic errors in vertex displacement, that are due to limitations in measuring precision.
 
 \begin{figure}[H]
     \centering

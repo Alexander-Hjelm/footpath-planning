@@ -10,10 +10,4 @@ Which might be why some of these services have not gained the traction they have
 Urban planning: Research projects have a case-by-case nature, need to implement datastructures and fit data to your own model
 
 4)
-Root of this projects: ESAL does crowd simulation by the nature of the indnstry means car roads are at the focus (ecological, self driving cars + games)
-
-5)
-Constraint: Building are assumes to be coherent to their footprints along the z axis, no taper
-
-6)
 Remove maximum estimate, add notes about the minimum footpath estimate, and that it was towards the maximum and not minimum. No recommendation exists from STA

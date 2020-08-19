@@ -207,6 +207,7 @@ In this study, when working with OSM geodata, the following assumptions have bee
     \item It will be assumed that the city map consists of only arterial (primary) roads, secondary roads, residential roads and footpaths.
     \item It will be assumed that the OSM dataset represents all roads as simple polylines, and building footprints as simple connected polygons. Any other features (such as squares, which are roads represented as polygons) will be omitted from the dataset.
     \item The road network is assumed to be a 2D simple graph. This means that any overlapping roads, such as tunnels and bridges that cross over street-level roads, will be eliminated from the dataset. Any self-connected nodes will also be eliminated from the dataset.
+    \item All building footprints are assumed to be coherent to their footprints along the z axis. Thus, it will be assumed that no buildings taper or extend beyond their footprints at a higher altitude.
 \end{enumerate}
 
 \subsection{Delimitations of accuracy classes}

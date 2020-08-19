@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  19 AUG 2020 17:14
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.4.10)  19 AUG 2020 17:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1745,37 +1745,34 @@ rely from Open-StreetMap
 [52] [53] [54
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 1110--1111
+Underfull \hbox (badness 10000) in paragraph at lines 1113--1114
 []\T1/qtm/m/n/12 Kunze, C. (2012). Ver-gle-ich-s-anal-yse des Gebäude-datenbe-
  []
 
 
-Underfull \hbox (badness 7925) in paragraph at lines 1110--1111
+Underfull \hbox (badness 7925) in paragraph at lines 1113--1114
 \T1/qtm/m/n/12 standes aus Open-StreetMap mit amtlichen Daten-quellen. Stu-dent
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1110--1111
+Underfull \hbox (badness 10000) in paragraph at lines 1113--1114
 \T1/qtm/m/n/12 re-search project, Tech-ni-cal Uni-ver-sity of Dres-den. http://
 nbn-
  []
 
 [55] [56]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1155.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1155.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1158.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1158.
  (./report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1155.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1155.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1158.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1158.
 
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: F98BF4E424F1C61AF2C5BCDE67C8232C;3653.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
 Package logreq Info: Writing requests to 'report.run.xml'.
 \openout1 = `report.run.xml'.
@@ -1801,7 +1798,7 @@ msfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
 type1/public/tex-gyre/qhvr.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qt
 mb.pfb></usr/share/texmf/fonts/type1/public/tex-gyre/qtmr.pfb></usr/share/texmf
 /fonts/type1/public/tex-gyre/qtmri.pfb>
-Output written on report.pdf (64 pages, 5492420 bytes).
+Output written on report.pdf (64 pages, 5492675 bytes).
 PDF statistics:
  782 PDF objects out of 1000 (max. 8388607)
  663 compressed objects within 7 object streams

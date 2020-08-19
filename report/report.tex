@@ -1033,25 +1033,30 @@ If a modeler wishes to acquire building assets at a LOD-C level, they would have
 
 \section{Feasibility in the urban planning field}
 
-For simple presentation in e.g. animation and video games or even urban planning software, such procedurally generated cities could very well be enough.
-As said however, the big problem is that these features will rarely match real life.
-Such models will be sufficient as long as one can be satisfied with looking at rough representations of buildings and does not require additional knowledge about minor features.
-However, many studies in urban development have been done before that required detailed knowledge about a city's geometry, e.g. for the purposes of modeling heat development
+Simple, procedurally generated cities, populated with generic 3D models, could very well be enough for simple presentation in e.g. animation and video games or even urban planning software, 
+In such a model however, features will only be rough representations, and rarely match their real life counterparts.
+Such models will be sufficient as long as one can be satisfied with looking at rough representations of major features, and do not require additional knowledge about minor features.
+It turns out however, that many studies in urban development have a highly case-by-case nature.
+Studies acroos many different areas have been done before that required very different knowledge about a city's geometry, e.g. for the purposes of modeling heat development
 \textbf{(Nakata-Osaki, Souza and Rodrigues, 2018)}
 or reducing noise
 \textbf{(Joon, Seo and Byung, 2011)}.
 
-By looking at such studies in urban development, one will discover that a lot of research in this field requires detailed morphological information that goes beyond simply knowing the geometry of the city.
+According to \textbf{(Stojanovski, 2019)}, software that strives to aid in the urban development process is commonly not sophisticated enough to fully represent the needs and workspaces of urban planners in practise.
+Stojanovski goes on to claim that a lot of research in this field requires detailed information that goes beyond simply knowing the geometry of the city.
+Additionally, such research also typically requires additional logical data structures that a OSM cannot note serve.
 Urban architects often work with morphological structures where a single feature, such as a city neighborhood, can be examined from many different levels of perspective.
 A neighborhood can be analyzed from the level of its city blocks, individual lots, properties or building limits, building facades or even indoor spaces.
 Similarly a road network can be analyzed by looking at it either at its connectivity by viewing it a a simple 2D graph, but it might as well be seen as a hierarchical structure where primary roads branch off into sub-streets. 
 The very unfortunate fact is that much of that morphological information is not present in the OSM dataset.
 Furthermore, take the fact that even a single road can be comprised of many different sections with different purposes.
 A single inner-city street for example, often contains sidewalks and lanes reserved for taxis or public transit, all of a certain placement and dimension that determines what type of traffic it can serve.
-According to \textbf{(Stojanovski, 2019)}, this type of representation is known as a multimodal structures, due to the possibility of incorporating multiple modes of transportation, but it may even describe subtilties like building facades and distances between curb line and building lot.
+This type of representation is known as a multimodal structures, due to the possibility of incorporating multiple modes of transportation, but it may even describe subtilties like building facades and distances between curb line and building lot.
 OSM, while being an excellent source of city geometry, is simply not a sophisticated enough dataset to cater to all these possible areas of research.
 For media applications, such morphological and multimodal information could in theory be generated procedurally, by using shape grammars and some sort of way finding to create logical routes for different types of traffic.
-But for urban planners requiring an exact morphological representation of some specification, this complementary data will have to be obtained from another dataset.
+For urban planners however, requiring an exact representation of some specification, this complementary data will have to be obtained from another dataset.
+It may also be necessary for a researcher to implement their own data structures on top of the existing city model, with will increase the complexity of the problem even further.
+The case-by-case nature of urban development projects also means that it is unlikely that a single piece of software can cater to the very differing needs of data and data structures for variuos projects.
 
 \section{Final conclusions}
 

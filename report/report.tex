@@ -538,18 +538,17 @@ The average and variance in vertex spread will be calculated and used to make an
 
 \subsection{Road widths and properties}
 
-The standard road widths were obtained from a publication by the Swedish Transport Administration
+The standard road widths for the different types of car road were obtained from a publication by the Swedish Transport Administration
 \footnote{Vägars och gators utformning - Trafikverket. Publikation 2020:029. https://trafikverket.ineko.se/Files/sv-SE/71830/\\Ineko.Product.RelatedFiles/2020\_029\_vagar\_och\_gators\_utformning\_krav.pdf}
 , and were presented as requirements on the minimum lane width for certain types of roads and applications.
-These regulated minimum widths were used as a lower bound road with when examining the OSM dataset for potential overlap.
-The upper bound was found by visual measurements of a few key locations in the Stockholm area using the Bing maps service.
-Table \ref{table:road-widths} shows the minimum and maximum road widths that will be used in the overlap study.
+The minimum road widths were used as lower bounds when examining the OSM dataset for potential overlap.
+The estimate standard width for footpaths was obtained from a set of manual sidewalk and walkway width measurements, obtained from visual inspection of publicly available satellite imagery from Bing Maps. A rounded value was chosen that was weighted towards the maximum results of those measurements.
+Table \ref{table:road-widths} shows the road widths that were be used in the overlap study.
 
 \begin{table}[H]
     \begin{tabular}{lllll}
-                      & Footpath & Residential & Secondary & Primary \\
-        Minimum width & 2.0 m    & 6.0 m       & 6.5 m     & 8.0 m   \\
-        Maximum width & 5.0 m    & 9.0 m       & 10.0 m    & 16.0 m
+                   & Footpath & Residential & Secondary & Primary \\
+        Used width & 2.0 m    & 6.0 m       & 6.5 m     & 8.0 m   \\
     \end{tabular}
     \captionof{table}{Standard road widths used for the overlap study}
     \label{table:road-widths}

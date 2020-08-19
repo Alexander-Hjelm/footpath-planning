@@ -459,9 +459,17 @@ See figure \ref{fig:turning-function-compare} for a side-by-side comparison of t
 
 \subsection{Closest point and point proximity}
 
-The final problem is that even when building polygons have been matched between the two datasets, they may not have one-to-one vertex relationship, since footprints from different datasets may be formed at a different level of detail.
-Possible problems are that the vertex counts could be dissimilar, or that vertex clusters may be found at different parts of the two polygons.
-To avoid this effect, key points are extracted using the Douglas-Peucker algorithm \textbf{(Douglas and Peucker, 1973)}, to create a simplified footprint with less points that still retain information about the rough features of the detailed footprint.
+Once a feature map has been obtained, the next task will be to find a matching vertex set among the vertices of the corresponding building footprint polygons.
+Provided that the corresponding building footprints are true representations of the real life building, these pairs of matching verties must match the same part of the building.
+The most common case is that a vertex represents a corner in the footprint polygon, and in these cases it must hold that two matching vertices represent the same corner.
+The central problem is that even when building polygons have been matched between the two datasets, they may not have one-to-one vertex relationship, since footprints from different datasets may be formed at a different level of detail.
+Possible causes are that the vertex counts are dissimilar, or that vertex clusters may be found at different parts of the two polygons.
+Thus, simply comparing the closest vertices between the two building representations may not be valid, since those vertices may not represent the same part of the true building footprint.
+To avoid this effect, key points were extracted using the Douglas-Peucker algorithm \textbf{(Douglas and Peucker, 1973)}, to create a simplified footprint with less points that still retain information about the rough features of the detailed footprint.
+This will eliminate dense vertex clusters, as well as any vertices that lie in roughly straight lines, in favour of creating polygons with reduced vertex counts.
+A useful property of the Douglas-Peucker algorithm is that two highly similar polygons of different vertex counts will be reduced to resulting polygons with similar vertex counts.
+Thus, one can be much more certain that a closest vertex pair is indeed corresponding to the same feature of the building.
+
 The idea behind Douglas-Peucker is to recursively divide a polyline.
 It initially marks only the start and end points $(v_0, v_n)$ to be kept, and finds the point $v_i$ in between whose distance is the greatest to the line segment between $v_0$ and $v_n$.
 It then recursively refines the line segments $(v_0, v_i)$ and $(v_i, v_n)$, and proceeds to do so until a line segment $(v_j, v_k)$ is found, where every point in between $v_j$ and $v_k$ have a distance to the line segment $(v_j, v_k)$ that is smaller than some resolution $\epsilon$.
@@ -514,7 +522,8 @@ See figure \ref{fig:vertex-match-algo} for an illustration of the algorithm that
     \caption{Douglas-Peucker}
 \end{algorithm}
 
-Finally, when two building footprints and their vertices have been mapped, the average offset of matching vertices will be used as a measure of positional error.
+Finally, when two building footprints and their vertices have been mapped, the average offset of the matching vertices will be used as a measure of positional error.
+The final estimate of the positional accuracy of the OSM dataset will be taken as the average of each building's positional error, over the entire dataset.
 The average and variance in vertex spread will be calculated and used to make an assessment of the geometric precision of the OSM dataset, and this precision will further be used to form an upper boundary on geometrical corrections that can be made in the overlap study.
 
 \section{Overlap study}

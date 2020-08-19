@@ -401,7 +401,9 @@ Once the positional error estimate was obtained from the precision study, it was
 This was done by firstly locating critical points where assigning standard widths to the roads would cause collision with other features, and then evaluating how many of those points could be eliminated by making adjustments within the found margin of error.
 For the purpose of the overlap study, each road has been assigned a standard width that is in line with Swedish regulations, since in the OSM dataset, roads are represented as simple polylines, lacking width.
 After the width assignment, a program iterated over all features and calculated how many of them that show overlap with any other feature, as well as the total length of the road polylines that is intersecting some other feature.
-Finally, the program calculated how many of these colliding features that can be corrected by making adjustments that are within the positional accuracy of the OSM data, as obtained by the geodata precision study.
+Finally, the program calculated how many of these colliding features that can be corrected by making adjustments to the feature vertices, away from the collision point, that are within the positional accuracy of the OSM data, as obtained by the geodata precision study.
+The motivation behind using the positional accuracy as an upper bound for correction is to tread the positional accuracy as a maximum resolution of the map.
+Making translation withing the map resolution will preserve the logical consistency to OSM source data, and preserve aestetic characteristics of the map, both between features and in the map as a whole
 
 \section{Geodata precision study}
 

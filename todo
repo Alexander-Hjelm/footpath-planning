@@ -1,7 +1,2 @@
 1)
-Presentation to report:
-    Clarify why I did the collision study the way I did
-        Distance less than the accuracy to preserve the logical consistency to the map + aestetic characteristics, both between features and in the map as a whole
-
-2)
 Remove maximum estimate, add notes about the minimum footpath estimate, and that it was towards the maximum and not minimum. No recommendation exists from STA
